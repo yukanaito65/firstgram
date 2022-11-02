@@ -6,8 +6,6 @@ import { useEffect, useState } from 'react';
 import {collection, getDocs} from 'firebase/firestore';
 
 function App() {
-    // const database = db.collection("user")
-    // console.log(db)
 
     const [users,setUsers] = useState<any[]>([]);
 
@@ -23,15 +21,21 @@ function App() {
       });
     },[]);
 
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          おはよう
-        </p>
-        <Input type="text" placeholder="検索" />
-      </header>
-      <Icon />
+    <div>
+      <div>
+        <p>Inputコンポーネント</p>
+        <Input inputType="search" inputPlaceholder="検索" buttonType="button" buttonName="検索" />
+      </div>
+      <hr />
+      <div>
+        <p>Iconコンポーネント</p>
+        <Icon />
+      </div>
+      <hr />
+
       <div>
         {users.map((user)=>(
           <div key={user.id}>
