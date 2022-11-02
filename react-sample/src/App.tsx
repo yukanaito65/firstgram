@@ -1,3 +1,4 @@
+import React from 'react';
 import Input from './component/atoms/Input';
 import { db } from './firebase';
 import Icon from './component/atoms/Icon';
