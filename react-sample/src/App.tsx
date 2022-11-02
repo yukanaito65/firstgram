@@ -4,6 +4,7 @@ import { db } from './firebase';
 import Icon from './component/atoms/Icon';
 import { useEffect, useState } from 'react';
 import {collection, getDocs} from 'firebase/firestore';
+import Button from './component/atoms/buotton';
 
 function App() {
 
@@ -34,6 +35,17 @@ function App() {
         <p>Iconコンポーネント</p>
         <Icon />
       </div>
+      <hr />
+      <div>Buttonコンポーネント</div>
+      <Button 
+        border="none"
+        color="pink"
+        height = "50px"
+        onClick={() => console.log("You clicked on the pink circle!")}
+        radius = "10%"
+        width = "100px"
+        children = "クリック"
+      />
       <hr />
 
       <div>
