@@ -8,7 +8,7 @@ function InputPost() {
     <div>
     <textarea 
     rows={10} cols={40} 
-    name="inputPost" value={textState} placeholder="コメントを書く" onChange={handleChange} />
+    name="inputPost" value={textState} placeholder="キャプションを入力…" onChange={handleChange} />
     </div>
   )
 }
