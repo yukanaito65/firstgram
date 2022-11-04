@@ -12,4 +12,4 @@ function KeepButton({ onClick }: Props) {
   )
 }
 
-export default CKeepButton
+export default KeepButton
