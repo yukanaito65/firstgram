@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 // import ImageLogo from "../../../public/image.svg"
-import storage from "../../firebase";
+import storage from "../../firebase-sec";
 import { getDownloadURL, ref, uploadBytes, uploadBytesResumable } from "firebase/storage";
+import { FirebaseError } from "firebase/app";
+import { collection, addDoc } from "firebase/firestore"; 
+import { db } from '../../firebase';
+
 
 const ImageUploader = () => {
 
@@ -49,6 +53,13 @@ const ImageUploader = () => {
         }
         )
     
+// firebase
+// Add a new document with a generated id.
+const docRef = addDoc(collection(db, "post"), {
+  caption: "test",
+//   imagePath: `${ref(storage,"image/"  + file.name)}`
+  imgUrl: `${ref(storage,"image/"  + file.name)}`
+});
     
 
 };
