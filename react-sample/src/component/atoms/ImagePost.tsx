@@ -10,7 +10,7 @@ const ImageUploader = () => {
     // アップロードが完了したか確認する
     const [isUploaded, setIsUploaded] = useState(false);
     // 画像のsrc
-    // const [imgSrc, setImgSrc] = useState("");
+    const [imgSrc, setImgSrc] = useState("");
 
   const OnFileUploadToFirebase = (e:any) => {
     // console.log(e.target.files[0].name);
@@ -25,33 +25,32 @@ const ImageUploader = () => {
     const uploadImage = uploadBytesResumable(storageRef, file);
     
     // 画像のダウンロード
-    // const gsReference = ref(
-    //     storage,
-    //     "gs://sns-app-c00fe.appspot.com/image"
-    //   )
-    // getDownloadURL(gsReference)
-    // .then(url => {
-    // // setImgSrc(url)
-    // console.log("画像のurl" + url)
-    // })
-    // .catch(err => console.log(err))
+        getDownloadURL(storageRef)
+        .then(url => {
+        setImgSrc(url)
+        console.log("画像のurlは" + url)
+        })
+        .catch(err => console.log(err))
 
     // 画像のモニタリング
     uploadImage.on(
-    "state_changed",
-    // upload開始したらloading中になる(loadingがtureになる)
-    (snapshot) => {
-        setloading(true);
-    },
-    (err) =>{
-        console.log(err);
-    },
-    //upload完了したらloadedになる(loadingがfalse,loadedがtrue)
-    () =>{
-        setloading(false);
-        setIsUploaded(true);
-    }
-    )
+        "state_changed",
+        // upload開始したらloading中になる(loadingがtureになる)
+        (snapshot) => {
+            setloading(true);
+        },
+        (err) =>{
+            console.log(err);
+        },
+        //upload完了したらloadedになる(loadingがfalse,loadedがtrue)
+        () =>{
+            setloading(false);
+            setIsUploaded(true);
+        }
+        )
+    
+    
+
 };
   return (
     <>
@@ -74,11 +73,11 @@ const ImageUploader = () => {
         />
     </div>
         )}
-        </>
+    </>
     )}
-    {/* <div>
-    <img alt="" src={imgSrc} />
-    </div> */}
+    <img alt="" src={imgSrc} 
+    // onChange={Download}
+    />
     </>
     
   );

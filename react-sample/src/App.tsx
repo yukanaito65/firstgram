@@ -63,7 +63,7 @@ function App() {
         </p>
         <Input type="text" placeholder="検索" />
         <ImageUploader />
-        <ImageDownload />
+        {/* <ImageDownload /> */}
       </header>
     </div>
   );
