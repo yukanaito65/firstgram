@@ -1,4 +1,3 @@
-import React from 'react';
 import Icon from './component/atoms/Icon';
 import FollowButton from './component/atoms/button/FollowButton';
 
@@ -21,9 +20,8 @@ function App() {
         onClick={() => console.log("You clicked on the pink circle!")}
       />
       <hr />
-
-    </div>
-  );
+  </div>
+);
 }
 
 export default App;
