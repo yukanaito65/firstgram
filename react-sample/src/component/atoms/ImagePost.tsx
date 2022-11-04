@@ -25,15 +25,16 @@ const ImageUploader = () => {
     const uploadImage = uploadBytesResumable(storageRef, file);
     
     // 画像のダウンロード
-    // const download =  getDownloadURL(ref(storage, 'gs://bucket/images/stars.jpg'))
-    // .then((url)=>{
-    //     // <imgSrc>に挿入
-    //     setImgSrc('gs://bucket/images/stars.jpg')
-    //     // setAttribute('src', url);
-    //   })
-    //   .catch((error) => {
-    //     console.log("err");
-    //   });
+    // const gsReference = ref(
+    //     storage,
+    //     "gs://sns-app-c00fe.appspot.com/image"
+    //   )
+    // getDownloadURL(gsReference)
+    // .then(url => {
+    // // setImgSrc(url)
+    // console.log("画像のurl" + url)
+    // })
+    // .catch(err => console.log(err))
 
     // 画像のモニタリング
     uploadImage.on(
@@ -71,11 +72,13 @@ const ImageUploader = () => {
         accept=".png, .jpeg, .jpg"
         onChange={ OnFileUploadToFirebase }
         />
-        {/* <img id='myimg' src={imgSrc} /> */}
     </div>
         )}
         </>
     )}
+    {/* <div>
+    <img alt="" src={imgSrc} />
+    </div> */}
     </>
     
   );

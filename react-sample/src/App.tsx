@@ -49,7 +49,7 @@ import React, { useState } from 'react';
 import Input from './component/atoms/Input';
 // import { db } from './firebase';
 import ImageUploader from "./component/atoms/ImagePost";
-// import ImageDownload from './component/atoms/ImageDownload';
+import ImageDownload from './component/atoms/ImageDownload';
 
 
 function App() {
@@ -63,7 +63,7 @@ function App() {
         </p>
         <Input type="text" placeholder="検索" />
         <ImageUploader />
-        {/* <ImageDownload /> */}
+        <ImageDownload />
       </header>
     </div>
   );

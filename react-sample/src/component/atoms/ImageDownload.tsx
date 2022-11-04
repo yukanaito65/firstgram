@@ -1,30 +1,28 @@
-// import { getDownloadURL, getStorage, ref } from 'firebase/storage'
-// import storage from "../../firebase";
-// import React from 'react'
+import { getDownloadURL, getStorage, ref } from 'firebase/storage'
+import storage from "../../firebase";
+import React, { useState } from 'react'
+import { fileURLToPath } from 'url';
 
-// function ImageDownload() {
-//     const OnFileDownload = (e:any) => {
-//     const storageImage = getStorage();
-//     const file = e.target.files[0];
-//     getDownloadURL(ref(storage, 'image/'  + file.name))
-//     .then((url)=>{
-//         // <img>に挿入
-//         const img = document.getElementById('myimg');
-//         img.setAttribute('src', url);
-//       })
-//       .catch((error) => {
-//         console.log("err");
-//       });
-//     }
-//   return (
-//     <div>
-//         <button 
-//         type="button"
-//         onClick={ OnFileDownload }
-//         >画像表示</button>
-//         <img id='myimg' src='' />
-//     </div>
-//   )
-// }
 
-// export default ImageDownload;
+function ImageDownload() {
+    const [imgSrc, setImgSrc] = useState("");
+    // const Download = ()=>{
+    // const file = e.target.files[0];
+    const gsReference = ref(storage,
+    `gs://sns-app-c00fe.appspot.com/image/emiri.jpg`)
+    getDownloadURL(gsReference)
+    .then(url => {
+    setImgSrc(url)
+    console.log("画像のurlは" + url)
+    })
+    .catch(err => console.log(err))
+  return (
+    <div>
+    <img alt="" src={imgSrc} 
+    // onChange={Download}
+    />
+    </div>
+  )
+  }
+
+export default ImageDownload;
