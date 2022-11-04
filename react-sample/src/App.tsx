@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import {collection, getDocs} from 'firebase/firestore';
 import Button from './component/atoms/buotton';
 import ImageUploader from "./component/atoms/ImagePost";
+import InputPost from './component/atoms/InputPost';
 
 
 function App() {
@@ -59,6 +60,7 @@ return (
     </div>
     <div>
     <ImageUploader />
+    <InputPost />
     </div>
 
   </div>

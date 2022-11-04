@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-// import ImageLogo from "../../../public/image.svg"
 import storage from "../../firebase-sec";
 import { getDownloadURL, ref, uploadBytes, uploadBytesResumable } from "firebase/storage";
-import { FirebaseError } from "firebase/app";
-import { collection, addDoc, setDoc } from "firebase/firestore"; 
-import { db } from '../../firebase';
-import { doc, updateDoc } from "firebase/firestore";
+
+// import ImageLogo from "../../../public/image.svg"
+// import { FirebaseError } from "firebase/app";
+// import { collection, addDoc, setDoc } from "firebase/firestore"; 
+// import { db } from '../../firebase';
+// import { doc, updateDoc } from "firebase/firestore";
 
 const ImageUploader = () => {
     //loadingしているかしてないか監視する
