@@ -1,4 +1,5 @@
 import React from "react";
+import "../../styles/button.css"
 
 interface Props {
   border: string;
@@ -6,7 +7,7 @@ interface Props {
   children?: React.ReactNode;
   height: string;
   onClick: () => void;
-  radius: string
+  radius: string;
   width: string;
 }
 
@@ -21,6 +22,7 @@ const Button = ({
   }:Props) => { 
   return (
     <button 
+      className="button"
       onClick={onClick}
       style={{
          backgroundColor: color,
