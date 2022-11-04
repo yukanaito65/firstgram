@@ -7,6 +7,7 @@ import {collection, getDocs} from 'firebase/firestore';
 import Button from './component/atoms/buotton';
 import ImageUploader from "./component/atoms/ImagePost";
 import InputPost from './component/atoms/InputPost';
+import EditingPulldown from './component/atoms/editingPulldown';
 
 
 function App() {
@@ -61,6 +62,7 @@ return (
     <div>
     <ImageUploader />
     <InputPost />
+    <EditingPulldown />
     </div>
 
   </div>
