@@ -1,5 +1,11 @@
 import Icon from './component/atoms/Icon';
 import FollowButton from './component/atoms/button/FollowButton';
+import InputName from './component/atoms/Input/InputName';
+import InputPass from './component/atoms/Input/InputPass';
+import InputEmail from './component/atoms/Input/InputEmail';
+import InputSearch from './component/atoms/Input/InputputSearch';
+import InputPost from './component/atoms/Input/InputPost';
+import InputImage from './component/atoms/Input/InputImage';
 
 function App() {
 
@@ -20,6 +26,14 @@ function App() {
         onClick={() => console.log("You clicked on the pink circle!")}
       />
       <hr />
+
+      <InputName plaseHolder="test" />
+      <InputPass plaseHolder="test2" />
+      <InputEmail />
+      <InputSearch />
+      <InputPost plaseHolder="test3" />
+      <InputImage/>
+
   </div>
 );
 }

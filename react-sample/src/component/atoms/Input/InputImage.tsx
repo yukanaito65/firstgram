@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import storage from "../../firebase-sec";
+import storage from "../../../firebase-sec";
 import { getDownloadURL, ref, uploadBytes, uploadBytesResumable } from "firebase/storage";
 
 // import ImageLogo from "../../../public/image.svg"
@@ -8,7 +8,7 @@ import { getDownloadURL, ref, uploadBytes, uploadBytesResumable } from "firebase
 // import { db } from '../../firebase';
 // import { doc, updateDoc } from "firebase/firestore";
 
-const ImageUploader = () => {
+const InputImage = () => {
     //loadingしているかしてないか監視する
     const [loading, setloading] = useState(false);
     // アップロードが完了したか確認する
@@ -82,4 +82,4 @@ return (
 );
 };
 
-export default ImageUploader;
+export default InputImage;
