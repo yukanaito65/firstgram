@@ -1,5 +1,7 @@
 import Icon from './component/atoms/Icon';
 import FollowButton from './component/atoms/button/FollowButton';
+import { GetUsersData } from './component/GetUsersData';
+import { IoEllipsisHorizontal } from "react-icons/io5"
 
 function App() {
 
@@ -20,6 +22,9 @@ function App() {
         onClick={() => console.log("You clicked on the pink circle!")}
       />
       <hr />
+    <IoEllipsisHorizontal />
+
+    
   </div>
 );
 }
