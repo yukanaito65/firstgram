@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+import { FaRegBookmark } from "react-icons/fa";
+
 
 interface Props {
     onClick: () => void;
@@ -7,7 +9,7 @@ interface Props {
 function KeepButton({ onClick }: Props) {
   return (
     <button type="button" className="" onClick={onClick}>
-      {/* マテリアルアイコンを入れる */}
+      <FaRegBookmark />
     </button>
   )
 }

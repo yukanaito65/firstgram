@@ -1,6 +1,7 @@
 import React from 'react';
 import Icon from './component/atoms/Icon';
 import FollowButton from './component/atoms/button/FollowButton';
+import DmButton from './component/atoms/button/DmButton';
 
 function App() {
 
@@ -21,6 +22,9 @@ function App() {
         onClick={() => console.log("You clicked on the pink circle!")}
       />
       <hr />
+    <DmButton 
+    onClick={() => console.log("You clicked on the pink circle!")} />
+    <hr />
 
     </div>
   );
