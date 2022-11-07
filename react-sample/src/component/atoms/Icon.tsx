@@ -20,12 +20,12 @@ function Icon() {
   //ログイン判定が終わるまでリダイレクトしない
   const [loading, setLoading] = useState(true);
 
-
-
   useEffect(() => {
     //ログイン判定
     onAuthStateChanged(auth, async (user) => {
-
+      if(!user){
+        console.log("ログアウト状態です");
+      } else {
       //ログイン情報をuserに代入
       setUser(user);
 
@@ -45,6 +45,7 @@ function Icon() {
       const userDataId = userDocId.data();
       // console.log(userDataId);
       setUsers(userDataId);
+      }
     });
 
     //一覧で取得
@@ -54,11 +55,18 @@ function Icon() {
     //コレクションの参照からコレクションの中にあるドキュメントを取得するためのgetDocs関数
     //(コレクションは複数ドキュメントが入っていることが普通だからsがつく)
     // getDocs(userCollectionRef).then((querySnapshot) => {
-    //   setUsers(
+    //   setUserData(
     //     querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
     //   );
     // });
   }, []);
+
+  // useEffect(() => {
+  //   onAuthStateChanged(auth, (currentUser: any) => {
+  //     setUser(currentUser);
+  //     setLoading(false);
+  //   });
+  // }, []);
 
   return (
     <>
@@ -72,17 +80,14 @@ function Icon() {
             border: "2px, lightgray",
           }}
         >
-          {/* {users.map((userData:any) => { */}
+          {/* {userData.map((userData:any) => { */}
           {/* return( */}
           {user ? (
-            <>
               <img
                 src={users.icon}
                 alt="icon"
                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
               />
-              <p>{users.name}</p>
-            </>
           ) : (
             <img
               src={`${process.env.PUBLIC_URL}/noIcon.png`}
