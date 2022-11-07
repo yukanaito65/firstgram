@@ -5,6 +5,7 @@ export type User = {
   icon: string;
   email: string;
   password: string;
+  Cpassword: string;
   follow: []; //userIdを格納
   follower: []; //userIdを格納
   favoritePost: []; //postIdを格納
