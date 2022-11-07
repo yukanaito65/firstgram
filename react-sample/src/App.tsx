@@ -8,7 +8,7 @@ import Icon from "./component/atoms/Icon";
 import FollowButton from "./component/atoms/button/FollowButton";
 import DmButton from "./component/atoms/button/DmButton";
 
-import { GetUsersData } from "./component/GetUsersData";
+// import { GetUsersData } from "./component/GetUsersData";
 import { IoEllipsisHorizontal } from "react-icons/io5";
 
 import InputName from "./component/atoms/Input/InputName";
@@ -19,6 +19,8 @@ import InputPost from "./component/atoms/Input/InputPost";
 import InputImage from "./component/atoms/Input/InputImage";
 import InputPulldown from "./component/atoms/Input/InputPulldown";
 import InputRadioSearch from "./component/atoms/Input/InputRadioSearch";
+
+import Logo from "./component/atoms/Logo";
 
 function App() {
   return (
@@ -64,6 +66,9 @@ function App() {
         <InputImage />
         <InputPulldown />
         <InputRadioSearch />
+
+        <Logo
+        width={100} />
       </div>
     </div>
   );
