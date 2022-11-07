@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+import { FaRegHeart } from "react-icons/fa";
+
 
 interface Props {
     onClick: () => void;
@@ -7,7 +9,7 @@ interface Props {
 function GoodButton({ onClick }: Props) {
   return (
     <button type="button" className="" onClick={onClick}>
-      {/* マテリアルアイコンを入れる */}
+      <FaRegHeart />
     </button>
   )
 }

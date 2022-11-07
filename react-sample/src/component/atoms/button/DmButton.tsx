@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { FaTelegramPlane } from "react-icons/fa"
 
 interface Props {
     onClick: () => void;
@@ -7,7 +8,7 @@ interface Props {
 function DmButton({ onClick }: Props) {
   return (
     <button type="button" className="" onClick={onClick}>
-      {/* マテリアルアイコンを入れる */}
+      <FaTelegramPlane />
     </button>
   )
 }
