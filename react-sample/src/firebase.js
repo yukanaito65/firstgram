@@ -1,5 +1,6 @@
 import { getFirestore } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
 
 
 // Your web app's Firebase configuration
@@ -20,3 +21,6 @@ const db = getFirestore(app);
 
 // 上記2つの変数をどこででも使えるようにexportする
 export { db };
+
+//Firebaseの認証機能を使う場合に必要な記述
+export const auth = getAuth(app);

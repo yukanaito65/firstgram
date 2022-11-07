@@ -1,95 +1,109 @@
-import React, { useEffect, useState } from "react";
-// import noIcon from "../../../public/noIcon.png";
-import { db } from "../../firebase";
-import { doc, collection, getDocs, onSnapshot } from "firebase/firestore";
-import { async } from "@firebase/util";
-
-
+import { useEffect, useState } from "react";
+import { auth, db } from "../../firebase";
+import {
+  collection,
+  getDoc,
+  doc,
+  CollectionReference,
+} from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
+import type { User } from "../../types/types";
 
 function Icon() {
-  const [posts, setPosts] = useState([]);
+  //取得してきたデータを保持
+  const [users, setUsers] = useState<any>([]);
 
-  useEffect(()=>{
-    //データベースからデータを取得する
-    const postData = collection(db, "posts");
+  //ログイン状態を保持
+  //Authenticationに登録されている情報を持つ
+  const [user, setUser] = useState<any>("");
 
-    // console.log(`iconフォルダ${postData}`);
+  //ログイン判定が終わるまでリダイレクトしない
+  const [loading, setLoading] = useState(true);
 
-    //getDocsでドキュメントのデータを全て取得できる
-    getDocs(postData).then((snapShot:any)=> {
-      setPosts(snapShot.docs.map((doc:any)=>({...doc.data() })));
+  useEffect(() => {
+    //ログイン判定
+    onAuthStateChanged(auth, async (user) => {
+      if(!user){
+        console.log("ログアウト状態です");
+      } else {
+      //ログイン情報をuserに代入
+      setUser(user);
+
+      //ログイン判定が終わったタイミングでloadingはfalseに変わる
+      setLoading(false);
+
+      //コレクションへの参照を取得
+      const userCollectionRef = collection(db, "user") as CollectionReference<User>;
+
+      // //上記を元にドキュメントへの参照を取得
+      const userDocRefId = doc(userCollectionRef, user.uid);
+
+      // //上記を元にドキュメントのデータを取得
+      const userDocId = await getDoc(userDocRefId);
+
+      // //取得したデータから必要なものを取り出す
+      const userDataId = userDocId.data();
+      // console.log(userDataId);
+      setUsers(userDataId);
+      }
     });
 
-    // リアルタイムで取得(これをしないとリロードしないとデータベースに新規追加された情報が表示されない)
-    onSnapshot(postData,(post:any)=> {
-      setPosts(post.docs.map((doc:any)=> ({...doc.data()})))
-    })
+    //一覧で取得
+    //userコレクションの参照を取得(ドキュメントのデータ取得ではない)
+    // const userCollectionRef = collection(db, "user");
 
-  },[]);
+    //コレクションの参照からコレクションの中にあるドキュメントを取得するためのgetDocs関数
+    //(コレクションは複数ドキュメントが入っていることが普通だからsがつく)
+    // getDocs(userCollectionRef).then((querySnapshot) => {
+    //   setUserData(
+    //     querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+    //   );
+    // });
+  }, []);
 
-  // const userRef = collection(db, "users");
-  // const docRef = doc(db, "users", "1oqek7UGl4126Nq4MGU1");
-  // const docSnap = await getDoc(docRef);
-
-// const handleClick = async() => {
-// const querySnapshot = await getDocs(collection(db, "user"));
-// querySnapshot.forEach((doc) => {
-//   // console.log(`${doc.id} => ${doc.data()}`);
-//   console.log(doc.data);
-// });
-
-// const db = firebase.firestore()
-// const doc = await db.collection('user').doc('1oqek7UGl4126Nq4MGU1').get();
-// console.log(doc.data());
-
-// db.collection('user').get().then((snapshot:any)=>{
-//   snapshot.forEach(doc=>{
-//     console.log(doc.id, '=>', doc.data());
-//   });
-// })
-// }
-
-// const docId = "1oqek7UGl4126Nq4MGU1";
-// const docRef = firestore.collection("user").doc(docId);
-// const doc = await docRef.get
-
-// const handleClick = () => {
-//   db.collection('user').get.then
-// }
+  // useEffect(() => {
+  //   onAuthStateChanged(auth, (currentUser: any) => {
+  //     setUser(currentUser);
+  //     setLoading(false);
+  //   });
+  // }, []);
 
   return (
     <>
-      <div
-        style={{
-          borderRadius: "50%",
-          width: "100px",
-          height: "100px",
-          backgroundColor: "#d3d3d3",
-        }}
-      >
-        <img
-          src={`${process.env.PUBLIC_URL}/noIcon.png`}
-          alt="NoImage"
-          style={{ width: "100%", height: "100%" }}
-        />
-      </div>
-      {/* <button onClick={handleClick}>取得</button> */}
-      <div>
-        <div>
-          {posts}
-          {posts.map((post:any)=>(
-            <div key={post.userId}>
-              <p>{post.name}</p>
-              <p>{post.email}</p>
-            </div>
-          ))}
+      {!loading && (
+        <div
+          className="icon-image"
+          style={{
+            borderRadius: "50%",
+            width: "100px",
+            height: "100px",
+            border: "2px, lightgray",
+          }}
+        >
+          {/* {userData.map((userData:any) => { */}
+          {/* return( */}
+          {user ? (
+              <img
+                src={users.icon}
+                alt="icon"
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              />
+          ) : (
+            <img
+              src={`${process.env.PUBLIC_URL}/noIcon.png`}
+              alt="NoImage"
+              style={{
+                width: "100%",
+                height: "100%",
+                backgroundColor: "#d3d3d3",
+              }}
+            />
+          )}
+          {/* )})} */}
         </div>
-      </div>
-</>
+      )}
+    </>
   );
 }
 
 export default Icon;
-
-//false ログインしていない状態はnoIcon(会員登録ページでしか使用しない)
-//true ログインしていればimageUrlの画像表示(画像登録なければnoIcon)
