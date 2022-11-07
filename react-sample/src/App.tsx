@@ -8,9 +8,11 @@ import { IoEllipsisHorizontal } from "react-icons/io5"
 import InputName from './component/atoms/Input/InputName';
 import InputPass from './component/atoms/Input/InputPass';
 import InputEmail from './component/atoms/Input/InputEmail';
-import InputSearch from './component/atoms/Input/InputputSearch';
+import InputSearch from './component/atoms/Input/InputSearch';
 import InputPost from './component/atoms/Input/InputPost';
 import InputImage from './component/atoms/Input/InputImage';
+import InputPulldown from './component/atoms/Input/InputPulldown';
+import InputRadioSearch from './component/atoms/Input/InputRadioSearch';
 
 
 function App() {
@@ -46,7 +48,9 @@ function App() {
       <InputEmail />
       <InputSearch />
       <InputPost plaseHolder="test3" />
-      <InputImage/>
+      <InputImage />
+      <InputPulldown />
+      <InputRadioSearch />
 
 
   </div>
