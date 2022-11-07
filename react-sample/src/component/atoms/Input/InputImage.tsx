@@ -67,17 +67,17 @@ return (
         <>
     {isUploaded ? (
         // 画面遷移（トップページとか？）
-        <h2>アップロード完了</h2>
+        <img alt="" src={imgSrc} />
     ):(
         <div>
-        <p>JpegかPngの画像ファイル</p>
+        {/* <p>JpegかPngの画像ファイル</p> */}
         <input name="imageURL" type="file" accept=".png, .jpeg, .jpg"
         onChange={ OnFileUploadToFirebase }/>
         </div>
     )}
         </>
     )}
-    <img alt="" src={imgSrc} />
+   
 </>
 );
 };

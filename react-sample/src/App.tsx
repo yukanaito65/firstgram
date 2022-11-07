@@ -56,14 +56,14 @@ function App() {
 
         <IoEllipsisHorizontal />
 
-        <InputName plaseHolder="test" />
+        {/* <InputName plaseHolder="test" />
         <InputPass plaseHolder="test2" />
         <InputEmail />
         <InputSearch />
         <InputPost plaseHolder="test3" />
         <InputImage />
-        <InputPulldown />
-        <InputRadioSearch />
+        <InputPulldown /> */}
+        {/* <InputRadioSearch /> */}
       </div>
     </div>
   );
