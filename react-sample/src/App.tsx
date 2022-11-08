@@ -8,7 +8,7 @@ import Icon from "./component/atoms/Icon";
 import FollowButton from "./component/atoms/button/FollowButton";
 import DmButton from "./component/atoms/button/DmButton";
 
-// import { GetUsersData } from "./component/GetUsersData";
+import { GetLoginUserData } from "./component/data/GetLoginUserData";
 import { IoEllipsisHorizontal } from "react-icons/io5";
 
 import InputName from "./component/atoms/Input/InputName";
@@ -21,8 +21,13 @@ import InputPulldown from "./component/atoms/Input/InputPulldown";
 import InputRadioSearch from "./component/atoms/Input/InputRadioSearch";
 
 import Logo from "./component/atoms/Logo";
+import { auth } from "./firebase";
+import { GetLogoutUserData } from "./component/data/GetLogoutUserData";
 
 function App() {
+
+    console.log(auth.currentUser)
+
   return (
     <div className="App">
       <div className="container">
@@ -67,9 +72,17 @@ function App() {
         <InputPulldown />
         <InputRadioSearch />
 
-        <Logo
-        width={100} />
+        <Logo width={100} />
       </div>
+
+      <hr />
+      <GetLoginUserData
+      fieldName="email" />
+      <hr />
+    <GetLogoutUserData
+    docName="8Ui1g5IHmhXMALQDWmEj5JXkirr1"
+    fieldName="email" />
+
     </div>
   );
 }
