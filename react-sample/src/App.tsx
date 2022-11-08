@@ -10,7 +10,7 @@ import DmButton from "./component/atoms/button/DmButton";
 
 import { GetUsersData } from "./component/GetUsersData";
 import { IoEllipsisHorizontal } from "react-icons/io5";
-import InputImage from "./component/atoms/Input/InputImage";
+import InputImage from "./NewPost";
 
 
 
@@ -51,7 +51,7 @@ function App() {
       
 
         <IoEllipsisHorizontal />
-        <InputImage />
+        
       </div>
     </div>
   );
