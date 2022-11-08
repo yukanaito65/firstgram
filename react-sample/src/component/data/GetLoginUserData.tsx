@@ -11,7 +11,7 @@ import { onAuthStateChanged } from "@firebase/auth";
 
 // ドキュメント名を引数に取る
 interface Props {
-    fieldName: string
+    fieldName: String | Number
   }
 
   // 引数に表示したいフィールドを挿入

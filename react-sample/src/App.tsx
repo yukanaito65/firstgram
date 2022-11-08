@@ -4,7 +4,7 @@ import Login from "./Login";
 import Mypage from "./Mypage";
 import "./index.css";
 
-import Icon from "./component/atoms/Icon";
+import Icon from "./component/atoms/pictures/Icon";
 import FollowButton from "./component/atoms/button/FollowButton";
 import DmButton from "./component/atoms/button/DmButton";
 
