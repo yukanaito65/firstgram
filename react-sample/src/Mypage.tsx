@@ -32,6 +32,7 @@ function MyPage() {
   };
 
   // console.log(user.uid);
+  console.log(auth.currentUser)
 
   return (
     <>
