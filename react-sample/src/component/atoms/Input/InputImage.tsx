@@ -1,85 +1,65 @@
 import React, { useState } from "react";
-import storage from "../../../firebase-sec";
 import { getDownloadURL, ref, uploadBytes, uploadBytesResumable } from "firebase/storage";
+import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
+import { db } from "../../../firebase";
+import storage from "../../../firebase-sec";
 
-// import ImageLogo from "../../../public/image.svg"
-// import { FirebaseError } from "firebase/app";
-// import { collection, addDoc, setDoc } from "firebase/firestore"; 
-// import { db } from '../../firebase';
-// import { doc, updateDoc } from "firebase/firestore";
-
-const InputImage = () => {
-    //loadingしているかしてないか監視する
-    const [loading, setloading] = useState(false);
-    // アップロードが完了したか確認する
-    const [isUploaded, setIsUploaded] = useState(false);
+const NewPost = () => {
     // 画像のsrc
     const [imgSrc, setImgSrc] = useState("");
+    // コメント
+    const [textState, setTextState] = useState("");
 
-const OnFileUploadToFirebase = (e:any) => {
-    const file = e.target.files[0];
-    
+// コメントの更新
+const InputText = (e:any)=>{
+    setTextState(e.target.value)
+}
+
+// 画像の更新
+const InputImage = (e:any) => {
     // パスと名前で参照を作成
+    const file = e.target.files[0];
     const storageRef = ref(storage,"image/"  + file.name);
     // 画像のアップロード
-    const uploadImage = uploadBytesResumable(storageRef, file);
+    uploadBytesResumable(storageRef, file);
     // 画像のダウンロード
     getDownloadURL(storageRef)
     .then(url => {
     setImgSrc(url)
-    console.log("画像のurlは" + url)
     })
     .catch(err => console.log(err))
+    }
 
-    // 画像のモニタリング
-    uploadImage.on("state_changed",
-        // upload開始したらloading中になる(loadingがtureになる)
-        (snapshot) => {
-            setloading(true);
-        },
-        (err) =>{
-            console.log(err);
-        },
-        //upload完了したらloadedになる(loadingがfalse,loadedがtrue)
-        () =>{
-            setloading(false);
-            setIsUploaded(true);
-        }
-    )
-    
-// firestoreに画像を追加
-// ドキュメント追加
-// const docRef = addDoc(collection(db, "post"), 
-// {caption: "test",
-//   imgUrl: `${ref(storage,"image/"  + file.name)}`
-// });
-// ドキュメント更新
-// const docImagePost = doc(db, "post", "zbzbfOdWidTHmKOjeyvr");
-// updateDoc(docImagePost, {
-// imgUrl: `${ref(storage,"image/"  + file.name)}`
-// });
+// firestoreに追加
+const OnFirebase = async(e:any) => {
+const collectionPost:any =collection(db, "postTest");
+const docRef = await addDoc(collectionPost,
+{test:"test",
+imgUrl:imgSrc,
+text:textState
+});
+
+// ドキュメント更新(ID取得の為)
+const docImagePost = doc(db, "postTest", docRef.id);
+updateDoc(docImagePost, {
+    id:docRef.id,
+});
 };
+
 return (
 <>
-    {loading ? (
-        <h2>アップロード中</h2>
-    ) : (
-        <>
-    {isUploaded ? (
-        // 画面遷移（トップページとか？）
-        <img alt="" src={imgSrc} />
-    ):(
         <div>
-        {/* <p>JpegかPngの画像ファイル</p> */}
         <input name="imageURL" type="file" accept=".png, .jpeg, .jpg"
-        onChange={ OnFileUploadToFirebase }/>
+        onChange={ InputImage }/>
+        <textarea rows={10} cols={40} name="inputPost" value={textState} 
+        placeholder="コメントを入力してください" onChange={InputText} />
+        <button onClick={OnFirebase}>投稿</button>
+        <img alt="" src={imgSrc} />
+        {textState}
         </div>
-    )}
-        </>
-    )}
-   
+    
 </>
 );
 };
 
-export default InputImage;
+export default NewPost;
