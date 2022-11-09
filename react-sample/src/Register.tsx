@@ -7,15 +7,57 @@ import { Link, Navigate } from "react-router-dom";
 import { auth } from "./firebase";
 import { db } from "./firebase";
 import { setDoc, doc, getDoc } from "firebase/firestore";
-import Icon from "./component/atoms/pictures/Icon";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import storage from "./firebase-sec";
+// import Icon from "./component/atoms/pictures/Icon";
+
 
 function Register() {
+  //ログイン状態保持(userが値を持てばログイン状態)
+  const [user, setUser] = useState<any>("");
+
   //Authenticationに登録するemailとpassword
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
 
-  //ログイン状態保持(userが値を持てばログイン状態)
-  const [user, setUser] = useState<any>("");
+  //loadingしているかしてないか監視する
+  const [loading, setLoading] = useState(false);
+
+  // 画像のアップロードが完了したか確認する
+  const [isUploaded, setIsUploaded] = useState(false);
+
+  //画像のURL
+  const [imgSrc, setImgSrc] = useState("");
+
+  //画像アップロード＆URL取得
+  const InputImage = (e: any) => {
+    const file = e.target.files[0];
+
+    // パスと名前で参照を作成
+    const storageRef = ref(storage, "image/" + file.name);
+
+    // 画像のアップロード
+    const uploadImage = uploadBytesResumable(storageRef, file);
+    uploadImage.on(
+      "state_changed",
+      // upload開始したらloading中になる(loadingがtrueになる)
+      (snapshot) => {
+        setLoading(true);
+      },
+      (err) => {
+        console.log(err);
+      },
+      //upload完了したらloadedになる(loadingがfalse,loadedがtrue)
+      () => {
+        setLoading(false);
+        setIsUploaded(true);
+
+        getDownloadURL(storageRef).then((url) => {
+          setImgSrc(url);
+        });
+      }
+    );
+  };
 
   //Authenticationへのユーザー登録、FireStoreへのデータ新規追加
   const handleSubmit = async (e: any) => {
@@ -23,6 +65,7 @@ function Register() {
 
     try {
       //Authenticationへのユーザー登録
+      //登録するのと同時にログインされる
       await createUserWithEmailAndPassword(
         auth,
         registerEmail,
@@ -54,6 +97,7 @@ function Register() {
               name: name.value,
               password: registerPassword,
               Cpassword: Cpassword.value,
+              icon: imgSrc,
             });
           }
         }
@@ -76,13 +120,39 @@ function Register() {
     <>
       {/* ログインしていればマイページを表示。Navigateで指定したページにリダイレクトする */}
       {user ? (
-        <Navigate to={`/`} />
+        <Navigate to={`/top/`} />
       ) : (
         <>
           <h1>会員登録</h1>
           {/* 登録ボタンを押した時にhandleSubmitを実行 */}
           <form onSubmit={handleSubmit}>
-            <div>icon登録</div>
+            <div>
+              <label>Icon</label>
+              {loading ? (
+                <>
+                  <p>uploading</p>
+                  <input
+                    name="imageURL"
+                    type="file"
+                    accept=".png, .jpeg, .jpg"
+                    onChange={InputImage}
+                  />
+                </>
+              ) : (
+                <>
+                  {isUploaded ? (
+                    <img alt="" src={imgSrc} />
+                  ) : (
+                    <input
+                      name="imageURL"
+                      type="file"
+                      accept=".png, .jpeg, .jpg"
+                      onChange={InputImage}
+                    />
+                  )}
+                </>
+              )}
+            </div>
             <div>
               <label>メールアドレス</label>
               <input
@@ -119,8 +189,7 @@ function Register() {
             </p>
           </form>
         </>
-      )}
-      <Icon />
+       )}
     </>
   );
 }

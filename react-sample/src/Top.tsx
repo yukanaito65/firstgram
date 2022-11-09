@@ -1,50 +1,23 @@
-import { onAuthStateChanged, signOut } from "firebase/auth";
-import { collection, CollectionReference, doc, getDoc } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import Icon from "./component/atoms/pictures/Icon";
-import { auth, db } from "./firebase";
-import { User } from "./types/types";
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import React, { useEffect, useState } from 'react'
+import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { auth } from './firebase';
 
-function MyPage() {
+function Top() {
   //ログインしているとログイン情報を持つ
   const [user, setUser] = useState<any>("");
 
   //ログイン判定が終わるまでリダイレクトさせないようにする(ログイン判定するには時間がかかるから、ページ遷移を先にされてしまうと表示がおかしくなってしまう)
   const [loading, setLoading] = useState(true);
 
-   //取得してきたデータを保持
-   const [users, setUsers] = useState<any>([]);
-
   // ログインしているかどうか判定
   //ログインしていればuserにユーザー情報が代入される
   //currentUserプロパティを使用して、現在サインインしているユーザーを取得する(サインインしていなければnull)
   useEffect(() => {
-    onAuthStateChanged(auth, async(currentUser: any) => {
-      if(!currentUser){
-        console.log("ログアウト状態です");
-      } else {
+    onAuthStateChanged(auth, (currentUser: any) => {
       setUser(currentUser);
       //ログイン判定が終わったタイミングでloadingはfalseに変わる
       setLoading(false);
-
-      //コレクションへの参照を取得
-      const userCollectionRef = collection(
-        db,
-        "user"
-      ) as CollectionReference<User>;
-
-      // //上記を元にドキュメントへの参照を取得
-      const userDocRefId = doc(userCollectionRef, currentUser.uid);
-
-      // //上記を元にドキュメントのデータを取得
-      const userDocId = await getDoc(userDocRefId);
-
-      // //取得したデータから必要なものを取り出す
-      const userDataId = userDocId.data();
-      // console.log(userDataId);
-      setUsers(userDataId);
-      }
     });
   }, []);
 
@@ -56,10 +29,6 @@ function MyPage() {
     await signOut(auth);
     navigate("/login/");
   };
-
-  // console.log(user.uid);
-  console.log(auth.currentUser)
-
   return (
     <>
       {/* loadingがfalseのときのみマイページを表示する設定。loadingがfalseのときのみ */}
@@ -70,28 +39,17 @@ function MyPage() {
             <Navigate to={`/login/`} />
           ) : (
             <>
-            <div>
-              <div>{users.userName}</div>
+              <h1>Topページ</h1>
               {/* ユーザーのメールアドレスを表示(ログインしている場合は表示する){user && user.email}これの略↓ */}
-              {/* <p>{user?.email}</p> */}
-              <button>設定</button>
+              <p>{user?.email}</p>
               <button onClick={logout}>ログアウト</button>
-              </div>
-              <div>
-              <Icon />
-              </div>
-              <div>
-                <div>投稿</div>
-                <div>フォロワー</div>
-                <div>フォロー中</div>
-              </div>
-              <Link to={"/top/"}>Top</Link>
+              <Link to={"/"}>マイページ</Link>
             </>
           )}
         </>
       )}
     </>
-  );
+  )
 }
 
-export default MyPage;
+export default Top

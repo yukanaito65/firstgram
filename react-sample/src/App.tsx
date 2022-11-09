@@ -2,18 +2,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Register from "./Register";
 import Login from "./Login";
 import Mypage from "./Mypage";
-import "./index.css";
-
-import Icon from "./component/atoms/pictures/Icon";
-import FollowButton from "./component/atoms/button/FollowButton";
-import DmButton from "./component/atoms/button/DmButton";
-
-import { GetLoginUserData } from "./component/data/GetLoginUserData";
-import { IoEllipsisHorizontal } from "react-icons/io5";
-import InputImage from "./NewPost";
+import "./index.css"
+import Top from "./Top";
 import NewPost from "./NewPost";
-
-import { GetLogoutUserData } from "./component/data/GetLogoutUserData";
 
 function App() {
   return (
@@ -21,14 +12,15 @@ function App() {
       <div className="container">
         <BrowserRouter>
           <Routes>
+          <Route path={`/`} element={<Mypage />} />
             <Route path={`/register/`} element={<Register />} />
             <Route path={`/login/`} element={<Login />} />
-            <Route path={`/`} element={<Mypage />} />
+            <Route path={`/top/`} element={<Top />} />
             <Route path={`/NewPost`} element={<NewPost />} />
           </Routes>
         </BrowserRouter>
       </div>
-    </div>
+      </div>
   );
 }
 
