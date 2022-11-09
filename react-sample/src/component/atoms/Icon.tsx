@@ -47,26 +47,8 @@ function Icon() {
       setUsers(userDataId);
       }
     });
-
-    //一覧で取得
-    //userコレクションの参照を取得(ドキュメントのデータ取得ではない)
-    // const userCollectionRef = collection(db, "user");
-
-    //コレクションの参照からコレクションの中にあるドキュメントを取得するためのgetDocs関数
-    //(コレクションは複数ドキュメントが入っていることが普通だからsがつく)
-    // getDocs(userCollectionRef).then((querySnapshot) => {
-    //   setUserData(
-    //     querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-    //   );
-    // });
   }, []);
 
-  // useEffect(() => {
-  //   onAuthStateChanged(auth, (currentUser: any) => {
-  //     setUser(currentUser);
-  //     setLoading(false);
-  //   });
-  // }, []);
 
   return (
     <>
@@ -80,8 +62,6 @@ function Icon() {
             border: "2px, lightgray",
           }}
         >
-          {/* {userData.map((userData:any) => { */}
-          {/* return( */}
           {user ? (
               <img
                 src={users.icon}
@@ -99,7 +79,6 @@ function Icon() {
               }}
             />
           )}
-          {/* )})} */}
         </div>
       )}
     </>

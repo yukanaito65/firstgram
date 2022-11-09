@@ -8,7 +8,7 @@ import Icon from "./component/atoms/Icon";
 import FollowButton from "./component/atoms/button/FollowButton";
 import DmButton from "./component/atoms/button/DmButton";
 
-import { GetUsersData } from "./component/GetUsersData";
+// import { GetUsersData } from "./component/GetUsersData";　　後でコメントアウト外す
 import { IoEllipsisHorizontal } from "react-icons/io5";
 
 import InputName from "./component/atoms/Input/InputName";
@@ -19,6 +19,7 @@ import InputPost from "./component/atoms/Input/InputPost";
 import InputImage from "./component/atoms/Input/InputImage";
 import InputPulldown from "./component/atoms/Input/InputPulldown";
 import InputRadioSearch from "./component/atoms/Input/InputRadioSearch";
+import InputIconUpload from "./component/atoms/Input/InputIconUpload";
 
 function App() {
   return (
@@ -41,11 +42,11 @@ function App() {
         <hr />
         <div>
           <p>Iconコンポーネント</p>
-          <Icon />
+          {/* <Icon /> */}
         </div>
         <hr />
         <div>検索コンポーネント</div>
-        <FollowButton
+        {/* <FollowButton
           onClick={() => console.log("You clicked on the pink circle!")}
         />
         <hr />
@@ -56,14 +57,14 @@ function App() {
 
         <IoEllipsisHorizontal />
 
-        <InputName plaseHolder="test" />
-        <InputPass plaseHolder="test2" />
+        <InputName placeHolder="test" />
+        <InputPass placeHolder="test2" />
         <InputEmail />
         <InputSearch />
-        <InputPost plaseHolder="test3" />
+        <InputPost placeHolder="test3" />
         <InputImage />
         <InputPulldown />
-        <InputRadioSearch />
+        <InputRadioSearch /> */}
       </div>
     </div>
   );

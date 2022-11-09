@@ -6,13 +6,73 @@ import React, { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { auth } from "./firebase";
 import { db } from "./firebase";
-import { setDoc, doc, getDoc } from "firebase/firestore";
+import { setDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 import Icon from "./component/atoms/Icon";
+import InputImage from "./component/atoms/Input/InputImage";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import storage from "./firebase-sec";
+// import InputIconUpload from "./component/atoms/Input/InputIconUpload";
 
 function Register() {
   //Authenticationに登録するemailとpassword
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
+
+
+
+   //loadingしているかしてないか監視する
+   const [loading, setLoading] = useState(false);
+    // アップロードが完了したか確認する
+    const [isUploaded, setIsUploaded] = useState(false);
+  const [imgSrc, setImgSrc] = useState("");
+
+  const [reference, setReference] = useState<any>("");
+
+
+  //画像アップロード＆URL取得
+  const InputImage = (e: any) => {
+    const file = e.target.files[0];
+
+    // パスと名前で参照を作成
+    const storageRef = ref(storage, "image/" + file.name);
+    // 画像のアップロード
+    // uploadBytesResumable(storageRef, file);
+    // setReference(storageRef);
+    // 画像のアップロード
+    const uploadImage = uploadBytesResumable(storageRef, file);
+    uploadImage.on("state_changed",
+    // upload開始したらloading中になる(loadingがtureになる)
+    (snapshot) => {
+        setLoading(true);
+    },
+    (err) =>{
+        console.log(err);
+    },
+    //upload完了したらloadedになる(loadingがfalse,loadedがtrue)
+    () =>{
+        setLoading(false);
+        setIsUploaded(true);
+
+        getDownloadURL(storageRef)
+        .then(url => {
+        setImgSrc(url)
+        })
+})
+
+
+
+    // // 画像のダウンロード
+    // getDownloadURL(storageRef)
+    //   .then((url) => {
+    //     setImgSrc(url);
+    //     console.log("画像のurlは" + url);
+    //     console.log(imgSrc);
+    //   })
+    //   .catch((err) => console.log(err));
+  };
+
+  //idを保管
+  // const [iconUserId,setIconUserId] = useState<any>("")
 
   //ログイン状態保持(userが値を持てばログイン状態)
   const [user, setUser] = useState<any>("");
@@ -33,6 +93,31 @@ function Register() {
       const { userName, name, Cpassword } = e.target.elements;
       console.log(userName.value);
 
+      //  const InputImage = (e:any) => {
+      //   const file = e.target.files[0];
+
+      //   // パスと名前で参照を作成
+      //   const storageRef = ref(storage,"image/"  + file.name);
+      //   // 画像のアップロード
+      //   uploadBytesResumable(storageRef, file);
+      //   // 画像のダウンロード
+      //   getDownloadURL(storageRef)
+      //   .then(url => {
+      //   setImgSrc(url)
+      //   console.log("画像のurlは" + url)
+      //   })
+      //   .catch(err => console.log(err))
+      //   }
+
+
+  // getDownloadURL(reference)
+  // .then((url) => {
+  //   setImgSrc(url);
+  //   console.log("画像のurlは" + url);
+  //   console.log(imgSrc);
+  // })
+  // .catch((err) => console.log(err));
+
       //ログイン判定
       onAuthStateChanged(auth, async (user) => {
         if (!user) {
@@ -44,6 +129,21 @@ function Register() {
           //上記を元にドキュメントのデータを取得
           const userDoc = await getDoc(docRef);
 
+          //propsで渡す用
+          // const userDataId = userDoc.data();
+          // setIconUserId(userDataId);
+
+
+          // 画像のダウンロード
+          //これだとコンソールには出力されるけど、ImagSrcには入ってなさそう
+    // getDownloadURL(reference)
+    // .then((url) => {
+    //   setImgSrc(url);
+    //   console.log("画像のurlは" + url);
+    //   console.log(imgSrc);
+    // })
+    // .catch((err) => console.log(err));
+
           //exists()でドキュメントの存在の有無を確認
           if (!userDoc.exists()) {
             //FireStoreにユーザー用のドキュメントが作られていなければ新規作成
@@ -54,6 +154,7 @@ function Register() {
               name: name.value,
               password: registerPassword,
               Cpassword: Cpassword.value,
+              icon: imgSrc,
             });
           }
         }
@@ -82,7 +183,40 @@ function Register() {
           <h1>会員登録</h1>
           {/* 登録ボタンを押した時にhandleSubmitを実行 */}
           <form onSubmit={handleSubmit}>
-            <div>icon登録</div>
+
+
+
+              {/* <InputIconUpload id={iconUserId.userId}/> */}
+              <div>
+              <label>Icon</label>
+                {/* <p>JpegかPngの画像ファイル</p>
+                <input
+                  name="icon"
+                  id="icon"
+                  type="file"
+                  accept=".png, .jpeg, .jpg"
+                  // value={imgSrc}
+                  onChange={InputImage}
+                />
+                <img alt="" src={imgSrc} /> */}
+
+          {loading ? (
+           <>
+              <p>uploading</p>
+              <input name="imageURL" type="file" accept=".png, .jpeg, .jpg"
+            onChange={ InputImage }/>
+             </>
+          ) : (
+           <>
+          {isUploaded ? (
+            <img alt="" src={imgSrc} />
+          ):(
+            <input name="imageURL" type="file" accept=".png, .jpeg, .jpg"
+              onChange={ InputImage } />
+          )}
+          </>
+          )}
+              </div>
             <div>
               <label>メールアドレス</label>
               <input
@@ -120,7 +254,7 @@ function Register() {
           </form>
         </>
       )}
-      <Icon />
+      {/* <Icon /> */}
     </>
   );
 }
