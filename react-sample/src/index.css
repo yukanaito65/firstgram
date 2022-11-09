@@ -29,7 +29,7 @@ form {
   row-gap: 30px;
 }
 
-input {
+/* input {
   width: 100%;
   box-sizing: border-box;
   border: solid 1px #ddd;
@@ -38,7 +38,7 @@ input {
   outline: none;
   appearance: none;
   border-radius: 0;
-}
+} */
 
 button {
   justify-self: center;
