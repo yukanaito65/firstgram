@@ -2,7 +2,7 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { collection, CollectionReference, doc, getDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import Icon from "./component/atoms/Icon";
+import Icon from "./component/atoms/pictures/Icon";
 import { auth, db } from "./firebase";
 import { User } from "./types/types";
 
@@ -58,6 +58,7 @@ function MyPage() {
   };
 
   // console.log(user.uid);
+  console.log(auth.currentUser)
 
   return (
     <>

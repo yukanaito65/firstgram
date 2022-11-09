@@ -4,6 +4,7 @@ import Login from "./Login";
 import Mypage from "./Mypage";
 import "./index.css"
 import Top from "./Top";
+import NewPost from "./NewPost";
 
 function App() {
   return (
@@ -11,10 +12,11 @@ function App() {
       <div className="container">
         <BrowserRouter>
           <Routes>
+          <Route path={`/`} element={<Mypage />} />
             <Route path={`/register/`} element={<Register />} />
             <Route path={`/login/`} element={<Login />} />
-            <Route path={`/`} element={<Mypage />} />
             <Route path={`/top/`} element={<Top />} />
+            <Route path={`/NewPost`} element={<NewPost />} />
           </Routes>
         </BrowserRouter>
       </div>

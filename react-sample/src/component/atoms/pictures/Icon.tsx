@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { auth, db } from "../../firebase";
+import { auth, db } from "../../../firebase";
 import {
   collection,
   getDoc,
@@ -7,7 +7,7 @@ import {
   CollectionReference,
 } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
-import type { User } from "../../types/types";
+import type { User } from "../../../types/types";
 
 function Icon() {
   //取得してきたデータを保持
