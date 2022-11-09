@@ -52,6 +52,11 @@ const InputImage = (e:any) => {
 
 // firestoreに追加
 const OnFirebase = async(e:any) => {
+if(textState === ""){
+console.log("テキストの入力がありません")
+}else if(imgSrc === ""){
+console.log("画像の入力がありません")
+}else {
 const collectionPost:any =collection(db, "postTest");
 const docRef = await addDoc(collectionPost,
 {test:"test",
@@ -65,6 +70,8 @@ const docImagePost = doc(db, "postTest", docRef.id);
 updateDoc(docImagePost, {
     id:docRef.id,
 });
+};
+
 };
 
 return (
