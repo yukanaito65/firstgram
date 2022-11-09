@@ -7,7 +7,7 @@ import { Link, Navigate } from "react-router-dom";
 import { auth } from "./firebase";
 import { db } from "./firebase";
 import { setDoc, doc, getDoc } from "firebase/firestore";
-import Icon from "./component/atoms/Icon";
+import Icon from "./component/atoms/pictures/Icon";
 
 function Register() {
   //Authenticationに登録するemailとpassword

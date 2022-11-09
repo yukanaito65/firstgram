@@ -19,6 +19,7 @@ const app = initializeApp(firebaseConfig);
 // 今回はfirestoreを使う、これでdbにfirebaseに保存されたデータが格納される
 const db = getFirestore(app);
 
+
 // 上記2つの変数をどこででも使えるようにexportする
 export { db };
 
