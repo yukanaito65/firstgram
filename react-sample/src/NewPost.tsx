@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { getDownloadURL, ref, uploadBytes, uploadBytesResumable } from "firebase/storage";
-import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
+import { addDoc, collection, doc, serverTimestamp, updateDoc } from "firebase/firestore";
 import { db } from "./firebase";
 import storage from "./firebase-sec";
+import {Link} from "react-router-dom";
 
 const NewPost = () => {
     //loadingしているかしてないか監視する
@@ -38,15 +39,16 @@ const InputImage = (e:any) => {
     () =>{
         setloading(false);
         setIsUploaded(true);
-    }
-)
-    // 画像のダウンロード
-    getDownloadURL(storageRef)
-    .then(url => {
-    setImgSrc(url)
-    })
-    .catch(err => console.log(err))
-    }
+
+        getDownloadURL(storageRef)
+        .then(url => {
+        setImgSrc(url)
+        })
+})
+
+
+}
+
 
 // firestoreに追加
 const OnFirebase = async(e:any) => {
@@ -54,7 +56,8 @@ const collectionPost:any =collection(db, "postTest");
 const docRef = await addDoc(collectionPost,
 {test:"test",
 imgUrl:imgSrc,
-text:textState
+text:textState,
+timestamp: serverTimestamp()
 });
 
 // ドキュメント更新(ID取得の為)
@@ -75,8 +78,8 @@ return (
             </button>
             <textarea rows={10} cols={40} name="inputPost" value={textState} 
             placeholder="コメントを入力してください" onChange={InputText} />
-            <button onClick={OnFirebase}>投稿</button>
-            <button>戻る</button>
+            <Link to="/NewPost/" ><button onClick={OnFirebase}>投稿</button></Link>
+            <Link to="/login/" ><button>戻る</button></Link>
         </div>
     ) : (
         <>
@@ -85,8 +88,8 @@ return (
         <img alt="" src={imgSrc} />
         <textarea rows={10} cols={40} name="inputPost" value={textState} 
         placeholder="コメントを入力してください" onChange={InputText} />
-        <button onClick={OnFirebase}>投稿</button>
-        <button>戻る</button>
+        <Link to="/NewPost/" ><button onClick={OnFirebase}>投稿</button></Link>
+        <Link to="/login/" ><button>戻る</button></Link>
         </div>
     ):(
     <div>
@@ -94,8 +97,8 @@ return (
     onChange={ InputImage }/>
     <textarea rows={10} cols={40} name="inputPost" value={textState} 
     placeholder="コメントを入力してください" onChange={InputText} />
-    <button onClick={OnFirebase}>投稿</button>
-    <button>戻る</button>
+    <Link to="/NewPost/" ><button onClick={OnFirebase}>投稿</button></Link>
+    <Link to="/login/" ><button>戻る</button></Link>
     </div>
     )}
         </>
