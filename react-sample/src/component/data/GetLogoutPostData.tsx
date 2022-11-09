@@ -10,11 +10,11 @@ interface Props {
 }
 
 // 引数に表示したいドキュメント(userId)とフィールドを挿入
-export function GetLogoutUserData({ docName, fieldName }: Props) {
+export function GetLogoutPostData({ docName, fieldName }: Props) {
   const [postData, setPostData] = useState("");
 
   async function getData() {
-    const docRef = doc(db, "post", `${docName}`);
+    const docRef = doc(db, "postTest", `${docName}`);
     const docSnap = await getDoc(docRef);
     // console.log(docRef);
     const field = docSnap.get(`${fieldName}`);
@@ -35,3 +35,5 @@ export function GetLogoutUserData({ docName, fieldName }: Props) {
     </>
   );
 }
+
+export default GetLogoutPostData;
