@@ -16,6 +16,12 @@ function MyPage() {
    //取得してきたデータを保持
    const [users, setUsers] = useState<any>([]);
 
+   //follow配列
+   const [followList,setFollowList] = useState<any>({follow:[]});
+
+   //follower配列
+   const [followerList,setFollowerList] = useState<any>({follower:[]});
+
   // ログインしているかどうか判定
   //ログインしていればuserにユーザー情報が代入される
   //currentUserプロパティを使用して、現在サインインしているユーザーを取得する(サインインしていなければnull)
@@ -42,8 +48,21 @@ function MyPage() {
 
       // //取得したデータから必要なものを取り出す
       const userDataId = userDocId.data();
-      // console.log(userDataId);
+      console.log(userDataId);
       setUsers(userDataId);
+
+      if(!userDataId){
+        console.log("データがありません");
+      }else{
+      setFollowList(userDataId.follow);
+      setFollowerList(userDataId.follower);
+      console.log(userDataId.name);
+      console.log(userDataId.follow);
+      }
+
+      // console.log(users.name);  //undefinedになる
+
+      console.log(followList);
       }
     });
   }, []);
@@ -58,7 +77,11 @@ function MyPage() {
   };
 
   // console.log(user.uid);
-  console.log(auth.currentUser)
+  // console.log(auth.currentUser)
+  // console.log(users.follow.length);
+  // const followNumber = ()=>{setFollowList(users.follow)};
+  // console.log(followNumber);
+  //  console.log(users.name);  //ここに書くとレンダリングされた時に実行されてundefinedになる
 
   return (
     <>
@@ -82,8 +105,8 @@ function MyPage() {
               </div>
               <div>
                 <div>投稿</div>
-                <div>フォロワー</div>
-                <div>フォロー中</div>
+                <div>{followerList.length}フォロワー</div>
+                <div>{followList.length}フォロー中</div>
               </div>
               <Link to={"/top/"}>Top</Link>
             </>
