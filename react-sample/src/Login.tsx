@@ -1,7 +1,7 @@
 import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
-import Icon from "./component/atoms/Icon";
+// import Icon from "./component/atoms/Icon";
 import LoginForm from "./component/molecules/LoginForm";
 import { auth } from "./firebase";
 
