@@ -98,6 +98,9 @@ function Register() {
               password: registerPassword,
               Cpassword: Cpassword.value,
               icon: imgSrc,
+              follow: [],
+              follower: [],
+              post: [],
             });
           }
         }

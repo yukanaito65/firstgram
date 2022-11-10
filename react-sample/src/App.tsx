@@ -5,6 +5,8 @@ import Mypage from "./Mypage";
 import "./index.css"
 import Top from "./Top";
 import NewPost from "./NewPost";
+import Follow from "./Follow";
+import Follower from "./Follower";
 
 function App() {
   return (
@@ -16,7 +18,9 @@ function App() {
             <Route path={`/register/`} element={<Register />} />
             <Route path={`/login/`} element={<Login />} />
             <Route path={`/top/`} element={<Top />} />
-            <Route path={`/NewPost`} element={<NewPost />} />
+            <Route path={`/newPost`} element={<NewPost />} />
+            <Route path={`/follow`} element={<Follow />} />
+            <Route path={`/follower`} element={<Follower />} />
           </Routes>
         </BrowserRouter>
       </div>
