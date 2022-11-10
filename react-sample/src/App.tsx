@@ -6,6 +6,13 @@ import "./index.css"
 import Top from "./Top";
 import NewPost from "./NewPost";
 
+
+import { GetLogoutUserData } from "./component/data/GetLogoutUserData";
+import GetLogoutPostData from "./component/data/GetLogoutPostData";
+import PostDetails from "./PostDetails";
+import PostLook from "./PostLook";
+
+
 function App() {
   return (
     <div className="App">
@@ -17,6 +24,9 @@ function App() {
             <Route path={`/login/`} element={<Login />} />
             <Route path={`/top/`} element={<Top />} />
             <Route path={`/NewPost`} element={<NewPost />} />
+            <Route path={`/PostDetails`} element={<PostDetails />} />
+            <Route path={`/PostLook`} element={<PostLook />} />
+
           </Routes>
         </BrowserRouter>
       </div>

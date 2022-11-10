@@ -76,8 +76,12 @@ function MyPage() {
               {/* <p>{user?.email}</p> */}
               <button>設定</button>
               <button onClick={logout}>ログアウト</button>
+
+              <Link to="/NewPost/" ><button>新規投稿</button></Link>
+
               </div>
               <div>
+
               <Icon />
               </div>
               <div>
