@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
 
 interface Props {
-    plaseHolder: string;
+    placeHolder: string;
   }
 
-function InputPass({ plaseHolder }: Props) {
+function InputPass({ placeHolder }: Props) {
     const [textState, setTextState] = useState("");
     const handleChange = (e:any) => setTextState(e.target.value)
   return (
     <div>
-    <input type="password" name="inputPass" value={textState} placeholder={plaseHolder} onChange={handleChange} />
+    <input type="password" name="inputPass" value={textState} placeholder={placeHolder} onChange={handleChange} />
     </div>
   )
 }
