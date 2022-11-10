@@ -1,6 +1,6 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import React, { useEffect, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import Icon from "./component/atoms/pictures/Icon";
 import { auth } from "./firebase";
 
@@ -48,6 +48,7 @@ function MyPage() {
               {/* ユーザーのメールアドレスを表示(ログインしている場合は表示する){user && user.email}これの略↓ */}
               <p>{user?.email}</p>
               <button onClick={logout}>ログアウト</button>
+              <Link to="/NewPost/" ><button>新規投稿</button></Link>
               <Icon />
             </>
           )}

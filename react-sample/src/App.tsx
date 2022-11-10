@@ -16,6 +16,7 @@ import NewPost from "./NewPost";
 import { GetLogoutUserData } from "./component/data/GetLogoutUserData";
 import GetLogoutPostData from "./component/data/GetLogoutPostData";
 import PostDetails from "./PostDetails";
+import PostLook from "./PostLook";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path={`/`} element={<Mypage />} />
             <Route path={`/NewPost`} element={<NewPost />} />
             <Route path={`/PostDetails`} element={<PostDetails />} />
+            <Route path={`/PostLook`} element={<PostLook />} />
 
           </Routes>
         </BrowserRouter>
