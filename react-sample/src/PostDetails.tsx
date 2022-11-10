@@ -20,6 +20,8 @@ const Click = async () =>{
       const postDataId = postDataDocId.data();
       console.log(postDataId);
       setPostData(postDataId);
+
+      
 }
 
 return (
