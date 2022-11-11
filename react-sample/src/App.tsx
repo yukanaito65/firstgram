@@ -5,10 +5,8 @@ import Mypage from "./Mypage";
 import "./index.css"
 import Top from "./Top";
 import NewPost from "./NewPost";
-
-
-import { GetLogoutUserData } from "./component/data/GetLogoutUserData";
-import GetLogoutPostData from "./component/data/GetLogoutPostData";
+import Follow from "./Follow";
+import Follower from "./Follower";
 import PostDetails from "./PostDetails";
 import PostLook from "./PostLook";
 
@@ -19,14 +17,15 @@ function App() {
       <div className="container">
         <BrowserRouter>
           <Routes>
-          <Route path={`/`} element={<Mypage />} />
+          <Route path={`/mypage/`} element={<Mypage />} />
             <Route path={`/register/`} element={<Register />} />
             <Route path={`/login/`} element={<Login />} />
-            <Route path={`/top/`} element={<Top />} />
-            <Route path={`/NewPost`} element={<NewPost />} />
+            <Route path={`/`} element={<Top />} />
+            <Route path={`/newPost`} element={<NewPost />} />
+            <Route path={`/follow`} element={<Follow />} />
+            <Route path={`/follower`} element={<Follower />} />
             <Route path={`/PostDetails`} element={<PostDetails />} />
             <Route path={`/PostLook`} element={<PostLook />} />
-
           </Routes>
         </BrowserRouter>
       </div>

@@ -1,7 +1,6 @@
-import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
-import Icon from "./component/atoms/Icon";
 import LoginForm from "./component/molecules/LoginForm";
 import { auth } from "./firebase";
 
@@ -20,7 +19,7 @@ function Login() {
     <>
       {/* ログインしている場合、マイページにリダイレクトする設定 */}
       {user ? (
-        <Navigate to={`/`} />
+        <Navigate to={`/mypage/`} />
       ) : (
         <>
           <LoginForm />
