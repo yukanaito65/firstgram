@@ -2,9 +2,11 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Register from "./Register";
 import Login from "./Login";
 import Mypage from "./Mypage";
+import NewPost from "./NewPost";
+import AccountEditPage from "./AccountEditPage";
+import AccountSettingPage from "./AccountSettingPage";
 import "./index.css"
 import Top from "./Top";
-import NewPost from "./NewPost";
 import Follow from "./Follow";
 import Follower from "./Follower";
 import PostDetails from "./PostDetails";
@@ -20,6 +22,8 @@ function App() {
           <Route path={`/mypage/`} element={<Mypage />} />
             <Route path={`/register/`} element={<Register />} />
             <Route path={`/login/`} element={<Login />} />
+            <Route path={`/AccountEditPage`} element={<AccountEditPage />} />
+            <Route path={`/AccountSettingPage`} element={<AccountSettingPage />} />
             <Route path={`/`} element={<Top />} />
             <Route path={`/newPost`} element={<NewPost />} />
             <Route path={`/follow`} element={<Follow />} />

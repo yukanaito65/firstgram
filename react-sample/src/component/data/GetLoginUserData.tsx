@@ -11,11 +11,11 @@ import { onAuthStateChanged } from "@firebase/auth";
 
 // ドキュメント名を引数に取る
 interface Props {
-    fieldName: String | Number
+    fieldName: any
   }
 
   // 引数に表示したいフィールドを挿入
-export function GetLoginUserData({fieldName}:Props) {
+export function GetLoginUserData({ fieldName } :Props) {
     //取得してきたデータを保持
   const [users, setUsers] = useState<any>([]);
 
@@ -42,16 +42,16 @@ export function GetLoginUserData({fieldName}:Props) {
       const userDocId = await getDoc(userDocRefId);
 
       // //取得したデータから必要なものを取り出す
-      const userDataId:any = userDocId.data();
-      console.log(userDataId.fieldName);
+      const userDataId:any = userDocId.get(fieldName);
       setUsers(userDataId);
+    
       }
     });
   }, []);
 
   return (
     <>
-    {user ? <p>{users.fieldName}</p>
+    {user ? <p>{users}</p>
     :
     <p>データがありません</p>}
     </>

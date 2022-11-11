@@ -10,12 +10,13 @@ import {
   where,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, Link } from "react-router-dom";
 import Icon from "./component/atoms/pictures/Icon";
 import MyPost from "./component/atoms/pictures/MyPost";
 import { auth, db } from "./firebase";
 import { User } from "./types/types";
 import { Post } from "./types/types";
+
 
 function MyPage() {
   //ログインしているとログイン情報を持つ
@@ -154,6 +155,7 @@ function MyPage() {
           )}
         </>
       )}
+      <Link to={`/AccountSettingPage`}><button>設定</button></Link>
     </>
   );
 }
