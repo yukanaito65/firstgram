@@ -14,10 +14,10 @@ function App() {
       <div className="container">
         <BrowserRouter>
           <Routes>
-          <Route path={`/`} element={<Mypage />} />
+          <Route path={`/mypage/`} element={<Mypage />} />
             <Route path={`/register/`} element={<Register />} />
             <Route path={`/login/`} element={<Login />} />
-            <Route path={`/top/`} element={<Top />} />
+            <Route path={`/`} element={<Top />} />
             <Route path={`/newPost`} element={<NewPost />} />
             <Route path={`/follow`} element={<Follow />} />
             <Route path={`/follower`} element={<Follower />} />

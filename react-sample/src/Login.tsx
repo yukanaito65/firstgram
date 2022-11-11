@@ -19,7 +19,7 @@ function Login() {
     <>
       {/* ログインしている場合、マイページにリダイレクトする設定 */}
       {user ? (
-        <Navigate to={`/`} />
+        <Navigate to={`/mypage/`} />
       ) : (
         <>
           <LoginForm />

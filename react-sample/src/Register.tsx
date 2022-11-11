@@ -12,6 +12,7 @@ import storage from "./firebase-sec";
 // import Icon from "./component/atoms/pictures/Icon";
 
 
+
 function Register() {
   //ログイン状態保持(userが値を持てばログイン状態)
   const [user, setUser] = useState<any>("");
@@ -73,7 +74,7 @@ function Register() {
       );
 
       //FireStoreへのデータ新規追加
-      const { userName, name, Cpassword } = e.target.elements;
+      const { userName, name, Cpassword, profile } = e.target.elements;
       console.log(userName.value);
 
       //ログイン判定
@@ -101,6 +102,7 @@ function Register() {
               follow: [],
               follower: [],
               post: [],
+              profile: profile.value,
             });
           }
         }
@@ -121,9 +123,9 @@ function Register() {
 
   return (
     <>
-      {/* ログインしていればマイページを表示。Navigateで指定したページにリダイレクトする */}
+      {/* ログインしていればtopを表示。Navigateで指定したページにリダイレクトする */}
       {user ? (
-        <Navigate to={`/top/`} />
+        <Navigate to={`/`} />
       ) : (
         <>
           <h1>会員登録</h1>
@@ -185,6 +187,10 @@ function Register() {
             <div>
               <label>確認用パスワード</label>
               <input type="password" name="Cpassword" />
+            </div>
+            <div>
+              <label>プロフィール</label>
+              <input type="textarea" name="profile" />
             </div>
             <button>登録</button>
             <p>
