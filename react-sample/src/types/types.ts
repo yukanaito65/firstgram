@@ -9,6 +9,8 @@ export type User = {
   follow: []; //userIdを格納
   follower: []; //userIdを格納
   favoritePost: []; //postIdを格納
+  post: []; //postドキュメントidを格納
+  profile: string;
 };
 
 export type Post = {

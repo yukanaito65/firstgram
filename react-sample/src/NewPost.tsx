@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { getDownloadURL, ref, uploadBytes, uploadBytesResumable } from "firebase/storage";
-import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
-import { db } from "./firebase";
+import { addDoc, arrayUnion, collection, doc, getDoc, serverTimestamp, updateDoc } from "firebase/firestore";
+import { auth, db } from "./firebase";
 import storage from "./firebase-sec";
+import {Link} from "react-router-dom";
+import { onAuthStateChanged } from "firebase/auth";
 
-const NewPost = () => {
+const NewPost = (props:any) => {
     //loadingしているかしてないか監視する
     const [loading, setloading] = useState(false);
     // アップロードが完了したか確認する
@@ -13,6 +15,8 @@ const NewPost = () => {
     const [imgSrc, setImgSrc] = useState("");
     // コメント
     const [textState, setTextState] = useState("");
+      //ログイン状態保持(userが値を持てばログイン状態)
+    const [user, setUser] = useState<any>("");
 
 // コメントの更新
 const InputText = (e:any)=>{
@@ -38,31 +42,59 @@ const InputImage = (e:any) => {
     () =>{
         setloading(false);
         setIsUploaded(true);
-    }
-)
-    // 画像のダウンロード
-    getDownloadURL(storageRef)
-    .then(url => {
-    setImgSrc(url)
-    })
-    .catch(err => console.log(err))
-    }
+
+        getDownloadURL(storageRef)
+        .then(url => {
+        setImgSrc(url)
+        })
+})
+}
 
 // firestoreに追加
 const OnFirebase = async(e:any) => {
-const collectionPost:any =collection(db, "postTest");
+if(textState === ""){
+console.log("テキストの入力がありません")
+}else if(imgSrc === ""){
+console.log("画像の入力がありません")
+}else {
+const collectionPost:any =collection(db, "post");
 const docRef = await addDoc(collectionPost,
-{test:"test",
-imgUrl:imgSrc,
-text:textState
+{
+imageUrl:imgSrc,
+caption:textState,
+postDate: serverTimestamp(),
+favorites: [],
+ userId: props.uid,
 });
 
 // ドキュメント更新(ID取得の為)
-const docImagePost = doc(db, "postTest", docRef.id);
+const docImagePost = doc(db, "post", docRef.id);
 updateDoc(docImagePost, {
-    id:docRef.id,
+    postId:docRef.id,
 });
+
+// usersのログインしているuserのidを取得
+onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+    console.log("ログアウト状態です");
+    } else {
+    console.log("ログイン状態です");
+    //ログイン済みユーザーのドキュメントへの参照を取得
+    const docusesinformation = doc(db, "user", user.uid);
+    // ドキュメント更新(postId[]を作成、docRef.idを追加)
+    updateDoc(docusesinformation, {
+        postId: arrayUnion(docRef.id),
+    });
+
+    // //上記を元にドキュメントのデータを取得
+    // const userDoc = await getDoc(docRef);
+
+    }
+})
+
 };
+};
+
 
 return (
     <>
@@ -73,29 +105,29 @@ return (
             <input name="imageURL" type="file" accept=".png, .jpeg, .jpg"
             onChange={ InputImage }/>
             </button>
-            <textarea rows={10} cols={40} name="inputPost" value={textState} 
+            <textarea rows={10} cols={40} name="inputPost" value={textState}
             placeholder="コメントを入力してください" onChange={InputText} />
-            <button onClick={OnFirebase}>投稿</button>
-            <button>戻る</button>
+            <Link to="/NewPost/" ><button onClick={OnFirebase}>投稿</button></Link>
+            <Link to="/login/" ><button>戻る</button></Link>
         </div>
     ) : (
         <>
     {isUploaded ? (
         <div>
         <img alt="" src={imgSrc} />
-        <textarea rows={10} cols={40} name="inputPost" value={textState} 
+        <textarea rows={10} cols={40} name="inputPost" value={textState}
         placeholder="コメントを入力してください" onChange={InputText} />
-        <button onClick={OnFirebase}>投稿</button>
-        <button>戻る</button>
+        <Link to="/NewPost/" ><button onClick={OnFirebase}>投稿</button></Link>
+        <Link to="/login/" ><button>戻る</button></Link>
         </div>
     ):(
     <div>
     <input name="imageURL" type="file" accept=".png, .jpeg, .jpg"
     onChange={ InputImage }/>
-    <textarea rows={10} cols={40} name="inputPost" value={textState} 
+    <textarea rows={10} cols={40} name="inputPost" value={textState}
     placeholder="コメントを入力してください" onChange={InputText} />
-    <button onClick={OnFirebase}>投稿</button>
-    <button>戻る</button>
+    <Link to="/NewPost/" ><button onClick={OnFirebase}>投稿</button></Link>
+    <Link to="/login/" ><button>戻る</button></Link>
     </div>
     )}
         </>
