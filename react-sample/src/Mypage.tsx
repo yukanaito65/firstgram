@@ -142,7 +142,6 @@ function MyPage() {
                 <div>{followList.length}フォロー中</div>
               </div>
               <div>{users.profile}</div>
-
               <div>
                  {posts.map((post:any)=>{
                   return(

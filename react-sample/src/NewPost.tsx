@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { getDownloadURL, ref, uploadBytes, uploadBytesResumable } from "firebase/storage";
-import { addDoc, collection, doc, serverTimestamp, updateDoc } from "firebase/firestore";
-import { db } from "./firebase";
+import { addDoc, arrayUnion, collection, doc, getDoc, serverTimestamp, updateDoc } from "firebase/firestore";
+import { auth, db } from "./firebase";
 import storage from "./firebase-sec";
 import {Link} from "react-router-dom";
+import { onAuthStateChanged } from "firebase/auth";
 
 const NewPost = (props:any) => {
     //loadingしているかしてないか監視する
@@ -14,6 +15,8 @@ const NewPost = (props:any) => {
     const [imgSrc, setImgSrc] = useState("");
     // コメント
     const [textState, setTextState] = useState("");
+      //ログイン状態保持(userが値を持てばログイン状態)
+    const [user, setUser] = useState<any>("");
 
 // コメントの更新
 const InputText = (e:any)=>{
@@ -45,10 +48,7 @@ const InputImage = (e:any) => {
         setImgSrc(url)
         })
 })
-
-
 }
-
 
 // firestoreに追加
 const OnFirebase = async(e:any) => {
@@ -72,9 +72,29 @@ const docImagePost = doc(db, "post", docRef.id);
 updateDoc(docImagePost, {
     postId:docRef.id,
 });
-};
+
+// usersのログインしているuserのidを取得
+onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+    console.log("ログアウト状態です");
+    } else {
+    console.log("ログイン状態です");
+    //ログイン済みユーザーのドキュメントへの参照を取得
+    const docusesinformation = doc(db, "user", user.uid);
+    // ドキュメント更新(postId[]を作成、docRef.idを追加)
+    updateDoc(docusesinformation, {
+        postId: arrayUnion(docRef.id),
+    });
+
+    // //上記を元にドキュメントのデータを取得
+    // const userDoc = await getDoc(docRef);
+
+    }
+})
 
 };
+};
+
 
 return (
     <>
