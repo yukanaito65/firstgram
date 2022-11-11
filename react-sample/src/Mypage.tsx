@@ -12,6 +12,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import Icon from "./component/atoms/pictures/Icon";
+import MyPost from "./component/atoms/pictures/MyPost";
 import { auth, db } from "./firebase";
 import { User } from "./types/types";
 import { Post } from "./types/types";
@@ -145,7 +146,7 @@ function MyPage() {
               <div>
                  {posts.map((post:any)=>{
                   return(
-                     <img src={post.imageUrl} alt="投稿" />
+                     <MyPost imageUrl={post.imageUrl} />
                   )
                  })}
                </div>
