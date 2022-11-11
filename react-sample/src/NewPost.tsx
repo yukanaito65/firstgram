@@ -57,19 +57,22 @@ console.log("テキストの入力がありません")
 }else if(imgSrc === ""){
 console.log("画像の入力がありません")
 }else {
-const collectionPost:any =collection(db, "postTest");
+const collectionPost:any =collection(db, "post");
 const docRef = await addDoc(collectionPost,
-{test:"test",
+{
+caption:textState,
+favorites:[],
 imgUrl:imgSrc,
-text:textState,
-timestamp: serverTimestamp()
+postData: serverTimestamp(),
 });
 
 // ドキュメント更新(ID取得の為)
-const docImagePost = doc(db, "postTest", docRef.id);
+const docImagePost = doc(db, "post", docRef.id);
 updateDoc(docImagePost, {
-    id:docRef.id,
+    postId:docRef.id,
 });
+
+// console.log(auth.currentUser)
 
 // usersのログインしているuserのidを取得
 onAuthStateChanged(auth, async (user) => {
@@ -81,8 +84,13 @@ onAuthStateChanged(auth, async (user) => {
     const docusesinformation = doc(db, "user", user.uid);
     // ドキュメント更新(postId[]を作成、docRef.idを追加)
     updateDoc(docusesinformation, {
-        postId: arrayUnion(docRef.id),
+        post: arrayUnion(docRef.id),
     });
+    updateDoc(docImagePost, {
+        userId:user.uid,
+    });
+
+
 
     // //上記を元にドキュメントのデータを取得
     // const userDoc = await getDoc(docRef);
