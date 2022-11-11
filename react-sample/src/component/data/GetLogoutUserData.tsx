@@ -16,11 +16,11 @@ export function GetLogoutUserData({ docName, fieldName }: Props) {
   async function getData() {
     const docRef = doc(db, "user", `${docName}`);
     const docSnap = await getDoc(docRef);
-    // console.log(docRef);
+    console.log(docRef);
     const field = docSnap.get(`${fieldName}`);
 
     if (docSnap.exists()) {
-      // console.log("Document data:", field);
+      console.log("Document data:", field);
       setUserData(field);
     } else {
       // doc.data() will be undefined in this case

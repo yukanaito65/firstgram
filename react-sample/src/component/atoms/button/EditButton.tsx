@@ -7,7 +7,7 @@ interface Props {
 function EditButton({ onClick }: Props) {
   return (
     <button type="button" className="" onClick={onClick}>
-      削除
+      編集
     </button>
   )
 }

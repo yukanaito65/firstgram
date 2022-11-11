@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 interface Props {
-    plaseHolder: string;
+    plaseHolder: any;
   }
 
 function InputName({ plaseHolder }: Props) {

@@ -1,8 +1,9 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import React, { useEffect, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, Link } from "react-router-dom";
 import Icon from "./component/atoms/pictures/Icon";
 import { auth } from "./firebase";
+
 
 function MyPage() {
   //ログインしているとログイン情報を持つ
@@ -53,6 +54,7 @@ function MyPage() {
           )}
         </>
       )}
+      <Link to={`/AccountSettingPage`}><button>設定</button></Link>
     </>
   );
 }
