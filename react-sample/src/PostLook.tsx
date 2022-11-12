@@ -16,8 +16,6 @@ const [followUserPostArray, setFollowUserPostArray] = useState<any>([]);
 // followuserのpostidからとってきたpostData
 const [postData, setPostData] = useState<any>([]);
 
-const [array,setArray] =useState<string[]>([])
-
 const click = (e:any) => {
 //ログイン判定
 onAuthStateChanged(auth, async (user) => {
@@ -44,23 +42,32 @@ onAuthStateChanged(auth, async (user) => {
     console.log(UseLoginUserFollowUserIdArray)
 
     
-    const newArray:any[] = []
-    const result = await Promise.all(UseLoginUserFollowUserIdArray.map(async(followUser:any)=>{
-        const followUserInfo = doc(db, "user", followUser);
-        const followUserPosts =await (await getDoc(followUserInfo)).data()?.post;
-        // const newArray = [...array, ...followUserPosts]
-        newArray.push(...followUserPosts)
-        return followUserPosts
-          }))
-          const a = [...result]
-          console.log(...a)
-    console.log(...result[0])
+    const loginUserFollowUserPostArray:any[] = []
+    // const result = await Promise.all(UseLoginUserFollowUserIdArray.map(async(followUser:any)=>{
+    //     const followUserInfo = doc(db, "user", followUser);
+    //     const followUserPosts =await (await getDoc(followUserInfo)).data()?.post;
+    //     // const newArray = [...array, ...followUserPosts]
+    //     newArray.push(...followUserPosts)
+    //     return newArray
+    //     // followUserPosts
+    //     }))
+    // console.log(result)
+    for(let followUser of UseLoginUserFollowUserIdArray){
+    const followUserInfo = doc(db, "user", followUser);
+    const followUserPosts =await (await getDoc(followUserInfo)).data()?.post;
+    loginUserFollowUserPostArray.push(...followUserPosts)
+    }
+    console.log(loginUserFollowUserPostArray)
+    setFollowUserPostArray(loginUserFollowUserPostArray)
 
-        // const a =Promise.resolve('Success').then((res:any)=>res)
-        // console.log(a)
-        
-    
-
+    const postDataArray:any[] = []
+    for(let postid of loginUserFollowUserPostArray){
+    const postinformation = doc(db, "post", postid);
+    const postDataDoc =  await getDoc(postinformation);
+    const postDatas = postDataDoc.data();
+    postDataArray.push(postDatas)
+    }
+    setPostData(postDataArray)
 //     let array:any[] = []
 //     // LoginUserFollowUserIdから、user情報を取得する
 //     UseLoginUserFollowUserIdArray.map(async(followUserDocId:any) =>{
@@ -87,17 +94,17 @@ onAuthStateChanged(auth, async (user) => {
 // setFollowUserPostArray(array)  
 // console.log(array[0])
 
-    const getPostData = followUserPostArray.map(async(postid:any)=>{
-    // posttestのドキュメントへの参照を取得
-    const postinformation = doc(db, "post", postid);
-    // 上記を元にドキュメントのデータを取得
-    const postDataDoc =  await getDoc(postinformation);
-    // 取得したデータから必要なものを取り出す
-    const postDatas = postDataDoc.data();
+    // const getPostData = followUserPostArray.map(async(postid:any)=>{
+    // // posttestのドキュメントへの参照を取得
+    // const postinformation = doc(db, "post", postid);
+    // // 上記を元にドキュメントのデータを取得
+    // const postDataDoc =  await getDoc(postinformation);
+    // // 取得したデータから必要なものを取り出す
+    // const postDatas = postDataDoc.data();
 
-    postData.push(postDatas)
-    setPostData(postData)
-    })
+    // postData.push(postDatas)
+    // setPostData(postData)
+    // })
     }
     })
 }
@@ -106,12 +113,13 @@ return (
 <>
 <button onClick={click}>ボタン</button>
 <div>
-{postData.map((data:any)=>{
+{postData.map((data:any,index:any)=>{
     return(
-    <div key={data.postId}>
+    <div key={index}>
     <p>{data.postId}</p>
     <p>{data.text}</p>
     <img src={data.imgUrl} />
+    {/* <a href="{data.postId}">ああ</a> */}
     </div>
     )
 })}
