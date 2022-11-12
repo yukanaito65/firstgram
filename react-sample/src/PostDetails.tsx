@@ -1,38 +1,42 @@
  import { useEffect, useState } from "react";
 import { auth, db } from "./firebase";
 import {collection,getDoc,doc,CollectionReference,} from "firebase/firestore";
+import { useLocation } from "react-router-dom";
+import firebasePostDetails from "./firebasePostDetails";
+
+interface State {
+      id:string
+}
 
 function PostDetails() {
-      //取得してきたデータを保持
+// postlookからデータを持ってくる
+const location = useLocation();
+const {id} = location.state as State
+//取得してきたデータを保持
 const [postData, setPostData] = useState<any>([]);
+// 画像urlを格納
+const [imgUrl, setimgUrl] = useState<any>("");
+// textを格納
+const [text, setText] = useState<any>("");
 
-const Click = async () =>{
-      //コレクションへの参照を取得
-      const postDataCollectionRef = collection(db, "postTest") ;
+useEffect(()=>{
+// .then(〜がきたときに)
+firebasePostDetails(id).then((postData)=>{
+setimgUrl(postData.imgUrl)
+setText(postData.text)
+})
 
-      // //上記を元にドキュメントへの参照を取得
-      const postDataDocRefId = doc(postDataCollectionRef, "5JmiLlaOyfc1W9x3LAzk");
-    
-      // //上記を元にドキュメントのデータを取得
-      const postDataDocId = await getDoc(postDataDocRefId);
 
-      // //取得したデータから必要なものを取り出す
-      const postDataId = postDataDocId.data();
-      console.log(postDataId);
-      setPostData(postDataId);
 
-      
-}
+}, [])
 
 return (
 <>
-    <div className="icon-image" style={{borderRadius: "50%",width: "100px",height: "100px",border: "2px, lightgray",}}>
-    <button onClick={Click}>テスト</button>
-    <img  src={postData.imgUrl} alt="icon" style={{ width: "100%", height: "100%", objectFit: "cover" }}/>
-    <input value={postData.test}></input>
-    {/* <p>{postData.timestamp}</p> */}
-    </div>
-    {/* )} */}
+<div>
+<img src={imgUrl} />
+<p>{text}</p>
+<input type="text" value={text} onChange={(e)=>{setText(e.target.value)}}></input>
+</div>
 </>
 );
 }

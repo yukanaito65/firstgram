@@ -1,7 +1,7 @@
 import { onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
-import { useActionData, useRouteLoaderData } from 'react-router-dom';
+import { Link, useActionData, useRouteLoaderData } from 'react-router-dom';
 import { auth, db } from './firebase';
 
 function PostLook() {
@@ -29,36 +29,18 @@ onAuthStateChanged(auth, async (user) => {
     const userDataDoc =  await getDoc(docusesinformation);
     //取得したデータから必要なものを取り出す
     const userDatas = userDataDoc.data();
-    console.log(userDatas)
-
     // ログインしているユーザーのデータを保持
     setLoginUserData(userDatas)
-    console.log(userDatas)
     // ログインしているユーザーのフォローしている人のuseridを配列に格納
-    // const followUserId = usersData.follow
-    // const userloginuserdatafollw = userDatas?.follow
     setLoginUserFollowUserIdArray(userDatas?.follow)
     const UseLoginUserFollowUserIdArray =  userDatas?.follow
 
-    console.log(UseLoginUserFollowUserIdArray)
-
-    
     const loginUserFollowUserPostArray:any[] = []
-    // const result = await Promise.all(UseLoginUserFollowUserIdArray.map(async(followUser:any)=>{
-    //     const followUserInfo = doc(db, "user", followUser);
-    //     const followUserPosts =await (await getDoc(followUserInfo)).data()?.post;
-    //     // const newArray = [...array, ...followUserPosts]
-    //     newArray.push(...followUserPosts)
-    //     return newArray
-    //     // followUserPosts
-    //     }))
-    // console.log(result)
     for(let followUser of UseLoginUserFollowUserIdArray){
     const followUserInfo = doc(db, "user", followUser);
     const followUserPosts =await (await getDoc(followUserInfo)).data()?.post;
     loginUserFollowUserPostArray.push(...followUserPosts)
     }
-    console.log(loginUserFollowUserPostArray)
     setFollowUserPostArray(loginUserFollowUserPostArray)
 
     const postDataArray:any[] = []
@@ -69,58 +51,21 @@ onAuthStateChanged(auth, async (user) => {
     postDataArray.push(postDatas)
     }
     setPostData(postDataArray)
-//     let array:any[] = []
-//     // LoginUserFollowUserIdから、user情報を取得する
-//     UseLoginUserFollowUserIdArray.map(async(followUserDocId:any) =>{
-//     // folowUserDocIdのドキュメントへの参照を取得
-//     const useriformation = doc(db, "user", followUserDocId);
-//     // 上記を元にドキュメントのデータを取得
-//     const userDataDoc =  await getDoc(useriformation);
-//     // 取得したデータから必要なものを取り出す
-//     const userData = userDataDoc.data();
-//     // followUserのDataを保持
-//     setFollowUserData(userData)
-//     // followUserのDataからpostを取り出す
-//     const followUserPost = userData?.post
-
-//     console.log(followUserPost)
-//     // followUserのpostをひとつずつ取り出して
-//     followUserPost?.map((data:any)=>{
-//     // followUserのpostをfolloeUserPostArrayの配列に格納
-//     array.push(data)
-//     // folloeUserPostArrayを保持
-// })  
-// })
-
-// setFollowUserPostArray(array)  
-// console.log(array[0])
-
-    // const getPostData = followUserPostArray.map(async(postid:any)=>{
-    // // posttestのドキュメントへの参照を取得
-    // const postinformation = doc(db, "post", postid);
-    // // 上記を元にドキュメントのデータを取得
-    // const postDataDoc =  await getDoc(postinformation);
-    // // 取得したデータから必要なものを取り出す
-    // const postDatas = postDataDoc.data();
-
-    // postData.push(postDatas)
-    // setPostData(postData)
-    // })
     }
     })
-// }
+
 }, [])
 
 return (
 <>
-{/* <button onClick={click}>ボタン</button> */}
 <div>
 {postData.map((data:any,index:any)=>{
     return(
     <div key={index}>
-    <p>{data.postId}</p>
     <p>{data.text}</p>
-    <img src={data.imgUrl} />
+    <Link to="/PostDetails" state={{id:data.id}}><img src={data.imgUrl} /></Link>
+    {/* 日付が表示できない */}
+    {/* <p>{data.timestamp}</p> */}
     {/* <a href="{data.postId}">ああ</a> */}
     </div>
     )

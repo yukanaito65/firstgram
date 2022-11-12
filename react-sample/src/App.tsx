@@ -25,8 +25,8 @@ function App() {
             <Route path={`/top/`} element={<Top />} />
             <Route path={`/NewPost`} element={<NewPost />} />
             <Route path={`/PostDetails`} element={<PostDetails />} />
+            {/* <Route path="/PostDetails" component={PostDetails} /> */}
             <Route path={`/PostLook`} element={<PostLook />} />
-
           </Routes>
         </BrowserRouter>
       </div>
