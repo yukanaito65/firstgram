@@ -1,6 +1,6 @@
 import { onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useActionData, useRouteLoaderData } from 'react-router-dom';
 import { auth, db } from './firebase';
 
@@ -16,7 +16,8 @@ const [followUserPostArray, setFollowUserPostArray] = useState<any>([]);
 // followuserのpostidからとってきたpostData
 const [postData, setPostData] = useState<any>([]);
 
-const click = (e:any) => {
+// const click = (e:any) => {
+useEffect(()=>{
 //ログイン判定
 onAuthStateChanged(auth, async (user) => {
     if (!user) {
@@ -107,11 +108,12 @@ onAuthStateChanged(auth, async (user) => {
     // })
     }
     })
-}
+// }
+}, [])
 
 return (
 <>
-<button onClick={click}>ボタン</button>
+{/* <button onClick={click}>ボタン</button> */}
 <div>
 {postData.map((data:any,index:any)=>{
     return(
