@@ -63,8 +63,8 @@ return (
     return(
     <div key={index}>
     <p>{data.caption}</p>
-    {/* <Link to="/PostDetails" state={{id:data.postId}}><img src={data.imgUrl} /></Link> */}
-    <Link to="/PostEditing" state={{id:data.postId}}><img src={data.imgUrl} /></Link>
+    <Link to="/PostDetails" state={{id:data.postId,userid:data.userId}}><img src={data.imgUrl} /></Link>
+    {/* <Link to="/PostEditing" state={{id:data.postId}}><img src={data.imgUrl} /></Link> */}
     {/* 日付が表示できない */}
     {/* <p>{data.timestamp}</p> */}
     {/* <a href="{data.postId}">ああ</a> */}
