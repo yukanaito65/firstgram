@@ -1,5 +1,6 @@
 import { onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
+import { connectStorageEmulator } from 'firebase/storage';
 import React, { useEffect, useState } from 'react'
 import { Link, useActionData, useRouteLoaderData } from 'react-router-dom';
 import { auth, db } from './firebase';
@@ -35,14 +36,22 @@ onAuthStateChanged(auth, async (user) => {
     setLoginUserFollowUserIdArray(userDatas?.follow)
     const UseLoginUserFollowUserIdArray =  userDatas?.follow
 
+    
     const loginUserFollowUserPostArray:any[] = []
+    // ログインしているユーザーのpostIdも上記配列に格納
+    const myPostId = userDatas?.post
+    loginUserFollowUserPostArray.push(...myPostId)
+
+    // ログインしているuserのfollowのpostIDを配列に格納
     for(let followUser of UseLoginUserFollowUserIdArray){
     const followUserInfo = doc(db, "user", followUser);
     const followUserPosts =await (await getDoc(followUserInfo)).data()?.post;
     loginUserFollowUserPostArray.push(...followUserPosts)
     }
+    
     setFollowUserPostArray(loginUserFollowUserPostArray)
 
+    // 上記postidの配列からpost情報を取得
     const postDataArray:any[] = []
     for(let postid of loginUserFollowUserPostArray){
     const postinformation = doc(db, "post", postid);
