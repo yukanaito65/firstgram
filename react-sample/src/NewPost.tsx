@@ -70,6 +70,7 @@ postData: serverTimestamp(),
 const docImagePost = doc(db, "post", docRef.id);
 updateDoc(docImagePost, {
     postId:docRef.id,
+    caption:"更新"
 });
 
 // console.log(auth.currentUser)
