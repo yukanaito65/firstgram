@@ -3,6 +3,7 @@ import { auth, db } from "./firebase";
 import {collection,getDoc,doc,CollectionReference,} from "firebase/firestore";
 import { Link, useLocation } from "react-router-dom";
 import firebasePostDetails from "./firebasePostDetails";
+import { onAuthStateChanged } from "firebase/auth";
 
 interface State {
       id:string
@@ -10,16 +11,26 @@ interface State {
 
 function PostDetails() {
 const [value , setValue] = useState("");
-
-// postlookからデータを持ってくる
-const location = useLocation();
-const {id} = location.state as State
-//取得してきたデータを保持
-// const [postData, setPostData] = useState<any>([]);
 // 画像urlを格納
 const [imgUrl, setimgUrl] = useState<any>("");
 // textを格納
 const [text, setText] = useState<any>("");
+// ログインユーザー
+
+//ログイン判定
+onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+      console.log(user);
+      } else {
+      console.log(user)
+      }
+})
+
+// postlookからデータを持ってくる
+const location = useLocation();
+const {id} = location.state as State
+
+
 
 useEffect(()=>{
 // .then(〜がきたときに)
@@ -32,6 +43,7 @@ setText(postData.text)
 return (
 <>
 <div>
+
 <select>
       <option selected disabled>…</option>
       <option value="editing" onChange={(e)=>{setValue("editing")}}>編集</option>

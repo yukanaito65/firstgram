@@ -11,7 +11,7 @@ const firebasePostDetails = async(id:string) =>{
     // 取得したデータから必要なものを取り出す
     const postDataId = postDataDocId.data();
     const  imgurl = postDataId?.imgUrl
-    const text = postDataId?.text
+    const text = postDataId?.caption
 
   return (
     {

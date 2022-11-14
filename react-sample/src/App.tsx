@@ -11,6 +11,7 @@ import { GetLogoutUserData } from "./component/data/GetLogoutUserData";
 import GetLogoutPostData from "./component/data/GetLogoutPostData";
 import PostDetails from "./PostDetails";
 import PostLook from "./PostLook";
+import PostEditing from "./PostEditing";
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
             <Route path={`/PostDetails`} element={<PostDetails />} />
             {/* <Route path="/PostDetails" component={PostDetails} /> */}
             <Route path={`/PostLook`} element={<PostLook />} />
+            <Route path={`/PostEditing`} element={<PostEditing />} />
           </Routes>
         </BrowserRouter>
       </div>

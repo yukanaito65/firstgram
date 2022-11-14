@@ -70,7 +70,7 @@ postData: serverTimestamp(),
 const docImagePost = doc(db, "post", docRef.id);
 updateDoc(docImagePost, {
     postId:docRef.id,
-    caption:"更新"
+    // caption:"更新"
 });
 
 // console.log(auth.currentUser)
@@ -124,7 +124,7 @@ return (
         <img alt="" src={imgSrc} />
         <textarea rows={10} cols={40} name="inputPost" value={textState} 
         placeholder="コメントを入力してください" onChange={InputText} />
-        <Link to="/NewPost/" ><button onClick={OnFirebase}>投稿</button></Link>
+        <Link to="/PostLook/" ><button onClick={OnFirebase}>投稿</button></Link>
         <Link to="/login/" ><button>戻る</button></Link>
         </div>
     ):(
