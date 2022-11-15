@@ -2,6 +2,7 @@ import { onAuthStateChanged, signOut } from 'firebase/auth';
 import React, { useEffect, useState } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { auth } from './firebase';
+import NewPost from './NewPost';
 
 function Top() {
   //ログインしているとログイン情報を持つ
@@ -42,8 +43,9 @@ function Top() {
               <h1>Topページ</h1>
               {/* ユーザーのメールアドレスを表示(ログインしている場合は表示する){user && user.email}これの略↓ */}
               <p>{user?.email}</p>
+              <NewPost uid={user.uid}/>
               <button onClick={logout}>ログアウト</button>
-              <Link to={"/"}>マイページ</Link>
+              <Link to={"/mypage/"}>マイページ</Link>
             </>
           )}
         </>
