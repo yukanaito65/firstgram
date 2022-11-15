@@ -60,11 +60,12 @@ console.log("画像の入力がありません")
 const collectionPost:any =collection(db, "post");
 const docRef = await addDoc(collectionPost,
 {
-imageUrl:imgSrc,
+
 caption:textState,
-postDate: serverTimestamp(),
-favorites: [],
- userId: props.uid,
+favorites:[],
+imgUrl:imgSrc,
+postData: serverTimestamp(),
+
 });
 
 // ドキュメント更新(ID取得の為)
@@ -72,6 +73,8 @@ const docImagePost = doc(db, "post", docRef.id);
 updateDoc(docImagePost, {
     postId:docRef.id,
 });
+
+// console.log(auth.currentUser)
 
 // usersのログインしているuserのidを取得
 onAuthStateChanged(auth, async (user) => {
@@ -83,7 +86,10 @@ onAuthStateChanged(auth, async (user) => {
     const docusesinformation = doc(db, "user", user.uid);
     // ドキュメント更新(postId[]を作成、docRef.idを追加)
     updateDoc(docusesinformation, {
-        postId: arrayUnion(docRef.id),
+        post: arrayUnion(docRef.id),
+    });
+    updateDoc(docImagePost, {
+        userId:user.uid,
     });
 
     // //上記を元にドキュメントのデータを取得
@@ -117,7 +123,7 @@ return (
         <img alt="" src={imgSrc} />
         <textarea rows={10} cols={40} name="inputPost" value={textState}
         placeholder="コメントを入力してください" onChange={InputText} />
-        <Link to="/NewPost/" ><button onClick={OnFirebase}>投稿</button></Link>
+        <Link to="/PostLook/" ><button onClick={OnFirebase}>投稿</button></Link>
         <Link to="/login/" ><button>戻る</button></Link>
         </div>
     ):(

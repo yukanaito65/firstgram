@@ -11,6 +11,7 @@ import Follow from "./Follow";
 import Follower from "./Follower";
 import PostDetails from "./PostDetails";
 import PostLook from "./PostLook";
+import PostEditing from "./PostEditing";
 
 
 function App() {
@@ -29,7 +30,9 @@ function App() {
             <Route path={`/follow`} element={<Follow />} />
             <Route path={`/follower`} element={<Follower />} />
             <Route path={`/PostDetails`} element={<PostDetails />} />
+            {/* <Route path="/PostDetails" component={PostDetails} /> */}
             <Route path={`/PostLook`} element={<PostLook />} />
+            <Route path={`/PostEditing`} element={<PostEditing />} />
           </Routes>
         </BrowserRouter>
       </div>

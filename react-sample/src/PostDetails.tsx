@@ -1,38 +1,79 @@
- import { useEffect, useState } from "react";
+ import { useEffect, useId, useState } from "react";
 import { auth, db } from "./firebase";
 import {collection,getDoc,doc,CollectionReference,} from "firebase/firestore";
+import { Link, useLocation } from "react-router-dom";
+import firebasePostDetails from "./firebasePostDetails";
+import { onAuthStateChanged, updateCurrentUser } from "firebase/auth";
+import { current } from "@reduxjs/toolkit";
+
+interface State {
+      id:string,
+      userid:string
+}
 
 function PostDetails() {
-      //取得してきたデータを保持
-const [postData, setPostData] = useState<any>([]);
+const [value , setValue] = useState("");
+// 画像urlを格納
+const [imgUrl, setimgUrl] = useState<any>("");
+// textを格納
+const [text, setText] = useState<any>("");
+// ログインユーザー
+const [loginUserPost,setLoginUserPost]=useState(false)
 
-const Click = async () =>{
-      //コレクションへの参照を取得
-      const postDataCollectionRef = collection(db, "postTest") ;
 
-      // //上記を元にドキュメントへの参照を取得
-      const postDataDocRefId = doc(postDataCollectionRef, "5JmiLlaOyfc1W9x3LAzk");
-    
-      // //上記を元にドキュメントのデータを取得
-      const postDataDocId = await getDoc(postDataDocRefId);
+// postlookからデータを持ってくる
+const location = useLocation();
+const {id,userid} = location.state as State
+// const {userId} =location.state as State
 
-      // //取得したデータから必要なものを取り出す
-      const postDataId = postDataDocId.data();
-      console.log(postDataId);
-      setPostData(postDataId);
+//ログイン判定
+onAuthStateChanged(auth, async (user) => {
+      if(user?.uid === userid){
+            setLoginUserPost(true)
+      }else{
+            setLoginUserPost(false)
+            // console.log(userid)
+            // console.log(user?.uid)
+      }
+})
 
-      
-}
+
+
+useEffect(()=>{
+// .then(〜がきたときに)
+firebasePostDetails(id).then((postData)=>{
+setimgUrl(postData.imgUrl)
+setText(postData.text)
+})
+}, [])
 
 return (
 <>
-    <div className="icon-image" style={{borderRadius: "50%",width: "100px",height: "100px",border: "2px, lightgray",}}>
-    <button onClick={Click}>テスト</button>
-    <img  src={postData.imgUrl} alt="icon" style={{ width: "100%", height: "100%", objectFit: "cover" }}/>
-    <input value={postData.test}></input>
-    {/* <p>{postData.timestamp}</p> */}
-    </div>
-    {/* )} */}
+<div>
+
+{loginUserPost ?(
+       <>
+      <select>
+      <option selected disabled>…</option>
+      <option value="editing" onChange={(e)=>{setValue("editing")}}>編集</option>
+      <option value="deletion" onChange={(e)=>{setValue("deletion")}}>削除</option>
+      </select>
+     
+      <img src={imgUrl} />
+      <p>{text}</p>
+      <Link to="/PostEditing" state={{id:id}}><button>編集</button></Link>
+      <button>削除</button>
+      </>
+):(
+      <>
+      <img src={imgUrl} />
+      <p>{text}</p>
+      {/* <Link to="/PostEditing" state={{id:id}}><button>編集</button></Link> */}
+      </>
+)}
+
+
+</div>
 </>
 );
 }
