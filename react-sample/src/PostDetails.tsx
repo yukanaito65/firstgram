@@ -1,6 +1,6 @@
  import { useEffect, useId, useState } from "react";
 import { auth, db } from "./firebase";
-import {collection,getDoc,doc,CollectionReference, deleteDoc, deleteField, updateDoc, arrayUnion,} from "firebase/firestore";
+import {collection,getDoc,doc,CollectionReference, deleteDoc, deleteField, updateDoc, arrayUnion, query, where, getDocs,} from "firebase/firestore";
 import { Link, useLocation } from "react-router-dom";
 import firebasePostDetails from "./firebasePostDetails";
 import { onAuthStateChanged, updateCurrentUser } from "firebase/auth";
@@ -87,13 +87,45 @@ const AddComment =async(e:any)=>{
             })
 }
 
+
+const ClickDelition = async(e:any) =>{
+// postのドキュメントへの参照を取得
+const postDataDocRefId = doc(collection(db, "post"), id);
+// 上記を元にドキュメントのデータを取得
+const postDataDocId = await getDoc(postDataDocRefId);
+// 取得したデータから必要なものを取り出す
+const postDataId = postDataDocId.data();
+// postuseridを取得(投稿者が誰か)
+const postUserId = postDataId?.userId
+
+// 投稿者のuser情報取得
+const postUserDocRef = doc(collection(db,"user"),postUserId)
+// 上記を元にドキュメントのデータを取得
+const postUserDoc = await getDoc(postUserDocRef);
+// 取得したデータから必要なものを取り出す
+const postUserData = postUserDoc.data();
+// 投稿者のpostを取り出す
+const postUserPost = postUserData?.post
+
+const index = postUserPost.indexOf(id);
+postUserPost.splice(index, 1)
+
+console.log(postUserPost)
+
+await updateDoc(postUserDocRef,{
+      post: postUserPost
+});
+
+await deleteDoc(doc(db, "post", id));
+}
+
 return (
 <>
 <div>
 {loginUserPost ?(
 <>
 <Link to="/PostEditing" state={{id:id}}><button>編集</button></Link>
-{/* <button onClick={ClickDelition}>削除</button><br /> */}
+<button onClick={ClickDelition}>削除</button><br />
 </>
 ):(
       <>
@@ -107,7 +139,7 @@ return (
 </div>
 <button onClick={AddComment}>コメント</button>
 <button onClick={Favorite}>♡</button>
-<p>♡ {favolites}</p>
+<div>♡: {favolites}</div>
 <div>コメント:
 {displayComment.map((data:any,index:any)=>{
     return(
@@ -120,7 +152,7 @@ return (
 </div>
 </>
 );
-}
+};
 
 
 export default PostDetails;
