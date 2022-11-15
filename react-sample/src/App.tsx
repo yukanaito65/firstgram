@@ -13,6 +13,7 @@ import PostDetails from "./PostDetails";
 import PostLook from "./PostLook";
 import DeleteCompPage from "./DeleteCompPage";
 import PsswordChange from "./PsswordChange"
+import PostEditing from "./PostEditing";
 
 function App() {
   return (
@@ -30,9 +31,11 @@ function App() {
             <Route path={`/follow`} element={<Follow />} />
             <Route path={`/follower`} element={<Follower />} />
             <Route path={`/PostDetails`} element={<PostDetails />} />
+            {/* <Route path="/PostDetails" component={PostDetails} /> */}
             <Route path={`/PostLook`} element={<PostLook />} />
             <Route path={`/deleteComp`} element={<DeleteCompPage />} />
             <Route path={`/passwordChange`} element={<PsswordChange />} />
+            <Route path={`/PostEditing`} element={<PostEditing />} />
           </Routes>
         </BrowserRouter>
       </div>

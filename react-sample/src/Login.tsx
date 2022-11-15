@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import Footer from "./component/molecules/Footer";
 import Header from "./component/molecules/Header";
+// import Icon from "./component/atoms/Icon";
 import LoginForm from "./component/molecules/LoginForm";
 import { auth } from "./firebase";
 
