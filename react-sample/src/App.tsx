@@ -11,8 +11,9 @@ import Follow from "./Follow";
 import Follower from "./Follower";
 import PostDetails from "./PostDetails";
 import PostLook from "./PostLook";
+import DeleteCompPage from "./DeleteCompPage";
+import PsswordChange from "./PsswordChange"
 import PostEditing from "./PostEditing";
-
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
       <div className="container">
         <BrowserRouter>
           <Routes>
-          <Route path={`/mypage/`} element={<Mypage />} />
+            <Route path={`/mypage/`} element={<Mypage />} />
             <Route path={`/register/`} element={<Register />} />
             <Route path={`/login/`} element={<Login />} />
             <Route path={`/AccountEditPage`} element={<AccountEditPage />} />
@@ -32,6 +33,8 @@ function App() {
             <Route path={`/PostDetails`} element={<PostDetails />} />
             {/* <Route path="/PostDetails" component={PostDetails} /> */}
             <Route path={`/PostLook`} element={<PostLook />} />
+            <Route path={`/deleteComp`} element={<DeleteCompPage />} />
+            <Route path={`/passwordChange`} element={<PsswordChange />} />
             <Route path={`/PostEditing`} element={<PostEditing />} />
           </Routes>
         </BrowserRouter>

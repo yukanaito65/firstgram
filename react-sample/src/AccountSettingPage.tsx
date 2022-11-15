@@ -5,7 +5,6 @@ import {
   getDoc,
   doc,
   collection,
-  updateDoc,
   CollectionReference,
 } from "firebase/firestore";
 import { useEffect } from "react";
@@ -52,7 +51,6 @@ function AccountSettingPage() {
         setNameValue(userDataId.name);
         setProfileValue(userDataId.profile);
         setEmailValue(userDataId.email);
-        setPasswordValue(userDataId.password);
 
         console.log("ログイン状態です");
       }
@@ -64,7 +62,6 @@ function AccountSettingPage() {
   const [nameValue, setNameValue] = useState<any>("");
   const [profileValue, setProfileValue] = useState<any>("");
   const [emailValue, setEmailValue] = useState<any>("");
-  const [passwordValue, setPasswordValue] = useState<any>("");
 
   return (
     <div>
@@ -96,8 +93,12 @@ function AccountSettingPage() {
 
           <div>
             <p>パスワード</p>
-            <p>{passwordValue}</p>
+            <p>****</p>
           </div>
+
+<Link to="/passwordChange">
+          パスワード変更はこちら
+          </Link>
 
           <Link to="/AccountEditPage">
             <button>編集</button>

@@ -3,7 +3,7 @@ import FollowButton from './component/atoms/button/FollowButton'
 
 function Follow() {
   return (
-    <FollowButton />
+    <FollowButton onClick={() => console.log("フォローする")} />
   )
 }
 

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { auth } from "./firebase";
 import { db } from "./firebase";
 import {
   getDoc,
@@ -11,20 +10,20 @@ import {
 import { useEffect } from "react";
 import { onAuthStateChanged } from "@firebase/auth";
 import type { User } from "./types/types";
-import Icon from "./component/atoms/pictures/Icon";
-import { Link } from "react-router-dom";
-import {
-  getDownloadURL,
-  ref,
-  uploadBytesResumable,
-} from "firebase/storage";
+import { Link,useNavigate } from "react-router-dom";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import storage from "./firebase-sec";
+import { getAuth } from "firebase/auth";
 
 function AccountEditPage() {
   //ログイン状態を保持
   //Authenticationに登録されている情報を持つ
   const [user, setUser] = useState<any>("");
-  const [userDocRefId, setUserDocRefId] = useState<any>("");
+  // 各inputの状態管理
+  const [userNameValue, setUserNameValue] = useState<any>("");
+  const [nameValue, setNameValue] = useState<any>("");
+  const [profileValue, setProfileValue] = useState<any>("");
+  const [iconValue, setIconValue] = useState<any>("");
 
   useEffect(() => {
     //ログイン判定
@@ -40,11 +39,8 @@ function AccountEditPage() {
           db,
           "user"
         ) as CollectionReference<User>;
-        console.log(userCollectionRef);
 
         // 上記を元にドキュメントへの参照を取得
-        setUserDocRefId(doc(userCollectionRef, user.uid));
-        console.log(doc(userCollectionRef, user.uid));
         const docDtata = doc(userCollectionRef, user.uid);
 
         // 上記を元にドキュメントのデータを取得
@@ -57,8 +53,6 @@ function AccountEditPage() {
         setUserNameValue(userDataId.userName);
         setNameValue(userDataId.name);
         setProfileValue(userDataId.profile);
-        setEmailValue(userDataId.email);
-        setPasswordValue(userDataId.password);
         setIconValue(userDataId.icon);
 
         console.log("ログイン状態です");
@@ -66,34 +60,33 @@ function AccountEditPage() {
     });
   }, []);
 
-  // 各inputの状態管理
-  const [userNameValue, setUserNameValue] = useState<any>("");
-  const [nameValue, setNameValue] = useState<any>("");
-  const [profileValue, setProfileValue] = useState<any>("");
-  const [emailValue, setEmailValue] = useState<any>("");
-  const [passwordValue, setPasswordValue] = useState<any>("");
-  const [cPasswordValue, setCPasswordValue] = useState<any>("");
-  const [iconValue, setIconValue] = useState<any>("");
+  // Authenticationの変更
+  const auth = getAuth();
+  const navigate = useNavigate();
 
   // 確定時にfiresoterにデータ送信
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    updateDoc(userDocRefId, {
-      icon: imgSrc,
+
+    const userCollectionRef = collection(
+      db,
+      "user"
+    ) as CollectionReference<User>;
+    const docDtata = doc(userCollectionRef, user.uid);
+
+    updateDoc(docDtata, {
+      icon: iconValue,
       userName: userNameValue,
       name: nameValue,
       profile: profileValue,
-      email: emailValue,
-      password: passwordValue,
     });
+    navigate("/AccountSettingPage");
   };
 
   //loadingしているかしてないか監視する
   const [loading, setloading] = useState(false);
   // アップロードが完了したか確認する
   const [isUploaded, setIsUploaded] = useState(false);
-  // 画像のsrc
-  const [imgSrc, setImgSrc] = useState("");
 
   // 画像の更新
   const InputImage = (e: any) => {
@@ -105,7 +98,7 @@ function AccountEditPage() {
     uploadImage.on(
       "state_changed",
       // upload開始したらloading中になる(loadingがtureになる)
-      (snapshot) => {
+      () => {
         setloading(true);
       },
       (err) => {
@@ -115,14 +108,12 @@ function AccountEditPage() {
       () => {
         setloading(false);
         setIsUploaded(true);
+        // 画像のダウンロード
+        getDownloadURL(storageRef).then((url) => {
+          setIconValue(url);
+        });
       }
     );
-    // 画像のダウンロード
-    getDownloadURL(storageRef)
-      .then((url) => {
-        setImgSrc(url);
-      })
-      .catch((err) => console.log(err));
   };
 
   return (
@@ -130,16 +121,15 @@ function AccountEditPage() {
       <h1>設定</h1>
       {user ? (
         <>
-          <form onSubmit={handleSubmit}>
-          <label htmlFor="settingIcon">アイコン</label>
+          <form>
+            <label htmlFor="settingIcon">アイコン</label>
             {loading ? (
               <p>アップロード中</p>
             ) : (
               <>
                 {isUploaded ? (
                   <div>
-                    <img alt="" src={imgSrc} />
-                    <label>変更</label>
+                    <img alt="" src={iconValue} />
                     <input
                       name="settingIcon"
                       type="file"
@@ -194,47 +184,7 @@ function AccountEditPage() {
               ></input>
             </div>
 
-            <div>
-              <label htmlFor="settingEmail">メールアドレス</label>
-              <input
-                type="email"
-                value={emailValue}
-                onChange={(e) => setEmailValue(e.target.value)}
-                name="settingEmail"
-                id="settingEmail"
-              ></input>
-            </div>
-
-            <div>
-              <label htmlFor="settingPassword">パスワード</label>
-              <input
-                type="password"
-                value={passwordValue}
-                onChange={(e) => setPasswordValue(e.target.value)}
-                name="settingPassword"
-                id="settingPassword"
-              ></input>
-            </div>
-
-            <div>
-              <label htmlFor="settingCPassword">確認用パスワード</label>
-              <input
-                type="password"
-                value={cPasswordValue}
-                onChange={(e) => setCPasswordValue(e.target.value)}
-                name="settingCPassword"
-                id="settingCPassword"
-                placeholder="確認のため再度パスワードを入力"
-              ></input>
-              {cPasswordValue.length > 0 && passwordValue !== cPasswordValue ? (
-                <p>パスワードと確認用パスワードが一致していません</p>
-              ) : (
-                <></>
-              )}
-            </div>
-            <Link to="/mypage/">
-            <button>確定</button>
-            </Link>
+              <button onClick={handleSubmit}>確定</button>
           </form>
           <Link to="/AccountSettingPage">
             <button>戻る</button>
