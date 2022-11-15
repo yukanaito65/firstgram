@@ -1,15 +1,15 @@
-import React from 'react'
+// import React from 'react'
 
-// interface Props {
-//     onClick: () => void;
-//   }
+// // interface Props {
+// //     onClick: () => void;
+// //   }
 
-function FollowButton() {
-  return (
-    <button type="button" className="login-form__button" >
-      フォロー
-    </button>
-  )
-}
+// function FollowButton() {
+//   return (
+//     <button type="button" className="login-form__button" >
+//       フォロー
+//     </button>
+//   )
+// }
 
-export default FollowButton
+// export default FollowButton
