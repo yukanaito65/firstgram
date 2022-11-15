@@ -13,14 +13,14 @@ const firebasePostDetails = async(id:string) =>{
     const  imgurl = postDataId?.imgUrl
     const text = postDataId?.caption
     const favolites = postDataId?.favolites
-    const comments = postDataId?.comment
+    const comment = postDataId?.comment
 
   return (
     {
     Imgurl:imgurl,
     Caption:text,
     Favorites:favolites,
-    Comments:comments
+    Comment:comment
     }
  
   )

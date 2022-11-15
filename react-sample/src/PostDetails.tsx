@@ -23,13 +23,12 @@ const [imgUrl, setImgUrl] = useState<any>("");
 const [caption, setCaption] = useState<any>("");
 // favolitesを格納
 const [favolites, setFavolites] = useState<any>([]);
+
 // commentを格納
 const [displayComment, setDisplayComment] = useState<any>([]);
 
-
-
 // inputcommentを格納
-const [inputComment, setInputComment] = useState<any>("a");
+const [inputComment, setInputComment] = useState<any>("テスト3");
 
 
 // postlookからデータを持ってくる
@@ -58,7 +57,7 @@ firebasePostDetails(id).then((postData)=>{
 setImgUrl(postData.Imgurl)
 setCaption(postData.Caption)
 setFavolites(postData.Favorites)
-setDisplayComment(postData.Comments)
+setDisplayComment(postData.Comment)
 })
 }, [])
 
@@ -80,11 +79,11 @@ const AddComment =async(e:any)=>{
       // 押された投稿のcommentにinputCommentを配列で追加
       const postDataDocRefId = doc(collection(db, "post"), id);
       updateDoc(postDataDocRefId, {
-            comment:arrayUnion(inputComment),
+            comment:arrayUnion({username:loginUserName,commentText:inputComment}),
       });
       // firestoreからcommentを取得、保持
       await firebasePostDetails(id).then((postData)=>{
-            setDisplayComment(postData.Comments)
+            setDisplayComment(postData.Comment)
             })
 }
 
@@ -103,11 +102,22 @@ return (
 </div>
 <img src={imgUrl} />
 <p>{caption}</p>
+<div>
 <input type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)}}></input>
+</div>
 <button onClick={AddComment}>コメント</button>
 <button onClick={Favorite}>♡</button>
 <p>♡ {favolites}</p>
-<p>コメント {displayComment}</p>
+<div>コメント:
+{displayComment.map((data:any,index:any)=>{
+    return(
+    <div key={index}>
+    <p>{data.username}</p>
+    <p>{data.commentText}</p>
+    </div>
+    )
+})}
+</div>
 </>
 );
 }
