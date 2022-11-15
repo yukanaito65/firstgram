@@ -32,14 +32,9 @@ onAuthStateChanged(auth, async (user) => {
             setLoginUserPost(true)
       }else{
             setLoginUserPost(false)
-            console.log(userid)
-            console.log(user?.uid)
+            // console.log(userid)
+            // console.log(user?.uid)
       }
-      // if (!user) {
-      // console.log(user);
-      // } else {
-      // console.log(user.uid)
-      // }
 })
 
 
@@ -67,6 +62,7 @@ return (
       <img src={imgUrl} />
       <p>{text}</p>
       <Link to="/PostEditing" state={{id:id}}><button>編集</button></Link>
+      <button>削除</button>
       </>
 ):(
       <>

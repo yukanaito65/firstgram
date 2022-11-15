@@ -91,8 +91,6 @@ onAuthStateChanged(auth, async (user) => {
         userId:user.uid,
     });
 
-
-
     // //上記を元にドキュメントのデータを取得
     // const userDoc = await getDoc(docRef);
 
