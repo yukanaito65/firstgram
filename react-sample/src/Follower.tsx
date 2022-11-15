@@ -1,6 +1,7 @@
 // import React from 'react'
 // import FollowButton from './component/atoms/button/FollowButton'
 
+
 // function Follower() {
 //   return (
 //     <>
@@ -9,5 +10,6 @@
 //     </>
 //   )
 // }
+
 
 // export default Follower
