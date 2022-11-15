@@ -22,8 +22,8 @@ const [text, setText] = useState<any>("");
 useEffect(()=>{
 // .then(〜がきたときに)
 firebasePostDetails(id).then((postData)=>{
-setimgUrl(postData.imgUrl)
-setText(postData.text)
+setimgUrl(postData.Imgurl)
+setText(postData.Caption)
 })
 }, [])
 

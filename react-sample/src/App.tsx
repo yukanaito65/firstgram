@@ -7,8 +7,8 @@ import AccountEditPage from "./AccountEditPage";
 import AccountSettingPage from "./AccountSettingPage";
 import "./index.css"
 import Top from "./Top";
-import Follow from "./Follow";
-import Follower from "./Follower";
+// import Follow from "./Follow";
+// import Follower from "./Follower";
 import PostDetails from "./PostDetails";
 import PostLook from "./PostLook";
 import DeleteCompPage from "./DeleteCompPage";
@@ -28,8 +28,8 @@ function App() {
             <Route path={`/AccountSettingPage`} element={<AccountSettingPage />} />
             <Route path={`/`} element={<Top />} />
             <Route path={`/newPost`} element={<NewPost />} />
-            <Route path={`/follow`} element={<Follow />} />
-            <Route path={`/follower`} element={<Follower />} />
+            {/* <Route path={`/follow`} element={<Follow />} />
+            <Route path={`/follower`} element={<Follower />} /> */}
             <Route path={`/PostDetails`} element={<PostDetails />} />
             {/* <Route path="/PostDetails" component={PostDetails} /> */}
             <Route path={`/PostLook`} element={<PostLook />} />
