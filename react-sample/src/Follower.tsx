@@ -5,7 +5,7 @@ function Follower() {
   return (
     <>
     <div>Follower</div>
-    <FollowButton />
+    <FollowButton onClick={() => console.log("フォローする")} />
     </>
   )
 }

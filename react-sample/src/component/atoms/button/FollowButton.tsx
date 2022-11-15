@@ -1,10 +1,10 @@
 import React from 'react'
 
-// interface Props {
-//     onClick: () => void;
-//   }
+interface Props {
+    onClick: () => void;
+  }
 
-function FollowButton() {
+function FollowButton({ onClick }: Props) {
   return (
     <button type="button" className="login-form__button" >
       フォロー
