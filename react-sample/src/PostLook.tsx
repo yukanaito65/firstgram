@@ -2,13 +2,20 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { collection, doc, getDoc, getDocs, query, updateDoc, where } from 'firebase/firestore';
 import { connectStorageEmulator } from 'firebase/storage';
 import React, { useEffect, useState } from 'react'
-import { Link, useActionData, useRouteLoaderData } from 'react-router-dom';
+import { Link, useActionData, useLocation, useRouteLoaderData } from 'react-router-dom';
+import FavolitePostLook from './FavolitePostLook';
 import { auth, db } from './firebase';
-import FollowUserPostFirebase from './FollowUserPostFirebase';
 
 function PostLook() {
 // followuserのpostidからとってきたpostData
 const [postData, setPostData] = useState<any>([]);
+// userName保持
+const[userName,setUserName]=useState("");
+// postid保持
+const[postId,setPostId]=useState("");
+
+// favolites保持
+const[favolites,setFavolites]=useState("");
 
 useEffect(()=>{
 //ログイン判定
@@ -24,6 +31,10 @@ onAuthStateChanged(auth, async (user) => {
     const userDatas = userDataDoc.data();
     // ログインしているユーザーのフォローしている人のuseridを配列に格納
     const UseLoginUserFollowUserIdArray =  userDatas?.follow
+    
+    // ログインしてるuserのuserName取得
+    const username =  userDatas?.userName
+    setUserName(username)
 
     const postDataArray:any[]=[];
 
@@ -38,7 +49,7 @@ onAuthStateChanged(auth, async (user) => {
         postDataArray.push(followUserPost)
     });
     })
-    
+
     // ログインしているユーザーのpost情報を配列に格納
     const myPostId = userDatas?.post
     for(let postid of myPostId ){
@@ -55,13 +66,19 @@ onAuthStateChanged(auth, async (user) => {
     })
 }, [])
 
+// postData.map((data:any)=>{
+//     const id = data.postId
+// setPostId(id)
+// })
 // console.log(postId)
-// const Favorite = async(e:any)=>{
-//     const postDataDocRefId = doc(collection(db, "post"), postId);
-//     updateDoc(postDataDocRefId, {
-//           favorites:userId,
-//       });
-//     }
+
+const Favorite = (e:any)=>{
+    FavolitePostLook().then((favo:any)=>{
+        setFavolites(favo.favo)
+        console.log(favolites)
+    })
+    }
+
 
 return (
 <>
@@ -71,6 +88,7 @@ return (
     <div key={index}>
     <p>{data.caption}</p>
     <Link to="/PostDetails" state={{id:data.postId,userid:data.userId}}><img src={data.imgUrl} /></Link>
+    <button onClick={Favorite}>♡</button>
     </div>
     )
 })}
