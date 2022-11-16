@@ -129,6 +129,8 @@ return (
 </>
 ):(
       <>
+      <Link to="/PostEditing" state={{id:id}}><button>編集</button></Link>
+<button onClick={ClickDelition}>削除</button><br />
       </>
 )}
 </div>

@@ -89,6 +89,7 @@ return (
     <p>{data.caption}</p>
     <Link to="/PostDetails" state={{id:data.postId,userid:data.userId}}><img src={data.imgUrl} /></Link>
     <button onClick={Favorite}>♡</button>
+    <button>コメント</button>
     </div>
     )
 })}
