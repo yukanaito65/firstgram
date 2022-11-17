@@ -88,22 +88,17 @@ const Favorite = async(e:any)=>{
     })
     }
 
-console.log(postData)
+const narabikae = [postData];
+postData.sort((a: any, b: any) => {
+return a.postData.toDate() > b.postData.toDate()  ? -1 : 1;
+});
 
 return (
 <>
 <div>
     
 {postData.map((data:any,index:any)=>{
-    // const time = postData.map((a:any)=>{
-    //     console.log( a.caption)
-    //     console.log(a.postData.nanoseconds)
-    // return a.postData.nanoseconds
-    // })
-    // time.sort();
-   
     const timestamp = data.postData.toDate()
-    // console.log(timestamp)
     const year = timestamp.getFullYear()
     const month = (timestamp.getMonth()+1)
     const day = timestamp.getDate()
