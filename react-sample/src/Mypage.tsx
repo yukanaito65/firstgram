@@ -156,6 +156,7 @@ function MyPage() {
         </>
       )}
       <Link to={`/AccountSettingPage`}><button>設定</button></Link>
+      <Link to={`/dmPage`}><button>DM</button></Link>
     </>
   );
 }
