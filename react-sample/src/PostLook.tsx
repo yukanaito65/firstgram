@@ -119,6 +119,7 @@ return (
     )
 })}
 </div>
+<Link to="/mypage"><button>マイページ</button></Link>
 </>
 )
 };
