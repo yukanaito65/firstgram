@@ -87,15 +87,19 @@ function MyPage() {
           "post"
         ), where("userId", "==", currentUser.uid))as CollectionReference<Post>;
 
+        console.log(postCollectionRef); //Zcがひとつ
+
         // 上記を元にドキュメントのデータを取得(post)
         const postDocId:any = await getDocs(postCollectionRef);
-        console.log(postDocId.docs); // 配列
+        console.log(postDocId.docs); // 配列(3)[rl,rl,rl]
+        console.log(postDocId); //ol
 
         //上記を元にデータの中身を取り出す。map()を使えるようにする。
         const newPostDocIds = postDocId.docs as any[];
         const postDataArray = newPostDocIds.map((id)=>id.data());
+        console.log(postDataArray); //(3)[{},{},{}]
         setPosts(postDataArray);
-        // console.log(posts);
+        console.log(posts); //[]
       }
     });
   }, []);
@@ -115,7 +119,7 @@ function MyPage() {
   // const followNumber = ()=>{setFollowList(users.follow)};
   // console.log(followNumber);
   // console.log(users.name);  //ここに書くとレンダリングされた時に実行されてundefinedになる
-// console.log(posts);
+console.log(posts); //何回か[]で最終的に[{},{},{}]
 
   return (
     <>
@@ -124,14 +128,16 @@ function MyPage() {
         <>
           {/* ログインしていない状態でマイページ表示しようとするとログインページにリダイレクトする設定(!userがログインしていない場合のこと) */}
           {!user ? (
-            <Navigate to={`/login/`} />
+            <Navigate to={`/login`} />
           ) : (
             <>
               <div>
                 <div>{users.userName}</div>
                 {/* ユーザーのメールアドレスを表示(ログインしている場合は表示する){user && user.email}これの略↓ */}
                 {/* <p>{user?.email}</p> */}
+                <Link to={"/AccountSettingPage"}>
                 <button>設定</button>
+                </Link>
                 <button onClick={logout}>ログアウト</button>
               </div>
               <div>
@@ -139,8 +145,12 @@ function MyPage() {
               </div>
               <div>
                 <div>{postList.length}投稿</div>
-                <div>{followerList.length}フォロワー</div>
+                <Link to={"/follower"}>
+                  <div>{followerList.length}フォロワー</div>
+                </Link>
+                <Link to={"/follow"}>
                 <div>{followList.length}フォロー中</div>
+                </Link>
               </div>
               <div>{users.profile}</div>
               <div>
@@ -155,7 +165,6 @@ function MyPage() {
           )}
         </>
       )}
-      <Link to={`/AccountSettingPage`}><button>設定</button></Link>
     </>
   );
 }

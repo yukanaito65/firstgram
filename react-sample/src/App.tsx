@@ -19,9 +19,9 @@ function App() {
       <div className="container">
         <BrowserRouter>
           <Routes>
-          <Route path={`/mypage/`} element={<Mypage />} />
-            <Route path={`/register/`} element={<Register />} />
-            <Route path={`/login/`} element={<Login />} />
+          <Route path={`/mypage`} element={<Mypage />} />
+            <Route path={`/register`} element={<Register />} />
+            <Route path={`/login`} element={<Login />} />
             <Route path={`/AccountEditPage`} element={<AccountEditPage />} />
             <Route path={`/AccountSettingPage`} element={<AccountSettingPage />} />
             <Route path={`/`} element={<Top />} />
