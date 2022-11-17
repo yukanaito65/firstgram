@@ -15,12 +15,20 @@ const firebasePostDetails = async(id:string) =>{
     const favolites = postDataId?.favolites
     const comment = postDataId?.comment
 
+    const postDataDocRef = doc(collection(db, "post"), id);
+    // updateDoc(postDataDocRef, {
+    //   favolites:userName,
+    // });
+    // const postdataDoc =await (await getDoc(postDataDocRef)).data()?.favolites
+    // setFavolite(postdataDoc)
+
   return (
     {
     Imgurl:imgurl,
     Caption:text,
     Favorites:favolites,
-    Comment:comment
+    Comment:comment,
+    favo:postDataDocRefId
     }
  
   )

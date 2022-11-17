@@ -1,21 +1,24 @@
 import { onAuthStateChanged } from 'firebase/auth';
-import { collection, doc, getDoc, getDocs, query, updateDoc, where } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, query, updateDoc, where ,serverTimestamp} from 'firebase/firestore';
 import { connectStorageEmulator } from 'firebase/storage';
 import React, { useEffect, useState } from 'react'
-import { Link, useActionData, useLocation, useRouteLoaderData } from 'react-router-dom';
+import { Link, useActionData, useRouteLoaderData } from 'react-router-dom';
 import FavolitePostLook from './FavolitePostLook';
+// import FavolitePostLook from './FavolitePostLook';
 import { auth, db } from './firebase';
+// import FollowUserPostFirebase from './FollowUserPostFirebase';
 
 function PostLook() {
 // followuserのpostidからとってきたpostData
 const [postData, setPostData] = useState<any>([]);
 // userName保持
 const[userName,setUserName]=useState("");
+
 // postid保持
-const[postId,setPostId]=useState("");
+const[postId,setPostId]=useState<any>("");
 
 // favolites保持
-const[favolites,setFavolites]=useState("");
+const[favolites,setFavolites]=useState<any>([]);
 
 useEffect(()=>{
 //ログイン判定
@@ -31,7 +34,7 @@ onAuthStateChanged(auth, async (user) => {
     const userDatas = userDataDoc.data();
     // ログインしているユーザーのフォローしている人のuseridを配列に格納
     const UseLoginUserFollowUserIdArray =  userDatas?.follow
-    
+
     // ログインしてるuserのuserName取得
     const username =  userDatas?.userName
     setUserName(username)
@@ -49,7 +52,7 @@ onAuthStateChanged(auth, async (user) => {
         postDataArray.push(followUserPost)
     });
     })
-
+    
     // ログインしているユーザーのpost情報を配列に格納
     const myPostId = userDatas?.post
     for(let postid of myPostId ){
@@ -66,31 +69,47 @@ onAuthStateChanged(auth, async (user) => {
     })
 }, [])
 
-// postData.map((data:any)=>{
-//     const id = data.postId
-// setPostId(id)
-// })
-// console.log(postId)
 
-const Favorite = (e:any)=>{
-    FavolitePostLook().then((favo:any)=>{
+const Favorite = async(e:any)=>{
+//     // const postDataDocRefId = doc(collection(db, "post"), postId);
+//     // updateDoc(postDataDocRefId, {
+//     //       favorites:userName,
+// const postdataDoc =await (await getDoc(postDataDocRef)).data()?.favolites
+// setFavolite(postdataDoc)
+//     //   });
+
+//     // firebasePostDetails(userName)
+
+    FavolitePostLook(userName).then((favo:any)=>{
         setFavolites(favo.favo)
         console.log(favolites)
     })
+
+//     const postDataDocRef = doc(collection(db, "post"), postId);
+//     console.log(postId)
     }
-
-
+console.log(postData)
 return (
 <>
 <div>
 {postData.map((data:any,index:any)=>{
+    // var timestamp = 1607110465663
+    // var date = new Date(timestamp);
+    // console.log(date.getTime())
     return(
+    <>
     <div key={index}>
     <p>{data.caption}</p>
+    {/* <p>{dayjs({data.podtData}).format('YYYY/MM/DD HH:mm')}</p> */}
+
     <Link to="/PostDetails" state={{id:data.postId,userid:data.userId}}><img src={data.imgUrl} /></Link>
+    {/* <Link to="/FavolitePostLook" state={{id:data.postId,userid:data.userId}}></Link> */}
     <button onClick={Favorite}>♡</button>
     <button>コメント</button>
+    {/* <FavolitePostLook Props={data.postId} />   */}
     </div>
+
+     </>
     )
 })}
 </div>

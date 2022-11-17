@@ -37,19 +37,20 @@ const {id,userid} = location.state as State
 
 //ログイン判定
 onAuthStateChanged(auth, async (user) => {
-      if(user?.uid === userid){
-      // useStateでログインしているユーザーの投稿かどうか判定するを保持
-      setLoginUserPost(true)
       // ログインしているユーザーのuserNameをuseStateで保持
-      const userDatas = doc(collection(db, "user"), user.uid);
+      const userDatas = doc(collection(db, "user"), user?.uid);
       const  userDataGet = await getDoc(userDatas);
       const userData = userDataGet.data();
       const userName =userData?.userName
       setLoginUserName(userName)
+      if(user?.uid === userid){
+      // useStateでログインしているユーザーの投稿かどうか判定するを保持
+      setLoginUserPost(true)
       }else{
       setLoginUserPost(false)
       }
 })
+
 
 // 画面遷移したら、firestoreから画像、caption,falolites,commmentを取得、保持
 useEffect(()=>{
@@ -65,6 +66,7 @@ setDisplayComment(postData.Comment)
 const Favorite = async(e:any)=>{
       // 押された投稿のFavolitesにloginUserNameを配列で追加
       const postDataDocRefId = doc(collection(db, "post"), id);
+      console.log(loginUserName)
       updateDoc(postDataDocRefId, {
             favolites:arrayUnion(loginUserName),
       });
@@ -129,8 +131,6 @@ return (
 </>
 ):(
       <>
-      <Link to="/PostEditing" state={{id:id}}><button>編集</button></Link>
-<button onClick={ClickDelition}>削除</button><br />
       </>
 )}
 </div>
