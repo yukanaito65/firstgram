@@ -2,11 +2,12 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { collection, doc, getDoc, getDocs, query, updateDoc, where ,serverTimestamp} from 'firebase/firestore';
 import { connectStorageEmulator } from 'firebase/storage';
 import React, { useEffect, useState } from 'react'
-import { Link, useActionData, useRouteLoaderData } from 'react-router-dom';
+import { Link, useActionData, useLocation, useRouteLoaderData } from 'react-router-dom';
 import FavolitePostLook from './FavolitePostLook';
 // import FavolitePostLook from './FavolitePostLook';
 import { auth, db } from './firebase';
 // import FollowUserPostFirebase from './FollowUserPostFirebase';
+
 
 function PostLook() {
 // followuserのpostidからとってきたpostData
@@ -19,6 +20,7 @@ const[postId,setPostId]=useState<any>("");
 
 // favolites保持
 const[favolites,setFavolites]=useState<any>([]);
+
 
 useEffect(()=>{
 //ログイン判定
@@ -81,34 +83,43 @@ const Favorite = async(e:any)=>{
 //     // firebasePostDetails(userName)
 
     FavolitePostLook(userName).then((favo:any)=>{
-        setFavolites(favo.favo)
+        // setFavolites(favo.favo)
         console.log(favolites)
     })
-
-//     const postDataDocRef = doc(collection(db, "post"), postId);
-//     console.log(postId)
     }
+
 console.log(postData)
+
 return (
 <>
 <div>
+    
 {postData.map((data:any,index:any)=>{
-    // var timestamp = 1607110465663
-    // var date = new Date(timestamp);
-    // console.log(date.getTime())
+    // const time = postData.map((a:any)=>{
+    //     console.log( a.caption)
+    //     console.log(a.postData.nanoseconds)
+    // return a.postData.nanoseconds
+    // })
+    // time.sort();
+   
+    const timestamp = data.postData.toDate()
+    // console.log(timestamp)
+    const year = timestamp.getFullYear()
+    const month = (timestamp.getMonth()+1)
+    const day = timestamp.getDate()
+    const hour = timestamp.getHours()
+    const min = timestamp.getMinutes()
+    const seco = timestamp.getSeconds()
     return(
     <>
     <div key={index}>
     <p>{data.caption}</p>
-    {/* <p>{dayjs({data.podtData}).format('YYYY/MM/DD HH:mm')}</p> */}
-
     <Link to="/PostDetails" state={{id:data.postId,userid:data.userId}}><img src={data.imgUrl} /></Link>
-    {/* <Link to="/FavolitePostLook" state={{id:data.postId,userid:data.userId}}></Link> */}
+    <div>{year}年{month}月{day}日{hour}:{min}:{seco}</div>
     <button onClick={Favorite}>♡</button>
     <button>コメント</button>
     {/* <FavolitePostLook Props={data.postId} />   */}
     </div>
-
      </>
     )
 })}
