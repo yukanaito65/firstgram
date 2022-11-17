@@ -16,15 +16,15 @@ const firebasePostDetails = async(id:string,userid:string) =>{
     const comment = postDataId?.comment
     const time = postDataId?.postData
 
-//     // 投稿者のuser情報取得
-// const postUserDocRef = doc(collection(db,"user"),userid)
-// // 上記を元にドキュメントのデータを取得
-// const postUserDoc = await getDoc(postUserDocRef)
-// // 取得したデータから必要なものを取り出す
-// const postUserData = postUserDoc.data();
-// // 投稿者のpostを取り出す
-// const postUserName = postUserData?.userName
-// const icon = postUserData?.icon
+    // 投稿者のuser情報取得
+const postUserDocRef = doc(collection(db,"user"),userid)
+// 上記を元にドキュメントのデータを取得
+const postUserDoc = await getDoc(postUserDocRef)
+// 取得したデータから必要なものを取り出す
+const postUserData = postUserDoc.data();
+// 投稿者のpostを取り出す
+const postUserName = postUserData?.userName
+const icon = postUserData?.icon
 
 
 
@@ -42,8 +42,8 @@ const firebasePostDetails = async(id:string,userid:string) =>{
     Favorites:favolites,
     Comment:comment,
     Time:time,
-    // PostUserName:postUserName,
-    // Icon:icon,
+    PostUserName:postUserName,
+    Icon:icon,
     favo:postDataDocRefId
     }
  

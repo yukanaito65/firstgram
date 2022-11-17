@@ -67,8 +67,8 @@ setCaption(postData.Caption)
 setFavolites(postData.Favorites)
 setDisplayComment(postData.Comment)
 setTime(postData.Time)
-// setPostUserName(postData.PostUserName)
-// setIcon(postData.Icon)
+setPostUserName(postData.PostUserName)
+setIcon(postData.Icon)
 })
 
 }, [])
@@ -145,7 +145,8 @@ await deleteDoc(doc(db, "post", id));
 
 return (
 <>
-{/* <img src={icon} /><p>{postUserName}</p> */}
+<img src={icon} />
+<p>{postUserName}</p>
 <img src={imgUrl} />
 <p>{caption}</p>
 {/* <p>{year}年{month}月{day}日{hour}:{min}:{seco}</p> */}
@@ -169,7 +170,7 @@ return (
 <div>
 {loginUserPost ?(
 <>
-<Link to="/PostEditing" state={{id:id}}><button>編集</button></Link>
+<Link to="/PostEditing" state={{id:id,userid:userid}}><button>編集</button></Link>
 <button onClick={ClickDelition}>削除</button><br />
 </>
 ):(
