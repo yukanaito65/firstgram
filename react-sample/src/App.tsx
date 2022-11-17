@@ -3,18 +3,21 @@ import Register from "./Register";
 import Login from "./Login";
 import Mypage from "./Mypage";
 import NewPost from "./NewPost";
-import AccountEditPage from "./AccountEditPage";
-import AccountSettingPage from "./AccountSettingPage";
+import AccountEditPage from "./component/pages/AccountEditPage";
+import AccountSettingPage from "./component/pages/AccountSettingPage";
 import "./index.css"
 import Top from "./Top";
 // import Follow from "./Follow";
 // import Follower from "./Follower";
 import PostDetails from "./PostDetails";
 import PostLook from "./PostLook";
-import DeleteCompPage from "./DeleteCompPage";
+import DeleteCompPage from "./component/pages/DeleteCompPage";
 import PsswordChange from "./PsswordChange"
 import PostEditing from "./PostEditing";
+
 // import FavolitePostLook from "./FavolitePostLook";
+
+import DMPage from "./component/pages/DMPage";
 
 
 function App() {
@@ -38,7 +41,11 @@ function App() {
             <Route path={`/deleteComp`} element={<DeleteCompPage />} />
             <Route path={`/passwordChange`} element={<PsswordChange />} />
             <Route path={`/PostEditing`} element={<PostEditing />} />
+
             {/* <Route path={`/FavolitePostLook`} element={<FavolitePostLook />} /> */}
+
+            <Route path={`/dmPage`} element={<DMPage />} />
+
           </Routes>
         </BrowserRouter>
       </div>

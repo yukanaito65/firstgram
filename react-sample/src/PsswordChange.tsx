@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   getAuth,
   deleteUser,
-  updateEmail,
   EmailAuthProvider,
   reauthenticateWithCredential,
   updatePassword as firebaseUpdatePassword,
@@ -17,7 +16,8 @@ import {
   query,
   where,
   getDocs,
-  updateDoc
+  updateDoc,
+  arrayRemove,
 } from "firebase/firestore";
 import { db } from "./firebase";
 import { useEffect } from "react";
@@ -27,12 +27,12 @@ import type { User } from "./types/types";
 export function PsswordChange() {
   const auth = getAuth();
   const currentUser: any = auth.currentUser;
+  console.log(currentUser);
   const navigate = useNavigate();
 
   const [nowPassValue, setNowPassValue] = useState<any>("");
   const [newPassValue, setNewPassValue] = useState<any>("");
   const [cNewPassValue, setCNewPassValue] = useState<any>("");
-  const [newEmailValue, setNewEmailValue] = useState<any>("");
   const [nowEmailValue, setNowEmailValue] = useState<any>("");
 
   useEffect(() => {
@@ -49,11 +49,11 @@ export function PsswordChange() {
 
         // 上記を元にドキュメントへの参照を取得
         const docData = doc(userCollectionRef, user.uid);
-        console.log(docData)
+        console.log(docData);
 
         // 上記を元にドキュメントのデータを取得
         const userDocId = await getDoc(docData);
-        console.log(docData)
+        console.log(docData);
 
         // 取得したデータから必要なものを取り出す
         const userDataId: any = userDocId.data();
@@ -96,30 +96,11 @@ export function PsswordChange() {
 
   //   Authenticationを更新
   const dataUpdate: () => void = () => {
-    // メアド変更
-    // const credential = promptForCredentials();
-
-    // reauthenticateWithCredential(currentUser, credential)
-    updateEmail(currentUser, "tanaka123@example.com");
-
     // パスワード変更
     updatePassword(nowPassValue, newPassValue);
   };
 
   const currentUserId = currentUser?.uid;
-
-  // データ削除
-  const userDelete = async () => {
-    await deleteDoc(doc(db, "user", `${currentUserId}`));
-    deleteUser(currentUser)
-      .then(() => {
-        // データ削除しましたページに飛ぶ
-        navigate("/deleteComp");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
 
   // 該当するPostデータの削除
   const deletePostData = async () => {
@@ -130,65 +111,75 @@ export function PsswordChange() {
     );
     const querySnapshot = await getDocs(q);
     console.log(querySnapshot);
-
-    querySnapshot.forEach(async(doca) => {
-      const data = (doca.id, " => ", doca.data())
-      const id = data.postId
+    querySnapshot.forEach(async (docdata) => {
+      const data = (docdata.id, " => ", docdata.data());
+      const id = data.postId;
       await deleteDoc(doc(db, "post", id));
     });
   };
 
-//   currentUserをフォローしているユーザーのfollow配列からcurrentUserのuserIdを消す
-const followArrDelete = async() => {
+  //   currentUserをフォローしているユーザーのfollow配列からcurrentUserのuserIdを消す
+  const followArrDelete = async () => {
     //コレクションへの参照を取得
-    const userCollectionRef = collection(
-        db,
-        "user"
-      );
+    const userCollectionRef = collection(db, "user");
 
-      // currentUserデータを取得
-      const docData = doc(userCollectionRef, currentUserId);
+    // currentUserデータを取得
+    const currentUserData = doc(userCollectionRef, currentUserId);
 
-      // 上記を元にcurrentUserのドキュメントのデータを取得
-      const userDocId = await getDoc(docData);
+    // 上記を元にcurrentUserのドキュメントのデータを取得
+    const currentUserDocData = await getDoc(currentUserData);
+    console.log(currentUserDocData);
 
-      // 取得したドキュメントデータからfollow配列を取得
-      const followerUserIdArr: string[] = userDocId.get("follower");
-      console.log(followerUserIdArr)
+    // 取得したドキュメントデータからfollow配列を取得
+    const followerUserIdArr: string[] = currentUserDocData.get("follower");
+    console.log(followerUserIdArr);
 
-      followerUserIdArr.forEach(async(userId) => {
-        console.log(userId)
-        const userCollectionRef = collection(
-            db,
-            "user"
-          ) as CollectionReference<User>;
-    
-          // currentUserのfollowerのデータ取得
-          const docData = doc(userCollectionRef, userId);
-          console.log(docData)
-    
-          // 上記を元にcurrentUserのfollowerのドキュメントのデータを取得
-          const userDocId = await getDoc(docData);
-          console.log(userDocId)
-    
-          // 取得したドキュメントデータからfollow配列を取得
-          const followerUserId = userDocId.get("follow");
-          console.log(followerUserId)
+    for (const followerUserId of followerUserIdArr) {
+      const followerUserData = doc(db, "user", followerUserId);
+      await updateDoc(followerUserData, {
+        follow: arrayRemove(currentUserId),
+      });
+    }
+  };
 
-        //   currentUserIdを削除
-          const deleteVal = currentUserId;
-          const index = followerUserId.indexOf(deleteVal);
-          followerUserId.splice(index,1);
+  // currentUserがフォローしているユーザーのfollower配列からcurrentUserのuserIdを消す
+  const followerArrDelete = async () => {
+    //コレクションへの参照を取得
+    const userCollectionRef = collection(db, "user");
 
-          console.log(followerUserId)
-        // 情報を更新
-          updateDoc(docData, {
-            follow: followerUserId,
-          });
+    // currentUserデータを取得
+    const currentUserData = doc(userCollectionRef, currentUserId);
 
+    // 上記を元にcurrentUserのドキュメントのデータを取得
+    const currentUserDocData = await getDoc(currentUserData);
+    console.log(currentUserDocData);
+
+    // 取得したドキュメントデータからfollow配列を取得
+    const followUserIdArr: string[] = currentUserDocData.get("follow");
+
+    for (const followUserId of followUserIdArr) {
+      const followUserData = doc(db, "user", followUserId);
+      await updateDoc(followUserData, {
+        follower: arrayRemove(currentUserId),
+      });
+    }
+  };
+
+  // データ削除
+  const userDelete = async () => {
+    await deleteDoc(doc(db, "user", `${currentUserId}`));
+    deleteUser(currentUser)
+      .then(() => {
+        deletePostData();
+        followArrDelete();
+        followerArrDelete();
+        // データ削除しましたページに飛ぶ
+        navigate("/deleteComp");
       })
-}
-
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <div>
@@ -197,7 +188,7 @@ const followArrDelete = async() => {
         <label htmlFor="settingEmail">現在のメールアドレス</label>
         <p>{nowEmailValue}</p>
       </div>
-      <div>
+      {/* <div>
         <label htmlFor="settingEmail">新しいメールアドレス</label>
         <input
           type="email"
@@ -206,7 +197,7 @@ const followArrDelete = async() => {
           name="settingEmail"
           id="settingEmail"
         ></input>
-      </div>
+      </div> */}
       <div>
         <label htmlFor="settingPassword">現在のパスワード</label>
         <input
@@ -247,7 +238,6 @@ const followArrDelete = async() => {
       </div>
       <button onClick={dataUpdate}>確定</button>
       <button onClick={userDelete}>アカウントを削除</button>
-      <button onClick={followArrDelete}>テスト</button>
     </div>
   );
 }

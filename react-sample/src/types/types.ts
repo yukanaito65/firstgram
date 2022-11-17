@@ -28,3 +28,11 @@ export type Comment = {
   commentTimestamp: Date;
   hashtag: string;
 };
+
+export type DirectMessage = {
+  messageId: number;
+  message: string;
+  timestamp: Date;
+  userId: string;
+  withUserId: string;
+};

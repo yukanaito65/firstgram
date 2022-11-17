@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { auth } from "./firebase";
-import { db } from "./firebase";
+import { auth } from "../../firebase";
+import { db } from "../../firebase";
 import {
   getDoc,
   doc,
@@ -9,8 +9,8 @@ import {
 } from "firebase/firestore";
 import { useEffect } from "react";
 import { onAuthStateChanged } from "@firebase/auth";
-import type { User } from "./types/types";
-import Icon from "./component/atoms/pictures/Icon";
+import type { User } from "../../types/types";
+import Icon from "../atoms/pictures/Icon";
 import { Link } from "react-router-dom";
 
 function AccountSettingPage() {
