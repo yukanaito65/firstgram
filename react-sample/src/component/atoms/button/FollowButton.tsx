@@ -3,9 +3,6 @@ import { arrayRemove, arrayUnion, collection, doc, getDoc, updateDoc } from "fir
 import React, { useEffect, useState } from "react";
 import { auth, db } from "../../../firebase";
 
-// interface Props {
-//     onClick: () => void;
-//   }
 
 function FollowButton() {
   //ログインユーザーの情報

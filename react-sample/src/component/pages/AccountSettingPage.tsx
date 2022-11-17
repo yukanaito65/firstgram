@@ -1,17 +1,16 @@
 import React, { useState } from "react";
-import { auth } from "./firebase";
-import { db } from "./firebase";
+import { auth } from "../../firebase";
+import { db } from "../../firebase";
 import {
   getDoc,
   doc,
   collection,
-  updateDoc,
   CollectionReference,
 } from "firebase/firestore";
 import { useEffect } from "react";
 import { onAuthStateChanged } from "@firebase/auth";
-import type { User } from "./types/types";
-import Icon from "./component/atoms/pictures/Icon";
+import type { User } from "../../types/types";
+import Icon from "../atoms/pictures/Icon";
 import { Link } from "react-router-dom";
 
 function AccountSettingPage() {
@@ -52,7 +51,6 @@ function AccountSettingPage() {
         setNameValue(userDataId.name);
         setProfileValue(userDataId.profile);
         setEmailValue(userDataId.email);
-        setPasswordValue(userDataId.password);
 
         console.log("ログイン状態です");
       }
@@ -64,7 +62,6 @@ function AccountSettingPage() {
   const [nameValue, setNameValue] = useState<any>("");
   const [profileValue, setProfileValue] = useState<any>("");
   const [emailValue, setEmailValue] = useState<any>("");
-  const [passwordValue, setPasswordValue] = useState<any>("");
 
   return (
     <div>
@@ -96,8 +93,12 @@ function AccountSettingPage() {
 
           <div>
             <p>パスワード</p>
-            <p>{passwordValue}</p>
+            <p>****</p>
           </div>
+
+<Link to="/passwordChange">
+          パスワード変更はこちら
+          </Link>
 
           <Link to="/AccountEditPage">
             <button>編集</button>

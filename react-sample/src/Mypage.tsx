@@ -139,6 +139,7 @@ console.log(posts); //何回か[]で最終的に[{},{},{}]
                 <button>設定</button>
                 </Link>
                 <button onClick={logout}>ログアウト</button>
+                <Link to="/NewPost/" ><button>新規投稿</button></Link>
               </div>
               <div>
                 <Icon />
@@ -165,6 +166,7 @@ console.log(posts); //何回か[]で最終的に[{},{},{}]
           )}
         </>
       )}
+      <Link to={`/dmPage`}><button>DM</button></Link>
     </>
   );
 }
