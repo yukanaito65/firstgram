@@ -23,12 +23,12 @@ function Login() {
     <Header />
       {/* ログインしている場合、マイページにリダイレクトする設定 */}
       {user ? (
-        <Navigate to={`/mypage/`} />
+        <Navigate to={`/mypage`} />
       ) : (
         <>
           <LoginForm />
           <p>
-            新規登録は<Link to={`/register/`}>こちら</Link>
+            新規登録は<Link to={`/register`}>こちら</Link>
           </p>
         </>
       )}

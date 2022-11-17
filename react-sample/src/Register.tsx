@@ -101,7 +101,8 @@ function Register() {
               icon: imgSrc,
               follow: [],
               follower: [],
-              post: [],
+              posts: [],
+              favoritePosts: [],
               profile: profile.value,
             });
           }
@@ -194,7 +195,7 @@ function Register() {
             </div>
             <button>登録</button>
             <p>
-              ログインは<Link to={`/login/`}>こちら</Link>
+              ログインは<Link to={`/login`}>こちら</Link>
             </p>
           </form>
         </>
