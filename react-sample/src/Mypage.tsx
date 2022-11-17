@@ -167,6 +167,7 @@ console.log(posts); //何回か[]で最終的に[{},{},{}]
         </>
       )}
       <Link to={`/dmPage`}><button>DM</button></Link>
+      <Link to="/PostLook"><button>一覧表示</button></Link>
     </>
   );
 }
