@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { db } from "./firebase";
+import { db } from "../../firebase";
 import {
   getDoc,
   doc,
@@ -9,10 +9,10 @@ import {
 } from "firebase/firestore";
 import { useEffect } from "react";
 import { onAuthStateChanged } from "@firebase/auth";
-import type { User } from "./types/types";
+import type { User } from "../../types/types";
 import { Link,useNavigate } from "react-router-dom";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import storage from "./firebase-sec";
+import storage from "../../firebase-sec";
 import { getAuth } from "firebase/auth";
 
 function AccountEditPage() {
