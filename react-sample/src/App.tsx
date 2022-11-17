@@ -14,7 +14,11 @@ import PostLook from "./PostLook";
 import DeleteCompPage from "./component/pages/DeleteCompPage";
 import PsswordChange from "./PsswordChange"
 import PostEditing from "./PostEditing";
+
+// import FavolitePostLook from "./FavolitePostLook";
+
 import DMPage from "./component/pages/DMPage";
+
 
 function App() {
   return (
@@ -37,7 +41,11 @@ function App() {
             <Route path={`/deleteComp`} element={<DeleteCompPage />} />
             <Route path={`/passwordChange`} element={<PsswordChange />} />
             <Route path={`/PostEditing`} element={<PostEditing />} />
+
+            {/* <Route path={`/FavolitePostLook`} element={<FavolitePostLook />} /> */}
+
             <Route path={`/dmPage`} element={<DMPage />} />
+
           </Routes>
         </BrowserRouter>
       </div>
