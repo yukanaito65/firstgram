@@ -18,15 +18,13 @@ import PostEditing from "./PostEditing";
 // import FavolitePostLook from "./FavolitePostLook";
 
 import DMPage from "./component/pages/DMPage";
-<<<<<<< HEAD
 import SearchPage from "./component/pages/SearchPage";
-=======
 import Profile from "./Profile";
 import Follow from "./MyFollow";
 import Follower from "./MyFollower";
 import MyFollower from "./MyFollower";
 import MyFollow from "./MyFollow";
->>>>>>> main
+
 
 
 function App() {
@@ -56,12 +54,8 @@ function App() {
             {/* <Route path={`/FavolitePostLook`} element={<FavolitePostLook />} /> */}
 
             <Route path={`/dmPage`} element={<DMPage />} />
-<<<<<<< HEAD
             <Route path={`/searchPage`} element={<SearchPage />} />
-=======
             <Route path={`/profile`} element={<Profile />} />
-
->>>>>>> main
           </Routes>
         </BrowserRouter>
       </div>
