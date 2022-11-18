@@ -65,7 +65,7 @@ caption:textState,
 comments:[],
 favorites:[],
 imageUrl:imgSrc,
-postData: serverTimestamp(),
+postDate: serverTimestamp(),
 
 });
 
