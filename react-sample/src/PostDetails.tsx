@@ -122,6 +122,7 @@ const AddComment =async(e:any)=>{
       await firebasePostDetails(id,userid).then((postData)=>{
             setDisplayComment(postData.Comments)
             })
+      setInputComment("")
 }
 
 

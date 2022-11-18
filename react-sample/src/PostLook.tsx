@@ -97,8 +97,8 @@ return a.postDate.toDate() > b.postDate.toDate()  ? -1 : 1;
 
 return (
 <>
+{/* {for(let i=0; i < 1;  i++){ */}
 <div>
-    
 {postData.map((data:any,index:any)=>{
     const timestamp = data.postDate.toDate()
     const year = timestamp.getFullYear()
@@ -115,14 +115,17 @@ return (
     <p>{data.caption}</p>
     <Link to="/PostDetails" state={{id:data.postId,userid:data.userId}}><img src={data.imageUrl} /></Link>
     <div>{year}年{month}月{day}日{hour}:{min}:{seco}</div>
-    <button onClick={async(e:any)=>{
+    <button onClick={
+        // useEffect(
+        async(e:any)=>{
     updateDoc(doc(collection(db, "post"), data.postId), {
         favorites:userName,
         });
     // await (await getDoc(doc(collection(db, "post"), data.postId))).data()?.favolites
     setFavorites(await (await getDoc(doc(collection(db, "post"), data.postId))).data()?.favorites)
-    
-    // setNone(true)
+    // this.forceUpdate()
+    // window.location.reload()
+// }, [])
 }}>♡</button>
 {/* <p style={none:stylnone}> */}
 <input type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)}}></input>
@@ -169,8 +172,9 @@ return (
      </>
     )
 })}
-<p></p>
+
 </div>
+{/* }} */}
 
 
 
