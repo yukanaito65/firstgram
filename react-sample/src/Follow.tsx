@@ -13,17 +13,20 @@ import {
   where,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-// import { render } from "react-dom";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { serialize } from "v8";
 // import FollowButton from "./component/atoms/button/FollowButton";
 import CommonIcon from "./component/atoms/pictures/CommonIcon";
 import Icon from "./component/atoms/pictures/Icon";
 import { auth, db } from "./firebase";
 
+interface State {
+  userId: string;
+}
+
 function Follow() {
-  //ログインユーザーの情報
-  const [user, setUser] = useState<any>("");
+  // //ログインユーザーの情報
+  // const [user, setUser] = useState<any>("");
 
   const [users, setUsers] = useState<any>([]);
 
@@ -45,15 +48,20 @@ function Follow() {
   //followのuserId
   const [followUserId, setFollowUserId] = useState("");
 
+  //各ページからデータ取得
+  const location = useLocation();
+  const { userId } = location.state as State;
+  console.log(userId);
+
   useEffect(() => {
     onAuthStateChanged(auth, async (currentUser: any) => {
       setLoading(false);
-      setUser(currentUser);
+      // setUser(currentUser);
       //userコレクション参照
       const userCollectionRef = collection(db, "user");
 
-      //ログインユーザーのドキュメント参照
-      const userDocRefId = doc(userCollectionRef, currentUser.uid);
+      //ユーザーのドキュメント参照
+      const userDocRefId = doc(userCollectionRef, userId);
       setUserDocRefId(userDocRefId);
 
       //上記を元にデータ取得
@@ -62,7 +70,7 @@ function Follow() {
 
       //データの中からfollow配列取得
       const followUserList = userDocId.get("follow");
-      console.log(followUserList); //配列で2つ取得できてる
+      console.log(followUserList);
       setFollowList(followUserList);
 
       const userDataId = userDocId.data();
@@ -71,13 +79,13 @@ function Follow() {
       const followArray: any = [];
 
       //follow配列の中のユーザー情報一人ずつ取得する
-      followUserList.map(async (userId: any) => {
+      followUserList.map(async (followUserId: any) => {
         //userコレクション参照
         const followUserCollectionRef: any = collection(db, "user");
         console.log(followUserCollectionRef);
 
         //userIdがfollow配列の中のuserIdと等しいドキュメントを参照
-        const followUserDocRefId = doc(followUserCollectionRef, userId);
+        const followUserDocRefId = doc(followUserCollectionRef, followUserId);
         setFollowUserDocRefId(followUserDocRefId);
 
         //ドキュメント取得
@@ -92,133 +100,31 @@ function Follow() {
 
         console.log(followUsers);
 
-        setFollowUserId(userId);
+        setFollowUserId(followUserId);
       }); //map
     }); //onAuth
   }, []);
 
-  const [followBtn, setFollowBtn] = useState<any>(true);
-
-  const [isVisible, setVisibility] = useState(true);
-
-    // isVisibleを反転する関数を定義する。
-    const updateVisibility = () => {
-        setVisibility(!isVisible);
-        // render();
-    };
-
-  // const removeFollow = async() => {
-  //   setFollowBtn(true);
-  //   await updateDoc(userDocRefId, {
-  //     follow: arrayRemove(followUserId),
-  //   });
-  //   //ユーザーのfollower配列からログインユーザーを削除
-  //   await updateDoc(followUserDocRefId, {
-  //     follower: arrayRemove(user.uid),
-  //   });
-  //   console.log("remove/true");
-  // }
-
-  // const addFollow = async()=>{
-  //   setFollowBtn(false);
-  //   //存在しなければ、ログインユーザーのfollowに追加[フォローする]
-  //   await updateDoc(userDocRefId, {
-  //     follow: arrayUnion(followUserId),
-  //   });
-  //   //ユーザーのfollower配列にログインユーザーを追加
-  //   await updateDoc(followUserDocRefId, {
-  //     follower: arrayUnion(user.uid),
-  //   });
-  //   console.log("add/false");
-  // }
-
-  //フォローボタン  削除が機能していることは確認済み
-  // const changeFollow = async () => {
-  //   if (followList.includes(followUserId)) {
-  //     //存在すれば、followから削除[フォロー中](外す)
-  //     await updateDoc(userDocRefId, {
-  //       follow: arrayRemove(followUserId),
-  //     });
-  //     //ユーザーのfollower配列からログインユーザーを削除
-  //     await updateDoc(followUserDocRefId, {
-  //       follower: arrayRemove(user.uid),
-  //     });
-  //     setFollowBtn(true);
-  //     console.log(true);
-  //   } else {
-  //     //存在しなければ、ログインユーザーのfollowに追加[フォローする]
-  //     await updateDoc(userDocRefId, {
-  //       follow: arrayUnion(followUserId),
-  //     });
-  //     //ユーザーのfollower配列にログインユーザーを追加
-  //     await updateDoc(followUserDocRefId, {
-  //       follower: arrayUnion(user.uid),
-  //     });
-  //     setFollowBtn(false);
-  //     console.log(false);
-  //   }
-  // };
-
-  console.log(followUsers);
-  console.log(followUserId);
+  // console.log(followUsers);
+  // console.log(followUserId);
 
   return (
     <>
       {!loading && (
         <>
-          <Link to={"/mypage"}>⬅︎</Link>
+          <Link to={"/profile"}>⬅︎</Link>
           <div>
             {followUsers.map((followUser) => {
               return (
-                <div id={followUser.userId}>
-                  <CommonIcon icon={followUser.icon} />
-                  <div>
-                    <p>{followUser.userName}</p>
-                    <p>{followUser.name}</p>
+                <Link to="/profile" state={{ userId: followUser.userId }}>
+                  <div id={followUser.userId}>
+                    <CommonIcon icon={followUser.icon} />
+                    <div>
+                      <p>{followUser.userName}</p>
+                      <p>{followUser.name}</p>
+                    </div>
                   </div>
-                  {/* followList.includes(followUser.userId) */}
-
-                  {/* {followBtn === true  ? ( */}
-                    <button
-                      onClick={async () => {
-                        // updateVisibility();
-                        // setFollowBtn(false)
-                        // if(followList.includes(followUser.userId)){
-                        await updateDoc(userDocRefId, {
-                          follow: arrayRemove(followUser.userId),
-                        });
-                        //ユーザーのfollower配列からログインユーザーを削除
-                        await updateDoc(followUserDocRefId, {
-                          follower: arrayRemove(users.userId),
-                        });
-                        console.log("remove/true");
-                      // }
-                    }}
-                    >
-                      フォロー外す
-                    </button>
-                  {/* ) : ( */}
-                    <button
-                      onClick={async () => {
-                        // updateVisibility();
-                        // setFollowBtn(true);
-                        // if(!followList.includes(followUser.userId)){
-                        //存在しなければ、ログインユーザーのfollowに追加[フォローする]
-                        await updateDoc(userDocRefId, {
-                          follow: arrayUnion(followUser.userId),
-                        });
-                        //ユーザーのfollower配列にログインユーザーを追加
-                        await updateDoc(followUserDocRefId, {
-                          follower: arrayUnion(users.userId),
-                        });
-                        console.log("add/false");
-                      // }
-                    }}
-                    >
-                      フォローする
-                    </button>
-                  {/* )} */}
-                </div>
+                </Link>
               );
             })}
           </div>
