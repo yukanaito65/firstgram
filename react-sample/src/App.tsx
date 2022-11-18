@@ -20,8 +20,8 @@ import PostEditing from "./PostEditing";
 import DMPage from "./component/pages/DMPage";
 import SearchPage from "./component/pages/SearchPage";
 import Profile from "./Profile";
-import Follow from "./MyFollow";
-import Follower from "./MyFollower";
+import Follow from "./Follow";
+import Follower from "./Follower";
 import MyFollower from "./MyFollower";
 import MyFollow from "./MyFollow";
 

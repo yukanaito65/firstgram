@@ -8,8 +8,8 @@ import { current } from "@reduxjs/toolkit";
 import CommonIcon from "./component/atoms/pictures/CommonIcon";
 
 interface State {
-      id:string,
-      userid:string
+      postId:string,
+      userId:string
 }
 
 function PostDetails() {
@@ -56,7 +56,7 @@ const [seco, setSeco] = useState<any>("");
 
 // postlookからデータを持ってくる
 const location = useLocation();
-const {id,userid} = location.state as State
+const {postId,userId} = location.state as State
 
 //ログイン判定
 onAuthStateChanged(auth, async (user) => {
@@ -66,7 +66,7 @@ onAuthStateChanged(auth, async (user) => {
       const userData = userDataGet.data();
       const userName =userData?.userName
       setLoginUserName(userName)
-      if(user?.uid === userid){
+      if(user?.uid === userId){
       // useStateでログインしているユーザーの投稿かどうか判定するを保持
       setLoginUserPost(true)
       }else{
@@ -77,7 +77,7 @@ onAuthStateChanged(auth, async (user) => {
 
 // 画面遷移したら、firestoreから画像、caption,falolites,commmentを取得、保持
 useEffect(()=>{
-firebasePostDetails(id,userid).then((postData)=>{
+firebasePostDetails(postId,userId).then((postData)=>{
 setImgUrl(postData.Imgurl)
 setCaption(postData.Caption)
 setFavorites(postData.Favorites)
@@ -100,13 +100,13 @@ setSeco(time.getSeconds())
 // お気に入りボタンがクリックされたら
 const Favorite = async(e:any)=>{
       // 押された投稿のFavolitesにloginUserNameを配列で追加
-      const postDataDocRefId = doc(collection(db, "post"), id);
+      const postDataDocRefId = doc(collection(db, "post"), postId);
       console.log(loginUserName)
       updateDoc(postDataDocRefId, {
             favorites:arrayUnion(loginUserName),
       });
       // firestoreからfavolitesを取得、保持
-      await firebasePostDetails(id,userid).then((postData)=>{
+      await firebasePostDetails(postId,userId).then((postData)=>{
       setFavorites(postData.Favorites)
       })
       };
@@ -114,12 +114,12 @@ const Favorite = async(e:any)=>{
 // コメント送信ボタンがクリックされたら
 const AddComment =async(e:any)=>{
       // 押された投稿のcommentにinputCommentを配列で追加
-      const postDataDocRefId = doc(collection(db, "post"), id);
+      const postDataDocRefId = doc(collection(db, "post"), postId);
       updateDoc(postDataDocRefId, {
             comments:arrayUnion({userName:loginUserName,commentText:inputComment}),
       });
       // firestoreからcommentを取得、保持
-      await firebasePostDetails(id,userid).then((postData)=>{
+      await firebasePostDetails(postId,userId).then((postData)=>{
             setDisplayComment(postData.Comments)
             })
       setInputComment("")
@@ -138,7 +138,7 @@ const ClickDelition = async(e:any) =>{
 // const postUserId = postDataId?.userId
 
 // 投稿者のuser情報取得
-const postUserDocRef = doc(collection(db,"user"),userid)
+const postUserDocRef = doc(collection(db,"user"),userId)
 // 上記を元にドキュメントのデータを取得
 const postUserDoc = await getDoc(postUserDocRef);
 // 取得したデータから必要なものを取り出す
@@ -146,7 +146,7 @@ const postUserData = postUserDoc.data();
 // 投稿者のpostを取り出す
 const postUserPost = postUserData?.post
 
-const index = postUserPost.indexOf(id);
+const index = postUserPost.indexOf(postId);
 postUserPost.splice(index, 1)
 
 console.log(postUserPost)
@@ -155,7 +155,7 @@ await updateDoc(postUserDocRef,{
       post: postUserPost
 });
 
-await deleteDoc(doc(db, "post", id));
+await deleteDoc(doc(db, "post", postId));
 }
 
 
@@ -187,7 +187,7 @@ return (
 <div>
 {loginUserPost ?(
 <>
-<Link to="/PostEditing" state={{id:id,userid:userid}}><button>編集</button></Link>
+<Link to="/PostEditing" state={{id:postId,userid:userId}}><button>編集</button></Link>
 <Link to="/PostLook"><button onClick={ClickDelition}>削除</button></Link>
 </>
 ):(
