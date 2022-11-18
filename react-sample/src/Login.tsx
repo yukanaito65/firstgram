@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import Footer from "./component/molecules/Footer";
 import Header from "./component/molecules/Header";
-// import Icon from "./component/atoms/Icon";
 import LoginForm from "./component/molecules/LoginForm";
 import { auth } from "./firebase";
 
@@ -20,15 +19,15 @@ function Login() {
 
   return (
     <>
-    <Header />
+      <Header />
       {/* ログインしている場合、マイページにリダイレクトする設定 */}
       {user ? (
-        <Navigate to={`/mypage/`} />
+        <Navigate to={`/mypage`} />
       ) : (
         <>
           <LoginForm />
           <p>
-            新規登録は<Link to={`/register/`}>こちら</Link>
+            新規登録は<Link to={`/register`}>こちら</Link>
           </p>
         </>
       )}

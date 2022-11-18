@@ -62,10 +62,10 @@ const docRef = await addDoc(collectionPost,
 {
 
 caption:textState,
-comment:[],
+comments:[],
 favorites:[],
-imgUrl:imgSrc,
-postData: serverTimestamp(),
+imageUrl:imgSrc,
+postDate: serverTimestamp(),
 
 });
 

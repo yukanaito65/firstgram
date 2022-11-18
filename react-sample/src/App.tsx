@@ -18,7 +18,15 @@ import PostEditing from "./PostEditing";
 // import FavolitePostLook from "./FavolitePostLook";
 
 import DMPage from "./component/pages/DMPage";
+<<<<<<< HEAD
 import SearchPage from "./component/pages/SearchPage";
+=======
+import Profile from "./Profile";
+import Follow from "./MyFollow";
+import Follower from "./MyFollower";
+import MyFollower from "./MyFollower";
+import MyFollow from "./MyFollow";
+>>>>>>> main
 
 
 function App() {
@@ -27,15 +35,17 @@ function App() {
       <div className="container">
         <BrowserRouter>
           <Routes>
-            <Route path={`/mypage/`} element={<Mypage />} />
-            <Route path={`/register/`} element={<Register />} />
-            <Route path={`/login/`} element={<Login />} />
+          <Route path={`/mypage`} element={<Mypage />} />
+            <Route path={`/register`} element={<Register />} />
+            <Route path={`/login`} element={<Login />} />
             <Route path={`/AccountEditPage`} element={<AccountEditPage />} />
             <Route path={`/AccountSettingPage`} element={<AccountSettingPage />} />
             <Route path={`/`} element={<Top />} />
             <Route path={`/newPost`} element={<NewPost />} />
-            {/* <Route path={`/follow`} element={<Follow />} />
-            <Route path={`/follower`} element={<Follower />} /> */}
+            <Route path={`/myFollow`} element={<MyFollow />} />
+            <Route path={`/myFollower`} element={<MyFollower />} />
+            <Route path={`/follow`} element={<Follow />} />
+            <Route path={`/follower`} element={<Follower />} />
             <Route path={`/PostDetails`} element={<PostDetails />} />
             {/* <Route path="/PostDetails" component={PostDetails} /> */}
             <Route path={`/PostLook`} element={<PostLook />} />
@@ -46,7 +56,12 @@ function App() {
             {/* <Route path={`/FavolitePostLook`} element={<FavolitePostLook />} /> */}
 
             <Route path={`/dmPage`} element={<DMPage />} />
+<<<<<<< HEAD
             <Route path={`/searchPage`} element={<SearchPage />} />
+=======
+            <Route path={`/profile`} element={<Profile />} />
+
+>>>>>>> main
           </Routes>
         </BrowserRouter>
       </div>

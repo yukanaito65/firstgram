@@ -1,35 +1,3 @@
-import { onAuthStateChanged } from 'firebase/auth';
-import { collection, doc, getDoc, updateDoc } from 'firebase/firestore';
-import React, { useState } from 'react'
-import { useLocation } from 'react-router-dom';
-import { auth, db } from './firebase';
-
-
-const  FavolitePostLook=async(userName:string)=> {
-// const[favolite,setFavolite]=useState([])
-
-interface State {
-        id:string
-    }
-
-const location = useLocation();
-const {id} = location.state as State
-
-const postDataDocRef = doc(collection(db, "post"), id);
-// updateDoc(postDataDocRef, {
-//       favolites:userName,
-//   });
-
-// console.log(id)
-// const postdataDoc =await (await getDoc(postDataDocRef)).data()?.favolites
-// setFavolite(postdataDoc)
-
-  return (
-    {favo:postDataDocRef}
-  )
-}
-
-export default FavolitePostLook
 // import { onAuthStateChanged } from 'firebase/auth';
 // import { collection, doc, getDoc, updateDoc } from 'firebase/firestore';
 // import { useState } from 'react';
@@ -40,16 +8,12 @@ export default FavolitePostLook
 //     id:any,
 // }
 
-// const  FavolitePostLook=(props:Props)=> {
-// const[favolite,setFavolite]=useState([])
+// const  FavoritePostLook=({id}:Props)=> {
+// const[favorite,setFavorite]=useState([])
 // const[userName, setUserName] = useState("");
 
-// interface State {
-//         id:string
-//     }
-
-// const location = useLocation();
-// const {id} = location.state as State
+// // const location = useLocation();
+// // const {id} = location.state as State
 
 // //ログイン判定
 // onAuthStateChanged(auth, async (user) => {
@@ -73,12 +37,12 @@ export default FavolitePostLook
 // const Favorite =async(e:any)=>{
 // const postDataDocRef = doc(collection(db, "post"), id);
 // updateDoc(postDataDocRef, {
-//       favolites:userName,
+//       favorites:userName,
 //   });
 
 // // console.log(id)
-// const postdataDoc =await (await getDoc(postDataDocRef)).data()?.favolites
-// setFavolite(postdataDoc)
+// const postdataDoc =await (await getDoc(postDataDocRef)).data()?.favorites
+// setFavorite(postdataDoc)
 // }
 
 // return (
@@ -88,4 +52,4 @@ export default FavolitePostLook
 //   )
 // }
 
-// export default FavolitePostLook;
+// export default FavoritePostLook;

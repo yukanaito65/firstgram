@@ -1,15 +1,13 @@
-// import React from 'react'
-// import FollowButton from './component/atoms/button/FollowButton'
+import React from "react";
+import { Link } from "react-router-dom";
 
+function Follower() {
+  return (
+    <>
+      <Link to={"/profile"}>⬅︎</Link>
+      <div>Follower</div>
+    </>
+  );
+}
 
-// function Follower() {
-//   return (
-//     <>
-//     <div>Follower</div>
-//     <FollowButton />
-//     </>
-//   )
-// }
-
-
-// export default Follower
+export default Follower;

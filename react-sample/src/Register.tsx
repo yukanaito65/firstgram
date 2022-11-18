@@ -9,9 +9,6 @@ import { db } from "./firebase";
 import { setDoc, doc, getDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import storage from "./firebase-sec";
-// import Icon from "./component/atoms/pictures/Icon";
-
-
 
 function Register() {
   //ログイン状態保持(userが値を持てばログイン状態)
@@ -101,7 +98,8 @@ function Register() {
               icon: imgSrc,
               follow: [],
               follower: [],
-              post: [],
+              posts: [],
+              favoritePosts: [],
               profile: profile.value,
             });
           }
@@ -194,11 +192,11 @@ function Register() {
             </div>
             <button>登録</button>
             <p>
-              ログインは<Link to={`/login/`}>こちら</Link>
+              ログインは<Link to={`/login`}>こちら</Link>
             </p>
           </form>
         </>
-       )}
+      )}
     </>
   );
 }

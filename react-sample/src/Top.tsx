@@ -37,7 +37,7 @@ function Top() {
         <>
           {/* ログインしていない状態でマイページ表示しようとするとログインページにリダイレクトする設定(!userがログインしていない場合のこと) */}
           {!user ? (
-            <Navigate to={`/login/`} />
+            <Navigate to={`/login`} />
           ) : (
             <>
               <h1>Topページ</h1>
@@ -45,7 +45,7 @@ function Top() {
               <p>{user?.email}</p>
               <NewPost uid={user.uid}/>
               <button onClick={logout}>ログアウト</button>
-              <Link to={"/mypage/"}>マイページ</Link>
+              <Link to={"/mypage"}>マイページ</Link>
             </>
           )}
         </>
