@@ -21,6 +21,8 @@ const [loginUserName, setLoginUserName] = useState<any>("");
 const [imgUrl, setImgUrl] = useState<any>("");
 // captionを格納
 const [caption, setCaption] = useState<any>("");
+// timeを格納
+const [Time, setTime] = useState<any>("");
 // favolitesを格納
 const [favolites, setFavolites] = useState<any>([]);
 
@@ -28,7 +30,12 @@ const [favolites, setFavolites] = useState<any>([]);
 const [displayComment, setDisplayComment] = useState<any>([]);
 
 // inputcommentを格納
-const [inputComment, setInputComment] = useState<any>("テスト3");
+const [inputComment, setInputComment] = useState<any>("");
+
+// postUserNameを格納
+const [postUserName, setPostUserName] = useState<any>("");
+// iconを格納
+const [icon, setIcon] = useState<any>("");
 
 
 // postlookからデータを持ってくる
@@ -54,12 +61,16 @@ onAuthStateChanged(auth, async (user) => {
 
 // 画面遷移したら、firestoreから画像、caption,falolites,commmentを取得、保持
 useEffect(()=>{
-firebasePostDetails(id).then((postData)=>{
+firebasePostDetails(id,userid).then((postData)=>{
 setImgUrl(postData.Imgurl)
 setCaption(postData.Caption)
 setFavolites(postData.Favorites)
 setDisplayComment(postData.Comment)
+setTime(postData.Time)
+setPostUserName(postData.PostUserName)
+setIcon(postData.Icon)
 })
+
 }, [])
 
 // お気に入りボタンがクリックされたら
@@ -71,7 +82,7 @@ const Favorite = async(e:any)=>{
             favolites:arrayUnion(loginUserName),
       });
       // firestoreからfavolitesを取得、保持
-      await firebasePostDetails(id).then((postData)=>{
+      await firebasePostDetails(id,userid).then((postData)=>{
       setFavolites(postData.Favorites)
       })
       };
@@ -84,7 +95,7 @@ const AddComment =async(e:any)=>{
             comment:arrayUnion({username:loginUserName,commentText:inputComment}),
       });
       // firestoreからcommentを取得、保持
-      await firebasePostDetails(id).then((postData)=>{
+      await firebasePostDetails(id,userid).then((postData)=>{
             setDisplayComment(postData.Comment)
             })
 }
@@ -92,16 +103,16 @@ const AddComment =async(e:any)=>{
 
 const ClickDelition = async(e:any) =>{
 // postのドキュメントへの参照を取得
-const postDataDocRefId = doc(collection(db, "post"), id);
-// 上記を元にドキュメントのデータを取得
-const postDataDocId = await getDoc(postDataDocRefId);
-// 取得したデータから必要なものを取り出す
-const postDataId = postDataDocId.data();
-// postuseridを取得(投稿者が誰か)
-const postUserId = postDataId?.userId
+// const postDataDocRefId = doc(collection(db, "post"), id);
+// // 上記を元にドキュメントのデータを取得
+// const postDataDocId = await getDoc(postDataDocRefId);
+// // 取得したデータから必要なものを取り出す
+// const postDataId = postDataDocId.data();
+// // postuseridを取得(投稿者が誰か)
+// const postUserId = postDataId?.userId
 
 // 投稿者のuser情報取得
-const postUserDocRef = doc(collection(db,"user"),postUserId)
+const postUserDocRef = doc(collection(db,"user"),userid)
 // 上記を元にドキュメントのデータを取得
 const postUserDoc = await getDoc(postUserDocRef);
 // 取得したデータから必要なものを取り出す
@@ -121,21 +132,24 @@ await updateDoc(postUserDocRef,{
 await deleteDoc(doc(db, "post", id));
 }
 
+
+// const time = Time.toDate()
+// const year = time.getFullYear()
+// const month = (time.getMonth()+1)
+// const day = time.getDate()
+// const hour = time.getHours()
+// const min = time.getMinutes()
+// const seco = time.getSeconds()
+
+// console.log(Time.toDate())
+
 return (
 <>
-<div>
-{loginUserPost ?(
-<>
-<Link to="/PostEditing" state={{id:id}}><button>編集</button></Link>
-<button onClick={ClickDelition}>削除</button><br />
-</>
-):(
-      <>
-      </>
-)}
-</div>
+<img src={icon} />
+<p>{postUserName}</p>
 <img src={imgUrl} />
 <p>{caption}</p>
+{/* <p>{year}年{month}月{day}日{hour}:{min}:{seco}</p> */}
 <div>
 <input type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)}}></input>
 </div>
@@ -151,6 +165,18 @@ return (
     </div>
     )
 })}
+</div>
+<Link to="/PostLook"><button>戻る</button></Link>
+<div>
+{loginUserPost ?(
+<>
+<Link to="/PostEditing" state={{id:id,userid:userid}}><button>編集</button></Link>
+<button onClick={ClickDelition}>削除</button><br />
+</>
+):(
+      <>
+      </>
+)}
 </div>
 </>
 );

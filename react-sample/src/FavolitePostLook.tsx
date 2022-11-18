@@ -30,6 +30,9 @@ const postDataDocRef = doc(collection(db, "post"), id);
 }
 
 export default FavolitePostLook
+
+
+
 // import { onAuthStateChanged } from 'firebase/auth';
 // import { collection, doc, getDoc, updateDoc } from 'firebase/firestore';
 // import { useState } from 'react';

@@ -182,6 +182,9 @@ function MyPage() {
       <Link to={`/dmPage`}>
         <button>DM</button>
       </Link>
+      <Link to={"/PostLook"}>
+        <button>一覧表示</button>
+      </Link>
     </>
   );
 }

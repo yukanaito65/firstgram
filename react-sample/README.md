@@ -1,4 +1,13 @@
-# Getting Started with Create React App
+#プロジェクトについて
+
+snsの画像投稿アプリを作成(instagram参考)
+react,typescript,firebaseを使用
+
+＃環境構築の手順
+docker-compose run --rm react-app sh -c "npm install -g create-react-app && create-react-app react-sample -template redux-typescript”
+
+
+<!-- # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) TS template.
 
@@ -43,4 +52,4 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+To learn React, check out the [React documentation](https://reactjs.org/). -->
