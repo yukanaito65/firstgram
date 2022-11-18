@@ -1,11 +1,12 @@
 import { onAuthStateChanged } from 'firebase/auth';
-import { collection, doc, getDoc, getDocs, query, updateDoc, where ,serverTimestamp} from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, query, updateDoc, where ,serverTimestamp, arrayUnion} from 'firebase/firestore';
 import { connectStorageEmulator } from 'firebase/storage';
 import React, { useEffect, useState } from 'react'
 import { Link, useActionData, useLocation, useRouteLoaderData } from 'react-router-dom';
-import FavolitePostLook from './FavolitePostLook';
+import { setOriginalNode } from 'typescript';
 // import FavolitePostLook from './FavolitePostLook';
 import { auth, db } from './firebase';
+import firebasePostDetails from './firebasePostDetails';
 // import FollowUserPostFirebase from './FollowUserPostFirebase';
 
 
@@ -19,12 +20,30 @@ const[userName,setUserName]=useState("");
 const[postId,setPostId]=useState<any>("");
 
 // favolites保持
-const[favolites,setFavolites]=useState<any>([]);
+const[favorites,setFavorites]=useState<any>([]);
+
+// style有無判定
+const [none,setNone]=useState<boolean>(false)
+
+// commentを格納
+const [displayComment, setDisplayComment] = useState<any>([]);
+
+// inputcommentを格納
+const [inputComment, setInputComment] = useState<any>("");
+
+// ログインしているユーザーのuserNameを格納
+const [loginUserName, setLoginUserName] = useState<any>("");
 
 
 useEffect(()=>{
 //ログイン判定
 onAuthStateChanged(auth, async (user) => {
+    // ログインしているユーザーのuserNameをuseStateで保持
+    const userDatas = doc(collection(db, "user"), user?.uid);
+    const  userDataGet = await getDoc(userDatas);
+    const userData = userDataGet.data();
+    const userName =userData?.userName
+    setLoginUserName(userName)
     if (!user) {
     console.log("ログアウト状態です");
     } else {
@@ -54,7 +73,7 @@ onAuthStateChanged(auth, async (user) => {
         postDataArray.push(followUserPost)
     });
     })
-    
+
     // ログインしているユーザーのpost情報を配列に格納
     const myPostId = userDatas?.post
     for(let postid of myPostId ){
@@ -67,30 +86,13 @@ onAuthStateChanged(auth, async (user) => {
     
     // データを保持
     setPostData(postDataArray)
-    }
-    })
+
+}})
 }, [])
-
-
-const Favorite = async(e:any)=>{
-//     // const postDataDocRefId = doc(collection(db, "post"), postId);
-//     // updateDoc(postDataDocRefId, {
-//     //       favorites:userName,
-// const postdataDoc =await (await getDoc(postDataDocRef)).data()?.favolites
-// setFavolite(postdataDoc)
-//     //   });
-
-//     // firebasePostDetails(userName)
-
-    FavolitePostLook(userName).then((favo:any)=>{
-        // setFavolites(favo.favo)
-        console.log(favolites)
-    })
-    }
 
 const narabikae = [postData];
 postData.sort((a: any, b: any) => {
-return a.postData.toDate() > b.postData.toDate()  ? -1 : 1;
+return a.postDate.toDate() > b.postDate.toDate()  ? -1 : 1;
 });
 
 return (
@@ -98,27 +100,80 @@ return (
 <div>
     
 {postData.map((data:any,index:any)=>{
-    const timestamp = data.postData.toDate()
+    const timestamp = data.postDate.toDate()
     const year = timestamp.getFullYear()
     const month = (timestamp.getMonth()+1)
     const day = timestamp.getDate()
     const hour = timestamp.getHours()
     const min = timestamp.getMinutes()
     const seco = timestamp.getSeconds()
+    // const id = data.postId
+    // setPostId(id)
     return(
     <>
     <div key={index}>
     <p>{data.caption}</p>
-    <Link to="/PostDetails" state={{id:data.postId,userid:data.userId}}><img src={data.imgUrl} /></Link>
+    <Link to="/PostDetails" state={{id:data.postId,userid:data.userId}}><img src={data.imageUrl} /></Link>
     <div>{year}年{month}月{day}日{hour}:{min}:{seco}</div>
-    <button onClick={Favorite}>♡</button>
-    <button>コメント</button>
-    {/* <FavolitePostLook Props={data.postId} />   */}
+    <button onClick={async(e:any)=>{
+    updateDoc(doc(collection(db, "post"), data.postId), {
+        favorites:userName,
+        });
+    // await (await getDoc(doc(collection(db, "post"), data.postId))).data()?.favolites
+    setFavorites(await (await getDoc(doc(collection(db, "post"), data.postId))).data()?.favorites)
+    
+    // setNone(true)
+}}>♡</button>
+{/* <p style={none:stylnone}> */}
+<input type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)}}></input>
+<button onClick={async(e:any)=>{
+        // 押された投稿のcommentにinputCommentを配列で追加
+        updateDoc(doc(collection(db, "post"), data.postId), {
+        comments:arrayUnion({userName:loginUserName,commentText:inputComment}),
+        });
+        // firestoreからcommentを取得、保持
+        // await(await getDoc(doc(collection(db, "post"), data.postId))).data()?.comment
+        setDisplayComment (await(await getDoc(doc(collection(db, "post"), data.postId))).data()?.comments)
+        setInputComment("")
+}}>コメント</button>
+<p>♡:{data.favorites}</p>
+{/* <p>♡：{favorites}</p> */}
+<div>コメント:
+{/* {displayComment.map((data:any,index:any)=>{ */}
+{data.comments.map((com:any,index:any)=>{
+    return(
+    <div key={index}>
+    <p>{com.userName}</p>
+    <p>{com.commentText}</p>
+    {/* <button onClick={async(e:any)=>{
+        await (await getDoc(doc(collection(db,"post"),data.postId))).data()?.comment.splice(
+        await (await getDoc(doc(collection(db,"post"),data.postId))).data()?.comment.com.username, 1)
+
+        await updateDoc(doc(collection(db,"post"),data.postId),{
+            post: await (await getDoc(doc(collection(db,"post"),data.postId))).data()?.comment
+      });
+
+        await (await getDoc(doc(collection(db,"post"),data.postId))).data()?.comment.splice(
+        await (await getDoc(doc(collection(db,"post"),data.postId))).data()?.comment.com.commentText, 1)
+
+        await updateDoc(doc(collection(db,"post"),data.postId),{
+            post: await (await getDoc(doc(collection(db,"post"),data.postId))).data()?.comment
+          });
+        }}>削除</button> */}
+    </div>
+    )
+})}
+</div>
+
     </div>
      </>
     )
 })}
+<p></p>
 </div>
+
+
+
 <Link to="/mypage"><button>マイページ</button></Link>
 </>
 )

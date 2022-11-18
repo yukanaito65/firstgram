@@ -5,6 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 import firebasePostDetails from "./firebasePostDetails";
 import { onAuthStateChanged, updateCurrentUser } from "firebase/auth";
 import { current } from "@reduxjs/toolkit";
+import CommonIcon from "./component/atoms/pictures/CommonIcon";
 
 interface State {
       id:string,
@@ -24,7 +25,7 @@ const [caption, setCaption] = useState<any>("");
 // timeを格納
 const [Time, setTime] = useState<any>("");
 // favolitesを格納
-const [favolites, setFavolites] = useState<any>([]);
+const [favorites, setFavorites] = useState<any>([]);
 
 // commentを格納
 const [displayComment, setDisplayComment] = useState<any>([]);
@@ -36,6 +37,21 @@ const [inputComment, setInputComment] = useState<any>("");
 const [postUserName, setPostUserName] = useState<any>("");
 // iconを格納
 const [icon, setIcon] = useState<any>("");
+
+// timeを格納
+const [time, settime] = useState<any>("");
+// yearを格納
+const [year, setYear] = useState<any>("");
+// monthを格納
+const [month, setMonth] = useState<any>("");
+// dayを格納
+const [day, setDay] = useState<any>("");
+// dayを格納
+const [hour, setHour] = useState<any>("");
+// dayを格納
+const [min, setMin] = useState<any>("");
+// dayを格納
+const [seco, setSeco] = useState<any>("");
 
 
 // postlookからデータを持ってくる
@@ -64,11 +80,19 @@ useEffect(()=>{
 firebasePostDetails(id,userid).then((postData)=>{
 setImgUrl(postData.Imgurl)
 setCaption(postData.Caption)
-setFavolites(postData.Favorites)
-setDisplayComment(postData.Comment)
+setFavorites(postData.Favorites)
+setDisplayComment(postData.Comments)
 setTime(postData.Time)
 setPostUserName(postData.PostUserName)
 setIcon(postData.Icon)
+console.log(Time)
+settime(Time.toDate())
+setYear(time.getFullYear())
+setMonth((time.getMonth()+1))
+setDay(time.getDate())
+setHour(time.getHours())
+setMin(time.getMinutes())
+setSeco(time.getSeconds())
 })
 
 }, [])
@@ -79,11 +103,11 @@ const Favorite = async(e:any)=>{
       const postDataDocRefId = doc(collection(db, "post"), id);
       console.log(loginUserName)
       updateDoc(postDataDocRefId, {
-            favolites:arrayUnion(loginUserName),
+            favorites:arrayUnion(loginUserName),
       });
       // firestoreからfavolitesを取得、保持
       await firebasePostDetails(id,userid).then((postData)=>{
-      setFavolites(postData.Favorites)
+      setFavorites(postData.Favorites)
       })
       };
 
@@ -92,13 +116,14 @@ const AddComment =async(e:any)=>{
       // 押された投稿のcommentにinputCommentを配列で追加
       const postDataDocRefId = doc(collection(db, "post"), id);
       updateDoc(postDataDocRefId, {
-            comment:arrayUnion({username:loginUserName,commentText:inputComment}),
+            comments:arrayUnion({userName:loginUserName,commentText:inputComment}),
       });
       // firestoreからcommentを取得、保持
       await firebasePostDetails(id,userid).then((postData)=>{
-            setDisplayComment(postData.Comment)
+            setDisplayComment(postData.Comments)
             })
 }
+
 
 
 const ClickDelition = async(e:any) =>{
@@ -133,34 +158,25 @@ await deleteDoc(doc(db, "post", id));
 }
 
 
-// const time = Time.toDate()
-// const year = time.getFullYear()
-// const month = (time.getMonth()+1)
-// const day = time.getDate()
-// const hour = time.getHours()
-// const min = time.getMinutes()
-// const seco = time.getSeconds()
-
-// console.log(Time.toDate())
-
 return (
 <>
 <img src={icon} />
+{/* <CommonIcon icon={icon}/> */}
 <p>{postUserName}</p>
 <img src={imgUrl} />
 <p>{caption}</p>
-{/* <p>{year}年{month}月{day}日{hour}:{min}:{seco}</p> */}
+<p>{year}年{month}月{day}日{hour}:{min}:{seco}</p>
 <div>
 <input type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)}}></input>
 </div>
 <button onClick={AddComment}>コメント</button>
 <button onClick={Favorite}>♡</button>
-<div>♡: {favolites}</div>
+<div>♡: {favorites}</div>
 <div>コメント:
 {displayComment.map((data:any,index:any)=>{
     return(
     <div key={index}>
-    <p>{data.username}</p>
+    <p>{data.userName}</p>
     <p>{data.commentText}</p>
     </div>
     )
@@ -171,7 +187,7 @@ return (
 {loginUserPost ?(
 <>
 <Link to="/PostEditing" state={{id:id,userid:userid}}><button>編集</button></Link>
-<button onClick={ClickDelition}>削除</button><br />
+<Link to="/PostLook"><button onClick={ClickDelition}>削除</button></Link>
 </>
 ):(
       <>
