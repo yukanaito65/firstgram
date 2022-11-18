@@ -9,9 +9,6 @@ import { db } from "./firebase";
 import { setDoc, doc, getDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import storage from "./firebase-sec";
-// import Icon from "./component/atoms/pictures/Icon";
-
-
 
 function Register() {
   //ログイン状態保持(userが値を持てばログイン状態)
@@ -199,7 +196,7 @@ function Register() {
             </p>
           </form>
         </>
-       )}
+      )}
     </>
   );
 }
