@@ -18,6 +18,7 @@ import PostEditing from "./PostEditing";
 // import FavolitePostLook from "./FavolitePostLook";
 
 import DMPage from "./component/pages/DMPage";
+import SearchPage from "./component/pages/SearchPage";
 
 
 function App() {
@@ -45,7 +46,7 @@ function App() {
             {/* <Route path={`/FavolitePostLook`} element={<FavolitePostLook />} /> */}
 
             <Route path={`/dmPage`} element={<DMPage />} />
-
+            <Route path={`/searchPage`} element={<SearchPage />} />
           </Routes>
         </BrowserRouter>
       </div>

@@ -11,6 +11,7 @@ import {
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Navigate, useNavigate, Link } from "react-router-dom";
+import SearchButton from "./component/atoms/button/SearchButton";
 import Icon from "./component/atoms/pictures/Icon";
 import MyPost from "./component/atoms/pictures/MyPost";
 import { auth, db } from "./firebase";
@@ -108,6 +109,10 @@ function MyPage() {
     navigate("/login/");
   };
 
+  const forSearchPage = () => {
+    navigate('/searchPage')
+  }
+
   // console.log(users.post);
   // console.log(user.uid);
   // console.log(auth.currentUser)
@@ -158,6 +163,7 @@ function MyPage() {
       )}
       <Link to={`/AccountSettingPage`}><button>設定</button></Link>
       <Link to={`/dmPage`}><button>DM</button></Link>
+      <SearchButton onClick={forSearchPage} />
     </>
   );
 }
