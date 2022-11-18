@@ -18,6 +18,11 @@ import PostEditing from "./PostEditing";
 // import FavolitePostLook from "./FavolitePostLook";
 
 import DMPage from "./component/pages/DMPage";
+import Profile from "./Profile";
+import Follow from "./MyFollow";
+import Follower from "./MyFollower";
+import MyFollower from "./MyFollower";
+import MyFollow from "./MyFollow";
 
 
 function App() {
@@ -33,8 +38,10 @@ function App() {
             <Route path={`/AccountSettingPage`} element={<AccountSettingPage />} />
             <Route path={`/`} element={<Top />} />
             <Route path={`/newPost`} element={<NewPost />} />
-            {/* <Route path={`/follow`} element={<Follow />} />
-            <Route path={`/follower`} element={<Follower />} /> */}
+            <Route path={`/myFollow`} element={<MyFollow />} />
+            <Route path={`/myFollower`} element={<MyFollower />} />
+            <Route path={`/follow`} element={<Follow />} />
+            <Route path={`/follower`} element={<Follower />} />
             <Route path={`/PostDetails`} element={<PostDetails />} />
             {/* <Route path="/PostDetails" component={PostDetails} /> */}
             <Route path={`/PostLook`} element={<PostLook />} />
@@ -45,6 +52,7 @@ function App() {
             {/* <Route path={`/FavolitePostLook`} element={<FavolitePostLook />} /> */}
 
             <Route path={`/dmPage`} element={<DMPage />} />
+            <Route path={`/profile`} element={<Profile />} />
 
           </Routes>
         </BrowserRouter>

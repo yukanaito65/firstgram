@@ -1,9 +1,17 @@
-import React from 'react'
+import { FC, ReactNode } from "react";
 
-function MyPost(props:any) {
+type Props = {
+  imageUrl: string;
+  children?: ReactNode;
+};
+
+const MyPost: FC<Props> = (props) => {
+  // const MyPost=(props:any) =>{
   return (
-        <img src={props.imageUrl} alt="投稿" />
-  )
-}
+    <div>
+      <img src={props.imageUrl} alt="投稿" />
+    </div>
+  );
+};
 
-export default MyPost
+export default MyPost;
