@@ -150,7 +150,7 @@ function MyPage() {
                 <Icon />
               </div>
               <div>
-                <div>{postList.length}投稿</div>
+                <div>{posts.length}投稿</div>
                 <Link to={"/myFollower"}>
                   <div>{followerList.length}フォロワー</div>
                 </Link>
@@ -160,7 +160,7 @@ function MyPage() {
               </div>
               <div>{users.profile}</div>
               <div>
-                {postList.length > 0 ? (
+                {posts.length > 0 ? (
                   <div>
                     {posts.map((post: any) => {
                       return (

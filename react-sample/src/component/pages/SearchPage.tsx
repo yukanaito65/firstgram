@@ -20,7 +20,7 @@ import {
   arrayRemove,
   orderBy,
   startAt,
-  endAt
+  endAt,
 } from "firebase/firestore";
 import { useEffect } from "react";
 import { onAuthStateChanged } from "@firebase/auth";
@@ -28,40 +28,99 @@ import { db } from "../../firebase";
 
 function SearchPage() {
   const [searchValue, setSearchValue] = useState<string>("");
-  const [name, setName] = useState<string>("")
-  const [userName, setUserName] = useState<string>("")
-  const [icon, setIcon] = useState<string>("")
+  const [name, setName] = useState<string>("");
+  const [userName, setUserName] = useState<string>("");
+  const [icon, setIcon] = useState<string>("");
+  const [dataList, setDataList] = useState<
+    { userId: string; name: string; userName: string }[]
+  >([]);
+  const userDataArr: { userId: string; name: string; userName: string }[] = [];
 
-  const accountList = async() => {
-  const queryPost = query(
-    collection(db, "user"),
-    where("name", "==", true),
-    orderBy("message"),
-    startAt(searchValue),
-    endAt(searchValue + '\uf8ff'),
-  );
-  
-  console.log(queryPost)
+  const auth = getAuth();
+  useEffect(() => {
+    //ログイン判定
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        console.log("ログアウト状態です");
+      } else {
+        const auth = getAuth();
+        const currentUserId = auth.currentUser?.uid;
 
-//   const usersRef = collection(db, "user");
+        // 取得したデータを入れる箱
+        const userDataList: {
+          userId: string;
+          name: string;
+          userName: string;
+        }[] = [];
 
-// getDocs(query(usersRef, orderBy("age", "desc"))).then(snapshot => {
-//   snapshot.forEach(doc => {
-//     console.log(`${doc.id}: ${doc.data().userName}`);
-//   })
-// })
+        // 取得データ指定
+        const userQuery = query(collection(db, "user"));
 
-  const querySnapshot = await getDocs(queryPost);
-  console.log(querySnapshot)
-  querySnapshot.forEach((doc) => {
-    // doc.data() is never undefined for query doc snapshots
-    const data = (doc.id, " => ", doc.data());
-    console.log(data);
-  });
-}
+        // 上記を元にドキュメントのデータを取得
+        const userDocId = await getDocs(userQuery);
+
+        // 取得したデータからnameとuserNameとuserIdを取り出し配列にpushする
+        userDocId.forEach((docdata) => {
+          const data = (docdata.id, " => ", docdata.data());
+          userDataList.push({
+            userId: data.userId,
+            name: data.name,
+            userName: data.userName,
+          });
+        });
+        setDataList(userDataList);
+
+        console.log(userDataList);
+        console.log(dataList);
+      }
+    });
+  }, []);
+
+  const onClickSearch = async () => {
+    const searchResultList: string[] = [];
+
+    dataList.forEach((user) => {
+      const userName = user.userName;
+      const name = user.name;
+      const userId = user.userId;
+      if (userName.includes(searchValue)) {
+        searchResultList.push(userId);
+      }
+      if (name.includes(searchValue)) {
+        searchResultList.push(userId);
+      }
+    });
+
+    const newSearchResultList = Array.from(new Set(searchResultList));
+
+    // 重複のない検索結果ユーザーIDの配列
+    const newResultUserList = newSearchResultList;
+    console.log(newResultUserList)
+
+    newResultUserList.forEach(async (userId) => {
+      const resultUserDoc: any = doc(db, "user", userId);
+
+      const resultUserData: any[] | unknown = await getDocs(resultUserDoc);
+      console.log(resultUserData)
+
+      //上記を元にデータの中身を取り出す。map()を使えるようにする。
+      // resultUserData.forEach((docdata) => {
+      //   const data: any = (docdata.id, " => ", docdata.data());
+      //   console.log(data)
+      //   if(data) {
+      //   userDataArr.push({
+      //     userId: data.userId,
+      //     name: data.name,
+      //     userName: data.userName,
+      //   });
+      // }
+      // });
+    });
+    setSearchValue("");
+  };
 
   return (
-    <div>
+    <>
       <input
         type="search"
         value={searchValue}
@@ -69,12 +128,16 @@ function SearchPage() {
       />
       <p>{searchValue}</p>
 
-      <button onClick={accountList}>検索</button>
-    </div>
+      <button onClick={onClickSearch}>検索</button>
+      {userDataArr.map(() => {
+        <>
+          <img src={icon} />
+          <p>{name}</p>
+          <p>{userName}</p>
+        </>;
+      })}
+    </>
   );
 }
 
 export default SearchPage;
-
-// まずはアカウント検索
-// まずはsearchValueと一致するデータを取ってくる

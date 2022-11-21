@@ -180,7 +180,7 @@ function MyFollow() {
                         <p>{followUser.userName}</p>
                         <p>{followUser.name}</p>
                       </div>
-                      <FollowButton userId={followUser.userId} />
+                      {/* <FollowButton userId={followUser.userId} /> */}
                     </div>
                   </Link>
                 );
