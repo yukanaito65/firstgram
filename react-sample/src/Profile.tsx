@@ -11,7 +11,10 @@ import {
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import AddFollowButton from "./component/atoms/button/AddFollowButton";
 import FollowButton from "./component/atoms/button/FollowButton";
+import RemoveFollowButton from "./component/atoms/button/RemoveFollowButton";
+import FollowerCount from "./component/atoms/FollowerCount";
 import CommonIcon from "./component/atoms/pictures/CommonIcon";
 import Icon from "./component/atoms/pictures/Icon";
 import MyPost from "./component/atoms/pictures/MyPost";
@@ -23,8 +26,12 @@ interface State {
 }
 
 function Profile() {
-  //取得してきたデータ保管
-  const [users, setUsers] = useState<any>([]);
+  const [user, setUser] = useState<any>("");
+  //ログインユーザーの情報
+  const [usersFollow, setUsersFollow] = useState<any>([]);
+
+  //userIdのユーザーの情報
+  const [profileUsers, setProfileUsers] = useState<any>([]);
   const [posts, setPosts] = useState<QuerySnapshot[]>([]);
 
   const [loading, setLoading] = useState(true);
@@ -38,6 +45,8 @@ function Profile() {
   //userのfollower配列
   const [followerList, setFollowerList] = useState<any>({ follower: [] });
 
+  const [followBtn,setFollowBtn] = useState<boolean>();
+
   //各ページからデータ取得
   const location = useLocation();
   const { userId } = location.state as State;
@@ -46,22 +55,33 @@ function Profile() {
   useEffect(() => {
     onAuthStateChanged(auth, async (currentUser: any) => {
       setLoading(false);
+      setUser(currentUser);
 
       const userCollectionRef = collection(db, "user");
 
-      const userDocRefId = doc(userCollectionRef, userId);
+      //ログインユーザーのfollow配列取得
+      const userDocRefId = doc(userCollectionRef, currentUser.uid);
 
       const userDocId = await getDoc(userDocRefId);
 
-      const userDataId = userDocId.data();
-      setUsers(userDataId);
-      console.log(userDataId);
-      if (!userDataId) {
+      const userDataFollow = userDocId.get("follow");
+      setUsersFollow(userDataFollow);
+
+      //前のページから渡されたuserIdを元にデータ取得し、usersに格納
+      const profileUserDocRefId = doc(userCollectionRef, userId);
+
+      const profileUserDocId = await getDoc(profileUserDocRefId);
+
+      const profileUserDataId = profileUserDocId.data();
+      setProfileUsers(profileUserDataId);
+      console.log(profileUserDataId);
+
+      if (!profileUserDataId) {
         console.log("データがありません");
       } else {
-        setPostList(userDataId.post);
-        setFollowList(userDataId.follow);
-        setFollowerList(userDataId.follower);
+        setPostList(profileUserDataId.post);
+        setFollowList(profileUserDataId.follow);
+        setFollowerList(profileUserDataId.follower);
       }
 
       //投稿一覧取得
@@ -80,28 +100,63 @@ function Profile() {
     });
   }, []);
 
-  console.log(posts);
+  console.log(profileUsers); //[]
+  console.log(profileUsers.follow); //undefined
+  console.log(posts); //[]
+  console.log(followList);//follow[]
+  console.log(userId); //id出てる
+  console.log(profileUsers.userId); //undefined
+  console.log(usersFollow);
+
+  // const [followBtn, setFollowBtn] = useState(true);
+  // const handleClick= () => {
+  //   if(user.follow.includes(userId)){
+  //   //表示しているユーザーのidがログインユーザーのfollow配列に存在したらremove
+  //   setFollowBtn(true);
+  // }else{
+  //   setFollowBtn(false);
+  // }
+
+  // const [followerNum, setFollowerNum ] = useState<number>(followerList.length);
 
   return (
     <>
       {!loading && (
         <div>
-          <div>{users.userName}</div>
+          <div>{profileUsers.userName}</div>
           <div>
-            <CommonIcon icon={users.icon} />
+            <CommonIcon icon={profileUsers.icon} />
           </div>
           <div>{postList.length}投稿</div>
-          <Link to={"/follower"} state={{ userId: userId }}>
+
+          <Link to={"/follower"} state={{ userId: userId, follower:followerList, uid: user.uid }}>
+            {/* <div>{followerList.length}フォロワー</div> */}
             <div>{followerList.length}フォロワー</div>
           </Link>
-          <Link to={"/follow"} state={{ userId: userId }}>
+
+          {/* <FollowerCount
+          userId={userId}
+          uid={user.uid}
+          followerList={followerList}
+          /> */}
+
+          <Link to={"/follow"} state={{ userId: userId, follow:followList, uid: user.uid }}>
             <div>{followList.length}フォロー中</div>
           </Link>
-          <div>{users.profile}</div>
+          <div>{profileUsers.profile}</div>
           <Link to={`/dmPage`}>
             <button>DM</button>
           </Link>
-          <FollowButton />
+          <Link to={"/mypage"}>マイページ</Link>
+           {usersFollow.includes(userId) ? (
+            <RemoveFollowButton
+            userId={userId}
+            // onClick={()=>setFollowerNum(followerNum)}
+            // followerNum={followerNum}
+            />
+           ) : (
+            <AddFollowButton userId={userId} />
+           )}
           <div>
             {postList.length > 0 ? (
               <div>
@@ -109,7 +164,7 @@ function Profile() {
                   return (
                     <Link
                       to="/PostDetails"
-                      state={{ userId: users.userId, postId: post.postId }}
+                      state={{ userId: profileUsers.userId, postId: post.postId }}
                     >
                       <MyPost imageUrl={post.imageUrl} />
                     </Link>
