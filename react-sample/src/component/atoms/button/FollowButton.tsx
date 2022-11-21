@@ -11,6 +11,9 @@ import React, { useEffect, useState } from "react";
 import { auth, db } from "../../../firebase";
 
 function FollowButton(props: any) {
+
+  const [loading, setLoading] = useState(true);
+
   //ログインユーザーの情報
   const [user, setUser] = useState<any>("");
 
@@ -24,9 +27,12 @@ function FollowButton(props: any) {
   //フォローしているユーザーの情報[{1人目},{2人目}....]
   const [followUsers, setFollowUsers] = useState<any[]>([]);
 
+
+
   useEffect(() => {
     onAuthStateChanged(auth, async (currentUser: any) => {
       setUser(currentUser);
+      setLoading(false);
 
       //ログインユーザーの情報取得して、usersに格納
       const userCollectionRef = collection(db, "user");
@@ -39,7 +45,7 @@ function FollowButton(props: any) {
       const userDataId = userDocId.data();
       setUsers(userDataId);
 
-      //followユーザー情報取得して、followUsersに格納
+      //表示されている(ボタンを押された)ユーザー情報取得して、followUsersに格納
       const followUserDocRefId = doc(userCollectionRef, props.userId);
       setFollowUserDocRefId(followUserDocRefId);
 
@@ -47,9 +53,21 @@ function FollowButton(props: any) {
 
       const followUserDataId = followUserDocId.data();
       setFollowUsers(followUserDataId);
+
+      console.log(props.userId);
+      console.log(userDataId);
+      // console.log(userDataId.follow); //undefined
+      console.log(followUserDataId);
     }); //onAuth
   }, []);
 
+  //useEffectの中のコードよりも先に外のコードが処理される→初期表示の時にundefinedになってしまう
+  console.log(props.userId);
+console.log(users);
+console.log(users.follow); //undefined
+console.log(followUsers);
+
+  //ログインユーザーのfollow配列に今表示しているユーザーのuserIdが存在したら、フォロー外すボタン、存在しなかったらフォローするボタン
   const [followBtn, setFollowBtn] = useState(true);
 
   // const changeFollow = async () => {
@@ -76,13 +94,8 @@ function FollowButton(props: any) {
   //   }
   // };
 
-  // if(users.follow.includes(props.userId)){
-  //   //存在したら
-  //   setFollowBtn(true);
-  // }else{
-  //   //存在しなかったら
-  //   setFollowBtn(false);
-  // }
+
+
 
   const removeFollow = async () => {
     await updateDoc(userDocRefId, {
@@ -93,6 +106,8 @@ function FollowButton(props: any) {
       follower: arrayRemove(user.uid),
     });
     console.log("remove");
+    //削除したらtrueにする
+    // setFollowBtn(false);
   };
 
   const addFollow = async () => {
@@ -104,14 +119,44 @@ function FollowButton(props: any) {
       follower: arrayUnion(user.uid),
     });
     console.log("add");
+    // setFollowBtn(true);
   };
+
+const changeFollow = () => {
+  if(users.follow.includes(props.userId)){
+    //存在したら
+    removeFollow();
+    setFollowBtn(false);
+  }else{
+    //存在しなかったら
+    // setFollowBtn(false);
+    addFollow();
+    setFollowBtn(true);
+  }
+}
 
   return (
     <>
-      <button onClick={() => addFollow()}>フォローする</button>
-      <button onClick={() => removeFollow()}>フォロー中</button>
-    </>
-  );
+    {!loading && (
+        <button onClick={()=>changeFollow()}>
+        </button>
+        )}
+        </>
+      );
+  //     {/* <button onClick={() => addFollow()}>フォローする</button> */}
+  //     {/* <button onClick={() => removeFollow()}>フォロー中</button> */}
+  //   {/* リロードすると機能反転して使える */}
+
+  // }
+  //       {/* followBtn ? だとリロードされる度に初期値のtrueに戻ってしまう */}
+  //       {/* {users.follow.includes(props.userId) ? "フォロー中" : "フォローする"} */}
+  //     {/* </button> */}
+  //     {/* <button onClick={()=>handleClick()}></button> */}
+  //     {/* {followBtn === true ? (
+  //       <button onClick={()=>addFollow()}>フォローする</button>
+  //     ):(
+  //       <button onClick={()=>removeFollow()}>フォロー中</button>
+  //     )} */}
 }
 
 export default FollowButton;

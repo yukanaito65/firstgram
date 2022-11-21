@@ -53,7 +53,7 @@ function MyFollower() {
 
       //上記を元にデータ取得
       const userDocId = await getDoc(userDocRefId);
-      console.log(userDocId);
+      console.log(userDocId); //il
 
       //データの中からfollow配列取得
       const followerUserList = userDocId.get("follower");
@@ -97,23 +97,23 @@ function MyFollower() {
           <Link to={"/mypage"}>⬅︎</Link>
 
           {followerUsers.length > 0 ? (
-            <div>
-              {followerUsers.map((followerUser) => {
-                return (
-                  <Link to="/profile" state={{ userId: followerUser.userId }}>
-                    <div id={followerUser.userId}>
-                      <CommonIcon icon={followerUser.icon} />
-                      <div>
-                        <p>{followerUser.userName}</p>
-                        <p>{followerUser.name}</p>
-                      </div>
-                      <FollowButton userId={followerUser.userId} />
+          <div>
+            {followerUsers.map((followerUser) => {
+              return (
+                <Link to="/profile" state={{ userId: followerUser.userId }}>
+                  <div id={followerUser.userId}>
+                    <CommonIcon icon={followerUser.icon} />
+                    <div>
+                      <p>{followerUser.userName}</p>
+                      <p>{followerUser.name}</p>
                     </div>
-                  </Link>
-                );
-              })}
-            </div>
-          ) : (
+                    {/* <FollowButton userId={followerUser.userId} /> */}
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+          ) :(
             <div>
               <p>フォロワーがいません</p>
             </div>
