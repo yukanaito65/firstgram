@@ -57,7 +57,6 @@ function SearchPage() {
     // doc.data() is never undefined for query doc snapshots
     const data = (doc.id, " => ", doc.data());
     console.log(data);
-    
   });
 }
 
