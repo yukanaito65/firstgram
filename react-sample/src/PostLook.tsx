@@ -50,6 +50,7 @@ const [postDataSecond,  setPostDataSecond] = useState<any>({});
 
 const postData2=[...postData]
     for(let i = 0; i<postData.length; i++){
+        console.log(postId)
         if(postData[i].postId === postId){
             postData2[i].favorites.push()
         }
@@ -119,8 +120,8 @@ onAuthStateChanged(auth, async (user) => {
 }})
 
 },
-// []
-[postData]
+[]
+// [postData]
 )
 
 const narabikae = [postData];
