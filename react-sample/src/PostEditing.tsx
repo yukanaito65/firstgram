@@ -6,14 +6,14 @@ import firebasePostDetails from "./firebasePostDetails";
 import FirestoreUpdata from "./FirestoreUpdata";
 
 interface State {
-    id:string,
+    postid:string,
     userid:string
 }
 
 function PostEditing() {
 // postlookからデータを持ってくる
 const location = useLocation();
-const {id,userid} = location.state as State
+const {postid,userid} = location.state as State
 
 // 画像urlを格納
 const [imgUrl, setimgUrl] = useState<any>("");
@@ -22,7 +22,7 @@ const [text, setText] = useState<any>("");
 
 useEffect(()=>{
 // .then(〜がきたときに)
-firebasePostDetails(id,userid).then((postData)=>{
+firebasePostDetails(postid,userid).then((postData)=>{
 setimgUrl(postData.Imgurl)
 setText(postData.Caption)
 })
@@ -30,7 +30,7 @@ setText(postData.Caption)
 
 const Updata = ((e:any)=>{
 console.log(text)
-FirestoreUpdata(id,text)
+FirestoreUpdata(postid,text)
 })
 
 return (

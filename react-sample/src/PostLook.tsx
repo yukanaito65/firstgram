@@ -3,7 +3,7 @@ import { collection, doc, getDoc, getDocs, query, updateDoc, where ,serverTimest
 import { connectStorageEmulator } from 'firebase/storage';
 import React, { useEffect, useState } from 'react'
 import { Link, useActionData, useLocation, useRouteLoaderData } from 'react-router-dom';
-import { setOriginalNode } from 'typescript';
+// import { setOriginalNode } from 'typescript';
 // import FavolitePostLook from './FavolitePostLook';
 import { auth, db } from './firebase';
 import firebasePostDetails from './firebasePostDetails';
@@ -33,6 +33,35 @@ const [inputComment, setInputComment] = useState<any>("");
 
 // ログインしているユーザーのuserNameを格納
 const [loginUserName, setLoginUserName] = useState<any>("");
+
+// 
+const [postDataSecond,  setPostDataSecond] = useState<any>({});
+
+// const setFavorites2 = (postId:any)=>{
+//     // setPostData(()=>{
+//             for(let i = 0; i<postData.length; i++){
+//                 console.log(postData[i])
+//             if(postData[i].postId === postId){
+//                 postData[i].favorites.push(userName)
+//             }
+//         }
+// // })
+// }
+
+const postData2=[...postData]
+    for(let i = 0; i<postData.length; i++){
+        if(postData[i].postId === postId){
+            postData2[i].favorites.push()
+        }
+    }
+
+const postData3=[...postData]
+    for(let i = 0; i<postData.length; i++){
+        if(postData[i].postId === postId){
+            postData3[i].comments.push()
+        }
+    }   
+
 
 
 useEffect(()=>{
@@ -88,16 +117,20 @@ onAuthStateChanged(auth, async (user) => {
     setPostData(postDataArray)
 
 }})
-}, [])
+
+},
+// []
+[postData]
+)
 
 const narabikae = [postData];
 postData.sort((a: any, b: any) => {
 return a.postDate.toDate() > b.postDate.toDate()  ? -1 : 1;
 });
-
+console.log(postData)
 return (
+   
 <>
-{/* {for(let i=0; i < 1;  i++){ */}
 <div>
 {postData.map((data:any,index:any)=>{
     const timestamp = data.postDate.toDate()
@@ -107,37 +140,32 @@ return (
     const hour = timestamp.getHours()
     const min = timestamp.getMinutes()
     const seco = timestamp.getSeconds()
-    // const id = data.postId
-    // setPostId(id)
     return(
     <>
     <div key={index}>
     <p>{data.caption}</p>
-    <Link to="/PostDetails" state={{id:data.postId,userid:data.userId}}><img src={data.imageUrl} /></Link>
+    <Link to="/PostDetails" state={{postid:data.postId,userid:data.userId}}><img src={data.imageUrl} /></Link>
     <div>{year}年{month}月{day}日{hour}:{min}:{seco}</div>
     <button onClick={
-        // useEffect(
         async(e:any)=>{
-    updateDoc(doc(collection(db, "post"), data.postId), {
+        updateDoc(doc(collection(db, "post"), data.postId), {
         favorites:userName,
         });
-    // await (await getDoc(doc(collection(db, "post"), data.postId))).data()?.favolites
-    setFavorites(await (await getDoc(doc(collection(db, "post"), data.postId))).data()?.favorites)
-    // this.forceUpdate()
-    // window.location.reload()
-// }, [])
+        setPostData(()=>postData2)
 }}>♡</button>
-{/* <p style={none:stylnone}> */}
 <input type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)}}></input>
 <button onClick={async(e:any)=>{
         // 押された投稿のcommentにinputCommentを配列で追加
         updateDoc(doc(collection(db, "post"), data.postId), {
         comments:arrayUnion({userName:loginUserName,commentText:inputComment}),
         });
+
+        setPostData(()=>postData3)
         // firestoreからcommentを取得、保持
         // await(await getDoc(doc(collection(db, "post"), data.postId))).data()?.comment
-        setDisplayComment (await(await getDoc(doc(collection(db, "post"), data.postId))).data()?.comments)
+        // setDisplayComment (await(await getDoc(doc(collection(db, "post"), data.postId))).data()?.comments)
         setInputComment("")
+        
 }}>コメント</button>
 <p>♡:{data.favorites}</p>
 {/* <p>♡：{favorites}</p> */}
@@ -148,21 +176,6 @@ return (
     <div key={index}>
     <p>{com.userName}</p>
     <p>{com.commentText}</p>
-    {/* <button onClick={async(e:any)=>{
-        await (await getDoc(doc(collection(db,"post"),data.postId))).data()?.comment.splice(
-        await (await getDoc(doc(collection(db,"post"),data.postId))).data()?.comment.com.username, 1)
-
-        await updateDoc(doc(collection(db,"post"),data.postId),{
-            post: await (await getDoc(doc(collection(db,"post"),data.postId))).data()?.comment
-      });
-
-        await (await getDoc(doc(collection(db,"post"),data.postId))).data()?.comment.splice(
-        await (await getDoc(doc(collection(db,"post"),data.postId))).data()?.comment.com.commentText, 1)
-
-        await updateDoc(doc(collection(db,"post"),data.postId),{
-            post: await (await getDoc(doc(collection(db,"post"),data.postId))).data()?.comment
-          });
-        }}>削除</button> */}
     </div>
     )
 })}
@@ -172,11 +185,7 @@ return (
      </>
     )
 })}
-
 </div>
-{/* }} */}
-
-
 
 <Link to="/mypage"><button>マイページ</button></Link>
 </>
