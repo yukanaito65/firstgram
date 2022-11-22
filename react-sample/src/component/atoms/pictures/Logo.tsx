@@ -1,13 +1,9 @@
 import React from 'react';
 
-interface Props {
-    width: number;
-  }
-
-function Logo({ width }:Props) {
+function Logo() {
   return (
     <div>
-        <img src={`${process.env.PUBLIC_URL}/logo.png`} alt="Logo" width={width} />
+        <img src={`${process.env.PUBLIC_URL}/logo.png`} alt="Logo" />
     </div>
   )
 }

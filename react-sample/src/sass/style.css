@@ -35,7 +35,6 @@ a {
   color: #0066c0;
   text-decoration: underline;
   transition: 0.4s;
-  display: block;
 }
 a:hover {
   text-decoration: none;
@@ -55,7 +54,7 @@ a:hover {
 }
 
 .u-margin-auto {
-  margin: 30px auto 30px 0;
+  margin: auto;
 }
 
 .u-margin50 {
@@ -64,41 +63,6 @@ a:hover {
 
 .u-margin100 {
   margin: 100px;
-}
-
-/* ----------------------------------- */
-/* header */
-.header {
-  width: 100%;
-  background-color: #9ed1bb;
-}
-
-.header-warpper {
-  width: 85%;
-  display: flex;
-  margin: 0 auto;
-}
-
-.header-logo {
-  width: 15%;
-}
-
-.header-add-btn {
-  width: 20px;
-  margin-left: auto;
-}
-
-/* footer */
-.footer {
-  width: 100%;
-  background-color: #fff;
-  display: flex;
-  justify-content: space-between;
-}
-
-.footer-width {
-  width: 30%;
-  display: block;
 }
 
 /*--------------------------------------*
