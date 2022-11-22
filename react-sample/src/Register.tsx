@@ -100,6 +100,7 @@ function Register() {
               follower: [],
               posts: [],
               favoritePosts: [],
+              keepPosts: [],
               profile: profile.value,
             });
           }

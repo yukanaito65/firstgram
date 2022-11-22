@@ -10,7 +10,11 @@ import {
   where,
 } from "firebase/firestore";
 import React, { ReactElement, ReactNode, useEffect, useState } from "react";
+import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { Navigate, useNavigate, Link } from "react-router-dom";
+import AddKeepButton from "./component/atoms/button/AddKeepButton";
+import KeepButton from "./component/atoms/button/KeepButton";
+import RemoveKeepButton from "./component/atoms/button/RemoveKeepButton";
 import SearchButton from "./component/atoms/button/SearchButton";
 import Icon from "./component/atoms/pictures/Icon";
 import MyPost from "./component/atoms/pictures/MyPost";
@@ -112,8 +116,8 @@ function MyPage() {
   };
 
   const forSearchPage = () => {
-    navigate('/searchPage')
-  }
+    navigate("/searchPage");
+  };
 
   // console.log(users.post);
   // console.log(user.uid);
@@ -145,6 +149,14 @@ function MyPage() {
                   <button>新規投稿</button>
                 </Link>
                 <Link to={"/"}>Top</Link>
+                <SearchButton onClick={forSearchPage} />
+                <Link to={`/dmPage`}>
+                  <button>DM</button>
+                </Link>
+                <Link to={"/PostLook"}>
+                  <button>一覧表示</button>
+                </Link>
+                <Link to={"/keep"}>保存一覧</Link>
               </div>
               <div>
                 <Icon />
@@ -164,12 +176,22 @@ function MyPage() {
                   <div>
                     {posts.map((post: any) => {
                       return (
-                        <Link
-                          to="/PostDetails"
-                          state={{ userId: users.userId, postId: post.postId }}
-                        >
-                          <MyPost imageUrl={post.imageUrl} />
-                        </Link>
+                        <>
+                          <Link
+                            to="/PostDetails"
+                            state={{
+                              userId: users.userId,
+                              postId: post.postId,
+                            }}
+                          >
+                            <MyPost imageUrl={post.imageUrl} />
+                          </Link>
+                          {users.keepPosts.includes(post.postId) ? (
+                            <RemoveKeepButton postId={post.postId} />
+                          ) : (
+                            <AddKeepButton postId={post.postId} />
+                          )}
+                        </>
                       );
                     })}
                   </div>
@@ -184,14 +206,6 @@ function MyPage() {
           )}
         </>
       )}
-      <Link to={`/AccountSettingPage`}><button>設定</button></Link>
-      <SearchButton onClick={forSearchPage} />
-      <Link to={`/dmPage`}>
-        <button>DM</button>
-      </Link>
-      <Link to={"/PostLook"}>
-        <button>一覧表示</button>
-      </Link>
     </>
   );
 }

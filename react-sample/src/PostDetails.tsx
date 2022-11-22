@@ -6,6 +6,8 @@ import firebasePostDetails from "./firebasePostDetails";
 import { onAuthStateChanged, updateCurrentUser } from "firebase/auth";
 import { current } from "@reduxjs/toolkit";
 import CommonIcon from "./component/atoms/pictures/CommonIcon";
+import RemoveKeepButton from "./component/atoms/button/RemoveKeepButton";
+import AddKeepButton from "./component/atoms/button/AddKeepButton";
 
 interface State {
       postId:string,
@@ -17,6 +19,8 @@ function PostDetails() {
 const [loginUserPost,setLoginUserPost]=useState(false);
 // ログインしているユーザーのuserNameを格納
 const [loginUserName, setLoginUserName] = useState<any>("");
+// ログインしているユーザーのkeepPostsを格納
+const [loginUserKeep, setLoginUserKeep] = useState("");
 
 // 画像urlを格納
 const [imgUrl, setImgUrl] = useState<any>("");
@@ -53,6 +57,10 @@ const [min, setMin] = useState<any>("");
 // dayを格納
 const [seco, setSeco] = useState<any>("");
 
+const [displayPostId, setDisplayPostId] = useState<any>("");
+
+const [keepList, setKeepList] = useState<any>([]);
+
 
 // postlookからデータを持ってくる
 const location = useLocation();
@@ -65,7 +73,11 @@ onAuthStateChanged(auth, async (user) => {
       const  userDataGet = await getDoc(userDatas);
       const userData = userDataGet.data();
       const userName =userData?.userName
-      setLoginUserName(userName)
+      setLoginUserName(userName);
+
+      const keepPosts = userData?.keepPosts;
+      setLoginUserKeep(keepPosts);
+
       if(user?.uid === userId){
       // useStateでログインしているユーザーの投稿かどうか判定するを保持
       setLoginUserPost(true)
@@ -77,6 +89,8 @@ onAuthStateChanged(auth, async (user) => {
 
 // 画面遷移したら、firestoreから画像、caption,falolites,commmentを取得、保持
 useEffect(()=>{
+      setKeepList(loginUserKeep);
+      setDisplayPostId(postId)
 firebasePostDetails(postId,userId).then((postData)=>{
 setImgUrl(postData.Imgurl)
 setCaption(postData.Caption)
@@ -171,6 +185,13 @@ return (
 <input type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)}}></input>
 </div>
 <button onClick={AddComment}>コメント</button>
+{/* 保存ボタン追加!ログインユーザーのkeepPosts配列(loginUserKeep)に今表示しているpostのpostId(postId)が存在したら保存解除ボタン、存在しなかったら保存するボタン */}
+{/* {keepList.includes(displayPostId) ? (
+      <RemoveKeepButton postId={displayPostId} />
+) : (
+      <AddKeepButton postId={displayPostId} />
+)} */}
+
 <button onClick={Favorite}>♡</button>
 <div>♡: {favorites}</div>
 <div>コメント:
