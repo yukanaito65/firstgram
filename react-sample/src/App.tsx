@@ -24,6 +24,7 @@ import Follow from "./Follow";
 import Follower from "./Follower";
 import MyFollower from "./MyFollower";
 import MyFollow from "./MyFollow";
+import KeepList from "./KeepList";
 
 
 
@@ -56,6 +57,7 @@ function App() {
             <Route path={`/dmPage`} element={<DMPage />} />
             <Route path={`/searchPage`} element={<SearchPage />} />
             <Route path={`/profile`} element={<Profile />} />
+            <Route path={`/keep`} element={<KeepList />} />
           </Routes>
         </BrowserRouter>
       </div>
