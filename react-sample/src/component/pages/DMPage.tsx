@@ -95,10 +95,7 @@ function DMPage() {
       }
     });
   }, []);
-  // const navigate = useNavigate();
-  // const goBack = () => {
-  //   navigate.goBack()
-  // }
+
 
   return (
     <>
