@@ -10,8 +10,9 @@ import RemoveKeepButton from "./component/atoms/button/RemoveKeepButton";
 import AddKeepButton from "./component/atoms/button/AddKeepButton";
 
 interface State {
-      postId:string,
-      userId:string
+      postid:string,
+      userid:string
+
 }
 
 function PostDetails() {
@@ -64,7 +65,7 @@ const [keepList, setKeepList] = useState<any>([]);
 
 // postlookからデータを持ってくる
 const location = useLocation();
-const {postId,userId} = location.state as State
+const {postid,userid} = location.state as State
 
 //ログイン判定
 onAuthStateChanged(auth, async (user) => {
@@ -89,9 +90,12 @@ onAuthStateChanged(auth, async (user) => {
 
 // 画面遷移したら、firestoreから画像、caption,falolites,commmentを取得、保持
 useEffect(()=>{
-      setKeepList(loginUserKeep);
-      setDisplayPostId(postId)
-firebasePostDetails(postId,userId).then((postData)=>{
+
+firebasePostDetails(postid,userid).then((postData)=>{
+
+      // setKeepList(loginUserKeep);
+      // setDisplayPostId(postId)
+
 setImgUrl(postData.Imgurl)
 setCaption(postData.Caption)
 setFavorites(postData.Favorites)
@@ -99,28 +103,33 @@ setDisplayComment(postData.Comments)
 setTime(postData.Time)
 setPostUserName(postData.PostUserName)
 setIcon(postData.Icon)
-console.log(Time)
-settime(Time.toDate())
-setYear(time.getFullYear())
-setMonth((time.getMonth()+1))
-setDay(time.getDate())
-setHour(time.getHours())
-setMin(time.getMinutes())
-setSeco(time.getSeconds())
 })
+
+// settime(Time.toDate())
+// setYear(time.getFullYear())
+// setMonth((time.getMonth()+1))
+// setDay(time.getDate())
+// setHour(time.getHours())
+// setMin(time.getMinutes())
+// setSeco(time.getSeconds())
 
 }, [])
 
 // お気に入りボタンがクリックされたら
 const Favorite = async(e:any)=>{
       // 押された投稿のFavolitesにloginUserNameを配列で追加
-      const postDataDocRefId = doc(collection(db, "post"), postId);
+
+      const postDataDocRefId = doc(collection(db, "post"), postid);
+
+
       console.log(loginUserName)
       updateDoc(postDataDocRefId, {
             favorites:arrayUnion(loginUserName),
       });
       // firestoreからfavolitesを取得、保持
-      await firebasePostDetails(postId,userId).then((postData)=>{
+
+      await firebasePostDetails(postid,userid).then((postData)=>{
+
       setFavorites(postData.Favorites)
       })
       };
@@ -128,12 +137,16 @@ const Favorite = async(e:any)=>{
 // コメント送信ボタンがクリックされたら
 const AddComment =async(e:any)=>{
       // 押された投稿のcommentにinputCommentを配列で追加
-      const postDataDocRefId = doc(collection(db, "post"), postId);
+
+      const postDataDocRefId = doc(collection(db, "post"), postid);
+
       updateDoc(postDataDocRefId, {
             comments:arrayUnion({userName:loginUserName,commentText:inputComment}),
       });
       // firestoreからcommentを取得、保持
-      await firebasePostDetails(postId,userId).then((postData)=>{
+
+      await firebasePostDetails(postid,userid).then((postData)=>{
+
             setDisplayComment(postData.Comments)
             })
       setInputComment("")
@@ -152,7 +165,7 @@ const ClickDelition = async(e:any) =>{
 // const postUserId = postDataId?.userId
 
 // 投稿者のuser情報取得
-const postUserDocRef = doc(collection(db,"user"),userId)
+const postUserDocRef = doc(collection(db,"user"),userid)
 // 上記を元にドキュメントのデータを取得
 const postUserDoc = await getDoc(postUserDocRef);
 // 取得したデータから必要なものを取り出す
@@ -160,7 +173,9 @@ const postUserData = postUserDoc.data();
 // 投稿者のpostを取り出す
 const postUserPost = postUserData?.post
 
-const index = postUserPost.indexOf(postId);
+
+const index = postUserPost.indexOf(postid);
+
 postUserPost.splice(index, 1)
 
 console.log(postUserPost)
@@ -169,7 +184,8 @@ await updateDoc(postUserDocRef,{
       post: postUserPost
 });
 
-await deleteDoc(doc(db, "post", postId));
+await deleteDoc(doc(db, "post", postid));
+
 }
 
 
@@ -180,7 +196,7 @@ return (
 <p>{postUserName}</p>
 <img src={imgUrl} />
 <p>{caption}</p>
-<p>{year}年{month}月{day}日{hour}:{min}:{seco}</p>
+{/* <p>{year}年{month}月{day}日{hour}:{min}:{seco}</p> */}
 <div>
 <input type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)}}></input>
 </div>
@@ -208,7 +224,9 @@ return (
 <div>
 {loginUserPost ?(
 <>
-<Link to="/PostEditing" state={{id:postId,userid:userId}}><button>編集</button></Link>
+
+<Link to="/PostEditing" state={{id:postid,userid:userid}}><button>編集</button></Link>
+
 <Link to="/PostLook"><button onClick={ClickDelition}>削除</button></Link>
 </>
 ):(
