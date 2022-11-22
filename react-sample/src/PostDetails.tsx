@@ -1,6 +1,6 @@
  import { useEffect, useId, useState } from "react";
 import { auth, db } from "./firebase";
-import {collection,getDoc,doc,CollectionReference, deleteDoc, deleteField, updateDoc, arrayUnion, query, where, getDocs,} from "firebase/firestore";
+import {collection,getDoc,doc,CollectionReference, deleteDoc, deleteField, updateDoc, arrayUnion, query, where, getDocs, arrayRemove,} from "firebase/firestore";
 import { Link, useLocation } from "react-router-dom";
 import firebasePostDetails from "./firebasePostDetails";
 import { onAuthStateChanged, updateCurrentUser } from "firebase/auth";
@@ -67,6 +67,7 @@ const [keepList, setKeepList] = useState<any>([]);
 const location = useLocation();
 const {postid,userid} = location.state as State
 
+useEffect(()=>{
 //ログイン判定
 onAuthStateChanged(auth, async (user) => {
       // ログインしているユーザーのuserNameをuseStateで保持
@@ -89,7 +90,6 @@ onAuthStateChanged(auth, async (user) => {
 
 
 // 画面遷移したら、firestoreから画像、caption,falolites,commmentを取得、保持
-useEffect(()=>{
 
 firebasePostDetails(postid,userid).then((postData)=>{
 
@@ -115,12 +115,11 @@ setIcon(postData.Icon)
 
 }, [])
 
-// お気に入りボタンがクリックされたら
-const Favorite = async(e:any)=>{
+      // お気に入りボタンがクリックされたら
+      const Favorite = async(e:any)=>{
+
       // 押された投稿のFavolitesにloginUserNameを配列で追加
-
       const postDataDocRefId = doc(collection(db, "post"), postid);
-
 
       console.log(loginUserName)
       updateDoc(postDataDocRefId, {
@@ -133,6 +132,22 @@ const Favorite = async(e:any)=>{
       setFavorites(postData.Favorites)
       })
       };
+
+      // お気に入り取り消し機能
+      const NoFavorite = async(e:any)=>{
+
+      const postDataDocRefId = doc(collection(db, "post"), postid);
+
+      console.log(loginUserName)
+      updateDoc(postDataDocRefId, {
+            favorites:arrayRemove(loginUserName),
+      });
+
+      await firebasePostDetails(postid,userid).then((postData)=>{
+
+            setFavorites(postData.Favorites)
+            })
+}
 
 // コメント送信ボタンがクリックされたら
 const AddComment =async(e:any)=>{
@@ -151,6 +166,7 @@ const AddComment =async(e:any)=>{
             })
       setInputComment("")
 }
+
 
 
 
@@ -208,7 +224,13 @@ return (
       <AddKeepButton postId={displayPostId} />
 )} */}
 
+{favorites.includes(loginUserName)?(
+<button onClick={NoFavorite}>×</button>
+):(
 <button onClick={Favorite}>♡</button>
+)}
+
+
 <div>♡: {favorites}</div>
 <div>コメント:
 {displayComment.map((data:any,index:any)=>{
