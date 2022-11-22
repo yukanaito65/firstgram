@@ -161,9 +161,6 @@ return (
         });
 
         setPostData(()=>postData3)
-        // firestoreからcommentを取得、保持
-        // await(await getDoc(doc(collection(db, "post"), data.postId))).data()?.comment
-        // setDisplayComment (await(await getDoc(doc(collection(db, "post"), data.postId))).data()?.comments)
         setInputComment("")
         
 }}>コメント</button>
