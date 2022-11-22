@@ -12,8 +12,6 @@ import { auth } from "../../firebase";
       // 再ロードされないようにする
       e.preventDefault();
 
-      // const { uid, photoURL } = auth.currentUser;
-
       // dbを使って情報を追加する
       const collectionMesse: any = collection(db, "messages");
       await addDoc(collectionMesse, {
@@ -23,6 +21,7 @@ import { auth } from "../../firebase";
         withUserId: "",
       });
       setMessage("");
+      window.location.reload()
     }
     return (
       <div>

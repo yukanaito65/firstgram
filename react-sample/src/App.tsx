@@ -18,11 +18,14 @@ import PostEditing from "./PostEditing";
 // import FavolitePostLook from "./FavolitePostLook";
 
 import DMPage from "./component/pages/DMPage";
+import SearchPage from "./component/pages/SearchPage";
 import Profile from "./Profile";
-import Follow from "./MyFollow";
-import Follower from "./MyFollower";
+import Follow from "./Follow";
+import Follower from "./Follower";
 import MyFollower from "./MyFollower";
 import MyFollow from "./MyFollow";
+import KeepList from "./KeepList";
+
 
 
 function App() {
@@ -52,8 +55,9 @@ function App() {
             {/* <Route path={`/FavolitePostLook`} element={<FavolitePostLook />} /> */}
 
             <Route path={`/dmPage`} element={<DMPage />} />
+            <Route path={`/searchPage`} element={<SearchPage />} />
             <Route path={`/profile`} element={<Profile />} />
-
+            <Route path={`/keep`} element={<KeepList />} />
           </Routes>
         </BrowserRouter>
       </div>

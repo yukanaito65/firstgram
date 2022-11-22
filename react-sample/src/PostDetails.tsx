@@ -6,10 +6,13 @@ import firebasePostDetails from "./firebasePostDetails";
 import { onAuthStateChanged, updateCurrentUser } from "firebase/auth";
 import { current } from "@reduxjs/toolkit";
 import CommonIcon from "./component/atoms/pictures/CommonIcon";
+import RemoveKeepButton from "./component/atoms/button/RemoveKeepButton";
+import AddKeepButton from "./component/atoms/button/AddKeepButton";
 
 interface State {
       postid:string,
       userid:string
+
 }
 
 function PostDetails() {
@@ -17,6 +20,8 @@ function PostDetails() {
 const [loginUserPost,setLoginUserPost]=useState(false);
 // ログインしているユーザーのuserNameを格納
 const [loginUserName, setLoginUserName] = useState<any>("");
+// ログインしているユーザーのkeepPostsを格納
+const [loginUserKeep, setLoginUserKeep] = useState("");
 
 // 画像urlを格納
 const [imgUrl, setImgUrl] = useState<any>("");
@@ -53,6 +58,10 @@ const [min, setMin] = useState<any>("");
 // dayを格納
 const [seco, setSeco] = useState<any>("");
 
+const [displayPostId, setDisplayPostId] = useState<any>("");
+
+const [keepList, setKeepList] = useState<any>([]);
+
 
 // postlookからデータを持ってくる
 const location = useLocation();
@@ -65,8 +74,12 @@ onAuthStateChanged(auth, async (user) => {
       const  userDataGet = await getDoc(userDatas);
       const userData = userDataGet.data();
       const userName =userData?.userName
-      setLoginUserName(userName)
-      if(user?.uid === userid){
+      setLoginUserName(userName);
+
+      const keepPosts = userData?.keepPosts;
+      setLoginUserKeep(keepPosts);
+
+      if(user?.uid === userId){
       // useStateでログインしているユーザーの投稿かどうか判定するを保持
       setLoginUserPost(true)
       }else{
@@ -77,7 +90,12 @@ onAuthStateChanged(auth, async (user) => {
 
 // 画面遷移したら、firestoreから画像、caption,falolites,commmentを取得、保持
 useEffect(()=>{
+
 firebasePostDetails(postid,userid).then((postData)=>{
+
+      // setKeepList(loginUserKeep);
+      // setDisplayPostId(postId)
+
 setImgUrl(postData.Imgurl)
 setCaption(postData.Caption)
 setFavorites(postData.Favorites)
@@ -100,13 +118,18 @@ setIcon(postData.Icon)
 // お気に入りボタンがクリックされたら
 const Favorite = async(e:any)=>{
       // 押された投稿のFavolitesにloginUserNameを配列で追加
+
       const postDataDocRefId = doc(collection(db, "post"), postid);
+
+
       console.log(loginUserName)
       updateDoc(postDataDocRefId, {
             favorites:arrayUnion(loginUserName),
       });
       // firestoreからfavolitesを取得、保持
+
       await firebasePostDetails(postid,userid).then((postData)=>{
+
       setFavorites(postData.Favorites)
       })
       };
@@ -114,12 +137,16 @@ const Favorite = async(e:any)=>{
 // コメント送信ボタンがクリックされたら
 const AddComment =async(e:any)=>{
       // 押された投稿のcommentにinputCommentを配列で追加
+
       const postDataDocRefId = doc(collection(db, "post"), postid);
+
       updateDoc(postDataDocRefId, {
             comments:arrayUnion({userName:loginUserName,commentText:inputComment}),
       });
       // firestoreからcommentを取得、保持
+
       await firebasePostDetails(postid,userid).then((postData)=>{
+
             setDisplayComment(postData.Comments)
             })
       setInputComment("")
@@ -146,7 +173,9 @@ const postUserData = postUserDoc.data();
 // 投稿者のpostを取り出す
 const postUserPost = postUserData?.post
 
+
 const index = postUserPost.indexOf(postid);
+
 postUserPost.splice(index, 1)
 
 console.log(postUserPost)
@@ -156,6 +185,7 @@ await updateDoc(postUserDocRef,{
 });
 
 await deleteDoc(doc(db, "post", postid));
+
 }
 
 
@@ -171,6 +201,13 @@ return (
 <input type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)}}></input>
 </div>
 <button onClick={AddComment}>コメント</button>
+{/* 保存ボタン追加!ログインユーザーのkeepPosts配列(loginUserKeep)に今表示しているpostのpostId(postId)が存在したら保存解除ボタン、存在しなかったら保存するボタン */}
+{/* {keepList.includes(displayPostId) ? (
+      <RemoveKeepButton postId={displayPostId} />
+) : (
+      <AddKeepButton postId={displayPostId} />
+)} */}
+
 <button onClick={Favorite}>♡</button>
 <div>♡: {favorites}</div>
 <div>コメント:
@@ -187,7 +224,9 @@ return (
 <div>
 {loginUserPost ?(
 <>
+
 <Link to="/PostEditing" state={{id:postid,userid:userid}}><button>編集</button></Link>
+
 <Link to="/PostLook"><button onClick={ClickDelition}>削除</button></Link>
 </>
 ):(

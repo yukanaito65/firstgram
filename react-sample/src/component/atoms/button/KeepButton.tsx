@@ -9,7 +9,7 @@ interface Props {
 function KeepButton({ onClick }: Props) {
   return (
     <button type="button" className="" onClick={onClick}>
-      <FaRegBookmark />
+      <FaRegBookmark style={{color:"black"}}/>
     </button>
   )
 }
