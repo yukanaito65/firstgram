@@ -2,10 +2,10 @@ import { collection, doc, getDoc } from 'firebase/firestore';
 import React, { useState } from 'react'
 import { db } from './firebase';
 
-const firebasePostDetails = async(id:string,userid:string) =>{
+const firebasePostDetails = async(postid:string,userid:string) =>{
     const postDataCollectionRef = collection(db, "post") ;
     // 上記を元にドキュメントへの参照を取得
-    const postDataDocRefId = doc(postDataCollectionRef, id);
+    const postDataDocRefId = doc(postDataCollectionRef, postid);
     // 上記を元にドキュメントのデータを取得
     const postDataDocId = await getDoc(postDataDocRefId);
     // 取得したデータから必要なものを取り出す

@@ -39,7 +39,7 @@ function App() {
             <Route path={`/login`} element={<Login />} />
             <Route path={`/AccountEditPage`} element={<AccountEditPage />} />
             <Route path={`/AccountSettingPage`} element={<AccountSettingPage />} />
-            <Route path={`/`} element={<Top />} />
+            <Route path={`/`} element={<PostLook />} />
             <Route path={`/newPost`} element={<NewPost />} />
             <Route path={`/myFollow`} element={<MyFollow />} />
             <Route path={`/myFollower`} element={<MyFollower />} />

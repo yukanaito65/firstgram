@@ -79,7 +79,7 @@ onAuthStateChanged(auth, async (user) => {
       const keepPosts = userData?.keepPosts;
       setLoginUserKeep(keepPosts);
 
-      if(user?.uid === userId){
+      if(user?.uid === userid){
       // useStateでログインしているユーザーの投稿かどうか判定するを保持
       setLoginUserPost(true)
       }else{
@@ -220,12 +220,12 @@ return (
     )
 })}
 </div>
-<Link to="/PostLook"><button>戻る</button></Link>
+<Link to="/"><button>戻る</button></Link>
 <div>
 {loginUserPost ?(
 <>
 
-<Link to="/PostEditing" state={{id:postid,userid:userid}}><button>編集</button></Link>
+<Link to="/PostEditing" state={{postid:postid,userid:userid}}><button>編集</button></Link>
 
 <Link to="/PostLook"><button onClick={ClickDelition}>削除</button></Link>
 </>

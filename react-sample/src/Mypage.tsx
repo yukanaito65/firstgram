@@ -153,7 +153,7 @@ function MyPage() {
                 <Link to={`/dmPage`}>
                   <button>DM</button>
                 </Link>
-                <Link to={"/PostLook"}>
+                <Link to={"/"}>
                   <button>一覧表示</button>
                 </Link>
                 <Link to={"/keep"}>保存一覧</Link>
