@@ -180,8 +180,8 @@ function MyPage() {
                           <Link
                             to="/PostDetails"
                             state={{
-                              userId: users.userId,
-                              postId: post.postId,
+                              userid: users.userId,
+                              postid: post.postId,
                             }}
                           >
                             <MyPost imageUrl={post.imageUrl} />

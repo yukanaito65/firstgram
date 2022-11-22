@@ -127,7 +127,7 @@ function Profile() {
           <div>
             <CommonIcon icon={profileUsers.icon} />
           </div>
-          <div>{postList.length}投稿</div>
+          <div>{posts.length}投稿</div>
 
           <Link to={"/follower"} state={{ userId: userId, follower:followerList, uid: user.uid }}>
             {/* <div>{followerList.length}フォロワー</div> */}
@@ -164,7 +164,7 @@ function Profile() {
                   return (
                     <Link
                       to="/PostDetails"
-                      state={{ userId: profileUsers.userId, postId: post.postId }}
+                      state={{ userid: profileUsers.userId, postid: post.postId }}
                     >
                       <MyPost imageUrl={post.imageUrl} />
                     </Link>
