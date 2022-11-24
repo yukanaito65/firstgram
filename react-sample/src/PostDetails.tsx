@@ -196,7 +196,7 @@ return (
 <p>{postUserName}</p>
 <img src={imgUrl} />
 <p>{caption}</p>
-{/* <p>{year}年{month}月{day}日{hour}:{min}:{seco}</p> */}
+<p>{year}年{month}月{day}日{hour}:{min}:{seco}</p>
 <div>
 <input type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)}}></input>
 </div>

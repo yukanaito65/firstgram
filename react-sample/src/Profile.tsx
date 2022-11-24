@@ -158,13 +158,13 @@ function Profile() {
             <AddFollowButton userId={userId} />
            )}
           <div>
-            {postList.length > 0 ? (
+            {posts.length > 0 ? (
               <div>
                 {posts.map((post: any) => {
                   return (
                     <Link
                       to="/PostDetails"
-                      state={{ userId: profileUsers.userId, postId: post.postId }}
+                      state={{ userid: profileUsers.userId, postid: post.postId }}
                     >
                       <MyPost imageUrl={post.imageUrl} />
                     </Link>

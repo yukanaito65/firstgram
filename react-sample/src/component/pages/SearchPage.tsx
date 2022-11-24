@@ -1,42 +1,45 @@
 import React, { useState } from "react";
 import {
   getAuth,
-  deleteUser,
-  EmailAuthProvider,
-  reauthenticateWithCredential,
   updatePassword as firebaseUpdatePassword,
 } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
 import {
   getDoc,
   doc,
-  deleteDoc,
   collection,
-  CollectionReference,
   query,
-  where,
   getDocs,
-  updateDoc,
-  arrayRemove,
-  orderBy,
-  startAt,
-  endAt,
 } from "firebase/firestore";
 import { useEffect } from "react";
 import { onAuthStateChanged } from "@firebase/auth";
 import { db } from "../../firebase";
 
+// 流れ
+// まず前userのuserNameとnameとuserIdを取得し配列に入れる
+// その中からinputタグないの文字を含むuserを配列に格納する
+// 被ってるユーザーがいる可能性があるため、重複を消す
+// forEachで重複のない検索に引っかかったユーザーのデータを取得し、それらを新たな配列に格納する
+// それを使ってmapで回して表示する
+
 function SearchPage() {
+  // inputタグ内の状態管理
   const [searchValue, setSearchValue] = useState<string>("");
-  const [name, setName] = useState<string>("");
-  const [userName, setUserName] = useState<string>("");
-  const [icon, setIcon] = useState<string>("");
+
+  // 全userのデータを管理
   const [dataList, setDataList] = useState<
     { userId: string; name: string; userName: string }[]
   >([]);
-  const userDataArr: { userId: string; name: string; userName: string }[] = [];
+
+    // 最終的にmapで回して表示する検索結果のuser情報の管理
+  const [dataArr, setDataArr] = useState<
+    { userId: string; name: string; userName: string; icon: string }[]
+  >([]);
+
+  // 検索結果のデータの表示/非表示を管理
+  const [displaySwitch, setDisplaySwitch] = useState<boolean>(false);
 
   const auth = getAuth();
+  // まずuseEffect内で前userデータのuserNameとnameとtonametouserIdを取得
   useEffect(() => {
     //ログイン判定
     onAuthStateChanged(auth, async (user) => {
@@ -46,20 +49,14 @@ function SearchPage() {
         const auth = getAuth();
         const currentUserId = auth.currentUser?.uid;
 
-        // 取得したデータを入れる箱
+        // 取得した全userのデータを入れる箱
         const userDataList: {
           userId: string;
           name: string;
           userName: string;
         }[] = [];
-
-        // 取得データ指定
         const userQuery = query(collection(db, "user"));
-
-        // 上記を元にドキュメントのデータを取得
         const userDocId = await getDocs(userQuery);
-
-        // 取得したデータからnameとuserNameとuserIdを取り出し配列にpushする
         userDocId.forEach((docdata) => {
           const data = (docdata.id, " => ", docdata.data());
           userDataList.push({
@@ -69,16 +66,17 @@ function SearchPage() {
           });
         });
         setDataList(userDataList);
-
         console.log(userDataList);
         console.log(dataList);
       }
     });
   }, []);
 
+  // 「検索」クリック時にinputタグ内の文字と一致するユーザーのuserIdを配列に格納
+  // 格納されたuserIdの任意の情報を取得
   const onClickSearch = async () => {
+    // 検索に引っかかったuserのuserIdを格納（重複可能性あり）
     const searchResultList: string[] = [];
-
     dataList.forEach((user) => {
       const userName = user.userName;
       const name = user.name;
@@ -90,33 +88,44 @@ function SearchPage() {
         searchResultList.push(userId);
       }
     });
-
     const newSearchResultList = Array.from(new Set(searchResultList));
 
-    // 重複のない検索結果ユーザーIDの配列
+    // 重複のない検索結果ユーザーIDの配列に変換
     const newResultUserList = newSearchResultList;
-    console.log(newResultUserList)
+    console.log(newResultUserList);
 
+    // 検索に引っかかったuserの任意情報を格納
+    const userDataArr: {
+      userId: string;
+      name: string;
+      userName: string;
+      icon: string;
+    }[] = [];
     newResultUserList.forEach(async (userId) => {
-      const resultUserDoc: any = doc(db, "user", userId);
+      console.log(1);
+      const resultUserDoc = doc(db, "user", userId);
+      console.log(resultUserDoc);
 
-      const resultUserData: any[] | unknown = await getDocs(resultUserDoc);
-      console.log(resultUserData)
+      const resultUserData = await getDoc(resultUserDoc);
+      console.log(resultUserData);
 
-      //上記を元にデータの中身を取り出す。map()を使えるようにする。
-      // resultUserData.forEach((docdata) => {
-      //   const data: any = (docdata.id, " => ", docdata.data());
-      //   console.log(data)
-      //   if(data) {
-      //   userDataArr.push({
-      //     userId: data.userId,
-      //     name: data.name,
-      //     userName: data.userName,
-      //   });
-      // }
-      // });
+      const getData: any = resultUserData.data();
+      console.log(getData);
+      if (getData) {
+        userDataArr.push({
+          userId: getData.userId,
+          name: getData.name,
+          userName: getData.userName,
+          icon: getData.icon,
+        });
+      }
+      console.log(userDataArr);
     });
-    setSearchValue("");
+    const a = userDataArr;
+    console.log(a);
+    const b = true;
+    setDataArr(a);
+    setDisplaySwitch(b);
   };
 
   return (
@@ -125,17 +134,23 @@ function SearchPage() {
         type="search"
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
+        placeholder="検索ワードを入力"
       />
-      <p>{searchValue}</p>
-
-      <button onClick={onClickSearch}>検索</button>
-      {userDataArr.map(() => {
-        <>
-          <img src={icon} />
-          <p>{name}</p>
-          <p>{userName}</p>
-        </>;
-      })}
+      <button onClick={() => onClickSearch()}>検索</button>
+      {console.log(dataArr)}
+      {dataArr.length > 0 &&
+      displaySwitch ? (
+        dataArr.map((a) => {
+          return(
+          <>
+            <img src={a.icon} />
+            <p>{a.name}</p>
+            <p>{a.userName}</p>
+          </>
+          )
+        })
+      ) : (<p>該当するユーザーがいません</p>)
+      }
     </>
   );
 }
