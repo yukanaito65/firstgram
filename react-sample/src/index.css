@@ -1,4 +1,4 @@
-* {
+/* * {
   margin: 0;
   padding: 0;
 }
@@ -27,7 +27,7 @@ body {
 form {
   display: grid;
   row-gap: 30px;
-}
+} */
 
 /* input {
   width: 100%;
@@ -40,7 +40,7 @@ form {
   border-radius: 0;
 } */
 
-button {
+/* button {
   justify-self: center;
   border: none;
   background-color: #0d6efd;
@@ -61,4 +61,4 @@ input {
   border: none;
   border-bottom: 2px solid red;
   margin: 5px;
-}
+} */

@@ -21,6 +21,9 @@ import MyPost from "./component/atoms/pictures/MyPost";
 import { auth, db } from "./firebase";
 import { User } from "./types/types";
 import { Post } from "./types/types";
+import Footer from "./component/molecules/Footer";
+import Header from "./component/molecules/Header";
+
 
 function MyPage() {
   //ログインしているとログイン情報を持つ
@@ -106,19 +109,6 @@ function MyPage() {
     });
   }, []);
 
-  const navigate = useNavigate();
-
-  //signOut関数はfirebaseに用意されている関数
-  //ログアウトが成功するとログインページにリダイレクトする
-  const logout = async () => {
-    await signOut(auth);
-    navigate("/login/");
-  };
-
-  const forSearchPage = () => {
-    navigate("/searchPage");
-  };
-
   // console.log(users.post);
   // console.log(user.uid);
   // console.log(auth.currentUser)
@@ -131,6 +121,7 @@ function MyPage() {
 
   return (
     <>
+    <Header />
       {/* loadingがfalseのときのみマイページを表示する設定。loadingがfalseのときのみ */}
       {!loading && (
         <>
@@ -141,22 +132,6 @@ function MyPage() {
             <>
               <div>
                 <div>{users.userName}</div>
-                <Link to={"/AccountSettingPage"}>
-                  <button>設定</button>
-                </Link>
-                <button onClick={logout}>ログアウト</button>
-                <Link to="/NewPost/">
-                  <button>新規投稿</button>
-                </Link>
-                <Link to={"/"}>Top</Link>
-                <SearchButton onClick={forSearchPage} />
-                <Link to={`/dmPage`}>
-                  <button>DM</button>
-                </Link>
-                <Link to={"/"}>
-                  <button>一覧表示</button>
-                </Link>
-                <Link to={"/keep"}>保存一覧</Link>
               </div>
               <div>
                 <Icon />
@@ -206,6 +181,7 @@ function MyPage() {
           )}
         </>
       )}
+      <Footer />
     </>
   );
 }

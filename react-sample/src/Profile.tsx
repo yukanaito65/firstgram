@@ -158,7 +158,7 @@ function Profile() {
             <AddFollowButton userId={userId} />
            )}
           <div>
-            {postList.length > 0 ? (
+            {posts.length > 0 ? (
               <div>
                 {posts.map((post: any) => {
                   return (

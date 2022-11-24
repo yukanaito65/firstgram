@@ -35,7 +35,7 @@ function DMPage() {
         setCurrentUser(currentUserId)
         console.log(`ログインユーザーID : ${currentUserId}`);
 
-          // エッセー時の箱を用意
+          // メッセージの箱を用意
         const MesseList: { userId: string; message: string; timestamp: Date }[] = [];
 
         // ログインユーザーのデータ取得
@@ -51,24 +51,24 @@ function DMPage() {
           MesseList.push({
             userId: data.userId,
             message: data.message,
-            timestamp: timestamp,
+            timestamp: data.timestamp,
           });
         });
 
         // 会話相手のデータ取得
         const anotherQ = query(
           collection(db, "messages"),
-          where("userId", "==", "1s4kEXhN0gTei2bH7KROlrEcJdr2"),
+          where("userId", "==", "w2wZzrOOetPiGTvaE0nk86zVo3k1"),
           orderBy("timestamp")
         );
         const anotherQSnapshot = await getDocs(anotherQ);
         anotherQSnapshot.forEach((docdata) => {
           const data = (docdata.id, " => ", docdata.data());
-          const timestamp = data.timestamp.toDate();
+          // const timestamp = data.timestamp.toDate();
           MesseList.push({
             userId: data.userId,
             message: data.message,
-            timestamp: timestamp,
+            timestamp: data.timestamp,
           });
           console.log(MesseList)
         });
@@ -76,7 +76,7 @@ function DMPage() {
         console.log(MesseList)
 
         // 会話相手の情報取得
-        const userDocRefId = doc(db, "user", "1s4kEXhN0gTei2bH7KROlrEcJdr2");
+        const userDocRefId = doc(db, "user", "w2wZzrOOetPiGTvaE0nk86zVo3k1");
 
         // //上記を元にドキュメントのデータを取得
         const userDocId = await getDoc(userDocRefId);
@@ -91,11 +91,13 @@ function DMPage() {
           setAnotherName(userDataId.name);
           setAnotherUserName(userDataId.userName);
         }
-
+        MesseList.sort((a: any, b: any) => {
+          return a.postDate.toDate() < b.postDate.toDate()  ? -1 : 1;
+          });
+          console.log(MesseList)
       }
     });
   }, []);
-
 
   return (
     <>
@@ -109,27 +111,32 @@ function DMPage() {
     </div>
       {MesseDisplay === undefined ?
       <p>ローディング中...</p>
-      : MesseDisplay.map((messe) => {
-        const Year = messe.timestamp.getFullYear();
-        const Month = messe.timestamp.getMonth() + 1;
-        const Day = messe.timestamp.getDate();
-        const Hour = messe.timestamp.getHours();
-        const Min = messe.timestamp.getMinutes();
+      : MesseDisplay.map((data:any,index:any) => {
+        // const timestamp = data.postDate.toDate().getTime();
+        console.log(data.timestamp);
+        const timestamp = data.timestamp.toDate();
+        console.log(timestamp);
+
+        const Year = timestamp.getFullYear();
+        const Month = timestamp.getMonth() + 1;
+        const Day = timestamp.getDate();
+        const Hour = timestamp.getHours();
+        const Min = timestamp.getMinutes();
 
         return (
           <>
-          {messe.userId === currentUser ? 
-          <div className="right" key={messe.userId}>
-            <p>{messe.message}</p>
+          {data.userId === currentUser ? 
+          <div className="right" key={data.userId}>
+            <p>{data.message}</p>
             <p>
-              {Year}年{Month}月{Day}日{Hour}時{Min}分
+              {Year}.{Month}.{Day}&nbsp;{Hour}：{Min}
             </p>
           </div>
           :
-          <div className="left" key={messe.userId}>
-            <p>{messe.message}</p>
+          <div className="left" key={data.userId}>
+            <p>{data.message}</p>
             <p>
-              {Year}年{Month}月{Day}日{Hour}時{Min}分
+            {Year}.{Month}.{Day}&nbsp;{Hour}：{Min}
             </p>
           </div>
       }
