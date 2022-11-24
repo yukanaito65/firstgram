@@ -47,7 +47,7 @@ function App() {
             <Route path={`/follower`} element={<Follower />} />
             <Route path={`/PostDetails`} element={<PostDetails />} />
             {/* <Route path="/PostDetails" component={PostDetails} /> */}
-            <Route path={`/PostLook`} element={<PostLook />} />
+            {/* <Route path={`/PostLook`} element={<PostLook />} /> */}
             <Route path={`/deleteComp`} element={<DeleteCompPage />} />
             <Route path={`/passwordChange`} element={<PsswordChange />} />
             <Route path={`/PostEditing`} element={<PostEditing />} />

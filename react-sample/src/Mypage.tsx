@@ -9,21 +9,24 @@ import {
   QuerySnapshot,
   where,
 } from "firebase/firestore";
-import React, { ReactElement, ReactNode, useEffect, useState } from "react";
-import { FaBookmark, FaRegBookmark } from "react-icons/fa";
+import React, { useEffect, useState } from "react";
 import { Navigate, useNavigate, Link } from "react-router-dom";
 import AddKeepButton from "./component/atoms/button/AddKeepButton";
-import KeepButton from "./component/atoms/button/KeepButton";
+import LogoutButton from "./component/atoms/button/LogoutButton";
 import RemoveKeepButton from "./component/atoms/button/RemoveKeepButton";
 import SearchButton from "./component/atoms/button/SearchButton";
 import Icon from "./component/atoms/pictures/Icon";
 import MyPost from "./component/atoms/pictures/MyPost";
+import FollowCount from "./component/atoms/user/FollowCount";
+import FollowerCount from "./component/atoms/user/FollowerCount";
+import PostCount from "./component/atoms/user/PostCount";
+import UserName from "./component/atoms/user/UserName";
+import MyPostList from "./component/molecules/MyPostList";
 import { auth, db } from "./firebase";
 import { User } from "./types/types";
 import { Post } from "./types/types";
 import Footer from "./component/molecules/Footer";
 import Header from "./component/molecules/Header";
-
 
 function MyPage() {
   //ログインしているとログイン情報を持つ
@@ -37,7 +40,7 @@ function MyPage() {
   const [posts, setPosts] = useState<QuerySnapshot[]>([]);
 
   //userのpost配列
-  const [postList, setPostList] = useState<any>({ post: [] });
+  // const [postList, setPostList] = useState<any>({ post: [] });
 
   //userのfollow配列
   const [followList, setFollowList] = useState<any>({ follow: [] });
@@ -78,7 +81,7 @@ function MyPage() {
         if (!userDataId) {
           console.log("データがありません");
         } else {
-          setPostList(userDataId.post);
+          // setPostList(userDataId.post);
           setFollowList(userDataId.follow);
           setFollowerList(userDataId.follower);
           console.log(userDataId.name);
@@ -109,6 +112,12 @@ function MyPage() {
     });
   }, []);
 
+  const navigate = useNavigate();
+
+  const forSearchPage = () => {
+    navigate("/searchPage");
+  };
+
   // console.log(users.post);
   // console.log(user.uid);
   // console.log(auth.currentUser)
@@ -117,11 +126,12 @@ function MyPage() {
   // console.log(followNumber);
   // console.log(users.name);  //ここに書くとレンダリングされた時に実行されてundefinedになる
   console.log(posts); //postコレクションからuidと等しいドキュメントを取得したものが格納されている
-  console.log(postList); //userコレクションからログインユーザーの情報を取得して、post配列の中身だけ格納している
+  // console.log(postList); //userコレクションからログインユーザーの情報を取得して、post配列の中身だけ格納している
+  console.log(followList);
 
   return (
     <>
-    <Header />
+      <Header />
       {/* loadingがfalseのときのみマイページを表示する設定。loadingがfalseのときのみ */}
       {!loading && (
         <>
@@ -131,52 +141,51 @@ function MyPage() {
           ) : (
             <>
               <div>
-                <div>{users.userName}</div>
+                <UserName users={users} />
+                {/* <div>{users.userName}</div> */}
+                <Link to={"/AccountSettingPage"}>
+                  <button>設定</button>
+                </Link>
+                <LogoutButton />
+                <Link to="/NewPost/">
+                  <button>新規投稿</button>
+                </Link>
+                {/* <Link to={"/"}>Top</Link> */}
+                <SearchButton onClick={forSearchPage} />
+                <Link to={`/dmPage`}>
+                  <button>DM</button>
+                </Link>
+                <Link to={"/"}>
+                  <button>一覧表示</button>
+                </Link>
+                <Link to={"/keep"}>保存一覧</Link>
               </div>
+              <Icon />
               <div>
-                <Icon />
-              </div>
-              <div>
-                <div>{posts.length}投稿</div>
-                <Link to={"/myFollower"}>
+                <PostCount posts={posts} />
+                {/* <div>{posts.length}投稿</div> */}
+
+                {/* <Link to={"/myFollower"}>
                   <div>{followerList.length}フォロワー</div>
-                </Link>
-                <Link to={"/myFollow"}>
+                </Link> */}
+
+                <FollowerCount
+                  followerList={followerList}
+                  link={"/myFollower"}
+                  uid={user.uid}
+                />
+
+                <FollowCount
+                  followList={followList}
+                  link={"/myFollow"}
+                  uid={user.uid}
+                />
+                {/* <Link to={"/myFollow"}>
                   <div>{followList.length}フォロー中</div>
-                </Link>
+                </Link> */}
               </div>
               <div>{users.profile}</div>
-              <div>
-                {posts.length > 0 ? (
-                  <div>
-                    {posts.map((post: any) => {
-                      return (
-                        <>
-                          <Link
-                            to="/PostDetails"
-                            state={{
-                              userid: users.userId,
-                              postid: post.postId,
-                            }}
-                          >
-                            <MyPost imageUrl={post.imageUrl} />
-                          </Link>
-                          {users.keepPosts.includes(post.postId) ? (
-                            <RemoveKeepButton postId={post.postId} />
-                          ) : (
-                            <AddKeepButton postId={post.postId} />
-                          )}
-                        </>
-                      );
-                    })}
-                  </div>
-                ) : (
-                  <div>
-                    <p>初めて投稿してみよう！</p>
-                    <Link to="/NewPost/">新規投稿はこちら</Link>
-                  </div>
-                )}
-              </div>
+              <MyPostList posts={posts} users={users} />
             </>
           )}
         </>

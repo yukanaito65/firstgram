@@ -125,7 +125,7 @@ return (
         <img alt="" src={imgSrc} />
         <textarea rows={10} cols={40} name="inputPost" value={textState}
         placeholder="コメントを入力してください" onChange={InputText} />
-        <Link to="/PostLook/" ><button onClick={OnFirebase}>投稿</button></Link>
+        <Link to="/" ><button onClick={OnFirebase}>投稿</button></Link>
         <Link to="/login/" ><button>戻る</button></Link>
         </div>
     ):(
@@ -134,7 +134,7 @@ return (
     onChange={ InputImage }/>
     <textarea rows={10} cols={40} name="inputPost" value={textState}
     placeholder="コメントを入力してください" onChange={InputText} />
-    <Link to="/NewPost/" ><button onClick={OnFirebase}>投稿</button></Link>
+    <Link to="/" ><button onClick={OnFirebase}>投稿</button></Link>
     <Link to="/login/" ><button>戻る</button></Link>
     </div>
     )}
