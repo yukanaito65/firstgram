@@ -134,9 +134,6 @@ function Profile() {
           <FollowerCount
           followerList={followerList}
           link={"/follower"}
-          userId={userId}
-          uid={user.uid}
-          /> */}
 
           <FollowCount
           followList={followList}

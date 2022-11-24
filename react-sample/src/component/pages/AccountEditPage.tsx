@@ -80,7 +80,7 @@ function AccountEditPage() {
       name: nameValue,
       profile: profileValue,
     });
-    navigate("/AccountSettingPage");
+    navigate("/mypage");
   };
 
   //loadingしているかしてないか監視する

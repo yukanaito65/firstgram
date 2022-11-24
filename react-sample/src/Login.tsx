@@ -1,8 +1,6 @@
 import { onAuthStateChanged } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
-import Footer from "./component/molecules/Footer";
-import Header from "./component/molecules/Header";
 import LoginForm from "./component/molecules/LoginForm";
 import { auth } from "./firebase";
 
@@ -19,7 +17,6 @@ function Login() {
 
   return (
     <>
-      <Header />
       {/* ログインしている場合、マイページにリダイレクトする設定 */}
       {user ? (
         <Navigate to={`/mypage`} />
@@ -31,7 +28,6 @@ function Login() {
           </p>
         </>
       )}
-      <Footer />
     </>
   );
 }

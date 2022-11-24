@@ -25,6 +25,8 @@ import MyPostList from "./component/molecules/MyPostList";
 import { auth, db } from "./firebase";
 import { User } from "./types/types";
 import { Post } from "./types/types";
+import Footer from "./component/molecules/Footer";
+import Header from "./component/molecules/Header";
 
 function MyPage() {
   //ログインしているとログイン情報を持つ
@@ -116,11 +118,20 @@ function MyPage() {
     navigate("/searchPage");
   };
 
+  // console.log(users.post);
+  // console.log(user.uid);
+  // console.log(auth.currentUser)
+  // console.log(users.follow.length);
+  // const followNumber = ()=>{setFollowList(users.follow)};
+  // console.log(followNumber);
+  // console.log(users.name);  //ここに書くとレンダリングされた時に実行されてundefinedになる
   console.log(posts); //postコレクションからuidと等しいドキュメントを取得したものが格納されている
   // console.log(postList); //userコレクションからログインユーザーの情報を取得して、post配列の中身だけ格納している
-console.log(followList);
+  console.log(followList);
+
   return (
     <>
+      <Header />
       {/* loadingがfalseのときのみマイページを表示する設定。loadingがfalseのときのみ */}
       {!loading && (
         <>
@@ -130,7 +141,7 @@ console.log(followList);
           ) : (
             <>
               <div>
-                <UserName users={users}/>
+                <UserName users={users} />
                 {/* <div>{users.userName}</div> */}
                 <Link to={"/AccountSettingPage"}>
                   <button>設定</button>
@@ -149,42 +160,37 @@ console.log(followList);
                 </Link>
                 <Link to={"/keep"}>保存一覧</Link>
               </div>
-
-                <Icon />
-
+              <Icon />
               <div>
                 <PostCount posts={posts} />
                 {/* <div>{posts.length}投稿</div> */}
-
 
                 {/* <Link to={"/myFollower"}>
                   <div>{followerList.length}フォロワー</div>
                 </Link> */}
 
                 <FollowerCount
-                followerList={followerList}
-                link={"/myFollower"}
-                uid={user.uid}
+                  followerList={followerList}
+                  link={"/myFollower"}
+                  uid={user.uid}
                 />
 
                 <FollowCount
-                followList={followList}
-                link={"/myFollow"}
-                uid={user.uid}
+                  followList={followList}
+                  link={"/myFollow"}
+                  uid={user.uid}
                 />
                 {/* <Link to={"/myFollow"}>
                   <div>{followList.length}フォロー中</div>
                 </Link> */}
               </div>
               <div>{users.profile}</div>
-                <MyPostList
-                posts={posts}
-                users={users}
-                />
+              <MyPostList posts={posts} users={users} />
             </>
           )}
         </>
       )}
+      <Footer />
     </>
   );
 }

@@ -5,10 +5,12 @@ import React, { useEffect, useState } from 'react'
 import { Link, useActionData, useLocation, useRouteLoaderData } from 'react-router-dom';
 import AddKeepButton from './component/atoms/button/AddKeepButton';
 import RemoveKeepButton from './component/atoms/button/RemoveKeepButton';
+import AddFavBtn from './AddFavBtn';
 // import { setOriginalNode } from 'typescript';
 // import FavolitePostLook from './FavolitePostLook';
 import { auth, db } from './firebase';
 import firebasePostDetails from './firebasePostDetails';
+import NoFavBtn from './NoFavBtn';
 // import FollowUserPostFirebase from './FollowUserPostFirebase';
 
 
@@ -97,6 +99,8 @@ onAuthStateChanged(auth, async (user) => {
     // ログインしているユーザーのフォローしている人のuseridを配列に格納
     const UseLoginUserFollowUserIdArray =  userDatas?.follow
 
+
+
     // ログインしてるuserのuserName取得
     const username =  userDatas?.userName
     setUserName(username)
@@ -141,7 +145,6 @@ return a.postDate.toDate() > b.postDate.toDate()  ? -1 : 1;
 });
 console.log(postData)
 return (
-
 <>
 <div>
 {postData.map((data:any,index:any)=>{
@@ -158,29 +161,36 @@ return (
     <p>{data.caption}</p>
     <Link to="/PostDetails" state={{postid:data.postId,userid:data.userId}}><img src={data.imageUrl} /></Link>
     <div>{year}年{month}月{day}日{hour}:{min}:{seco}</div>
-    <button onClick={
-        async(e:any)=>{
-        updateDoc(doc(collection(db, "post"), data.postId), {
-        favorites:userName,
-        });
-        setPostData(()=>postData2)
-}}>♡</button>
-<input type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)}}></input>
-<button onClick={async(e:any)=>{
-        // 押された投稿のcommentにinputCommentを配列で追加
-        updateDoc(doc(collection(db, "post"), data.postId), {
-        comments:arrayUnion({userName:loginUserName,commentText:inputComment}),
-        });
+
 
         setPostData(()=>postData3)
         setInputComment("")
 
+
+    {data.favorites.includes(loginUserName)?(
+    <NoFavBtn postId={data.postId} userName={userName} />
+):(
+    <AddFavBtn postId={data.postId} userName={userName} />
+)
+}
+
+<input type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)}} />
+<button onClick={async(e:any)=>{
+// 押された投稿のcommentにinputCommentを配列で追加
+updateDoc(doc(collection(db, "post"), data.postId), {
+comments:arrayUnion({userName:loginUserName,commentText:inputComment}),
+});
+setPostData(()=>postData3)
+setInputComment("")
+
 }}>コメント</button>
+
 {loginUserKeep.includes(data.postId) ? (
       <RemoveKeepButton postId={data.postId} />
 ) : (
       <AddKeepButton postId={data.postId} />
 )}
+
 <p>♡:{data.favorites}</p>
 {/* <p>♡：{favorites}</p> */}
 <div>コメント:
