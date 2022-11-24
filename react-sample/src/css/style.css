@@ -1,3 +1,5 @@
+/* ------------------------------------ */
+/* 共通のcss */
 *,
 *:before,
 *:after {
@@ -15,7 +17,7 @@ html {
 }
 
 body {
-  color: #333333;
+  color: rgb(38, 38, 38);
   font-size: 1.6rem;
   font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
   min-width: 350px;
@@ -29,20 +31,67 @@ img,
 video,
 object {
   max-width: 100%;
-  height: auto;
-  border: none;
   display: block;
 }
 
 a {
   text-decoration: none;
   transition: 0.4s;
-  display: block;
   color: rgb(38, 38, 38);
 }
 a:hover {
   text-decoration: none;
 }
+
+p {
+  display: block;
+}
+
+h1 {
+  font-size: 20px;
+  margin: 5px;
+}
+
+/* ボタン共通 */
+button {
+  justify-self: center;
+  border: none;
+  background-color: #0d6efd;
+  color: #fff;
+  padding: 5px 15px;
+  font-size: 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin: 5px;
+}
+
+button:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+/* 戻るボタン */
+.to_back {
+  background-color: rgb(38, 38, 38);
+  border-radius: 50%;
+  padding: 10px;
+}
+
+.to_back:hover {
+  opacity: 0.6;
+}
+
+/* ユーザーアイコン */
+.icon-image img {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  border: 1px solid rgb(156, 156, 156);
+  margin: 5px;
+}
+
+/* -------------------------------------- */
+/* 保留 */
 
 .l-header {
   width: 100%;
@@ -73,14 +122,12 @@ a:hover {
 /* header */
 .header {
   width: 65%;
-  /* background-color: #fff;
-  border-bottom: 2px solid #1B4B36; */
-    background: -moz-linear-gradient(#ffb03c, #ff708d);
-    background: -webkit-linear-gradient(#ffb03c, #ff708d);
-    background: linear-gradient(to right, #ffb03c, #ff708d);
-    color: #FFF;
-    position: fixed;
-    margin: 0 auto;
+  background: -moz-linear-gradient(#ffb03c, #ff708d);
+  background: -webkit-linear-gradient(#ffb03c, #ff708d);
+  background: linear-gradient(to right, #ffb03c, #ff708d);
+  color: #FFF;
+  position: fixed;
+  margin: 0 auto;
   z-index: 999;
   top: 0;
   box-sizing: border-box;
@@ -127,9 +174,6 @@ a:hover {
 .nav {
   width: 65%;
   margin: 0 auto;
-  /* opacity: 0; */
-  /* visibility: hidden; */
-  /* transition: opacity .5s, visibility .5s; */
 }
 
 .nav_menu_ul {
@@ -181,24 +225,16 @@ a:hover {
   opacity: 0.6;
 }
 
-/* .display-none {
-  position: fixed;
-  top: 3rem;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 1rem;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity .5s, visibility .5s;
-  display: none;
-} */
-
-
-
 /* footer */
+body {
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 120px;
+  box-sizing: border-box;
+}
+
 .footer {
-  width: 65%;
+  width: 100%;
   background-color: #fff;
   display: flex;
   justify-content: space-between;
@@ -221,21 +257,45 @@ a:hover {
   margin: auto;
 }
 
-/*--------------------------------------*
- * foundation
- *--------------------------------------*/
-/*--------------------------------------*
- * layout
- *--------------------------------------*/
-/*--------------------------------------*
- * object
- *--------------------------------------*/
-/*-------------------
- * component
- -------------------*/
-/*-------------------
- * project
- -------------------*/
-/*-------------------
- * utility
- -------------------*//*# sourceMappingURL=style.css.map */
+/* -------------------------------------- */
+/* account setting */
+.margin-bottom_20 {
+  margin-bottom: 20px;
+}
+
+.setting_table {
+  width: 100%;
+  padding: 10px 0;
+}
+
+.setting_table_td {
+  padding: 20px 10px;
+  border-bottom: 1px dashed rgb(38, 38, 38);
+}
+
+.setting_table_title {
+  width: 30%;
+}
+
+.setting_table_content {
+  width: 70%;
+}
+
+.to_passChange {
+  text-align: center;
+  margin: 5px auto;
+}
+
+/* account edit */
+.confirm_btn {
+  text-align: center;
+}
+
+/* password change */
+.account_delete {
+  text-align: right;
+}
+
+.margin_left_auto {
+  background-color: rgb(255, 67, 67);
+}
