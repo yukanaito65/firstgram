@@ -8,13 +8,16 @@ import { auth, db } from "./firebase";
 
 function KeepList() {
   //keepPostsの中に入っているpostIdを元にpostのimageUrl取得
-  //LinkのPOstDetailsに渡すstateはpostIdとその投稿のuserId
+  //LinkのPostDetailsに渡すstateはpostIdとその投稿のuserId
   //posts
+
+  //ログインユーザー
   const [user, setUser] = useState<any>("");
 
   const [loading, setLoading] = useState(true);
 
-  const [keepList, setKeepList] = useState([]);
+  //ログインユーザーの情報の中からkeepPostsを格納
+  const [keepPostIds, setKeepPostIds] = useState([]);
 
   const [keepPosts, setKeepPosts] = useState<QuerySnapshot[]>([]);
 
@@ -31,7 +34,7 @@ function KeepList() {
       const userDocId = await getDoc(userDocRefId);
 
       const userKeepList = userDocId.get("keepPosts");
-      setKeepList(userKeepList);
+      setKeepPostIds(userKeepList);
 
 
 
@@ -65,9 +68,9 @@ function KeepList() {
       setKeepPosts(keepPostArray);
     }); //onAuth
   }, []);
-  console.log(keepPosts);
+  console.log(keepPosts);//postの情報がオブジェクトになって配列に格納
   console.log(user.uid);
-  console.log(keepList);
+  console.log(keepPostIds);//postIdだけ配列に格納
 
   return (
     <>
@@ -75,7 +78,7 @@ function KeepList() {
         <>
           <Link to={"/mypage"}>⬅︎</Link>
 
-          {keepList.length > 0 ? (
+          {keepPostIds.length > 0 ? (
             <div>
           {keepPosts.map((keepPost: any) => {
             return (

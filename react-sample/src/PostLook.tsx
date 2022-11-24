@@ -3,6 +3,8 @@ import { collection, doc, getDoc, getDocs, query, updateDoc, where ,serverTimest
 import { connectStorageEmulator } from 'firebase/storage';
 import React, { useEffect, useState } from 'react'
 import { Link, useActionData, useLocation, useRouteLoaderData } from 'react-router-dom';
+import AddKeepButton from './component/atoms/button/AddKeepButton';
+import RemoveKeepButton from './component/atoms/button/RemoveKeepButton';
 // import { setOriginalNode } from 'typescript';
 // import FavolitePostLook from './FavolitePostLook';
 import { auth, db } from './firebase';
@@ -34,8 +36,13 @@ const [inputComment, setInputComment] = useState<any>("");
 // ログインしているユーザーのuserNameを格納
 const [loginUserName, setLoginUserName] = useState<any>("");
 
-// 
+//保存ボタン用
+const [loginUserKeep, setLoginUserKeep] = useState<any>("");
+
+//
 const [postDataSecond,  setPostDataSecond] = useState<any>({});
+
+
 
 // const setFavorites2 = (postId:any)=>{
 //     // setPostData(()=>{
@@ -61,7 +68,7 @@ const postData3=[...postData]
         if(postData[i].postId === postId){
             postData3[i].comments.push()
         }
-    }   
+    }
 
 
 
@@ -74,6 +81,10 @@ onAuthStateChanged(auth, async (user) => {
     const userData = userDataGet.data();
     const userName =userData?.userName
     setLoginUserName(userName)
+
+    const keepPosts = userData?.keepPosts;
+    setLoginUserKeep(keepPosts);
+
     if (!user) {
     console.log("ログアウト状態です");
     } else {
@@ -92,9 +103,9 @@ onAuthStateChanged(auth, async (user) => {
 
     const postDataArray:any[]=[];
 
-    // follouserのpostドキュメントを配列に格納
-    UseLoginUserFollowUserIdArray.forEach(async(folloUserId:any)=>{
-    const q = query(collection(db, "post"), where("userId", "==", folloUserId));
+    // followuserのpostドキュメントを配列に格納
+    UseLoginUserFollowUserIdArray.forEach(async(followUserId:any)=>{
+    const q = query(collection(db, "post"), where("userId", "==", followUserId));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
         // console.log(doc.id, " => ", doc.data());
@@ -113,7 +124,7 @@ onAuthStateChanged(auth, async (user) => {
             // console.log(postDatas)
             postDataArray.push(Datas)
     }
-    
+
     // データを保持
     setPostData(postDataArray)
 
@@ -130,7 +141,7 @@ return a.postDate.toDate() > b.postDate.toDate()  ? -1 : 1;
 });
 console.log(postData)
 return (
-   
+
 <>
 <div>
 {postData.map((data:any,index:any)=>{
@@ -163,8 +174,13 @@ return (
 
         setPostData(()=>postData3)
         setInputComment("")
-        
+
 }}>コメント</button>
+{loginUserKeep.includes(data.postId) ? (
+      <RemoveKeepButton postId={data.postId} />
+) : (
+      <AddKeepButton postId={data.postId} />
+)}
 <p>♡:{data.favorites}</p>
 {/* <p>♡：{favorites}</p> */}
 <div>コメント:

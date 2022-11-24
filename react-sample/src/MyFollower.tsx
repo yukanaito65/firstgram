@@ -1,20 +1,18 @@
 import { onAuthStateChanged } from "firebase/auth";
 import {
-  arrayRemove,
-  arrayUnion,
   collection,
   doc,
   getDoc,
   getDocs,
   query,
-  updateDoc,
   where,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import FollowButton from "./component/atoms/button/FollowButton";
-// import FollowButton from "./component/atoms/button/FollowButton";
 import CommonIcon from "./component/atoms/pictures/CommonIcon";
+import Name from "./component/atoms/user/Name";
+import UserName from "./component/atoms/user/UserName";
+import UserList from "./component/pages/UserList";
 import { auth, db } from "./firebase";
 
 function MyFollower() {
@@ -25,19 +23,19 @@ function MyFollower() {
   const [loading, setLoading] = useState(true);
 
   //ログインユーザーのドキュメント取得
-  const [userDocRefId, setUserDocRefId] = useState<any>("");
+  // const [userDocRefId, setUserDocRefId] = useState<any>("");
 
   //followerユーザーのドキュメント参照の値
-  const [followerUserDocRefId, setFollowerUserDocRefId] = useState<any>("");
+  // const [followerUserDocRefId, setFollowerUserDocRefId] = useState<any>("");
 
   //ログインユーザーのfollowerデータ(配列でuserIdが格納されている)
-  const [followerList, setFollowerList] = useState<any>("");
+  // const [followerList, setFollowerList] = useState<any>("");
 
   //フォローされているユーザーの情報[{1人目},{2人目}....]
   const [followerUsers, setFollowerUsers] = useState<any[]>([]);
 
   //followのuserId
-  const [followerUserId, setFollowerUserId] = useState("");
+  // const [followerUserId, setFollowerUserId] = useState("");
 
   useEffect((): any => {
     onAuthStateChanged(auth, async (currentUser: any) => {
@@ -45,79 +43,47 @@ function MyFollower() {
       setUser(currentUser);
 
       //userコレクション参照
-      const userCollectionRef = collection(db, "user");
+      // const userCollectionRef = collection(db, "user");
 
-      //ログインユーザーのドキュメント参照
-      const userDocRefId = doc(userCollectionRef, currentUser.uid);
-      setUserDocRefId(userDocRefId);
+      // //ログインユーザーのドキュメント参照
+      // const userDocRefId = doc(userCollectionRef, currentUser.uid);
+      // // setUserDocRefId(userDocRefId);
 
-      //上記を元にデータ取得
-      const userDocId = await getDoc(userDocRefId);
-      console.log(userDocId); //il
+      // //上記を元にデータ取得
+      // const userDocId = await getDoc(userDocRefId);
+      // console.log(userDocId); //il
 
-      //データの中からfollow配列取得
-      const followerUserList = userDocId.get("follower");
-      console.log(followerUserList);
-      setFollowerList(followerUserList);
+      // //データの中からfollow配列取得
+      // const followerUserList = userDocId.get("follower");
+      // console.log(followerUserList);
+      // setFollowerList(followerUserList);
 
-      const followerArray: any = [];
-      console.log(followerArray);
+      //複数のユーザーの情報を取得する＝共通していることは、ログインユーザーのことをフォローしていること
+      const followerUserCollectionRef = query(
+        collection(db, "user"),
+        where("follow", "array-contains", currentUser.uid)
+      );
 
-      //follow配列の中のユーザー情報一人ずつ取得する
-      followerUserList.map(async (userId: any) => {
-        const followerUserCollectionRef = collection(db, "user");
+      const followerUserDocId = await getDocs(followerUserCollectionRef);
 
-        // userIdがfollower配列の中のuserIdと等しいドキュメントを参照
-        const followerUserDocRefId = doc(followerUserCollectionRef, userId);
-        console.log(followerUserDocRefId);
-        setFollowerUserDocRefId(followerUserDocRefId);
+      const newFollowerUserDocIds = followerUserDocId.docs as any[];
 
-        const followerUserDocId = await getDoc(followerUserDocRefId);
-        console.log(followerUserDocId);
-
-        const followerUserDataId: any = followerUserDocId.data();
-        console.log(followerUserDataId);
-
-        followerArray.push(followerUserDataId);
-        setFollowerUsers(followerArray);
-
-        console.log(followerArray);
-
-        setFollowerUserId(userId);
-      }); //map
+      const followerUserArray = newFollowerUserDocIds.map((doc) => doc.data());
+      setFollowerUsers(followerUserArray);
     }); //onAuth
   }, []); //useEffect
 
   console.log(followerUsers);
+  // console.log(followerList);
 
   return (
     <>
       {!loading && (
         <>
           <Link to={"/mypage"}>⬅︎</Link>
-
-          {followerUsers.length > 0 ? (
-          <div>
-            {followerUsers.map((followerUser) => {
-              return (
-                <Link to="/profile" state={{ userId: followerUser.userId }}>
-                  <div id={followerUser.userId}>
-                    <CommonIcon icon={followerUser.icon} />
-                    <div>
-                      <p>{followerUser.userName}</p>
-                      <p>{followerUser.name}</p>
-                    </div>
-                    {/* <FollowButton userId={followerUser.userId} /> */}
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
-          ) :(
-            <div>
-              <p>フォロワーがいません</p>
-            </div>
-          )}
+          <UserList
+          usersData={followerUsers}
+          uid={user.uid} />
         </>
       )}
     </>

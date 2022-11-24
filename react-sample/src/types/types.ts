@@ -1,25 +1,28 @@
 export type User = {
-  userId: number;
+  userId: string;
   userName: string;
   name: string;
   icon: string;
   email: string;
   password: string;
   Cpassword: string;
-  follow: []; //userIdを格納
-  follower: []; //userIdを格納
-  favoritePost: []; //postIdを格納
-  post: []; //postドキュメントidを格納
+  follow: string[]; //userIdを格納
+  follower: string[]; //userIdを格納
+  favoritePosts: string[]; //postIdを格納
+  posts: string[]; //postドキュメントidを格納
   profile: string;
+  keepPosts: string[]; //postIdを格納
 };
 
 export type Post = {
-  postId: number;
-  userId: number; //ユーザーのuserId
-  imageUrl: [];
+  postId: string;
+  userId: string; //ユーザーのuserId
+  imageUrl: string;
   caption: string;
   postDate: Date;
-  favorites: []; //userNameを格納
+  favorites: string[]; //userNameを格納
+  keeps: string[]; //userIdを格納
+  comments: string[];
 };
 
 export type Comment = {

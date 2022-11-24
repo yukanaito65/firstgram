@@ -12,22 +12,28 @@ import {
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import AddFollowButton from "./component/atoms/button/AddFollowButton";
-import FollowButton from "./component/atoms/button/FollowButton";
+// import FollowButton from "./component/atoms/button/FollowButton";
 import RemoveFollowButton from "./component/atoms/button/RemoveFollowButton";
-import FollowerCount from "./component/atoms/FollowerCount";
+import FollowerCount from "./component/atoms/user/FollowerCount";
 import CommonIcon from "./component/atoms/pictures/CommonIcon";
 import Icon from "./component/atoms/pictures/Icon";
 import MyPost from "./component/atoms/pictures/MyPost";
+import UserName from "./component/atoms/user/UserName";
+import MyPostList from "./component/molecules/MyPostList";
 import { auth, db } from "./firebase";
 import { Post } from "./types/types";
+import PostCount from "./component/atoms/user/PostCount";
+import FollowCount from "./component/atoms/user/FollowCount";
 
 interface State {
   userId: string;
 }
 
 function Profile() {
+
   const [user, setUser] = useState<any>("");
-  //ログインユーザーの情報
+
+  //ログインユーザーのfollow情報
   const [usersFollow, setUsersFollow] = useState<any>([]);
 
   //userIdのユーザーの情報
@@ -37,7 +43,7 @@ function Profile() {
   const [loading, setLoading] = useState(true);
 
   //userのpost配列
-  const [postList, setPostList] = useState<any>({ post: [] });
+  // const [postList, setPostList] = useState<any>({ post: [] });
 
   //userのfollow配列
   const [followList, setFollowList] = useState<any>({ follow: [] });
@@ -45,7 +51,9 @@ function Profile() {
   //userのfollower配列
   const [followerList, setFollowerList] = useState<any>({ follower: [] });
 
-  const [followBtn,setFollowBtn] = useState<boolean>();
+  // const [followBtn,setFollowBtn] = useState<boolean>();
+
+  const [followerNum,setFollowerNum] = useState(0);
 
   //各ページからデータ取得
   const location = useLocation();
@@ -79,9 +87,10 @@ function Profile() {
       if (!profileUserDataId) {
         console.log("データがありません");
       } else {
-        setPostList(profileUserDataId.post);
+        // setPostList(profileUserDataId.post);
         setFollowList(profileUserDataId.follow);
         setFollowerList(profileUserDataId.follower);
+        setFollowerNum(profileUserDataId.follower.length);
       }
 
       //投稿一覧取得
@@ -108,75 +117,59 @@ function Profile() {
   console.log(profileUsers.userId); //undefined
   console.log(usersFollow);
 
-  // const [followBtn, setFollowBtn] = useState(true);
-  // const handleClick= () => {
-  //   if(user.follow.includes(userId)){
-  //   //表示しているユーザーのidがログインユーザーのfollow配列に存在したらremove
-  //   setFollowBtn(true);
-  // }else{
-  //   setFollowBtn(false);
-  // }
-
-  // const [followerNum, setFollowerNum ] = useState<number>(followerList.length);
 
   return (
     <>
       {!loading && (
         <div>
-          <div>{profileUsers.userName}</div>
+          <UserName users={profileUsers} />
           <div>
             <CommonIcon icon={profileUsers.icon} />
           </div>
-          <div>{postList.length}投稿</div>
-
-          <Link to={"/follower"} state={{ userId: userId, follower:followerList, uid: user.uid }}>
-            {/* <div>{followerList.length}フォロワー</div> */}
-            <div>{followerList.length}フォロワー</div>
-          </Link>
-
-          {/* <FollowerCount
+          <PostCount posts={posts}/>
+          {/* <Link to={"/follower"} state={{ userId: userId, follower:followerList, uid: user.uid }}>
+            <div>{followerNum}follower</div>
+          </Link> */}
+{/*
+          <FollowerCount
+          followerList={followerList}
+          link={"/follower"}
           userId={userId}
           uid={user.uid}
-          followerList={followerList}
           /> */}
 
-          <Link to={"/follow"} state={{ userId: userId, follow:followList, uid: user.uid }}>
+          <FollowCount
+          followList={followList}
+          link={"/follow"}
+          userId={userId}
+          uid={user.uid}
+          />
+          {/* <Link to={"/follow"} state={{ userId: userId, follow:followList, uid: user.uid }}>
             <div>{followList.length}フォロー中</div>
-          </Link>
+          </Link> */}
+
           <div>{profileUsers.profile}</div>
           <Link to={`/dmPage`}>
             <button>DM</button>
           </Link>
           <Link to={"/mypage"}>マイページ</Link>
            {usersFollow.includes(userId) ? (
+            <>
             <RemoveFollowButton
             userId={userId}
             // onClick={()=>setFollowerNum(followerNum)}
             // followerNum={followerNum}
             />
+            </>
            ) : (
+            <>
             <AddFollowButton userId={userId} />
+            </>
            )}
-          <div>
-            {postList.length > 0 ? (
-              <div>
-                {posts.map((post: any) => {
-                  return (
-                    <Link
-                      to="/PostDetails"
-                      state={{ userId: profileUsers.userId, postId: post.postId }}
-                    >
-                      <MyPost imageUrl={post.imageUrl} />
-                    </Link>
-                  );
-                })}
-              </div>
-            ) : (
-              <div>
-                <p>投稿がありません</p>
-              </div>
-            )}
-          </div>
+           <MyPostList
+           posts={posts}
+           users={profileUsers}
+           />
         </div>
       )}
     </>

@@ -20,7 +20,7 @@ function PostDetails() {
 const [loginUserPost,setLoginUserPost]=useState(false);
 // ログインしているユーザーのuserNameを格納
 const [loginUserName, setLoginUserName] = useState<any>("");
-// ログインしているユーザーのkeepPostsを格納
+// ログインしているユーザーのkeepPostsを格納(保存ボタン用)
 const [loginUserKeep, setLoginUserKeep] = useState("");
 
 // 画像urlを格納
@@ -58,15 +58,12 @@ const [min, setMin] = useState<any>("");
 // dayを格納
 const [seco, setSeco] = useState<any>("");
 
-const [displayPostId, setDisplayPostId] = useState<any>("");
-
-const [keepList, setKeepList] = useState<any>([]);
-
 
 // postlookからデータを持ってくる
 const location = useLocation();
 const {postid,userid} = location.state as State
 
+useEffect(()=>{
 //ログイン判定
 onAuthStateChanged(auth, async (user) => {
       // ログインしているユーザーのuserNameをuseStateで保持
@@ -79,7 +76,7 @@ onAuthStateChanged(auth, async (user) => {
       const keepPosts = userData?.keepPosts;
       setLoginUserKeep(keepPosts);
 
-      if(user?.uid === userId){
+      if(user?.uid === userid){
       // useStateでログインしているユーザーの投稿かどうか判定するを保持
       setLoginUserPost(true)
       }else{
@@ -89,12 +86,9 @@ onAuthStateChanged(auth, async (user) => {
 
 
 // 画面遷移したら、firestoreから画像、caption,falolites,commmentを取得、保持
-useEffect(()=>{
+// useEffect(()=>{
 
 firebasePostDetails(postid,userid).then((postData)=>{
-
-      // setKeepList(loginUserKeep);
-      // setDisplayPostId(postId)
 
 setImgUrl(postData.Imgurl)
 setCaption(postData.Caption)
@@ -202,11 +196,11 @@ return (
 </div>
 <button onClick={AddComment}>コメント</button>
 {/* 保存ボタン追加!ログインユーザーのkeepPosts配列(loginUserKeep)に今表示しているpostのpostId(postId)が存在したら保存解除ボタン、存在しなかったら保存するボタン */}
-{/* {keepList.includes(displayPostId) ? (
-      <RemoveKeepButton postId={displayPostId} />
+{loginUserKeep.includes(postid) ? (
+      <RemoveKeepButton postId={postid} />
 ) : (
-      <AddKeepButton postId={displayPostId} />
-)} */}
+      <AddKeepButton postId={postid} />
+)}
 
 <button onClick={Favorite}>♡</button>
 <div>♡: {favorites}</div>
@@ -220,12 +214,12 @@ return (
     )
 })}
 </div>
-<Link to="/PostLook"><button>戻る</button></Link>
+<Link to="/"><button>戻る</button></Link>
 <div>
 {loginUserPost ?(
 <>
 
-<Link to="/PostEditing" state={{id:postid,userid:userid}}><button>編集</button></Link>
+<Link to="/PostEditing" state={{postid:postid,userid:userid}}><button>編集</button></Link>
 
 <Link to="/PostLook"><button onClick={ClickDelition}>削除</button></Link>
 </>
