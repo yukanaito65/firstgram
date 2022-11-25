@@ -23,8 +23,10 @@ const[postId,setPostId]=useState<any>("");
 const [inputComment, setInputComment] = useState<any>("");
 // ログインしているユーザーのuserNameを格納
 const [loginUserName, setLoginUserName] = useState<any>("");
+
 // ログインしているユーザーのfollowしている人のIdの配列
 const [followUser, setFollowUser] = useState<any>([]);
+
 // ログインしているユーザーのpostの配列
 const [myPostId, setMyPostID] = useState<any>([]);
 
@@ -77,6 +79,8 @@ GetLoginUserName(user).then((loginUserData:any)=>{
         const userDatas = userDataDoc.data();
         // ログインしているユーザーのフォローしている人のuseridを配列に格納
         const UseLoginUserFollowUserIdArray =  userDatas?.follow
+
+        setFollowUser(UseLoginUserFollowUserIdArray)
 
     const postDataArray:any[]=[];
 
@@ -137,9 +141,9 @@ return (
 <>
 <Header />
 <div>
-{postData.length === 0 ? (
+{followUser.length === 0 ? (
     <>
-    {console.log("postDataない")}
+    {console.log("followUserない")}
     <div>
     {ramData.map((data:any,index:any)=>{
         const timestamp = data.postDate.toDate()
@@ -193,7 +197,7 @@ return (
 ):(
 
     <>
-    { console.log("postDataある")}
+    { console.log("followUserある")}
     <div>
     {postData.map((data:any,index:any)=>{
         const timestamp = data.postDate.toDate()
