@@ -183,6 +183,7 @@ function DMPage() {
           );
         })
       )}
+      <div className="dmpage_margin_20"></div>
       <SendDM />
 
       <Footer />

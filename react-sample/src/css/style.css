@@ -327,7 +327,7 @@ body {
 .dmpage_top {
   display: flex;
   position: fixed;
-  top: 65px;
+  top: 63px;
   width: 65%;
   background-color: #fff;
   padding-top: 10px;
@@ -410,12 +410,12 @@ body {
   margin: 10px auto;
   background-color: #1B4B36;
   position: fixed;
-  top: 75px;
+  bottom: 62px;
 }
 
 .dmpage_form_wrapper {
   width: 100%;
-  padding: 20px 10px 20px 20px;
+  padding: 15px 10px 15px 20px;
 }
 
 .dmpage_form_input {
@@ -431,6 +431,10 @@ body {
   color: #fff;
   margin: 2px 0 2px 5px;
   font-size: 15px;
+}
+
+.dmpage_margin_20 {
+  height: 20px;
 }
 
 /* ----------------------------------- */
@@ -450,4 +454,34 @@ body {
   border: 2px solid #1B4B36;
   border-radius: 5px;
   padding: 2px 10px;
+}
+
+.searchpage_form_btn {
+  background:none;
+  color: rgb(38, 38, 38);
+  margin: 2px 0 1px 3px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.searchpage_form {
+  width: 65%;
+  margin: 10px auto;
+  position: fixed;
+  top: 53px;
+}
+
+.no_matchUser {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.searchpage_form_input::-webkit-search-cancel-button {    
+  -webkit-appearance: none;    /* デフォルトのサーチキャンセルボタンを非表示にする場合 */
+  cursor:pointer;
+  background-image: url(../../public/x_icon.png);  /* デフォルトのサーチキャンセルボタンを非表示にすること */
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-right: 0px;
+  width:15px; height:15px;  /* キャンセルボタンのサイズを個別に設定する場合 */
 }
