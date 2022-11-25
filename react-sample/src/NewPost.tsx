@@ -115,7 +115,7 @@ onAuthStateChanged(auth, async (user) => {
 
 return (
     <>
-    <Header />
+    {/* <Header /> */}
     {loading ? (
         <div>
             <button>

@@ -155,7 +155,7 @@ await deleteDoc(doc(db, "post", postid));
 }
 return (
 <>
-<Header />
+{/* <Header /> */}
 {/* <img src={icon} /> */}
 <Link to="/profile" state={{ userId: userid}}><CommonIcon icon={icon}/></Link>
 <p>{postUserName}</p>
@@ -165,7 +165,7 @@ return (
 <input type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)}}></input>
 </div>
 <button onClick={AddComment}>コメント</button>
-{/* 保存ボタン追加!ログインユーザーのkeepPosts配列(loginUserKeep)に今表示しているpostのpostId(postId)が存在したら保存解除ボタン、存在しなかったら保存するボタン */}
+{/* 保存ボタン追加!ログインユーザーのkeepPosts配列(loginUserKeep)に今表示しているpostのpostId(postId)が存在したら保存解除ボタン、存在しなかったら保存するボタン
 {loginUserKeep.includes(postid) ? (
       <RemoveKeepButton postId={postid} />
 ) : (
@@ -173,8 +173,8 @@ return (
       <AddKeepButton postId={displayPostId} />
 )} */}
 
-      <AddKeepButton postId={postid} />
-)}
+      {/* <AddKeepButton postId={postid} /> */}
+{/* )} */} 
 
 
 {favorites.includes(loginUserName)?(

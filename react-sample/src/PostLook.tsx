@@ -158,7 +158,7 @@ return a.postDate.toDate() > b.postDate.toDate()  ? -1 : 1;
 
 return (
 <>
-<Header />
+{/* <Header /> */}
 <div>
 {followUser.length === 0 ? (
     <>

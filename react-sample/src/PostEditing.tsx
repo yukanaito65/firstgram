@@ -35,7 +35,7 @@ FirestoreUpdata(postid,text)
 
 return (
 <>
-<Header />
+{/* <Header /> */}
 <div>
 <img src={imgUrl} />
 <input type="text" value={text} onChange={(e)=>{setText(e.target.value)}}></input>
