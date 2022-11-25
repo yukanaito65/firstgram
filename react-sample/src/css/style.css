@@ -16,14 +16,29 @@ html {
 
 body {
   color: #333333;
+  background-color: #f7f7f7;
   font-size: 1.6rem;
   font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
   min-width: 350px;
   width: 65%;
   margin: 0 auto;
   overflow-x: hidden;
-  padding-top: 100px;
+  padding-top: 80px;
+  min-height: 100vh;
+  position: relative;/*←相対位置*/
+  padding-bottom: 120px;/*←footerの高さ*/
+  box-sizing: border-box;/*←全て含めてmin-height:100vhに*/
 }
+
+button {
+  border: none;
+  background-color: #0d6efd;
+  color: #fff;
+  padding: 5px 15px;
+  font-size: 16px;
+  border-radius: 8px;
+}
+
 
 img,
 video,
@@ -140,7 +155,7 @@ a:hover {
   list-style: none;
   width: 20%;
   background-color: #f7f7f7;
-  box-shadow: 0 0px 10px 7px rgb(0 0 0 / 10%); 
+  box-shadow: 0 0px 10px 7px rgb(0 0 0 / 10%);
   font-size: 19px;
 
 }
@@ -198,7 +213,7 @@ a:hover {
 
 /* footer */
 .footer {
-  width: 65%;
+  width: 100%;
   background-color: #fff;
   display: flex;
   justify-content: space-between;

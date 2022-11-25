@@ -163,8 +163,8 @@ return (
     <div>{year}年{month}月{day}日{hour}:{min}:{seco}</div>
 
 
-        setPostData(()=>postData3)
-        setInputComment("")
+        {/* setPostData(()=>postData3)
+        setInputComment("") */}
 
 
     {data.favorites.includes(loginUserName)?(

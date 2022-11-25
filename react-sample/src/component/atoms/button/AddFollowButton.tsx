@@ -7,7 +7,9 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { auth, db } from "../../../firebase";
+import { followerData } from "../../../redux/followerCountSlice";
 import FollowerCount from "../user/FollowerCount";
 import RemoveFollowButton from "./RemoveFollowButton";
 
@@ -74,6 +76,10 @@ function AddFollowButton(props: any) {
   //ログインユーザーのfollow配列に今表示しているユーザーのuserIdが存在したら、フォロー外すボタン、存在しなかったらフォローするボタン
   const [followBtn, setFollowBtn] = useState<boolean>(false);
 
+  //redux
+  // const dispatch = useDispatch();
+
+
   const addFollow = async () => {
     await updateDoc(userDocRefId, {
       follow: arrayUnion(props.userId),
@@ -84,6 +90,9 @@ function AddFollowButton(props: any) {
     });
     console.log("add");
     setFollowBtn(true);
+
+    //redux
+    // dispatch(followerData(props.followerList));
   };
   console.log(users.follower);
 
@@ -95,14 +104,16 @@ function AddFollowButton(props: any) {
 
           {followBtn === false ? (
             <>
-            <button onClick={() => addFollow()}>フォローする</button>
-            {/* <p>{followerList.length}</p> */}
+            <span style={{position: "absolute", top:"20%", left: "75%" }}>
             <FollowerCount
             followerList={followerList}
             link={"/follower"}
             userId={props.userId}
             uid={user.uid}
             />
+            </span>
+            <button onClick={() => addFollow()}>フォローする</button>
+            {/* <p>{followerList.length}</p> */}
             </>
           ) : (
             <RemoveFollowButton userId={props.userId} />

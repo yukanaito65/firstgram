@@ -10,16 +10,8 @@ import {
   where,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { Navigate, useNavigate, Link } from "react-router-dom";
-import AddKeepButton from "./component/atoms/button/AddKeepButton";
-import LogoutButton from "./component/atoms/button/LogoutButton";
-import RemoveKeepButton from "./component/atoms/button/RemoveKeepButton";
-import SearchButton from "./component/atoms/button/SearchButton";
+import { Navigate } from "react-router-dom";
 import Icon from "./component/atoms/pictures/Icon";
-import MyPost from "./component/atoms/pictures/MyPost";
-import FollowCount from "./component/atoms/user/FollowCount";
-import FollowerCount from "./component/atoms/user/FollowerCount";
-import PostCount from "./component/atoms/user/PostCount";
 import UserName from "./component/atoms/user/UserName";
 import MyPostList from "./component/molecules/MyPostList";
 import { auth, db } from "./firebase";
@@ -27,6 +19,8 @@ import { User } from "./types/types";
 import { Post } from "./types/types";
 import Footer from "./component/molecules/Footer";
 import Header from "./component/molecules/Header";
+import MyPageInfo from "./component/molecules/MyPageInfo";
+import Name from "./component/atoms/user/Name";
 
 function MyPage() {
   //ログインしているとログイン情報を持つ
@@ -112,26 +106,20 @@ function MyPage() {
     });
   }, []);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const forSearchPage = () => {
-    navigate("/searchPage");
-  };
+  // const forSearchPage = () => {
+  //   navigate("/searchPage");
+  // };
 
-  // console.log(users.post);
-  // console.log(user.uid);
-  // console.log(auth.currentUser)
-  // console.log(users.follow.length);
-  // const followNumber = ()=>{setFollowList(users.follow)};
-  // console.log(followNumber);
   // console.log(users.name);  //ここに書くとレンダリングされた時に実行されてundefinedになる
   console.log(posts); //postコレクションからuidと等しいドキュメントを取得したものが格納されている
   // console.log(postList); //userコレクションからログインユーザーの情報を取得して、post配列の中身だけ格納している
   console.log(followList);
 
+
   return (
     <>
-      <Header />
       {/* loadingがfalseのときのみマイページを表示する設定。loadingがfalseのときのみ */}
       {!loading && (
         <>
@@ -140,57 +128,57 @@ function MyPage() {
             <Navigate to={`/login`} />
           ) : (
             <>
-              <div>
+              <Header />
+              <div style={{textAlign: "center", fontSize: "20px", fontWeight: "bold"}}>
                 <UserName users={users} />
-                {/* <div>{users.userName}</div> */}
-                <Link to={"/AccountSettingPage"}>
-                  <button>設定</button>
-                </Link>
-                <LogoutButton />
-                <Link to="/NewPost/">
-                  <button>新規投稿</button>
-                </Link>
-                {/* <Link to={"/"}>Top</Link> */}
-                <SearchButton onClick={forSearchPage} />
-                <Link to={`/dmPage`}>
-                  <button>DM</button>
-                </Link>
-                <Link to={"/"}>
-                  <button>一覧表示</button>
-                </Link>
-                <Link to={"/keep"}>保存一覧</Link>
               </div>
+                {/* <div>{users.userName}</div> */}
+                {/* <Link to={`/dmPage`}>
+                  <button>DM</button>
+                </Link> */}
+
+              <div style={{display: "flex", justifyContent: "space-between", gap: "10%", margin: "10px 20px",  alignItems: "center"}}>
               <Icon />
-              <div>
-                <PostCount posts={posts} />
+              <MyPageInfo
+              posts={posts}
+              followerList={followerList}
+              followList={followList}
+              uid={user.uid}
+              />
+              </div>
+              {/* <div> */}
+                {/* <PostCount posts={posts} /> */}
                 {/* <div>{posts.length}投稿</div> */}
 
                 {/* <Link to={"/myFollower"}>
                   <div>{followerList.length}フォロワー</div>
                 </Link> */}
 
-                <FollowerCount
+                {/* <FollowerCount
                   followerList={followerList}
                   link={"/myFollower"}
                   uid={user.uid}
-                />
+                /> */}
 
-                <FollowCount
+                {/* <FollowCount
                   followList={followList}
                   link={"/myFollow"}
                   uid={user.uid}
-                />
+                /> */}
                 {/* <Link to={"/myFollow"}>
                   <div>{followList.length}フォロー中</div>
                 </Link> */}
-              </div>
+              {/* </div> */}
+              <span style={{fontWeight: "bold"}}>
+                <Name users={users}/>
+              </span>
               <div>{users.profile}</div>
               <MyPostList posts={posts} users={users} />
+              <Footer />
             </>
           )}
         </>
       )}
-      <Footer />
     </>
   );
 }

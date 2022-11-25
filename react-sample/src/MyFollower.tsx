@@ -9,9 +9,8 @@ import {
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import CommonIcon from "./component/atoms/pictures/CommonIcon";
-import Name from "./component/atoms/user/Name";
-import UserName from "./component/atoms/user/UserName";
+import Footer from "./component/molecules/Footer";
+import Header from "./component/molecules/Header";
 import UserList from "./component/pages/UserList";
 import { auth, db } from "./firebase";
 
@@ -80,10 +79,12 @@ function MyFollower() {
     <>
       {!loading && (
         <>
+        <Header />
           <Link to={"/mypage"}>⬅︎</Link>
           <UserList
           usersData={followerUsers}
           uid={user.uid} />
+        <Footer />
         </>
       )}
     </>

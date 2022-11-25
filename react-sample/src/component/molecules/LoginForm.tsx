@@ -1,6 +1,9 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
 import { auth } from "../../firebase";
+import LoginButton from "../atoms/button/LoginButton";
+import InputEmail from "../atoms/Input/InputEmail";
+import InputPass from "../atoms/Input/InputPass";
 
 function LoginForm() {
   const [loginEmail, setLoginEmail] = useState("");
@@ -26,29 +29,40 @@ function LoginForm() {
   //   });
   // });
 
+  const handleChange = (e:any)=>{
+setLoginEmail(e.target.value);
+setLoginPassword(e.target.value);
+  }
+
   return (
     <>
-      <h1>ログイン</h1>
-      <form onSubmit={handleSubmit}>
+      <form
+      onSubmit={handleSubmit}
+      style={{lineHeight: "5rem"}}
+      >
         <div>
-          <label>メールアドレス</label>
           <input
             type="email"
             name="email"
             value={loginEmail}
             onChange={(e) => setLoginEmail(e.target.value)}
+            placeholder="メールアドレス"
+            style={{width:"80%", height: "35px", backgroundColor: "#f7f7f7",outline: "solid #d3d3d3", border: "none"}}
           />
         </div>
+        {/* <InputEmail handleChange={handleChange} loginEmail={loginEmail}/>
+        <InputPass handleChange={handleChange} loginPassword={loginPassword} /> */}
         <div>
-          <label>パスワード</label>
           <input
             type="password"
             name="password"
             value={loginPassword}
             onChange={(e) => setLoginPassword(e.target.value)}
+            placeholder="パスワード"
+            style={{width:"80%", height: "35px", backgroundColor: "#f7f7f7",outline: "solid #d3d3d3", border: "none"}}
           />
         </div>
-        <button>ログイン</button>
+        <LoginButton />
       </form>
     </>
   );

@@ -1,12 +1,9 @@
 import React from 'react'
 
-interface Props {
-    onClick: () => void;
-  }
 
-function LoginButton({ onClick }: Props) {
+function LoginButton() {
   return (
-    <button type="button" className="login-form__button" onClick={onClick}>
+    <button className="login-form__button">
       ログイン
     </button>
   )
