@@ -9,108 +9,110 @@ import { db } from "./firebase";
 import { setDoc, doc, getDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import storage from "./firebase-sec";
+import RegisterForm from "./component/molecules/RegisterForm";
+import Logo from "./component/atoms/pictures/Logo";
 import Header from "./component/molecules/Header";
 
 function Register() {
-  //ログイン状態保持(userが値を持てばログイン状態)
+  // //ログイン状態保持(userが値を持てばログイン状態)
   const [user, setUser] = useState<any>("");
 
-  //Authenticationに登録するemailとpassword
-  const [registerEmail, setRegisterEmail] = useState("");
-  const [registerPassword, setRegisterPassword] = useState("");
+  // //Authenticationに登録するemailとpassword
+  // const [registerEmail, setRegisterEmail] = useState("");
+  // const [registerPassword, setRegisterPassword] = useState("");
 
-  //loadingしているかしてないか監視する
-  const [loading, setLoading] = useState(false);
+  // //loadingしているかしてないか監視する
+  // const [loading, setLoading] = useState(false);
 
-  // 画像のアップロードが完了したか確認する
-  const [isUploaded, setIsUploaded] = useState(false);
+  // // 画像のアップロードが完了したか確認する
+  // const [isUploaded, setIsUploaded] = useState(false);
 
-  //画像のURL
-  const [imgSrc, setImgSrc] = useState("");
+  // //画像のURL
+  // const [imgSrc, setImgSrc] = useState("");
 
-  //画像アップロード＆URL取得
-  const InputImage = (e: any) => {
-    const file = e.target.files[0];
+  // //画像アップロード＆URL取得
+  // const InputImage = (e: any) => {
+  //   const file = e.target.files[0];
 
-    // パスと名前で参照を作成
-    const storageRef = ref(storage, "image/" + file.name);
+  //   // パスと名前で参照を作成
+  //   const storageRef = ref(storage, "image/" + file.name);
 
-    // 画像のアップロード
-    const uploadImage = uploadBytesResumable(storageRef, file);
-    uploadImage.on(
-      "state_changed",
-      // upload開始したらloading中になる(loadingがtrueになる)
-      (snapshot) => {
-        setLoading(true);
-      },
-      (err) => {
-        console.log(err);
-      },
-      //upload完了したらloadedになる(loadingがfalse,loadedがtrue)
-      () => {
-        setLoading(false);
-        setIsUploaded(true);
+  //   // 画像のアップロード
+  //   const uploadImage = uploadBytesResumable(storageRef, file);
+  //   uploadImage.on(
+  //     "state_changed",
+  //     // upload開始したらloading中になる(loadingがtrueになる)
+  //     (snapshot) => {
+  //       setLoading(true);
+  //     },
+  //     (err) => {
+  //       console.log(err);
+  //     },
+  //     //upload完了したらloadedになる(loadingがfalse,loadedがtrue)
+  //     () => {
+  //       setLoading(false);
+  //       setIsUploaded(true);
 
-        getDownloadURL(storageRef).then((url) => {
-          setImgSrc(url);
-        });
-      }
-    );
-  };
+  //       getDownloadURL(storageRef).then((url) => {
+  //         setImgSrc(url);
+  //       });
+  //     }
+  //   );
+  // };
 
-  //Authenticationへのユーザー登録、FireStoreへのデータ新規追加
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
+  // //Authenticationへのユーザー登録、FireStoreへのデータ新規追加
+  // const handleSubmit = async (e: any) => {
+  //   e.preventDefault();
 
-    try {
-      //Authenticationへのユーザー登録
-      //登録するのと同時にログインされる
-      await createUserWithEmailAndPassword(
-        auth,
-        registerEmail,
-        registerPassword
-      );
+  //   try {
+  //     //Authenticationへのユーザー登録
+  //     //登録するのと同時にログインされる
+  //     await createUserWithEmailAndPassword(
+  //       auth,
+  //       registerEmail,
+  //       registerPassword
+  //     );
 
-      //FireStoreへのデータ新規追加
-      const { userName, name, Cpassword, profile } = e.target.elements;
-      console.log(userName.value);
+  //     //FireStoreへのデータ新規追加
+  //     const { userName, name, Cpassword, profile } = e.target.elements;
+  //     console.log(userName.value);
 
-      //ログイン判定
-      onAuthStateChanged(auth, async (user) => {
-        if (!user) {
-          console.log("ログアウト状態です");
-        } else {
-          //ログイン済みユーザーのドキュメントへの参照を取得
-          const docRef = doc(db, "user", user.uid);
+  //     //ログイン判定
+  //     onAuthStateChanged(auth, async (user) => {
+  //       if (!user) {
+  //         console.log("ログアウト状態です");
+  //       } else {
+  //         //ログイン済みユーザーのドキュメントへの参照を取得
+  //         const docRef = doc(db, "user", user.uid);
 
-          //上記を元にドキュメントのデータを取得
-          const userDoc = await getDoc(docRef);
+  //         //上記を元にドキュメントのデータを取得
+  //         const userDoc = await getDoc(docRef);
 
-          //exists()でドキュメントの存在の有無を確認
-          if (!userDoc.exists()) {
-            //FireStoreにユーザー用のドキュメントが作られていなければ新規作成
-            setDoc(docRef, {
-              userId: user.uid,
-              email: registerEmail,
-              userName: userName.value,
-              name: name.value,
-              password: registerPassword,
-              Cpassword: Cpassword.value,
-              icon: imgSrc,
-              follow: [],
-              follower: [],
-              posts: [],
-              favoritePosts: [],
-              keepPosts: [],
-              profile: profile.value,
-            });
-          }
-        }
-      });
-    } catch (error) {
-      alert("正しく入力してください");
-    }
-  };
+  //         //exists()でドキュメントの存在の有無を確認
+  //         if (!userDoc.exists()) {
+  //           //FireStoreにユーザー用のドキュメントが作られていなければ新規作成
+  //           setDoc(docRef, {
+  //             userId: user.uid,
+  //             email: registerEmail,
+  //             userName: userName.value,
+  //             name: name.value,
+  //             password: registerPassword,
+  //             Cpassword: Cpassword.value,
+  //             icon: imgSrc,
+  //             follow: [],
+  //             follower: [],
+  //             posts: [],
+  //             favoritePosts: [],
+  //             keepPosts: [],
+  //             profile: profile.value,
+  //           });
+  //         }
+  //       }
+  //     });
+  //   } catch (error) {
+  //     alert("正しく入力してください");
+  //   }
+  // };
 
   //ログインしているかどうかを判断する
   //onAuthStateChanged関数はfirebaseの関数
@@ -128,76 +130,98 @@ function Register() {
       {user ? (
         <Navigate to={`/`} />
       ) : (
+        // <>
+        //   <h1>会員登録</h1>
+        //   {/* 登録ボタンを押した時にhandleSubmitを実行 */}
+        //   <form onSubmit={handleSubmit}>
+        //     <div>
+        //       <label>Icon</label>
+        //       {loading ? (
+        //         <>
+        //           <p>uploading</p>
+        //           <input
+        //             name="imageURL"
+        //             type="file"
+        //             accept=".png, .jpeg, .jpg"
+        //             onChange={InputImage}
+        //           />
+        //         </>
+        //       ) : (
+        //         <>
+        //           {isUploaded ? (
+        //             <img alt="" src={imgSrc} />
+        //           ) : (
+        //             <input
+        //               name="imageURL"
+        //               type="file"
+        //               accept=".png, .jpeg, .jpg"
+        //               onChange={InputImage}
+        //             />
+        //           )}
+        //         </>
+        //       )}
+        //     </div>
+        //     <div>
+        //       <label>メールアドレス</label>
+        //       <input
+        //         type="email"
+        //         name="email"
+        //         value={registerEmail}
+        //         onChange={(e) => setRegisterEmail(e.target.value)}
+        //       />
+        //     </div>
+        //     <div>
+        //       <label>ユーザーネーム</label>
+        //       <input type="text" name="userName" />
+        //     </div>
+        //     <div>
+        //       <label>ネーム</label>
+        //       <input type="text" name="name" />
+        //     </div>
+        //     <div>
+        //       <label>パスワード</label>
+        //       <input
+        //         type="password"
+        //         name="password"
+        //         value={registerPassword}
+        //         onChange={(e) => setRegisterPassword(e.target.value)}
+        //       />
+        //     </div>
+        //     <div>
+        //       <label>確認用パスワード</label>
+        //       <input type="password" name="Cpassword" />
+        //     </div>
+        //     <div>
+        //       <label>プロフィール</label>
+        //       <input type="textarea" name="profile" />
+        //     </div>
+        //     <button>登録</button>
+        //     <p>
+        //       ログインは<Link to={`/login`}>こちら</Link>
+        //     </p>
+        //   </form>
+        // </>
         <>
-          <h1>会員登録</h1>
-          {/* 登録ボタンを押した時にhandleSubmitを実行 */}
-          <form onSubmit={handleSubmit}>
-            <div>
-              <label>Icon</label>
-              {loading ? (
-                <>
-                  <p>uploading</p>
-                  <input
-                    name="imageURL"
-                    type="file"
-                    accept=".png, .jpeg, .jpg"
-                    onChange={InputImage}
-                  />
-                </>
-              ) : (
-                <>
-                  {isUploaded ? (
-                    <img alt="" src={imgSrc} />
-                  ) : (
-                    <input
-                      name="imageURL"
-                      type="file"
-                      accept=".png, .jpeg, .jpg"
-                      onChange={InputImage}
-                    />
-                  )}
-                </>
-              )}
-            </div>
-            <div>
-              <label>メールアドレス</label>
-              <input
-                type="email"
-                name="email"
-                value={registerEmail}
-                onChange={(e) => setRegisterEmail(e.target.value)}
-              />
-            </div>
-            <div>
-              <label>ユーザーネーム</label>
-              <input type="text" name="userName" />
-            </div>
-            <div>
-              <label>ネーム</label>
-              <input type="text" name="name" />
-            </div>
-            <div>
-              <label>パスワード</label>
-              <input
-                type="password"
-                name="password"
-                value={registerPassword}
-                onChange={(e) => setRegisterPassword(e.target.value)}
-              />
-            </div>
-            <div>
-              <label>確認用パスワード</label>
-              <input type="password" name="Cpassword" />
-            </div>
-            <div>
-              <label>プロフィール</label>
-              <input type="textarea" name="profile" />
-            </div>
-            <button>登録</button>
+          <div
+            style={{
+              backgroundColor: "#ffff",
+              outline: "solid #d3d3d3",
+              textAlign: "center",
+              width: "35%",
+              margin: "0 auto"
+            }}
+          >
+            <h1 style={{ width: "100px", height: "100px", margin: "0 auto" }}>
+              <Logo />
+            </h1>
+            <RegisterForm />
             <p>
-              ログインは<Link to={`/login`}>こちら</Link>
+              アカウントをお持ちですか？
+              <Link to={`/login`}>
+                <span style={{ color: "#0d6efd" }}>ログインする</span>
+              </Link>
             </p>
-          </form>
+          </div>
         </>
       )}
     </>

@@ -68,7 +68,7 @@ const postData3=[...postData]
             postData3[i].comments.push()
         }
 
-    } 
+    }
 
 useEffect(()=>{
 onAuthStateChanged(auth, async (user) => {
@@ -158,7 +158,7 @@ return a.postDate.toDate() > b.postDate.toDate()  ? -1 : 1;
 
 return (
 <>
-<Header />
+<Header show={true} />
 <div>
 {followUser.length === 0 ? (
     <>
@@ -178,13 +178,13 @@ return (
         <p>{data.caption}</p>
         <Link to="/PostDetails" state={{postid:data.postId,userid:data.userId}}><img src={data.imageUrl} /></Link>
         <div>{year}年{month}月{day}日{hour}:{min}:{seco}</div>
-    
+
     {data.favorites.includes(loginUserName)?(
     <NoFavBtn postId={data.postId} userName={loginUserName} />
     ):(
     <AddFavBtn postId={data.postId} userName={loginUserName} />
     )}
-    
+
     <input type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)}} />
     <button onClick={async(e:any)=>{
     // 押された投稿のcommentにinputCommentを配列で追加
@@ -232,14 +232,14 @@ return (
         <p>{data.caption}</p>
         <Link to="/PostDetails" state={{postid:data.postId,userid:data.userId}}><img src={data.imageUrl} /></Link>
         <div>{year}年{month}月{day}日{hour}:{min}:{seco}</div>
-    
+
         {data.favorites.includes(loginUserName)?(
         <NoFavBtn postId={data.postId} userName={loginUserName} />
     ):(
         <AddFavBtn postId={data.postId} userName={loginUserName} />
     )
     }
-    
+
     <input type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)}} />
     <button onClick={async(e:any)=>{
     // 押された投稿のcommentにinputCommentを配列で追加
@@ -262,7 +262,7 @@ return (
         )
     })}
     </div>
-    
+
         </div>
          </>
         )

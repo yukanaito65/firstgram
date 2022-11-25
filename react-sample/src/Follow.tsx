@@ -14,15 +14,10 @@ import {
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { serialize } from "v8";
-import FollowButton from "./component/atoms/button/FollowButton";
-// import FollowButton from "./component/atoms/button/FollowButton";
-import CommonIcon from "./component/atoms/pictures/CommonIcon";
-import Icon from "./component/atoms/pictures/Icon";
-import Name from "./component/atoms/user/Name";
-import UserName from "./component/atoms/user/UserName";
+import Footer from "./component/molecules/Footer";
+import Header from "./component/molecules/Header";
 import UserList from "./component/pages/UserList";
-import { auth, db } from "./firebase";
+import { db } from "./firebase";
 
 interface State {
   userId: string;
@@ -63,12 +58,14 @@ function Follow() {
 
   return (
     <>
+    <Header show={true} />
       <Link to={"/profile"} state={{ userId: userId }}>
         ⬅︎
       </Link>
       <UserList
       usersData={followUsers}
       uid={uid} />
+      <Footer />
     </>
   );
 }

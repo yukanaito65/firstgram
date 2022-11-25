@@ -24,13 +24,16 @@ import { auth, db } from "./firebase";
 import { Post } from "./types/types";
 import PostCount from "./component/atoms/user/PostCount";
 import FollowCount from "./component/atoms/user/FollowCount";
+import { useDispatch, useSelector } from "react-redux";
+import Header from "./component/molecules/Header";
+import Footer from "./component/molecules/Footer";
+import Name from "./component/atoms/user/Name";
 
 interface State {
   userId: string;
 }
 
 function Profile() {
-
   const [user, setUser] = useState<any>("");
 
   //ログインユーザーのfollow情報
@@ -53,7 +56,7 @@ function Profile() {
 
   // const [followBtn,setFollowBtn] = useState<boolean>();
 
-  const [followerNum,setFollowerNum] = useState(0);
+  // const [followerNum,setFollowerNum] = useState(0);
 
   //各ページからデータ取得
   const location = useLocation();
@@ -90,7 +93,7 @@ function Profile() {
         // setPostList(profileUserDataId.post);
         setFollowList(profileUserDataId.follow);
         setFollowerList(profileUserDataId.follower);
-        setFollowerNum(profileUserDataId.follower.length);
+        // setFollowerNum(profileUserDataId.follower.length);
       }
 
       //投稿一覧取得
@@ -112,62 +115,104 @@ function Profile() {
   console.log(profileUsers); //[]
   console.log(profileUsers.follow); //undefined
   console.log(posts); //[]
-  console.log(followList);//follow[]
+  console.log(followList); //follow[]
   console.log(userId); //id出てる
   console.log(profileUsers.userId); //undefined
   console.log(usersFollow);
 
+  // const dispatch = useDispatch();
+
+  // const followerNum = useSelector((state:any)=>state.followerCountSlice.follower);
 
   return (
     <>
       {!loading && (
-        <div>
-          <UserName users={profileUsers} />
+        <>
+          <Header />
           <div>
-            <CommonIcon icon={profileUsers.icon} />
-          </div>
-          <PostCount posts={posts}/>
-          {/* <Link to={"/follower"} state={{ userId: userId, follower:followerList, uid: user.uid }}>
+            <div
+              style={{
+                textAlign: "center",
+                fontSize: "20px",
+                fontWeight: "bold",
+              }}
+            >
+              <UserName users={profileUsers} />
+            </div>
+
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                gap: "10%",
+                margin: "10px 20px",
+                alignItems: "center",
+              }}
+            >
+              <CommonIcon icon={profileUsers.icon} />
+
+              <div
+                style={{
+                  display: "flex",
+                  width: "330px",
+                  justifyContent: "space-between",
+                  position: "relative",
+                }}
+              >
+                <PostCount posts={posts} />
+                {/* <Link to={"/follower"} state={{ userId: userId, follower:followerList, uid: user.uid }}>
             <div>{followerNum}follower</div>
           </Link> */}
-{/*
-          <FollowerCount
-          followerList={followerList}
-          link={"/follower"}
 
-          <FollowCount
-          followList={followList}
-          link={"/follow"}
-          userId={userId}
-          uid={user.uid}
-          />
-          {/* <Link to={"/follow"} state={{ userId: userId, follow:followList, uid: user.uid }}>
-            <div>{followList.length}フォロー中</div>
-          </Link> */}
+                {/* <FollowerCount
+           followerList={followerList}
+           link={"/follower"}
+           uid={user.uid}
+           userId={userId}
+           /> */}
 
-          <div>{profileUsers.profile}</div>
-          <Link to={`/dmPage`}>
-            <button>DM</button>
-          </Link>
-          <Link to={"/mypage"}>マイページ</Link>
-           {usersFollow.includes(userId) ? (
-            <>
-            <RemoveFollowButton
-            userId={userId}
-            // onClick={()=>setFollowerNum(followerNum)}
-            // followerNum={followerNum}
-            />
-            </>
-           ) : (
-            <>
-            <AddFollowButton userId={userId} />
-            </>
-           )}
-           <MyPostList
-           posts={posts}
-           users={profileUsers}
-           />
-        </div>
+                <FollowCount
+                  followList={followList}
+                  link={"/follow"}
+                  userId={userId}
+                  uid={user.uid}
+                />
+              </div>
+
+              {/* redux↓ */}
+              {/* <p>{followerNum.length}aaa</p> */}
+            </div>
+
+            <span style={{ fontWeight: "bold" }}>
+              <Name users={profileUsers} />
+            </span>
+            <div>{profileUsers.profile}</div>
+
+          <div style={{display: "flex", gap: "5%"}}>
+            {usersFollow.includes(userId) ? (
+              <>
+                <RemoveFollowButton
+                  userId={userId}
+                  // onClick={()=>setFollowerNum(followerNum)}
+                  // followerNum={followerNum}
+                />
+              </>
+            ) : (
+              <>
+                <AddFollowButton userId={userId} />
+              </>
+            )}
+
+            <Link to={`/dmPage`} state={{ userId: userId }}>
+              <button>DM</button>
+            </Link>
+
+            </div>
+
+            <MyPostList posts={posts} users={profileUsers} />
+          </div>
+          <Footer />
+        </>
       )}
     </>
   );

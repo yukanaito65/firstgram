@@ -9,13 +9,14 @@ type Props = {
 const MyPost: FC<Props> = (props) => {
   // const MyPost=(props:any) =>{
   return (
-    <div style={{width: "350px", height: "350px"}}>
+    // <div style={{width: "350px", height: "350px"}}>
+    <>
       <img
       src={props.imageUrl}
       alt="投稿"
-      style={{width: "100%", height: "100%", objectFit: "cover"}}
+      style={{width: "300px", height: "300px", objectFit: "cover"}}
        />
-    </div>
+    </>
   );
 };
 

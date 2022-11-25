@@ -1,6 +1,8 @@
 import { onAuthStateChanged } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
+import Logo from "./component/atoms/pictures/Logo";
+import Footer from "./component/molecules/Footer";
 import Header from "./component/molecules/Header";
 import LoginForm from "./component/molecules/LoginForm";
 import { auth } from "./firebase";
@@ -24,10 +26,37 @@ function Login() {
         <Navigate to={`/mypage`} />
       ) : (
         <>
-          <LoginForm />
-          <p>
-            新規登録は<Link to={`/register`}>こちら</Link>
-          </p>
+          <div style={{ display: "flex" }}>
+            <div style={{ width: "50%", height: "50%" }}>
+              <img
+                src={`${process.env.PUBLIC_URL}/iphone.png`}
+                alt="Iphone"
+                style={{ width: "100%", height: "100%" }}
+              />
+            </div>
+            <div
+              style={{
+                backgroundColor: "#ffff",
+                outline: "solid #d3d3d3",
+                textAlign: "center",
+                width: "35%",
+              }}
+            >
+              <h1
+                style={{ width: "100px", height: "100px", margin: "10% auto" }}
+              >
+                <Logo />
+              </h1>
+              <LoginForm />
+
+              <p>
+                アカウントをお持ちでないですか？
+                <Link to={`/register`}>
+                  <span style={{ color: "#0d6efd" }}>登録する</span>
+                </Link>
+              </p>
+            </div>
+          </div>
         </>
       )}
     </>
