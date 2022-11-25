@@ -1,7 +1,13 @@
 import { onAuthStateChanged } from 'firebase/auth';
-import { collection, doc, getDoc, getDocs, query, updateDoc, where , arrayUnion} from 'firebase/firestore';
-import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+
+
+import { collection, doc, getDoc, getDocs, query, updateDoc, where ,serverTimestamp, arrayUnion} from 'firebase/firestore';
+import { connectStorageEmulator } from 'firebase/storage';
+import React, { useEffect, useState } from 'react'
+import { Link, useActionData, useLocation, useRouteLoaderData } from 'react-router-dom';
+import AddKeepButton from './component/atoms/button/AddKeepButton';
+import RemoveKeepButton from './component/atoms/button/RemoveKeepButton';
+
 import AddFavBtn from './AddFavBtn';
 import { auth, db } from './firebase';
 import NoFavBtn from './NoFavBtn';
@@ -23,11 +29,20 @@ const [inputComment, setInputComment] = useState<any>("");
 // ログインしているユーザーのuserNameを格納
 const [loginUserName, setLoginUserName] = useState<any>("");
 
+
 // ログインしているユーザーのfollowしている人のIdの配列
 const [followUser, setFollowUser] = useState<any>([]);
 
 // ログインしているユーザーのpostの配列
 const [myPostId, setMyPostID] = useState<any>([]);
+
+const [loginUserKeep, setLoginUserKeep] = useState<any>("");
+
+//
+const [postDataSecond,  setPostDataSecond] = useState<any>({});
+
+
+
 
 // const setFavorites2 = (postId:any)=>{
 //     // setPostData(()=>{
@@ -52,6 +67,7 @@ const postData3=[...postData]
         if(postData[i].postId === postId){
             postData3[i].comments.push()
         }
+
     } 
 
 useEffect(()=>{
@@ -60,9 +76,11 @@ onAuthStateChanged(auth, async (user) => {
 GetLoginUserName(user).then((loginUserData:any)=>{
         setLoginUserName(loginUserData.userName);
 })
+
     if (!user) {
     console.log("ログアウト状態です");
     } else {
+
 
     // ログインしているユーザーのデータ取得
     // GetLoginUserName(user).then((loginUserData:any)=>{
@@ -79,13 +97,14 @@ GetLoginUserName(user).then((loginUserData:any)=>{
         // ログインしているユーザーのフォローしている人のuseridを配列に格納
         const UseLoginUserFollowUserIdArray =  userDatas?.follow
 
+
         setFollowUser(UseLoginUserFollowUserIdArray)
 
     const postDataArray:any[]=[];
 
-    // follouserのpostドキュメントを配列に格納
-    UseLoginUserFollowUserIdArray.forEach(async(folloUserId:any)=>{
-    const q = query(collection(db, "post"), where("userId", "==", folloUserId));
+    // followuserのpostドキュメントを配列に格納
+    UseLoginUserFollowUserIdArray.forEach(async(followUserId:any)=>{
+    const q = query(collection(db, "post"), where("userId", "==", followUserId));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
         const followUserPost =(doc.id, " => ", doc.data());
@@ -101,6 +120,7 @@ GetLoginUserName(user).then((loginUserData:any)=>{
             // console.log(postDatas)
             postDataArray.push(Datas)
     }
+
     // データを保持
     setPostData(postDataArray)
 

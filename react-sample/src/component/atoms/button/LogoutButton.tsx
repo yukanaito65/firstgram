@@ -1,15 +1,23 @@
-import React from 'react'
+import { signOut } from "firebase/auth";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { auth } from "../../../firebase";
 
-interface Props {
-    onClick: () => void;
-  }
+function LogoutButton() {
+  const navigate = useNavigate();
 
-function LogoutButton({ onClick }: Props) {
+  //signOut関数はfirebaseに用意されている関数
+  //ログアウトが成功するとログインページにリダイレクトする
+  const logout = async () => {
+    await signOut(auth);
+    navigate("/login");
+  };
+
   return (
-    <button type="button" className="header__logout-button" onClick={onClick}>
+    <button className="header__logout-button" onClick={logout}>
       ログアウト
     </button>
-  )
+  );
 }
 
-export default LogoutButton
+export default LogoutButton;

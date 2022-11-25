@@ -9,6 +9,7 @@ import { db } from "./firebase";
 import { setDoc, doc, getDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import storage from "./firebase-sec";
+import Header from "./component/molecules/Header";
 
 function Register() {
   //ログイン状態保持(userが値を持てばログイン状態)
@@ -122,6 +123,7 @@ function Register() {
 
   return (
     <>
+    <Header show={false} />
       {/* ログインしていればtopを表示。Navigateで指定したページにリダイレクトする */}
       {user ? (
         <Navigate to={`/`} />

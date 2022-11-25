@@ -11,7 +11,10 @@ import { useEffect } from "react";
 import { onAuthStateChanged } from "@firebase/auth";
 import type { User } from "../../types/types";
 import Icon from "../atoms/pictures/Icon";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
+import Header from "../molecules/Header";
+import Footer from "../molecules/Footer";
+import { IoIosArrowBack } from "react-icons/io"
 
 function AccountSettingPage() {
   //ログイン状態を保持
@@ -57,6 +60,11 @@ function AccountSettingPage() {
     });
   }, []);
 
+  const navigate = useNavigate();
+  const backBtn = () => {
+    navigate(-1);
+  }
+
   // 各inputの状態管理
   const [userNameValue, setUserNameValue] = useState<any>("");
   const [nameValue, setNameValue] = useState<any>("");
@@ -64,53 +72,70 @@ function AccountSettingPage() {
   const [emailValue, setEmailValue] = useState<any>("");
 
   return (
-    <div>
-      <h1>設定</h1>
-      {user ? (
-        <>
-          <div>
-            <Icon />
-          </div>
-          <div>
-            <p>ユーザーネーム</p>
-            <p>{userNameValue}</p>
-          </div>
+    <>
+      <Header show={true} />
+      <div>
+        <h1 className="margin-bottom_20">プロフィール</h1>
+        {user ? (
+          <>
+            <div>
+              <Icon />
+            </div>
+            <table className="setting_table">
+              <tr className="setting_block">
+                <td className="setting_table_title setting_table_td">
+                  ユーザーネーム
+                </td>
+                <td className="setting_table_td">{userNameValue}</td>
+              </tr>
 
-          <div>
-            <p>名前</p>
-            <p>{nameValue}</p>
-          </div>
+              <tr className="setting_block">
+                <td className="setting_table_title setting_table_td">名前</td>
+                <td className="setting_table_td">{nameValue}</td>
+              </tr>
 
-          <div>
-            <p>自己紹介</p>
-            <p>{profileValue}</p>
-          </div>
+              <tr className="setting_block">
+                <td className="setting_table_title setting_table_td">
+                  自己紹介
+                </td>
+                <td className="setting_table_td">{profileValue}</td>
+              </tr>
 
-          <div>
-            <p>メールアドレス</p>
-            <p>{emailValue}</p>
-          </div>
+              <tr className="setting_block">
+                <td className="setting_table_title setting_table_td">
+                  メールアドレス
+                </td>
+                <td className="setting_table_td">{emailValue}</td>
+              </tr>
 
-          <div>
-            <p>パスワード</p>
-            <p>****</p>
-          </div>
+              <tr className="setting_block">
+                <td className="setting_table_title setting_table_td">
+                  パスワード
+                </td>
+                <td className="setting_table_td">****</td>
+              </tr>
+            </table>
+            <div className="to_passChange">
+              <Link to="/passwordChange">
+                <button>パスワード変更</button>
+              </Link>
+            
 
-<Link to="/passwordChange">
-          パスワード変更はこちら
-          </Link>
-
-          <Link to="/AccountEditPage">
-            <button>編集</button>
-          </Link>
-          <Link to="/">
-            <button>戻る</button>
-          </Link>
-        </>
-      ) : (
-        <p>データが表示されません</p>
-      )}
-    </div>
+            
+              <Link to="/AccountEditPage">
+                <button>プロフィール編集</button>
+              </Link>
+              </div>
+              <div onClick={backBtn}>
+                <IoIosArrowBack color="white" size={40} className="to_back" />
+            </div>
+          </>
+        ) : (
+          <p>データが表示されません</p>
+        )}
+      </div>
+      <Footer />
+    </>
   );
 }
 

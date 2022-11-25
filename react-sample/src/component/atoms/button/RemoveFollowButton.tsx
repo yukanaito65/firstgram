@@ -8,6 +8,7 @@ import {
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { auth, db } from "../../../firebase";
+import FollowerCount from "../user/FollowerCount";
 import AddFollowButton from "./AddFollowButton";
 
 function RemoveFollowButton(props: any) {
@@ -25,6 +26,8 @@ function RemoveFollowButton(props: any) {
 
   //フォローしているユーザーの情報[{1人目},{2人目}....]
   const [followUsers, setFollowUsers] = useState<any[]>([]);
+
+  const [followerList, setFollowerList] = useState<any>({follower: []})
 
   useEffect(() => {
     onAuthStateChanged(auth, async (currentUser: any) => {
@@ -50,6 +53,7 @@ function RemoveFollowButton(props: any) {
 
       const followUserDataId = followUserDocId.data();
       setFollowUsers(followUserDataId);
+      setFollowerList(followUserDataId.follower);
 
       console.log(props.userId);
       console.log(userDataId);
@@ -86,12 +90,23 @@ function RemoveFollowButton(props: any) {
     <>
       {!loading && (
         <>
+
+
           {followBtn === true ? (
+            <>
             <button onClick={() =>{
                removeFollow()
               //  window.location.reload()
               }
               }>フォロー中</button>
+              {/* <p>{followerList.length}</p> */}
+              <FollowerCount
+              followerList={followerList}
+              link={"/follower"}
+              userId={props.userId}
+              uid={user.uid}
+              />
+              </>
           ) : (
             <AddFollowButton userId={props.userId} />
           )}

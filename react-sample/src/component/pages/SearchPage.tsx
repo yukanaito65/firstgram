@@ -13,13 +13,22 @@ import {
 import { useEffect } from "react";
 import { onAuthStateChanged } from "@firebase/auth";
 import { db } from "../../firebase";
+import Header from "../molecules/Header";
+import Footer from "../molecules/Footer";
+import { useLocation } from "react-router-dom";
+
 
 // 流れ
 // まず前userのuserNameとnameとuserIdを取得し配列に入れる
-// その中からinputタグないの文字を含むuserを配列に格納する
-// 被ってるユーザーがいる可能性があるため、重複を消す
-// forEachで重複のない検索に引っかかったユーザーのデータを取得し、それらを新たな配列に格納する
-// それを使ってmapで回して表示する
+// その中からinputタグ内の文字を含むuserを配列に格納する
+// 配列内で被ってるユーザーがいる可能性があるため、重複を消す
+// 上記の配列をforEachで回しデータを取得し、それらを新たな配列に格納する
+// 上記の配列を使ってmapで回して表示する
+
+interface State {
+  userId: string;
+} 
+
 
 function SearchPage() {
   // inputタグ内の状態管理
@@ -38,6 +47,13 @@ function SearchPage() {
   // 検索結果のデータの表示/非表示を管理
   const [displaySwitch, setDisplaySwitch] = useState<boolean>(false);
 
+  // 1発目に検索結果を出す
+  const  [display, setDisplay] = useState<number>(1)
+
+// postlookからデータを持ってくる
+const location = useLocation();
+  // const { userId } = location.state as State;
+
   const auth = getAuth();
   // まずuseEffect内で前userデータのuserNameとnameとtonametouserIdを取得
   useEffect(() => {
@@ -46,9 +62,6 @@ function SearchPage() {
       if (!user) {
         console.log("ログアウト状態です");
       } else {
-        const auth = getAuth();
-        const currentUserId = auth.currentUser?.uid;
-
         // 取得した全userのデータを入れる箱
         const userDataList: {
           userId: string;
@@ -126,24 +139,34 @@ function SearchPage() {
     const b = true;
     setDataArr(a);
     setDisplaySwitch(b);
+    setDisplay(display + 1)
   };
 
   return (
     <>
+    <Header show={true} />
+    <div className="margin"></div>
+    <form className="searchpage_form">
+      <div className="dmpage_form_wrapper">
       <input
+      className="searchpage_form_input"
         type="search"
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
         placeholder="検索ワードを入力"
       />
-      <button onClick={() => onClickSearch()}>検索</button>
+      <button
+      className="dampage_form_btn"
+      onClick={() => onClickSearch()}>検索</button>
+      </div>
+      </form>
       {console.log(dataArr)}
       {dataArr.length > 0 &&
       displaySwitch ? (
         dataArr.map((a) => {
           return(
           <>
-            <img src={a.icon} />
+            <img src={a.icon} alt="ユーザーアイコン" />
             <p>{a.name}</p>
             <p>{a.userName}</p>
           </>
@@ -151,6 +174,7 @@ function SearchPage() {
         })
       ) : (<p>該当するユーザーがいません</p>)
       }
+      <Footer />
     </>
   );
 }

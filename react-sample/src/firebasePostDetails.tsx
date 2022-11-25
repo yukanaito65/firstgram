@@ -36,7 +36,7 @@ const icon = postUserData?.icon
     PostUserName:postUserName,
     Icon:icon,
     }
- 
+
   )
 }
 

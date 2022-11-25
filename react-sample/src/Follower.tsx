@@ -1,10 +1,17 @@
-import { collection, doc, getDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Link, Navigate, useLocation } from "react-router-dom";
-import AddFollowButton from "./component/atoms/button/AddFollowButton";
-import FollowButton from "./component/atoms/button/FollowButton";
-import RemoveFollowButton from "./component/atoms/button/RemoveFollowButton";
 import CommonIcon from "./component/atoms/pictures/CommonIcon";
+import Name from "./component/atoms/user/Name";
+import UserName from "./component/atoms/user/UserName";
+import UserList from "./component/pages/UserList";
 import { db } from "./firebase";
 
 interface State {
@@ -45,31 +52,10 @@ function Follower() {
       <Link to={"/profile"} state={{ userId: userId }}>
         ⬅︎
       </Link>
-
-      {followerUsers.length > 0 ? (
-        <div>
-          {followerUsers.map((followerUser: any) => {
-            return (
-              <Link
-                to={followerUser.userId === uid ? "/mypage" : "/profile"}
-                state={{ userId: followerUser.userId }}
-              >
-                <div id={followerUser.userId}>
-                  <CommonIcon icon={followerUser.icon} />
-                  <div>
-                    <p>{followerUser.userName}</p>
-                    <p>{followerUser.name}</p>
-                  </div>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
-      ) : (
-        <div>
-          <p>フォロワーがいません</p>
-        </div>
-      )}
+      <UserList
+      usersData={followerUsers}
+      uid={uid}
+      />
     </>
   ); //return
 }

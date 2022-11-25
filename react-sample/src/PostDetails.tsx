@@ -22,7 +22,7 @@ function PostDetails() {
 const [loginUserPost,setLoginUserPost]=useState(false);
 // ログインしているユーザーのuserNameを格納
 const [loginUserName, setLoginUserName] = useState<any>("");
-// ログインしているユーザーのkeepPostsを格納
+// ログインしているユーザーのkeepPostsを格納(保存ボタン用)
 const [loginUserKeep, setLoginUserKeep] = useState("");
 
 // 画像urlを格納
@@ -42,6 +42,24 @@ const [inputComment, setInputComment] = useState<any>("");
 const [postUserName, setPostUserName] = useState<any>("");
 // iconを格納
 const [icon, setIcon] = useState<any>("");
+
+
+// timeを格納
+const [time, settime] = useState<any>("");
+// yearを格納
+const [year, setYear] = useState<any>("");
+// monthを格納
+const [month, setMonth] = useState<any>("");
+// dayを格納
+const [day, setDay] = useState<any>("");
+// dayを格納
+const [hour, setHour] = useState<any>("");
+// dayを格納
+const [min, setMin] = useState<any>("");
+// dayを格納
+const [seco, setSeco] = useState<any>("");
+
+
 
 // postlookからデータを持ってくる
 const location = useLocation();
@@ -67,8 +85,12 @@ setLoginUserPost(false)
 
 // 画面遷移したら、firestoreから画像、caption,falolites,commmentを取得、保持
 firebasePostDetails(postid,userid).then((postData)=>{
+
 // setKeepList(loginUserKeep);
 // setDisplayPostId(postId)
+
+
+
 setImgUrl(postData.Imgurl)
 setCaption(postData.Caption)
 setFavorites(postData.Favorites)
@@ -144,11 +166,17 @@ return (
 </div>
 <button onClick={AddComment}>コメント</button>
 {/* 保存ボタン追加!ログインユーザーのkeepPosts配列(loginUserKeep)に今表示しているpostのpostId(postId)が存在したら保存解除ボタン、存在しなかったら保存するボタン */}
-{/* {keepList.includes(displayPostId) ? (
-      <RemoveKeepButton postId={displayPostId} />
+{loginUserKeep.includes(postid) ? (
+      <RemoveKeepButton postId={postid} />
 ) : (
+
       <AddKeepButton postId={displayPostId} />
 )} */}
+
+      <AddKeepButton postId={postid} />
+)}
+
+
 {favorites.includes(loginUserName)?(
 <button onClick={NoFavorite}>
 <AiOutlineHeart size={20} color={"rgb(38, 38, 38)"} />
