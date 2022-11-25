@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 function Footer() {
   return (
     <footer className="footer">
-      <Link to="/postLook" className="footer-width">
+      <Link to="/" className="footer-width">
         <div className="footer-border-right" >
           <FaHome size={35} color={"rgb(38, 38, 38)"} />
         </div>
@@ -20,7 +20,7 @@ function Footer() {
       </Link>
 
       <Link to="/mypage/" className="footer-width">
-        <div >
+        <div className="footer-mypage" >
           <MdAccountCircle size={35} color={"rgb(38, 38, 38)"} className="icon" />
         </div>
       </Link>

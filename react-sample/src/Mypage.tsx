@@ -131,7 +131,7 @@ function MyPage() {
 
   return (
     <>
-      <Header />
+      <Header show={true} />
       {/* loadingがfalseのときのみマイページを表示する設定。loadingがfalseのときのみ */}
       {!loading && (
         <>

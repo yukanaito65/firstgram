@@ -11,7 +11,7 @@ import { useEffect } from "react";
 import { onAuthStateChanged } from "@firebase/auth";
 import type { User } from "../../types/types";
 import Icon from "../atoms/pictures/Icon";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import Header from "../molecules/Header";
 import Footer from "../molecules/Footer";
 import { IoIosArrowBack } from "react-icons/io"
@@ -60,6 +60,11 @@ function AccountSettingPage() {
     });
   }, []);
 
+  const navigate = useNavigate();
+  const backBtn = () => {
+    navigate(-1);
+  }
+
   // 各inputの状態管理
   const [userNameValue, setUserNameValue] = useState<any>("");
   const [nameValue, setNameValue] = useState<any>("");
@@ -68,7 +73,7 @@ function AccountSettingPage() {
 
   return (
     <>
-      <Header />
+      <Header show={true} />
       <div>
         <h1 className="margin-bottom_20">プロフィール</h1>
         {user ? (
@@ -121,10 +126,8 @@ function AccountSettingPage() {
                 <button>プロフィール編集</button>
               </Link>
               </div>
-              <div>
-              <Link to="/">
+              <div onClick={backBtn}>
                 <IoIosArrowBack color="white" size={40} className="to_back" />
-              </Link>
             </div>
           </>
         ) : (

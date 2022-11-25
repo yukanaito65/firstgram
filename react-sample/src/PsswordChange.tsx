@@ -25,6 +25,8 @@ import { onAuthStateChanged } from "@firebase/auth";
 import type { User } from "./types/types";
 import Header from "./component/molecules/Header";
 import Footer from "./component/molecules/Footer";
+import { Link } from "react-router-dom";
+import { IoIosArrowBack } from "react-icons/io"
 
 export function PsswordChange() {
   const auth = getAuth();
@@ -193,7 +195,7 @@ export function PsswordChange() {
 
   return (
     <div>
-      <Header />
+      <Header show={true} />
       <h1 className="margin-bottom_20">アカウント情報変更</h1>
       <table className="setting_table">
       <tr>
@@ -274,6 +276,12 @@ export function PsswordChange() {
       <div className="account_delete">
       <button className="margin_left_auto" onClick={userDeleteAlert}>アカウントを削除</button>
       </div>
+
+      <div className="back_btn">
+              <Link to="/">
+                <IoIosArrowBack color="white" size={40} className="to_back" />
+              </Link>
+            </div>
 
       <Footer />
     </div>

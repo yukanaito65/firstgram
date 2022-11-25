@@ -121,7 +121,7 @@ function AccountEditPage() {
 
   return (
     <div>
-      <Header />
+      <Header show={true} />
       <h1 className="margin-bottom_20">プロフィール編集</h1>
       {user ? (
         <>
