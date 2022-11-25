@@ -5,6 +5,11 @@ import { auth, db } from "./firebase";
 import storage from "./firebase-sec";
 import {Link} from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
+import { AiOutlineAreaChart } from "react-icons/ai";
+import Footer from "./component/molecules/Footer";
+import Header from "./component/molecules/Header";
+import "./css/newPost.css";
+
 
 const NewPost = (props:any) => {
     //loadingしているかしてないか監視する
@@ -57,17 +62,23 @@ console.log("テキストの入力がありません")
 }else if(imgSrc === ""){
 console.log("画像の入力がありません")
 }else {
+
+const getRandomArbitrary =(min:number, max:number)=> {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1) + min)
+}
+
 const collectionPost:any =collection(db, "post");
 const docRef = await addDoc(collectionPost,
 {
-
 caption:textState,
 comments:[],
 favorites:[],
 keeps: [],
 imageUrl:imgSrc,
 postDate: serverTimestamp(),
-
+number:getRandomArbitrary(1,5)
 });
 
 // ドキュメント更新(ID取得の為)
@@ -75,8 +86,6 @@ const docImagePost = doc(db, "post", docRef.id);
 updateDoc(docImagePost, {
     postId:docRef.id,
 });
-
-// console.log(auth.currentUser)
 
 // usersのログインしているuserのidを取得
 onAuthStateChanged(auth, async (user) => {
@@ -106,6 +115,7 @@ onAuthStateChanged(auth, async (user) => {
 
 return (
     <>
+    <Header />
     {loading ? (
         <div>
             <button>
@@ -129,18 +139,28 @@ return (
         <Link to="/login/" ><button>戻る</button></Link>
         </div>
     ):(
+
     <div>
-    <input name="imageURL" type="file" accept=".png, .jpeg, .jpg"
-    onChange={ InputImage }/>
-    <textarea rows={10} cols={40} name="inputPost" value={textState}
-    placeholder="コメントを入力してください" onChange={InputText} />
+
+    <div className ="FileBtn ">
+    <AiOutlineAreaChart size={40}/>
+    <input name="imageURL" type="file" accept=".png, .jpeg, .jpg" onChange={ InputImage } />
+    </div>
+    
+    <div className ="Textarea" >
+    <textarea value={textState} placeholder="コメントを入力
+    してください" onChange={InputText} />
+    </div>
+
     <Link to="/NewPost/" ><button onClick={OnFirebase}>投稿</button></Link>
     <Link to="/login/" ><button>戻る</button></Link>
     </div>
     )}
         </>
     )}
+    <Footer />
 </>
+
 );
 };
 
