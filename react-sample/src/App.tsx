@@ -6,7 +6,6 @@ import NewPost from "./NewPost";
 import AccountEditPage from "./component/pages/AccountEditPage";
 import AccountSettingPage from "./component/pages/AccountSettingPage";
 import "./index.css"
-import Top from "./Top";
 // import Follow from "./Follow";
 // import Follower from "./Follower";
 import PostDetails from "./PostDetails";

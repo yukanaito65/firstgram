@@ -1,6 +1,6 @@
 import { arrayUnion, collection, doc, getDoc, updateDoc } from 'firebase/firestore';
 import React from 'react'
-import { db } from './firebase';
+import { db } from '../../firebase';
 
 const FirestoreUpdata= async(id:string,text:string) =>{
     const postDataCollectionRef = collection(db, "post") ;

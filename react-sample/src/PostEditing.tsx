@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import firebasePostDetails from "./firebasePostDetails";
-import FirestoreUpdata from "./FirestoreUpdata";
+import firebasePostDetails from "./component/utils/firebasePostDetails";
+import FirestoreUpdata from "./component/utils/FirestoreUpdata";
 import Footer from "./component/molecules/Footer";
 import Header from "./component/molecules/Header";
 
@@ -35,7 +35,7 @@ FirestoreUpdata(postid,text)
 
 return (
 <>
-<Header />
+<Header show={true} />
 <div>
 <img src={imgUrl} />
 <input type="text" value={text} onChange={(e)=>{setText(e.target.value)}}></input>

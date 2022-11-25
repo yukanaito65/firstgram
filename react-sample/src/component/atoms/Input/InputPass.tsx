@@ -1,21 +1,14 @@
-import React, { useState } from "react";
-
 function InputPass(props:any) {
-  // const [textState, setTextState] = useState("");
-
-  // const passChange = (e: any) => {
-  //   setTextState(e.target.value);
-  //   props.handleChange();
-  // }
 
   return (
     <div>
       <input
         type="password"
         name="password"
-        value={props.loginEmail}
+        value={props.loginPassword}
         placeholder="パスワード"
-        onChange={props.handleChange}
+        onChange={props.passChange}
+        style={{width:"80%", height: "35px", backgroundColor: "#f7f7f7",outline: "solid #d3d3d3", border: "none"}}
       />
     </div>
   );

@@ -1,6 +1,6 @@
 import { arrayUnion, collection, doc, updateDoc } from 'firebase/firestore';
 import React, { useState } from 'react'
-import { db } from './firebase';
+import { db } from '../../../firebase';
 import NoFavBtn from './NoFavBtn';
 
 interface State {

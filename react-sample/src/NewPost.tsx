@@ -115,7 +115,7 @@ onAuthStateChanged(auth, async (user) => {
 
 return (
     <>
-    <Header />
+    <Header show={true} />
     {loading ? (
         <div>
             <button>
@@ -147,7 +147,7 @@ return (
     <AiOutlineAreaChart size={40}/>
     <input name="imageURL" type="file" accept=".png, .jpeg, .jpg" onChange={ InputImage } />
     </div>
-    
+
     <div className ="Textarea" >
     <textarea value={textState} placeholder="コメントを入力
     してください" onChange={InputText} />

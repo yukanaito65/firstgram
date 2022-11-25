@@ -1,6 +1,6 @@
 import { doc, getDoc } from "firebase/firestore";
 import { useState } from "react";
-import { db } from "../firebase";
+import { db } from "../../firebase";
 
 // ドキュメント名を引数に取る
 // interface Props {
@@ -24,7 +24,7 @@ import { db } from "../firebase";
 export async function GetUsersData() {
 
     const [userData, setUserData] = useState<any>("")
-    
+
       const userDocumentRef = doc(db, "user", "8Ui1g5IHmhXMALQDWmEj5JXkirr1");
       getDoc(userDocumentRef).then((documentSnapshot) => {
         if (documentSnapshot.exists()) {
@@ -34,9 +34,9 @@ export async function GetUsersData() {
           console.log("No such document!");
         }
       });
-      
+
       return (
         <p>{userData}</p>
       )
-    
+
     }

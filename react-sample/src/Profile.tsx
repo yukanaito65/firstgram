@@ -128,7 +128,7 @@ function Profile() {
     <>
       {!loading && (
         <>
-          <Header />
+          <Header show={true} />
           <div>
             <div
               style={{

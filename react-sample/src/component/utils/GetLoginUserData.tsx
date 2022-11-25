@@ -1,5 +1,5 @@
 import { collection, doc, getDoc } from 'firebase/firestore';
-import { db } from './firebase';
+import { db } from '../../firebase';
 
 const GetLoginUserData =async(user:any) =>{
     // onAuthStateChanged(auth, async (user) => {

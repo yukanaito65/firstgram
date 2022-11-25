@@ -2,15 +2,17 @@
 import { auth, db } from "./firebase";
 import {collection,getDoc,doc, deleteDoc, updateDoc, arrayUnion, arrayRemove,} from "firebase/firestore";
 import { Link, useLocation } from "react-router-dom";
-import firebasePostDetails from "./firebasePostDetails";
+import firebasePostDetails from "./component/utils/firebasePostDetails";
 import { onAuthStateChanged } from "firebase/auth";
-import LoginUserName from "./GetLoginUserData";
+import LoginUserName from "./component/utils/GetLoginUserData";
 import Footer from "./component/molecules/Footer";
 import Header from "./component/molecules/Header";
-import GetLoginUserData from "./GetLoginUserData";
-import FavoriteUpdata from "./FavoriteUpdata";
+import GetLoginUserData from "./component/utils/GetLoginUserData";
+import FavoriteUpdata from "./component/utils/FavoriteUpdata";
 import { AiFillHeart,AiOutlineHeart } from "react-icons/ai";
 import CommonIcon from "./component/atoms/pictures/CommonIcon";
+import RemoveKeepButton from "./component/atoms/button/RemoveKeepButton";
+import AddKeepButton from "./component/atoms/button/AddKeepButton";
 
 interface State {
       postid:string,
@@ -155,7 +157,7 @@ await deleteDoc(doc(db, "post", postid));
 }
 return (
 <>
-<Header />
+<Header show={true} />
 {/* <img src={icon} /> */}
 <Link to="/profile" state={{ userId: userid}}><CommonIcon icon={icon}/></Link>
 <p>{postUserName}</p>
@@ -169,10 +171,6 @@ return (
 {loginUserKeep.includes(postid) ? (
       <RemoveKeepButton postId={postid} />
 ) : (
-
-      <AddKeepButton postId={displayPostId} />
-)} */}
-
       <AddKeepButton postId={postid} />
 )}
 

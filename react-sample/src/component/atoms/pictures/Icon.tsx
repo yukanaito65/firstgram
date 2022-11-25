@@ -57,18 +57,18 @@ function Icon() {
       {!loading && (
         <div
           className="icon-image"
-          style={{
-            borderRadius: "50%",
-            width: "120px",
-            height: "120px",
-            border: "solid 1px lightgray",
-          }}
+          // style={{
+          //   borderRadius: "50%",
+          //   width: "120px",
+          //   height: "120px",
+          //   border: "solid 1px lightgray",
+          // }}
         >
           {user && users.icon !== "" ? (
             <img
               src={users.icon}
               alt="icon"
-              style={{ width: "100%", height: "100%", objectFit: "cover",borderRadius: "50%" }}
+              // style={{ width: "100%", height: "100%", objectFit: "cover",borderRadius: "50%" }}
             />
           ) : (
             <img
