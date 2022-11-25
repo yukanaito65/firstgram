@@ -7,7 +7,6 @@ import { auth, db } from './firebase';
 import NoFavBtn from './NoFavBtn';
 import Footer from "./component/molecules/Footer";
 import Header from "./component/molecules/Header";
-import LoginUserName from './GetLoginUserData';
 import GetLoginUserName from './GetLoginUserData';
 
 
