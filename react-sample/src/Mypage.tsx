@@ -146,7 +146,6 @@ function MyPage() {
                 <Link to={"/AccountSettingPage"}>
                   <button>設定</button>
                 </Link>
-                <LogoutButton />
                 <Link to="/NewPost/">
                   <button>新規投稿</button>
                 </Link>
