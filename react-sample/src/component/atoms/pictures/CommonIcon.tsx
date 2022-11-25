@@ -6,16 +6,16 @@ function CommonIcon(props: any) {
       className="icon-image"
       style={{
         borderRadius: "50%",
-        width: "100px",
-        height: "100px",
-        border: "2px, lightgray",
+        width: "120px",
+        height: "120px",
+        border: "solid 1px lightgray",
       }}
     >
       {props.icon !== "" ? (
         <img
           src={props.icon}
           alt="icon"
-          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          style={{ width: "100%", height: "100%", objectFit: "cover",borderRadius:"50%" }}
         />
       ) : (
         <img
@@ -25,6 +25,7 @@ function CommonIcon(props: any) {
             width: "100%",
             height: "100%",
             backgroundColor: "#d3d3d3",
+            borderRadius: "50%",
           }}
         />
       )}

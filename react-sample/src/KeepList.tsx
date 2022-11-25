@@ -4,6 +4,8 @@ import { setUseProxies } from "immer";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import MyPost from "./component/atoms/pictures/MyPost";
+import Footer from "./component/molecules/Footer";
+import Header from "./component/molecules/Header";
 import { auth, db } from "./firebase";
 
 function KeepList() {
@@ -76,6 +78,7 @@ function KeepList() {
     <>
       {!loading && (
         <>
+        <Header show={true} />
           <Link to={"/mypage"}>⬅︎</Link>
 
           {keepPostIds.length > 0 ? (
@@ -86,8 +89,8 @@ function KeepList() {
                   to={"/PostDetails"}
                   state={{ userId: keepPost.userId, postId: keepPost.postId }}
                 >
-                  {/* <MyPost imageUrl={keepPost.imageUrl} /> */}
-                  <img src={keepPost.imageUrl} alt="投稿" />
+                  <MyPost imageUrl={keepPost.imageUrl} />
+                  {/* <img src={keepPost.imageUrl} alt="投稿" /> */}
                 </Link>
             );
           })}
@@ -97,6 +100,7 @@ function KeepList() {
               <p>保存済みの投稿はありません</p>
             </div>
           )}
+          <Footer />
         </>
       )}
     </>

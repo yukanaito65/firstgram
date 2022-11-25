@@ -1,15 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 
+function InputEmail(props:any) {
+  // const [textState, setTextState] = useState("");
 
-function InputEmail() {
-    const [textState, setTextState] = useState("");
-    const handleChange = (e:any) => setTextState(e.target.value)
+  // const emailChange = (e: any) => {
+  //   setTextState(e.target.value);
+  //   props.handleChange();
+  // };
+
   return (
     <div>
-    <input type="email" name="inputEmail" value={textState} placeholder="メールアドレスを入力してください" onChange={handleChange} />
+      <input
+        type="email"
+        name="email"
+        value={props.loginPassword}
+        placeholder="メールアドレス"
+        onChange={props.handleChange}
+      />
     </div>
-  )
+  );
 }
 
-
-export default InputEmail
+export default InputEmail;

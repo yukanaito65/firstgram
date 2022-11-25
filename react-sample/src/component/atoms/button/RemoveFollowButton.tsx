@@ -90,22 +90,22 @@ function RemoveFollowButton(props: any) {
     <>
       {!loading && (
         <>
-
-
           {followBtn === true ? (
             <>
+            <span style={{position: "absolute", top: "20%", left: "75%" }}>
+            <FollowerCount
+              followerList={followerList}
+              link={"/follower"}
+              userId={props.userId}
+              uid={user.uid}
+              />
+              </span>
             <button onClick={() =>{
                removeFollow()
               //  window.location.reload()
               }
               }>フォロー中</button>
               {/* <p>{followerList.length}</p> */}
-              <FollowerCount
-              followerList={followerList}
-              link={"/follower"}
-              userId={props.userId}
-              uid={user.uid}
-              />
               </>
           ) : (
             <AddFollowButton userId={props.userId} />

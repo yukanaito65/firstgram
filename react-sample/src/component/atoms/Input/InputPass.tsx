@@ -1,17 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 
-interface Props {
-    placeHolder: string;
-  }
+function InputPass(props:any) {
+  // const [textState, setTextState] = useState("");
 
-function InputPass({ placeHolder }: Props) {
-    const [textState, setTextState] = useState("");
-    const handleChange = (e:any) => setTextState(e.target.value)
+  // const passChange = (e: any) => {
+  //   setTextState(e.target.value);
+  //   props.handleChange();
+  // }
+
   return (
     <div>
-    <input type="password" name="inputPass" value={textState} placeholder={placeHolder} onChange={handleChange} />
+      <input
+        type="password"
+        name="password"
+        value={props.loginEmail}
+        placeholder="パスワード"
+        onChange={props.handleChange}
+      />
     </div>
-  )
+  );
 }
 
-export default InputPass
+export default InputPass;

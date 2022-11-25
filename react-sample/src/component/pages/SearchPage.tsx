@@ -156,7 +156,7 @@ const location = useLocation();
         placeholder="検索ワードを入力"
       />
       <button
-      className="dampage_form_btn"
+      className="searchpage_form_btn"
       onClick={() => onClickSearch()}>検索</button>
       </div>
       </form>
@@ -172,7 +172,11 @@ const location = useLocation();
           </>
           )
         })
-      ) : (<p>該当するユーザーがいません</p>)
+      ) : (
+        <div className="no_matchUser">
+      <p>該当するユーザーがいません</p>
+      </div>
+      )
       }
       <Footer />
     </>

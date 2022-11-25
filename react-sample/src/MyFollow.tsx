@@ -9,10 +9,8 @@ import {
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import CommonIcon from "./component/atoms/pictures/CommonIcon";
-import Name from "./component/atoms/user/Name";
-import UserName from "./component/atoms/user/UserName";
-import User from "./component/molecules/UserData";
+import Footer from "./component/molecules/Footer";
+import Header from "./component/molecules/Header";
 import UserList from "./component/pages/UserList";
 import { auth, db } from "./firebase";
 
@@ -84,6 +82,7 @@ function MyFollow() {
     <>
       {!loading && (
         <>
+        <Header show={true} />
           <Link to={"/mypage"}>⬅︎</Link>
 
           <UserList
@@ -111,6 +110,7 @@ function MyFollow() {
               <p>フォローしている人がいません</p>
             </div>
           )} */}
+          <Footer />
         </>
       )}
     </>

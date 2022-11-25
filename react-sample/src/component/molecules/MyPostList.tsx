@@ -6,10 +6,10 @@ function MyPostList(props: any) {
   return (
     <div>
       {props.posts.length > 0 ? (
-        <div>
+        <div style={{display: "grid", gap:"0.5%", marginTop: "20px", flexWrap: "wrap", width:"100%", height: "auto", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))"}}>
           {props.posts.map((post: any) => {
             return (
-              <>
+              <div style={{width: "300px", height: "300px", objectFit: "cover"}}>
                 <Link
                   to="/PostDetails"
                   state={{
@@ -19,7 +19,7 @@ function MyPostList(props: any) {
                 >
                   <MyPost imageUrl={post.imageUrl} />
                 </Link>
-              </>
+              </div>
             );
           })}
         </div>
