@@ -1,48 +1,46 @@
 import { onAuthStateChanged } from 'firebase/auth';
+
+
 import { collection, doc, getDoc, getDocs, query, updateDoc, where ,serverTimestamp, arrayUnion} from 'firebase/firestore';
 import { connectStorageEmulator } from 'firebase/storage';
 import React, { useEffect, useState } from 'react'
 import { Link, useActionData, useLocation, useRouteLoaderData } from 'react-router-dom';
 import AddKeepButton from './component/atoms/button/AddKeepButton';
 import RemoveKeepButton from './component/atoms/button/RemoveKeepButton';
+
 import AddFavBtn from './AddFavBtn';
-// import { setOriginalNode } from 'typescript';
-// import FavolitePostLook from './FavolitePostLook';
 import { auth, db } from './firebase';
-import firebasePostDetails from './firebasePostDetails';
 import NoFavBtn from './NoFavBtn';
-// import FollowUserPostFirebase from './FollowUserPostFirebase';
+import Footer from "./component/molecules/Footer";
+import Header from "./component/molecules/Header";
+import GetLoginUserName from './GetLoginUserData';
+
 
 
 function PostLook() {
 // followuserのpostidからとってきたpostData
 const [postData, setPostData] = useState<any>([]);
-// userName保持
-const[userName,setUserName]=useState("");
-
+// followuserのpostidからとってきたpostData
+const [ramData, setRamData] = useState<any>([]);
 // postid保持
 const[postId,setPostId]=useState<any>("");
-
-// favolites保持
-const[favorites,setFavorites]=useState<any>([]);
-
-// style有無判定
-const [none,setNone]=useState<boolean>(false)
-
-// commentを格納
-const [displayComment, setDisplayComment] = useState<any>([]);
-
 // inputcommentを格納
 const [inputComment, setInputComment] = useState<any>("");
-
 // ログインしているユーザーのuserNameを格納
 const [loginUserName, setLoginUserName] = useState<any>("");
 
-//保存ボタン用
+
+// ログインしているユーザーのfollowしている人のIdの配列
+const [followUser, setFollowUser] = useState<any>([]);
+
+// ログインしているユーザーのpostの配列
+const [myPostId, setMyPostID] = useState<any>([]);
+
 const [loginUserKeep, setLoginUserKeep] = useState<any>("");
 
 //
 const [postDataSecond,  setPostDataSecond] = useState<any>({});
+
 
 
 
@@ -59,7 +57,6 @@ const [postDataSecond,  setPostDataSecond] = useState<any>({});
 
 const postData2=[...postData]
     for(let i = 0; i<postData.length; i++){
-        console.log(postId)
         if(postData[i].postId === postId){
             postData2[i].favorites.push()
         }
@@ -70,40 +67,38 @@ const postData3=[...postData]
         if(postData[i].postId === postId){
             postData3[i].comments.push()
         }
-    }
 
-
+    } 
 
 useEffect(()=>{
-//ログイン判定
 onAuthStateChanged(auth, async (user) => {
-    // ログインしているユーザーのuserNameをuseStateで保持
-    const userDatas = doc(collection(db, "user"), user?.uid);
-    const  userDataGet = await getDoc(userDatas);
-    const userData = userDataGet.data();
-    const userName =userData?.userName
-    setLoginUserName(userName)
-
-    const keepPosts = userData?.keepPosts;
-    setLoginUserKeep(keepPosts);
+// ログインしているユーザーのuserNameをuseStateで保持
+GetLoginUserName(user).then((loginUserData:any)=>{
+        setLoginUserName(loginUserData.userName);
+})
 
     if (!user) {
     console.log("ログアウト状態です");
     } else {
-    //ログインしているユーザーのドキュメントへの参照を取得
-    const docusesinformation = doc(db, "user", user.uid);
-    //上記を元にドキュメントのデータを取得
-    const userDataDoc =  await getDoc(docusesinformation);
-    //取得したデータから必要なものを取り出す
-    const userDatas = userDataDoc.data();
-    // ログインしているユーザーのフォローしている人のuseridを配列に格納
-    const UseLoginUserFollowUserIdArray =  userDatas?.follow
 
 
+    // ログインしているユーザーのデータ取得
+    // GetLoginUserName(user).then((loginUserData:any)=>{
+    //     setFollowUser(loginUserData.follow);
+    //     setMyPostID(loginUserData.post)
+    // })
 
-    // ログインしてるuserのuserName取得
-    const username =  userDatas?.userName
-    setUserName(username)
+        //ログインしているユーザーのドキュメントへの参照を取得
+        const docusesinformation = doc(db, "user", user.uid);
+        //上記を元にドキュメントのデータを取得
+        const userDataDoc =  await getDoc(docusesinformation);
+        //取得したデータから必要なものを取り出す
+        const userDatas = userDataDoc.data();
+        // ログインしているユーザーのフォローしている人のuseridを配列に格納
+        const UseLoginUserFollowUserIdArray =  userDatas?.follow
+
+
+        setFollowUser(UseLoginUserFollowUserIdArray)
 
     const postDataArray:any[]=[];
 
@@ -112,13 +107,10 @@ onAuthStateChanged(auth, async (user) => {
     const q = query(collection(db, "post"), where("userId", "==", followUserId));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
-        // console.log(doc.id, " => ", doc.data());
         const followUserPost =(doc.id, " => ", doc.data());
-        // console.log(followUserPost)
         postDataArray.push(followUserPost)
     });
     })
-
     // ログインしているユーザーのpost情報を配列に格納
     const myPostId = userDatas?.post
     for(let postid of myPostId ){
@@ -132,86 +124,155 @@ onAuthStateChanged(auth, async (user) => {
     // データを保持
     setPostData(postDataArray)
 
-}})
+// ランダムの数値のpostを取得
+    const getRandomArbitrary =(min:number, max:number)=> {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1) + min)
+    }
 
+    const randomArray:any[]=[];
+    const q = query(collection(db, "post"), where("number", "==", getRandomArbitrary(1,5)));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+        const followUserPost =(doc.id, " => ", doc.data());
+        randomArray.push(followUserPost)
+    });
+    setRamData(randomArray)
+
+
+
+}})
 },
 []
 // [postData]
 )
 
-const narabikae = [postData];
+
+
+
+// 日付順に並び替え
 postData.sort((a: any, b: any) => {
 return a.postDate.toDate() > b.postDate.toDate()  ? -1 : 1;
 });
-console.log(postData)
+
 return (
 <>
+<Header />
 <div>
-{postData.map((data:any,index:any)=>{
-    const timestamp = data.postDate.toDate()
-    const year = timestamp.getFullYear()
-    const month = (timestamp.getMonth()+1)
-    const day = timestamp.getDate()
-    const hour = timestamp.getHours()
-    const min = timestamp.getMinutes()
-    const seco = timestamp.getSeconds()
-    return(
+{followUser.length === 0 ? (
     <>
-    <div key={index}>
-    <p>{data.caption}</p>
-    <Link to="/PostDetails" state={{postid:data.postId,userid:data.userId}}><img src={data.imageUrl} /></Link>
-    <div>{year}年{month}月{day}日{hour}:{min}:{seco}</div>
-
-
-        {/* setPostData(() => postData3) */}
-        setInputComment("")
-
-
+    {console.log("followUserない")}
+    <div>
+    {ramData.map((data:any,index:any)=>{
+        const timestamp = data.postDate.toDate()
+        const year = timestamp.getFullYear()
+        const month = (timestamp.getMonth()+1)
+        const day = timestamp.getDate()
+        const hour = timestamp.getHours()
+        const min = timestamp.getMinutes()
+        const seco = timestamp.getSeconds()
+        return(
+        <>
+        <div key={index}>
+        <p>{data.caption}</p>
+        <Link to="/PostDetails" state={{postid:data.postId,userid:data.userId}}><img src={data.imageUrl} /></Link>
+        <div>{year}年{month}月{day}日{hour}:{min}:{seco}</div>
+    
     {data.favorites.includes(loginUserName)?(
-    <NoFavBtn postId={data.postId} userName={userName} />
+    <NoFavBtn postId={data.postId} userName={loginUserName} />
+    ):(
+    <AddFavBtn postId={data.postId} userName={loginUserName} />
+    )}
+    
+    <input type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)}} />
+    <button onClick={async(e:any)=>{
+    // 押された投稿のcommentにinputCommentを配列で追加
+    updateDoc(doc(collection(db, "post"), data.postId), {
+    comments:arrayUnion({userName:loginUserName,commentText:inputComment}),
+    });
+    setPostData(()=>postData3)
+    setInputComment("")
+    }}>コメント</button>
+    <p>♡:{data.favorites}</p>
+    <div>コメント:
+    {data.comments.map((com:any,index:any)=>{
+        return(
+        <div key={index}>
+        <p>{com.userName}</p>
+        <p>{com.commentText}</p>
+        </div>
+        )
+    })}
+    </div>
+    </div>
+    </>
+    )
+    })}
+    </div>
+    <Link to="/mypage"><button>マイページ</button></Link>
+    </>
+
 ):(
-    <AddFavBtn postId={data.postId} userName={userName} />
-)
-}
 
-<input type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)}} />
-<button onClick={async(e:any)=>{
-// 押された投稿のcommentにinputCommentを配列で追加
-updateDoc(doc(collection(db, "post"), data.postId), {
-comments:arrayUnion({userName:loginUserName,commentText:inputComment}),
-});
-setPostData(()=>postData3)
-setInputComment("")
-
-}}>コメント</button>
-
-{loginUserKeep.includes(data.postId) ? (
-      <RemoveKeepButton postId={data.postId} />
-) : (
-      <AddKeepButton postId={data.postId} />
+    <>
+    { console.log("followUserある")}
+    <div>
+    {postData.map((data:any,index:any)=>{
+        const timestamp = data.postDate.toDate()
+        const year = timestamp.getFullYear()
+        const month = (timestamp.getMonth()+1)
+        const day = timestamp.getDate()
+        const hour = timestamp.getHours()
+        const min = timestamp.getMinutes()
+        const seco = timestamp.getSeconds()
+        return(
+        <>
+        <div key={index}>
+        <p>{data.caption}</p>
+        <Link to="/PostDetails" state={{postid:data.postId,userid:data.userId}}><img src={data.imageUrl} /></Link>
+        <div>{year}年{month}月{day}日{hour}:{min}:{seco}</div>
+    
+        {data.favorites.includes(loginUserName)?(
+        <NoFavBtn postId={data.postId} userName={loginUserName} />
+    ):(
+        <AddFavBtn postId={data.postId} userName={loginUserName} />
+    )
+    }
+    
+    <input type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)}} />
+    <button onClick={async(e:any)=>{
+    // 押された投稿のcommentにinputCommentを配列で追加
+    updateDoc(doc(collection(db, "post"), data.postId), {
+    comments:arrayUnion({userName:loginUserName,commentText:inputComment}),
+    });
+    setPostData(()=>postData3)
+    setInputComment("")
+    }}>コメント</button>
+    <p>♡:{data.favorites}</p>
+    {/* <p>♡：{favorites}</p> */}
+    <div>コメント:
+    {/* {displayComment.map((data:any,index:any)=>{ */}
+    {data.comments.map((com:any,index:any)=>{
+        return(
+        <div key={index}>
+        <p>{com.userName}</p>
+        <p>{com.commentText}</p>
+        </div>
+        )
+    })}
+    </div>
+    
+        </div>
+         </>
+        )
+    })}
+    </div>
+    <Link to="/mypage"><button>マイページ</button></Link>
+    </>
 )}
-
-<p>♡:{data.favorites}</p>
-{/* <p>♡：{favorites}</p> */}
-<div>コメント:
-{/* {displayComment.map((data:any,index:any)=>{ */}
-{data.comments.map((com:any,index:any)=>{
-    return(
-    <div key={index}>
-    <p>{com.userName}</p>
-    <p>{com.commentText}</p>
-    </div>
-    )
-})}
 </div>
-
-    </div>
-     </>
-    )
-})}
-</div>
-
-<Link to="/mypage"><button>マイページ</button></Link>
+<Footer />
 </>
 )
 };
