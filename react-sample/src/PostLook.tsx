@@ -163,7 +163,7 @@ return (
     <div>{year}年{month}月{day}日{hour}:{min}:{seco}</div>
 
 
-        setPostData(()=>postData3)
+        {/* setPostData(() => postData3) */}
         setInputComment("")
 
 
