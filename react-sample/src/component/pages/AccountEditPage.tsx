@@ -14,6 +14,9 @@ import { Link,useNavigate } from "react-router-dom";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import storage from "../../firebase-sec";
 import { getAuth } from "firebase/auth";
+import Header from "../molecules/Header";
+import Footer from "../molecules/Footer";
+import { IoIosArrowBack } from "react-icons/io"
 
 function AccountEditPage() {
   //ログイン状態を保持
@@ -118,41 +121,52 @@ function AccountEditPage() {
 
   return (
     <div>
-      <h1>設定</h1>
+      <Header show={true} />
+      <h1 className="margin-bottom_20">プロフィール編集</h1>
       {user ? (
         <>
-          <form>
-            <label htmlFor="settingIcon">アイコン</label>
+            <table className="setting_table">
             {loading ? (
               <p>アップロード中</p>
             ) : (
               <>
                 {isUploaded ? (
-                  <div>
-                    <img alt="" src={iconValue} />
+                  <tr>
+                    <td className="icon-image setting_table_td">
+                    <img alt="ユーザーアイコン" src={iconValue} />
+                    </td>
+                    <td className="setting_table_td">
                     <input
                       name="settingIcon"
                       type="file"
                       accept=".png, .jpeg, .jpg"
                       onChange={InputImage}
                     />
-                  </div>
+                    </td>
+                  </tr>
                 ) : (
-                  <div>
-                    <img alt="" src={iconValue} />
+                  <tr>
+                    <td className="icon-image setting_table_td">
+                    <img alt="ユーザーアイコン" src={iconValue} />
+                    </td>
+                    <td className="setting_table_td">
                     <input
                       name="settingIcon"
                       type="file"
                       accept=".png, .jpeg, .jpg"
                       onChange={InputImage}
                     />
-                  </div>
+                    </td>
+                  </tr>
                 )}
               </>
             )}
-
-            <div>
+            
+            <tr>
+              <td className="setting_table_title setting_table_td">
               <label htmlFor="settingUserName">ユーザーネーム</label>
+              </td>
+              <td className="setting_table_content setting_table_td">
               <input
                 type="text"
                 value={userNameValue}
@@ -160,10 +174,14 @@ function AccountEditPage() {
                 name="settingUserName"
                 id="settingUserName"
               ></input>
-            </div>
+              </td>
+            </tr>
 
-            <div>
+            <tr>
+              <td className="setting_table_title setting_table_td">
               <label htmlFor="settingName">名前</label>
+              </td>
+              <td className="setting_table_content setting_table_td">
               <input
                 type="text"
                 value={nameValue}
@@ -171,28 +189,38 @@ function AccountEditPage() {
                 name="settingName"
                 id="settingName"
               ></input>
-            </div>
+              </td>
+            </tr>
 
-            <div>
+            <tr>
+              <td className="setting_table_title setting_table_td">
               <label htmlFor="settingProfile">自己紹介</label>
-              <input
-                type="textarea"
+              </td>
+              <td className="setting_table_content setting_table_td">
+              <textarea
                 value={profileValue}
                 onChange={(e) => setProfileValue(e.target.value)}
                 name="settingProfile"
                 id="settingProfile"
-              ></input>
-            </div>
-
+                cols={40}
+                rows={3}
+              ></textarea>
+              </td>
+            </tr>
+            </table>
+            <div className="confirm_btn">
               <button onClick={handleSubmit}>確定</button>
-          </form>
+            </div>
+            <div>
           <Link to="/AccountSettingPage">
-            <button>戻る</button>
+            <IoIosArrowBack size={40} color="white" className="to_back"/>
           </Link>
+          </div>
         </>
       ) : (
         <p>データが表示されません</p>
       )}
+      <Footer />
     </div>
   );
 }

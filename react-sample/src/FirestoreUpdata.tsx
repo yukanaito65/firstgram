@@ -1,4 +1,4 @@
-import { collection, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { arrayUnion, collection, doc, getDoc, updateDoc } from 'firebase/firestore';
 import React from 'react'
 import { db } from './firebase';
 
@@ -10,9 +10,13 @@ const FirestoreUpdata= async(id:string,text:string) =>{
     updateDoc(postDataDocRefId, {
         caption:text,
     });
+    // updateDoc(postDataDocRefId, {
+    //   favorites:arrayUnion(userName),
+    // });
   return (
     {
-    text:text
+    text:text,
+    // favorites:userName
     }
   )
 }

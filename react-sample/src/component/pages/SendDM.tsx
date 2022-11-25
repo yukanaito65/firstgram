@@ -26,14 +26,15 @@ import { auth } from "../../firebase";
     return (
       <div>
         {/* form入力をし、enterキーを押したときにonSubmitの中の関数が実行される */}
-        <form onSubmit={sendMessage}>
-          <div>
+        <form onSubmit={sendMessage} className="dmpage_form">
+          <div className="dmpage_form_wrapper">
             <input
-              placeholder="メッセージを入力"
+            className="dmpage_form_input"
+              placeholder="メッセージを入力..."
               onChange={(e) => setMessage(e.target.value)}
               value={message}
             />
-            <button>送信</button>
+            <button className="dmpage_form_btn">送信</button>
           </div>
         </form>
         <div>{message}</div>

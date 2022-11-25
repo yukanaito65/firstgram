@@ -20,7 +20,7 @@ function Footer() {
       </Link>
 
       <Link to="/mypage/" className="footer-width">
-        <div >
+        <div className="footer-mypage" >
           <MdAccountCircle size={35} color={"rgb(38, 38, 38)"} className="icon" />
         </div>
       </Link>

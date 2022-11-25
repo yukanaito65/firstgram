@@ -82,7 +82,7 @@ function MyFollow() {
     <>
       {!loading && (
         <>
-        <Header />
+        <Header show={true} />
           <Link to={"/mypage"}>⬅︎</Link>
 
           <UserList

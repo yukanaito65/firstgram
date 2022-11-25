@@ -11,6 +11,7 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import storage from "./firebase-sec";
 import RegisterForm from "./component/molecules/RegisterForm";
 import Logo from "./component/atoms/pictures/Logo";
+import Header from "./component/molecules/Header";
 
 function Register() {
   // //ログイン状態保持(userが値を持てばログイン状態)
@@ -124,6 +125,7 @@ function Register() {
 
   return (
     <>
+    <Header show={false} />
       {/* ログインしていればtopを表示。Navigateで指定したページにリダイレクトする */}
       {user ? (
         <Navigate to={`/`} />

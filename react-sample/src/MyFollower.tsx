@@ -79,7 +79,7 @@ function MyFollower() {
     <>
       {!loading && (
         <>
-        <Header />
+        <Header show={true} />
           <Link to={"/mypage"}>⬅︎</Link>
           <UserList
           usersData={followerUsers}

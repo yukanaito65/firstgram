@@ -20,6 +20,7 @@ function Login() {
 
   return (
     <>
+    <Header show={false} />
       {/* ログインしている場合、マイページにリダイレクトする設定 */}
       {user ? (
         <Navigate to={`/mypage`} />

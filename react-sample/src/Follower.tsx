@@ -48,7 +48,7 @@ function Follower() {
 
   return (
     <>
-    <Header />
+    <Header show={true} />
       <Link to={"/profile"} state={{ userId: userId }}>
         ⬅︎
       </Link>

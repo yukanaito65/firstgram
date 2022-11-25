@@ -78,7 +78,7 @@ function KeepList() {
     <>
       {!loading && (
         <>
-        <Header />
+        <Header show={true} />
           <Link to={"/mypage"}>⬅︎</Link>
 
           {keepPostIds.length > 0 ? (

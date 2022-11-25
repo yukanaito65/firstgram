@@ -1,18 +1,20 @@
- import { useEffect, useId, useState } from "react";
+ import { useEffect, useState } from "react";
 import { auth, db } from "./firebase";
-import {collection,getDoc,doc,CollectionReference, deleteDoc, deleteField, updateDoc, arrayUnion, query, where, getDocs, arrayRemove,} from "firebase/firestore";
+import {collection,getDoc,doc, deleteDoc, updateDoc, arrayUnion, arrayRemove,} from "firebase/firestore";
 import { Link, useLocation } from "react-router-dom";
 import firebasePostDetails from "./firebasePostDetails";
-import { onAuthStateChanged, updateCurrentUser } from "firebase/auth";
-import { current } from "@reduxjs/toolkit";
+import { onAuthStateChanged } from "firebase/auth";
+import LoginUserName from "./GetLoginUserData";
+import Footer from "./component/molecules/Footer";
+import Header from "./component/molecules/Header";
+import GetLoginUserData from "./GetLoginUserData";
+import FavoriteUpdata from "./FavoriteUpdata";
+import { AiFillHeart,AiOutlineHeart } from "react-icons/ai";
 import CommonIcon from "./component/atoms/pictures/CommonIcon";
-import RemoveKeepButton from "./component/atoms/button/RemoveKeepButton";
-import AddKeepButton from "./component/atoms/button/AddKeepButton";
 
 interface State {
       postid:string,
       userid:string
-
 }
 
 function PostDetails() {
@@ -34,14 +36,13 @@ const [favorites, setFavorites] = useState<any>([]);
 
 // commentを格納
 const [displayComment, setDisplayComment] = useState<any>([]);
-
 // inputcommentを格納
 const [inputComment, setInputComment] = useState<any>("");
-
 // postUserNameを格納
 const [postUserName, setPostUserName] = useState<any>("");
 // iconを格納
 const [icon, setIcon] = useState<any>("");
+
 
 // timeを格納
 const [time, settime] = useState<any>("");
@@ -59,6 +60,7 @@ const [min, setMin] = useState<any>("");
 const [seco, setSeco] = useState<any>("");
 
 
+
 // postlookからデータを持ってくる
 const location = useLocation();
 const {postid,userid} = location.state as State
@@ -66,28 +68,28 @@ const {postid,userid} = location.state as State
 useEffect(()=>{
 //ログイン判定
 onAuthStateChanged(auth, async (user) => {
-      // ログインしているユーザーのuserNameをuseStateで保持
-      const userDatas = doc(collection(db, "user"), user?.uid);
-      const  userDataGet = await getDoc(userDatas);
-      const userData = userDataGet.data();
-      const userName =userData?.userName
-      setLoginUserName(userName);
 
-      const keepPosts = userData?.keepPosts;
-      setLoginUserKeep(keepPosts);
+GetLoginUserData(user).then((loginUserData:any)=>{
+setLoginUserName(loginUserData.userName);
+setLoginUserKeep(loginUserData.keepPosts);
+})
 
-      if(user?.uid === userid){
-      // useStateでログインしているユーザーの投稿かどうか判定するを保持
-      setLoginUserPost(true)
-      }else{
-      setLoginUserPost(false)
-      }
+if(user?.uid === userid){
+// useStateでログインしているユーザーの投稿かどうか判定するを保持
+setLoginUserPost(true)
+}else{
+setLoginUserPost(false)
+}
 })
 
 
 // 画面遷移したら、firestoreから画像、caption,falolites,commmentを取得、保持
-
 firebasePostDetails(postid,userid).then((postData)=>{
+
+// setKeepList(loginUserKeep);
+// setDisplayPostId(postId)
+
+
 
 setImgUrl(postData.Imgurl)
 setCaption(postData.Caption)
@@ -97,82 +99,43 @@ setTime(postData.Time)
 setPostUserName(postData.PostUserName)
 setIcon(postData.Icon)
 })
-
-// settime(Time.toDate())
-// setYear(time.getFullYear())
-// setMonth((time.getMonth()+1))
-// setDay(time.getDate())
-// setHour(time.getHours())
-// setMin(time.getMinutes())
-// setSeco(time.getSeconds())
-
 }, [])
 
-      // お気に入りボタンがクリックされたら
-      const Favorite = async(e:any)=>{
-
+// お気に入りボタンがクリックされたら
+const Favorite = async(e:any)=>{
       // 押された投稿のFavolitesにloginUserNameを配列で追加
-      const postDataDocRefId = doc(collection(db, "post"), postid);
-
-      console.log(loginUserName)
-      updateDoc(postDataDocRefId, {
-            favorites:arrayUnion(loginUserName),
-      });
+      FavoriteUpdata(postid,loginUserName,arrayUnion)
       // firestoreからfavolitesを取得、保持
-
       await firebasePostDetails(postid,userid).then((postData)=>{
-
       setFavorites(postData.Favorites)
       })
-      };
+};
 
-      // お気に入り取り消し機能
-      const NoFavorite = async(e:any)=>{
-
-      const postDataDocRefId = doc(collection(db, "post"), postid);
-
-      console.log(loginUserName)
-      updateDoc(postDataDocRefId, {
-            favorites:arrayRemove(loginUserName),
-      });
-
+// お気に入り取り消し機能
+const NoFavorite = async(e:any)=>{
+      // 押された投稿のFavolitesからloginUserNameを削除
+      FavoriteUpdata(postid,loginUserName,arrayRemove)
+      // firestoreからfavolitesを取得、保持
       await firebasePostDetails(postid,userid).then((postData)=>{
-
-            setFavorites(postData.Favorites)
-            })
-}
+      setFavorites(postData.Favorites)
+      })
+};
 
 // コメント送信ボタンがクリックされたら
 const AddComment =async(e:any)=>{
       // 押された投稿のcommentにinputCommentを配列で追加
-
       const postDataDocRefId = doc(collection(db, "post"), postid);
-
       updateDoc(postDataDocRefId, {
             comments:arrayUnion({userName:loginUserName,commentText:inputComment}),
       });
       // firestoreからcommentを取得、保持
-
       await firebasePostDetails(postid,userid).then((postData)=>{
-
-            setDisplayComment(postData.Comments)
-            })
+      setDisplayComment(postData.Comments)
+      })
       setInputComment("")
 }
 
-
-
-
 const ClickDelition = async(e:any) =>{
-// postのドキュメントへの参照を取得
-// const postDataDocRefId = doc(collection(db, "post"), id);
-// // 上記を元にドキュメントのデータを取得
-// const postDataDocId = await getDoc(postDataDocRefId);
-// // 取得したデータから必要なものを取り出す
-// const postDataId = postDataDocId.data();
-// // postuseridを取得(投稿者が誰か)
-// const postUserId = postDataId?.userId
-
 // 投稿者のuser情報取得
 const postUserDocRef = doc(collection(db,"user"),userid)
 // 上記を元にドキュメントのデータを取得
@@ -182,30 +145,22 @@ const postUserData = postUserDoc.data();
 // 投稿者のpostを取り出す
 const postUserPost = postUserData?.post
 
-
 const index = postUserPost.indexOf(postid);
-
 postUserPost.splice(index, 1)
-
 console.log(postUserPost)
-
 await updateDoc(postUserDocRef,{
       post: postUserPost
 });
-
 await deleteDoc(doc(db, "post", postid));
-
 }
-
-
 return (
 <>
-<img src={icon} />
-{/* <CommonIcon icon={icon}/> */}
+<Header />
+{/* <img src={icon} /> */}
+<Link to="/profile" state={{ userId: userid}}><CommonIcon icon={icon}/></Link>
 <p>{postUserName}</p>
 <img src={imgUrl} />
 <p>{caption}</p>
-<p>{year}年{month}月{day}日{hour}:{min}:{seco}</p>
 <div>
 <input type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)}}></input>
 </div>
@@ -214,17 +169,24 @@ return (
 {loginUserKeep.includes(postid) ? (
       <RemoveKeepButton postId={postid} />
 ) : (
+
+      <AddKeepButton postId={displayPostId} />
+)} */}
+
       <AddKeepButton postId={postid} />
 )}
 
+
 {favorites.includes(loginUserName)?(
-<button onClick={NoFavorite}>×</button>
+<button onClick={NoFavorite}>
+<AiOutlineHeart size={20} color={"rgb(38, 38, 38)"} />
+</button>
 ):(
-<button onClick={Favorite}>♡</button>
+<button onClick={Favorite}>
+<AiFillHeart size={20} color={"red"} />
+</button>
 )}
-
-
-<div>♡: {favorites}</div>
+<div><AiFillHeart size={14} color={"red"} />: {favorites}</div>
 <div>コメント:
 {displayComment.map((data:any,index:any)=>{
     return(
@@ -239,16 +201,15 @@ return (
 <div>
 {loginUserPost ?(
 <>
-
 <Link to="/PostEditing" state={{postid:postid,userid:userid}}><button>編集</button></Link>
-
-<Link to="/PostLook"><button onClick={ClickDelition}>削除</button></Link>
+<Link to="/"><button onClick={ClickDelition}>削除</button></Link>
 </>
 ):(
-      <>
-      </>
+<>
+</>
 )}
 </div>
+<Footer />
 </>
 );
 };

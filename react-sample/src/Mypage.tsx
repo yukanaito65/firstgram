@@ -128,7 +128,7 @@ function MyPage() {
             <Navigate to={`/login`} />
           ) : (
             <>
-              <Header />
+              <Header show={true} />
               <div style={{textAlign: "center", fontSize: "20px", fontWeight: "bold"}}>
                 <UserName users={users} />
               </div>

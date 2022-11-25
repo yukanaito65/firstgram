@@ -23,6 +23,10 @@ import { db } from "./firebase";
 import { useEffect } from "react";
 import { onAuthStateChanged } from "@firebase/auth";
 import type { User } from "./types/types";
+import Header from "./component/molecules/Header";
+import Footer from "./component/molecules/Footer";
+import { Link } from "react-router-dom";
+import { IoIosArrowBack } from "react-icons/io"
 
 export function PsswordChange() {
   const auth = getAuth();
@@ -181,13 +185,27 @@ export function PsswordChange() {
       });
   };
 
+  const userDeleteAlert = () => {
+    if (window.confirm('本当にアカウントを削除しますか')) {
+      userDelete()
+  } else {
+      console.log('キャンセルボタンが押されました。')
+  }
+  }
+
   return (
     <div>
-      <h1>アカウント情報変更</h1>
-      <div>
+      <Header show={true} />
+      <h1 className="margin-bottom_20">アカウント情報変更</h1>
+      <table className="setting_table">
+      <tr>
+        <td className="setting_table_td setting_table_title">
         <label htmlFor="settingEmail">現在のメールアドレス</label>
+        </td>
+        <td className="setting_table_td setting_table_content">
         <p>{nowEmailValue}</p>
-      </div>
+        </td>
+      </tr>
       {/* <div>
         <label htmlFor="settingEmail">新しいメールアドレス</label>
         <input
@@ -198,8 +216,11 @@ export function PsswordChange() {
           id="settingEmail"
         ></input>
       </div> */}
-      <div>
+      <tr>
+        <td className="setting_table_td setting_table_title">
         <label htmlFor="settingPassword">現在のパスワード</label>
+        </td>
+        <td className="setting_table_td setting_table_content">
         <input
           type="password"
           value={nowPassValue}
@@ -207,10 +228,14 @@ export function PsswordChange() {
           name="settingPassword"
           id="settingPassword"
         ></input>
-      </div>
+        </td>
+      </tr>
 
-      <div>
+      <tr>
+        <td className="setting_table_td setting_table_title">
         <label htmlFor="settingPassword">新しいパスワード</label>
+        </td>
+        <td className="setting_table_td setting_table_content">
         <input
           type="password"
           value={newPassValue}
@@ -218,26 +243,47 @@ export function PsswordChange() {
           name="settingPassword"
           id="settingPassword"
         ></input>
-      </div>
+        </td>
+      </tr>
 
-      <div>
+      <tr>
+        <td className="setting_table_td setting_table_title">
         <label htmlFor="settingCPassword">新しいパスワード（確認）</label>
+        </td>
+        <td className="setting_table_td setting_table_content">
         <input
           type="password"
           value={cNewPassValue}
           onChange={(e) => setCNewPassValue(e.target.value)}
           name="settingCPassword"
           id="settingCPassword"
-          placeholder="確認のため再度パスワードを入力"
+          placeholder="再度パスワードを入力"
         ></input>
+        
         {newPassValue.length > 0 && newPassValue !== cNewPassValue ? (
           <p>新しいパスワードと新しいパワード（確認）が一致していません</p>
         ) : (
           <></>
         )}
-      </div>
+        </td>
+      </tr>
+      </table>
+
+      <div className="confirm_btn">
       <button onClick={dataUpdate}>確定</button>
-      <button onClick={userDelete}>アカウントを削除</button>
+      </div>
+
+      <div className="account_delete">
+      <button className="margin_left_auto" onClick={userDeleteAlert}>アカウントを削除</button>
+      </div>
+
+      <div className="back_btn">
+              <Link to="/">
+                <IoIosArrowBack color="white" size={40} className="to_back" />
+              </Link>
+            </div>
+
+      <Footer />
     </div>
   );
 }

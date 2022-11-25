@@ -1,3 +1,5 @@
+/* ------------------------------------ */
+/* 共通のcss */
 *,
 *:before,
 *:after {
@@ -15,8 +17,8 @@ html {
 }
 
 body {
-  color: #333333;
   background-color: #f7f7f7;
+  color: rgb(38, 38, 38);
   font-size: 1.6rem;
   font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
   min-width: 350px;
@@ -28,6 +30,7 @@ body {
   position: relative;/*←相対位置*/
   padding-bottom: 120px;/*←footerの高さ*/
   box-sizing: border-box;/*←全て含めてmin-height:100vhに*/
+
 }
 
 button {
@@ -44,20 +47,77 @@ img,
 video,
 object {
   max-width: 100%;
-  height: auto;
-  border: none;
   display: block;
 }
 
 a {
   text-decoration: none;
   transition: 0.4s;
-  display: block;
   color: rgb(38, 38, 38);
 }
 a:hover {
   text-decoration: none;
 }
+
+p {
+  display: block;
+}
+
+h1 {
+  font-size: 20px;
+  margin: 5px;
+}
+
+/* ボタン共通 */
+button {
+  justify-self: center;
+  border: none;
+  background-color: #0d6efd;
+  color: #fff;
+  padding: 5px 15px;
+  font-size: 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin: 5px;
+}
+
+button:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+/* 戻るボタン */
+.to_back {
+  background-color: rgb(38, 38, 38);
+  border-radius: 50%;
+  padding: 10px;
+}
+
+.to_back:hover {
+  opacity: 0.6;
+}
+
+.to_back2 {
+  border: 2px solid rgb(38, 38, 38);
+  border-radius: 50%;
+  padding: 7px;
+}
+
+.to_back2:hover {
+  opacity: 0.6;
+}
+
+/* ユーザーアイコン */
+.icon-image img {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  border: 1px solid rgb(156, 156, 156);
+  margin: 5px;
+}
+
+/* -------------------------------------- */
+/* 保留 */
 
 .l-header {
   width: 100%;
@@ -88,14 +148,12 @@ a:hover {
 /* header */
 .header {
   width: 65%;
-  /* background-color: #fff;
-  border-bottom: 2px solid #1B4B36; */
-    background: -moz-linear-gradient(#ffb03c, #ff708d);
-    background: -webkit-linear-gradient(#ffb03c, #ff708d);
-    background: linear-gradient(to right, #ffb03c, #ff708d);
-    color: #FFF;
-    position: fixed;
-    margin: 0 auto;
+  background: -moz-linear-gradient(#ffb03c, #ff708d);
+  background: -webkit-linear-gradient(#ffb03c, #ff708d);
+  background: linear-gradient(to right, #ffb03c, #ff708d);
+  color: #FFF;
+  position: fixed;
+  margin: 0 auto;
   z-index: 999;
   top: 0;
   box-sizing: border-box;
@@ -142,9 +200,6 @@ a:hover {
 .nav {
   width: 65%;
   margin: 0 auto;
-  /* opacity: 0; */
-  /* visibility: hidden; */
-  /* transition: opacity .5s, visibility .5s; */
 }
 
 .nav_menu_ul {
@@ -157,7 +212,7 @@ a:hover {
   background-color: #f7f7f7;
   box-shadow: 0 0px 10px 7px rgb(0 0 0 / 10%);
   font-size: 19px;
-
+  z-index: 800;
 }
 
 .nav_menu_li {
@@ -196,22 +251,32 @@ a:hover {
   opacity: 0.6;
 }
 
-/* .display-none {
-  position: fixed;
-  top: 3rem;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 1rem;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity .5s, visibility .5s;
-  display: none;
-} */
-
-
-
 /* footer */
+
+body {
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 120px;
+  box-sizing: border-box;
+}
+
+.footer {
+  width: 100%;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 0;
+}
+
+body {
+  min-height: 100vh;
+  position: relative;/*←相対位置*/
+  padding-bottom: 120px;/*←footerの高さ*/
+  box-sizing: border-box;/*←全て含めてmin-height:100vhに*/
+  /* position:absolute; */
+}
+
 .footer {
   width: 100%;
   background-color: #fff;
@@ -230,27 +295,227 @@ a:hover {
 .footer-border-right {
   border-right: 2px solid rgb(128, 128, 128);
   margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+.footer-mypage {
+  margin-bottom: 15px;
+  margin-top: 15px;
 }
 
 .icon {
   margin: auto;
 }
 
-/*--------------------------------------*
- * foundation
- *--------------------------------------*/
-/*--------------------------------------*
- * layout
- *--------------------------------------*/
-/*--------------------------------------*
- * object
- *--------------------------------------*/
-/*-------------------
- * component
- -------------------*/
-/*-------------------
- * project
- -------------------*/
-/*-------------------
- * utility
- -------------------*//*# sourceMappingURL=style.css.map */
+/* -------------------------------------- */
+/* account setting */
+.margin-bottom_20 {
+  margin-bottom: 20px;
+}
+
+.setting_table {
+  width: 100%;
+  padding: 10px 0;
+}
+
+.setting_table_td {
+  padding: 20px 10px;
+  border-bottom: 1px dashed rgb(38, 38, 38);
+}
+
+.setting_table_title {
+  width: 30%;
+}
+
+.setting_table_content {
+  width: 70%;
+}
+
+.to_passChange {
+  text-align: center;
+  margin: 5px auto;
+}
+
+/* account edit */
+.confirm_btn {
+  text-align: center;
+}
+
+/* password change */
+.account_delete {
+  text-align: right;
+}
+
+.margin_left_auto {
+  background-color: rgb(255, 67, 67);
+}
+
+.back_btn {
+  margin-top: 50px;
+}
+
+
+/* ------------------------------------- */
+/* dmページ */
+
+.dmpage_top {
+  display: flex;
+  position: fixed;
+  top: 63px;
+  width: 65%;
+  background-color: #fff;
+  padding-top: 10px;
+  box-shadow:   0px 10px 10px -8px rgba(0,0,0,0.5);
+}
+
+.dmpage_back_btn {
+  padding-top: 15px;
+  display: block;
+}
+
+.dmpage_back_btn:hover {
+  opacity: 0.6;
+}
+
+.dm_another_info {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.dm_another_text {
+  margin: auto 10px;
+}
+
+.dm_another_name {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.dm_another_userName {
+  font-size: 13px;
+}
+
+.margin {
+  height: 60px;
+}
+
+.dmpage_wrapper {
+  margin-top: 100px;
+}
+
+.dm_right {
+  width: 30%;
+  font-size: 13px;
+  margin: 10px 10px 10px auto;
+}
+
+.dm_message_right {
+  border-radius: 15px;
+  color: #fff;
+  background-color: #6ebe79;
+  padding: 15px;
+}
+
+.dm_date_right {
+  padding-left: 10px;
+}
+
+.dm_left {
+  width: 30%;
+  font-size: 13px;
+  margin: 10px auto 10px 10px;
+}
+
+.dm_message_left {
+  border-radius: 15px;
+  color: #fff;
+  background-color: #6ebe79;
+  padding: 15px;
+}
+
+.dm_date_left {
+  display: block;
+  text-align: right;
+  padding-right: 10px;
+}
+
+.dmpage_form {
+  width: 65%;
+  margin: 10px auto;
+  background-color: #1B4B36;
+  position: fixed;
+  bottom: 62px;
+}
+
+.dmpage_form_wrapper {
+  width: 100%;
+  padding: 15px 10px 15px 20px;
+}
+
+.dmpage_form_input {
+  width: 90%;
+  line-height: 30px;
+  border: none;
+  border-radius: 5px;
+  padding: 2px 10px;
+}
+
+.dmpage_form_btn {
+  background:none;
+  color: #fff;
+  margin: 2px 0 2px 5px;
+  font-size: 15px;
+}
+
+.dmpage_margin_20 {
+  height: 20px;
+}
+
+/* ----------------------------------- */
+/* search page */
+
+.searchpage_form {
+  width: 65%;
+  margin: 10px auto;
+  position: fixed;
+  top: 55px;
+  z-index: 100;
+}
+
+.searchpage_form_input {
+  width: 90%;
+  line-height: 30px;
+  border: 2px solid #1B4B36;
+  border-radius: 5px;
+  padding: 2px 10px;
+}
+
+.searchpage_form_btn {
+  background:none;
+  color: rgb(38, 38, 38);
+  margin: 2px 0 1px 3px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.searchpage_form {
+  width: 65%;
+  margin: 10px auto;
+  position: fixed;
+  top: 53px;
+}
+
+.no_matchUser {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.searchpage_form_input::-webkit-search-cancel-button {
+  -webkit-appearance: none;    /* デフォルトのサーチキャンセルボタンを非表示にする場合 */
+  cursor:pointer;
+  background-image: url(../../public/x_icon.png);  /* デフォルトのサーチキャンセルボタンを非表示にすること */
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-right: 0px;
+  width:15px; height:15px;  /* キャンセルボタンのサイズを個別に設定する場合 */
+}

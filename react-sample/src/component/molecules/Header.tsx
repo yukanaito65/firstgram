@@ -10,7 +10,7 @@ import { FaBookmark } from "react-icons/fa";
 import { BsGearWide } from "react-icons/bs";
 
 
-function Header() {
+function Header({show}:{show:boolean}) {
   const [navDisplay, setNavDisplay] = useState<boolean>(false);
 
   const navActive = () => {
@@ -33,6 +33,7 @@ function Header() {
             <Logo />
           </div>
 
+        {show &&
           <div className="header-btns">
             <Link to="/newPost">
               <button className="header-post-btn">
@@ -48,11 +49,11 @@ function Header() {
                 <FiMenu size={40} color={"white"} />
               </button>
             )}
-          </div>
+          </div>}
         </div>
       </header>
 
-      {navDisplay ? (
+      {show && navDisplay ? (
         <nav className="nav">
           <ul className="nav_menu_ul">
             <li className="nav_menu_li">
