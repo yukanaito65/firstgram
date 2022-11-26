@@ -72,14 +72,15 @@ function Icon() {
             />
           ) : (
             <img
+            className="noIconImage"
               src={`${process.env.PUBLIC_URL}/noIcon.png`}
               alt="NoImage"
-              style={{
-                width: "100%",
-                height: "100%",
-                backgroundColor: "#d3d3d3",
-                borderRadius: "50%",
-              }}
+              // style={{
+              //   width: "100%",
+              //   height: "100%",
+              //   backgroundColor: "#d3d3d3",
+              //   borderRadius: "50%",
+              // }}
             />
           )}
         </div>

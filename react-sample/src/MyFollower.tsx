@@ -9,6 +9,7 @@ import {
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import GetFollowerData from "./component/data/GetFollowerData";
 import Footer from "./component/molecules/Footer";
 import Header from "./component/molecules/Header";
 import UserList from "./component/pages/UserList";
@@ -36,6 +37,10 @@ function MyFollower() {
   //followのuserId
   // const [followerUserId, setFollowerUserId] = useState("");
 
+  // const [myFollowerData,setMyFollowerData] = useState<any>("");
+
+  // const myDataList =()=> setMyFollowerData(GetFollowerData());
+
   useEffect((): any => {
     onAuthStateChanged(auth, async (currentUser: any) => {
       setLoading(false);
@@ -57,6 +62,9 @@ function MyFollower() {
       // console.log(followerUserList);
       // setFollowerList(followerUserList);
 
+
+
+
       //複数のユーザーの情報を取得する＝共通していることは、ログインユーザーのことをフォローしていること
       const followerUserCollectionRef = query(
         collection(db, "user"),
@@ -69,11 +77,22 @@ function MyFollower() {
 
       const followerUserArray = newFollowerUserDocIds.map((doc) => doc.data());
       setFollowerUsers(followerUserArray);
+      console.log(followerUserArray);
+
+      // setMyFollowerData(GetFollowerData());
+
     }); //onAuth
   }, []); //useEffect
 
-  console.log(followerUsers);
+  // console.log(followerUsers);
   // console.log(followerList);
+
+
+
+  console.log(GetFollowerData());
+// console.log(myDataList);
+  // console.log(myFollowerData);
+
 
   return (
     <>

@@ -16,15 +16,12 @@ import AddFollowButton from "./component/atoms/button/AddFollowButton";
 import RemoveFollowButton from "./component/atoms/button/RemoveFollowButton";
 import FollowerCount from "./component/atoms/user/FollowerCount";
 import CommonIcon from "./component/atoms/pictures/CommonIcon";
-import Icon from "./component/atoms/pictures/Icon";
-import MyPost from "./component/atoms/pictures/MyPost";
 import UserName from "./component/atoms/user/UserName";
 import MyPostList from "./component/molecules/MyPostList";
 import { auth, db } from "./firebase";
 import { Post } from "./types/types";
 import PostCount from "./component/atoms/user/PostCount";
 import FollowCount from "./component/atoms/user/FollowCount";
-import { useDispatch, useSelector } from "react-redux";
 import Header from "./component/molecules/Header";
 import Footer from "./component/molecules/Footer";
 import Name from "./component/atoms/user/Name";
@@ -209,7 +206,7 @@ function Profile() {
 
             </div>
 
-            <MyPostList posts={posts} users={profileUsers} />
+            <MyPostList posts={posts} users={profileUsers} message={<p>投稿がありません</p>} />
           </div>
           <Footer />
         </>

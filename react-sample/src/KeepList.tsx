@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import MyPost from "./component/atoms/pictures/MyPost";
 import Footer from "./component/molecules/Footer";
 import Header from "./component/molecules/Header";
+import MyPostList from "./component/molecules/MyPostList";
 import { auth, db } from "./firebase";
 
 function KeepList() {
@@ -22,6 +23,8 @@ function KeepList() {
   const [keepPostIds, setKeepPostIds] = useState([]);
 
   const [keepPosts, setKeepPosts] = useState<QuerySnapshot[]>([]);
+
+
 
   useEffect(() => {
     onAuthStateChanged(auth, async (currentUser: any) => {
@@ -74,6 +77,7 @@ function KeepList() {
   console.log(user.uid);
   console.log(keepPostIds);//postIdだけ配列に格納
 
+
   return (
     <>
       {!loading && (
@@ -87,10 +91,9 @@ function KeepList() {
             return (
                 <Link
                   to={"/PostDetails"}
-                  state={{ userId: keepPost.userId, postId: keepPost.postId }}
+                  state={{ userid: keepPost.userId, postid: keepPost.postId }}
                 >
                   <MyPost imageUrl={keepPost.imageUrl} />
-                  {/* <img src={keepPost.imageUrl} alt="投稿" /> */}
                 </Link>
             );
           })}
