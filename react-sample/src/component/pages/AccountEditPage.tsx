@@ -63,8 +63,10 @@ function AccountEditPage() {
     });
   }, []);
 
-  // Authenticationの変更
+  // getAuthを使えるように定義
   const auth = getAuth();
+
+  // useNavigateを使えるように定義
   const navigate = useNavigate();
 
   // 確定時にfiresoterにデータ送信
@@ -218,7 +220,7 @@ function AccountEditPage() {
           </div>
         </>
       ) : (
-        <p>データが表示されません</p>
+        <p className="text-align_center">データが表示されません</p>
       )}
       <Footer />
     </div>

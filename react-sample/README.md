@@ -7,6 +7,55 @@ react,typescript,firebaseを使用
 docker-compose run --rm react-app sh -c "npm install -g create-react-app && create-react-app react-sample -template redux-typescript”
 
 
+
+## プロジェクトタイトル
+firstgram
+
+## ロゴ
+
+## プロジェクトの概要
+snsの画像投稿アプリを作成(instagram参考)
+
+## 使用言語
+- React
+- 状態管理(Redux,Reduxtoolkit)
+- TypeScript
+- scss(FLOOCSS)
+- Firebase(Firestore Database,Storage,Authentication)
+- Docker
+
+### 機能一覧
+- 画像・キャプションの投稿機能
+- 投稿された画像・キャプションの閲覧機能
+- 投稿の編集/削除機能
+- 新規ユーザー登録機能
+- ログイン/ログアウト機能
+- 投稿に対するいいね機能
+- 投稿に対するコメント機能
+- ダイレクトメッセージ機能
+- フォロー機能
+- 登録ユーザーの検索機能
+- 投稿の保存機能
+- プロフィール編集機能
+- アカウント削除機能
+
+## プロジェクトのスクリーンショット
+
+## こだわりポイント
+
+
+<!-- 【盛り込むべき内容】
+・リポジトリ（Webアプリ）の名前：Name
+・概要：Overview
+・デモ：Demo
+・使い方：Usage
+・環境：Requirement
+・インストール方法：Install
+・注意事項：Note
+・文責：Author
+・ライセンスlicense
+・参考文献 References -->
+
 <!-- # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) TS template.

@@ -20,15 +20,24 @@ import { useNavigate } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import Header from "../molecules/Header";
 import Footer from "../molecules/Footer";
+import { useLocation, Link } from "react-router-dom";
+
+interface State {
+  userId: string;
+}
 
 function DMPage() {
   const [anotherIcon, setAnotherIcon] = useState<string>("");
   const [anotherName, setAnotherName] = useState<string>("");
   const [anotherUserName, setAnotherUserName] = useState<string>("");
+  const [anotherUserId, setAnotherUserId] = useState<string>("");
   const [currentUser, setCurrentUser] = useState<string>("");
   const [MesseDisplay, setMesseDisplay] = useState<
     { userId: string; message: string; timestamp: Date }[]
   >([]);
+
+  const location = useLocation();
+  const { userId } = location.state as State;
 
   const auth = getAuth();
   useEffect(() => {
@@ -53,8 +62,7 @@ function DMPage() {
         const ownQ = query(
           collection(db, "messages"),
           where("userId", "==", currentUserId),
-          where("withUserId", "==", "w2wZzrOOetPiGTvaE0nk86zVo3k1"),
-          // orderBy("timestamp"),
+          where("withUserId", "==", userId),
           limit(5)
         );
         const ownQSnapshot = await getDocs(ownQ);
@@ -70,9 +78,8 @@ function DMPage() {
         // 会話相手の情報取得(メッセージ表示のため)
         const anotherQ = query(
           collection(db, "messages"),
-          where("userId", "==", "w2wZzrOOetPiGTvaE0nk86zVo3k1"),
+          where("userId", "==", userId),
           where("withUserId", "==", currentUserId),
-          // orderBy("timestamp"),
           limit(5)
         );
         const anotherQSnapshot = await getDocs(anotherQ);
@@ -90,7 +97,7 @@ function DMPage() {
         console.log(MesseList);
 
         // 会話相手の情報取得(ユーザーデータ表示のため)
-        const userDocRefId = doc(db, "user", "w2wZzrOOetPiGTvaE0nk86zVo3k1");
+        const userDocRefId = doc(db, "user", userId);
 
         // //上記を元にドキュメントのデータを取得
         const userDocId = await getDoc(userDocRefId);
@@ -103,6 +110,7 @@ function DMPage() {
           setAnotherIcon(userDataId.icon);
           setAnotherName(userDataId.name);
           setAnotherUserName(userDataId.userName);
+          setAnotherUserId(userDataId.userId);
         }
         console.log(MesseList);
         MesseList.sort((a: any, b: any) => {
@@ -112,29 +120,33 @@ function DMPage() {
       }
     });
   }, []);
+
+  // backボタン
   const navigate = useNavigate();
   const backBtn = () => {
     navigate(-1);
-  }
+  };
 
   return (
     <>
       <Header show={true} />
       <div className="dmpage_top">
-      <div onClick={backBtn}>
-        <IoIosArrowBack
-          color="rgb(38, 38, 38)"
-          size={35}
-          className="dmpage_back_btn"
-        />
-      </div>
-      <div className="dm_another_info">
-        <img src={anotherIcon} width={50} alt={anotherName} />
-        <div className="dm_another_text">
-          <p className="dm_another_name">{anotherName}</p>
-          <p className="dm_another_userName">{anotherUserName}</p>
+        <div onClick={backBtn}>
+          <IoIosArrowBack
+            color="rgb(38, 38, 38)"
+            size={35}
+            className="dmpage_back_btn"
+          />
         </div>
-      </div>
+        <Link to="/profile" state={{userid:anotherUserId}}>
+          <div className="dm_another_info">
+            <img src={anotherIcon} width={50} alt={anotherName} />
+            <div className="dm_another_text">
+              <p className="dm_another_name">{anotherName}</p>
+              <p className="dm_another_userName">{anotherUserName}</p>
+            </div>
+          </div>
+        </Link>
       </div>
       <div className="margin"></div>
       {MesseDisplay === undefined ? (
@@ -155,28 +167,28 @@ function DMPage() {
               {data.userId === currentUser ? (
                 <div className="dm_right" key={data.userId}>
                   <p className="dm_message_right">{data.message}</p>
-                  {Min.length > 0 ?
-                  (<p className="dm_date_right">
-                    {Year}.{Month}.{Day}&nbsp;{Hour}:0{Min}
-                  </p>)
-                  :
-                  (<p className="dm_date_right">
-                    {Year}.{Month}.{Day}&nbsp;{Hour}:{Min}
-                  </p>)
-                  }
+                  {Min.toString().length === 1 ? (
+                    <p className="dm_date_right">
+                      {Year}.{Month}.{Day}&nbsp;{Hour}:0{Min}
+                    </p>
+                  ) : (
+                    <p className="dm_date_right">
+                      {Year}.{Month}.{Day}&nbsp;{Hour}:{Min}
+                    </p>
+                  )}
                 </div>
               ) : (
                 <div className="dm_left" key={data.userId}>
                   <p className="dm_message_left">{data.message}</p>
-                  {Min.length > 0 ?
-                  (<p className="dm_date_right">
-                    {Year}.{Month}.{Day}&nbsp;{Hour}:0{Min}
-                  </p>)
-                  :
-                  (<p className="dm_date_right">
-                    {Year}.{Month}.{Day}&nbsp;{Hour}:{Min}
-                  </p>)
-                  }
+                  {Min.toString().length === 1 ? (
+                    <p className="dm_date_right">
+                      {Year}.{Month}.{Day}&nbsp;{Hour}:0{Min}
+                    </p>
+                  ) : (
+                    <p className="dm_date_right">
+                      {Year}.{Month}.{Day}&nbsp;{Hour}:{Min}
+                    </p>
+                  )}
                 </div>
               )}
             </>
