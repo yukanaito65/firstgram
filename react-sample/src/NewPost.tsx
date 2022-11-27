@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { getDownloadURL, ref, uploadBytes, uploadBytesResumable } from "firebase/storage";
 import { addDoc, arrayUnion, collection, doc, getDoc, serverTimestamp, updateDoc } from "firebase/firestore";
 import { auth, db } from "./firebase";
-import storage from "./firebase-sec";
+import { storage } from "./firebase";
 import {Link} from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { AiOutlineAreaChart } from "react-icons/ai";
