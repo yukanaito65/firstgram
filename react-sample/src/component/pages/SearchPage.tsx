@@ -15,7 +15,8 @@ import { onAuthStateChanged } from "@firebase/auth";
 import { db } from "../../firebase";
 import Header from "../molecules/Header";
 import Footer from "../molecules/Footer";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+
 
 
 // 流れ
@@ -25,9 +26,6 @@ import { useLocation } from "react-router-dom";
 // 上記の配列をforEachで回しデータを取得し、それらを新たな配列に格納する
 // 上記の配列を使ってmapで回して表示する
 
-interface State {
-  userId: string;
-} 
 
 
 function SearchPage() {
@@ -47,18 +45,11 @@ function SearchPage() {
   // 検索結果のデータの表示/非表示を管理
   const [displaySwitch, setDisplaySwitch] = useState<boolean>(false);
 
-  // 1発目に検索結果を出す
-  const  [display, setDisplay] = useState<number>(1)
-
-// postlookからデータを持ってくる
-const location = useLocation();
-  // const { userId } = location.state as State;
-
   const auth = getAuth();
   // まずuseEffect内で前userデータのuserNameとnameとtonametouserIdを取得
   useEffect(() => {
     //ログイン判定
-    onAuthStateChanged(auth, async (user) => {
+    onAuthStateChanged(auth, (user) => {
       if (!user) {
         console.log("ログアウト状態です");
       } else {
@@ -69,26 +60,33 @@ const location = useLocation();
           userName: string;
         }[] = [];
         const userQuery = query(collection(db, "user"));
-        const userDocId = await getDocs(userQuery);
-        userDocId.forEach((docdata) => {
-          const data = (docdata.id, " => ", docdata.data());
-          userDataList.push({
-            userId: data.userId,
-            name: data.name,
-            userName: data.userName,
+        getDocs(userQuery).then((data) => {
+          data.forEach((docdata) => {
+            // console.log(docdata.data());
+            const data = (docdata.id, " => ", docdata.data());
+            console.log(data);
+            userDataList.push({
+              userId: data.userId,
+              name: data.name,
+              userName: data.userName,
+            });
           });
+          console.log(userDataList);
+          setDataList(userDataList);
         });
-        setDataList(userDataList);
-        console.log(userDataList);
         console.log(dataList);
       }
     });
   }, []);
 
+  useEffect(() => {
+    console.log(dataArr);
+  },[displaySwitch])
+
   // 「検索」クリック時にinputタグ内の文字と一致するユーザーのuserIdを配列に格納
   // 格納されたuserIdの任意の情報を取得
   const onClickSearch = async () => {
-    // 検索に引っかかったuserのuserIdを格納（重複可能性あり）
+    // 検索に引っかかったuserのuserIdを格納
     const searchResultList: string[] = [];
     dataList.forEach((user) => {
       const userName = user.userName;
@@ -97,16 +95,11 @@ const location = useLocation();
       if (userName.includes(searchValue)) {
         searchResultList.push(userId);
       }
-      if (name.includes(searchValue)) {
+      else if(name.includes(searchValue)) {
         searchResultList.push(userId);
       }
     });
-    const newSearchResultList = Array.from(new Set(searchResultList));
-
-    // 重複のない検索結果ユーザーIDの配列に変換
-    const newResultUserList = newSearchResultList;
-    console.log(newResultUserList);
-
+    
     // 検索に引っかかったuserの任意情報を格納
     const userDataArr: {
       userId: string;
@@ -114,7 +107,7 @@ const location = useLocation();
       userName: string;
       icon: string;
     }[] = [];
-    newResultUserList.forEach(async (userId) => {
+    for(const userId of searchResultList) {
       console.log(1);
       const resultUserDoc = doc(db, "user", userId);
       console.log(resultUserDoc);
@@ -133,14 +126,15 @@ const location = useLocation();
         });
       }
       console.log(userDataArr);
-    });
+    };
     const a = userDataArr;
     console.log(a);
     const b = true;
-    setDataArr(a);
+    setDataArr(userDataArr);
     setDisplaySwitch(b);
-    setDisplay(display + 1)
   };
+
+  console.log(dataArr);
 
   return (
     <>
@@ -156,19 +150,21 @@ const location = useLocation();
         placeholder="検索ワードを入力"
       />
       <button
+      type="button"
       className="searchpage_form_btn"
       onClick={() => onClickSearch()}>検索</button>
       </div>
       </form>
-      {console.log(dataArr)}
-      {dataArr.length > 0 &&
-      displaySwitch ? (
+      {dataArr.length > 0 ?
+     (
         dataArr.map((a) => {
           return(
           <>
+          <Link to="/profile" state={{userid:a.userId}}>
             <img src={a.icon} alt="ユーザーアイコン" />
             <p>{a.name}</p>
             <p>{a.userName}</p>
+          </Link>
           </>
           )
         })

@@ -26,7 +26,7 @@ body {
   width: 65%;
   margin: 0 auto;
   overflow-x: hidden;
-  padding-top: 80px;
+  padding: 80px 10px 120px 10px;
   min-height: 100vh;
   position: relative; /*←相対位置*/
   padding-bottom: 120px; /*←footerの高さ*/
@@ -94,6 +94,7 @@ button:hover {
 
 .to_back:hover {
   opacity: 0.6;
+  cursor: pointer;
 }
 
 .to_back2 {
@@ -104,9 +105,18 @@ button:hover {
 
 .to_back2:hover {
   opacity: 0.6;
+  cursor: pointer;
 }
 
 /* ユーザーアイコン */
+/* .icon-image img {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  border: 1px solid rgb(156, 156, 156);
+  margin: 5px;
+} */
+
 .icon-image {
   border-radius: 50%;
   width: 120px;
@@ -193,8 +203,7 @@ button:hover {
 }
 
 .header-post-btn {
-  width: 10%px;
-  margin-right: 10px;
+  width: 10%;
   background: none;
   border: none;
 }
@@ -204,7 +213,7 @@ button:hover {
 }
 
 .header-menu-btn {
-  width: 10%px;
+  width: 10%;
   background: none;
   border: none;
 }
@@ -261,6 +270,7 @@ button:hover {
 .nav_menu_icon {
   color: rgb(38, 38, 38);
   margin-left: auto;
+  margin-right: 5px;
 }
 
 .nav_menu_btn:hover {
@@ -269,7 +279,6 @@ button:hover {
 }
 
 /* footer */
-
 .footer {
   width: 65%;
   background-color: #f7f7f7;
@@ -322,6 +331,7 @@ button:hover {
 
 .setting_table_content {
   width: 70%;
+  display: flex;
 }
 
 .to_passChange {
@@ -347,6 +357,9 @@ button:hover {
   margin-top: 50px;
 }
 
+.isRevealPassword_icon {
+  margin: auto 5px;
+}
 /* ------------------------------------- */
 /* dmページ */
 
@@ -367,6 +380,7 @@ button:hover {
 
 .dmpage_back_btn:hover {
   opacity: 0.6;
+  cursor: pointer;
 }
 
 .dm_another_info {
@@ -503,14 +517,19 @@ button:hover {
 }
 
 .searchpage_form_input::-webkit-search-cancel-button {
-  -webkit-appearance: none; /* デフォルトのサーチキャンセルボタンを非表示にする場合 */
-  cursor: pointer;
-  background-image: url(../../public/x_icon.png); /* デフォルトのサーチキャンセルボタンを非表示にすること */
+  -webkit-appearance: none;
+  cursor:pointer;
+  background-image: url(../../public/x_icon.png);
   background-repeat: no-repeat;
   background-size: cover;
   padding-right: 0px;
-  width: 15px;
-  height: 15px; /* キャンセルボタンのサイズを個別に設定する場合 */
+  width:15px;
+  height:15px;
+}
+
+.text-align_center {
+  text-align: center;
+  display: block;
 }
 
 /* keepボタン */

@@ -2,11 +2,19 @@ import React, { useState } from "react";
 import { db } from "../../firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { auth } from "../../firebase";
+import { useLocation } from "react-router-dom";
+
+interface State {
+  userId: string;
+} 
 
   const SendDM = () => {
     const [message, setMessage] = useState("");
-    const curretUser = auth.currentUser
-    const currentUserId = curretUser?.uid
+    const curretUser = auth.currentUser;
+    const currentUserId = curretUser?.uid;
+
+    const location = useLocation();
+    const { userId } = location.state as State;
 
     async function sendMessage(e: any) {
       // 再ロードされないようにする
@@ -18,7 +26,7 @@ import { auth } from "../../firebase";
         message: message,
         timestamp: serverTimestamp(),
         userId: currentUserId,
-        withUserId: "",
+        withUserId: userId,
       });
       setMessage("");
       window.location.reload()
@@ -37,7 +45,6 @@ import { auth } from "../../firebase";
             <button className="dmpage_form_btn">送信</button>
           </div>
         </form>
-        <div>{message}</div>
       </div>
     );
   };
