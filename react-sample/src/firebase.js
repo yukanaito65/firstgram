@@ -41,6 +41,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const storage = getStorage(app);
 
+
 // 上記2つの変数をどこででも使えるようにexportする
 export { db, storage };
 
