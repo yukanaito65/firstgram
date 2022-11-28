@@ -99,7 +99,7 @@ function SearchPage() {
         searchResultList.push(userId);
       }
     });
-    
+
     // 検索に引っかかったuserの任意情報を格納
     const userDataArr: {
       userId: string;
@@ -134,7 +134,7 @@ function SearchPage() {
     setDisplaySwitch(b);
   };
 
-  console.log(dataArr);
+  console.log("");
 
   return (
     <>
