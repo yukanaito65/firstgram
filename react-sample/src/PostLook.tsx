@@ -1,7 +1,7 @@
 import { onAuthStateChanged } from 'firebase/auth';
 
 
-import { collection, doc, getDoc, getDocs, query, updateDoc, where ,serverTimestamp, arrayUnion} from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, query, updateDoc, where ,serverTimestamp, arrayUnion, arrayRemove} from 'firebase/firestore';
 import { connectStorageEmulator } from 'firebase/storage';
 import React, { useEffect, useState } from 'react'
 import { Link, useActionData, useLocation, useRouteLoaderData } from 'react-router-dom';
@@ -14,6 +14,9 @@ import NoFavBtn from './component/atoms/button/NoFavBtn';
 import Footer from "./component/molecules/Footer";
 import Header from "./component/molecules/Header";
 import GetLoginUserName from './component/utils/GetLoginUserData';
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import { FaRegComment } from 'react-icons/fa';
+
 
 
 
@@ -41,6 +44,7 @@ const [loginUserKeep, setLoginUserKeep] = useState<any>("");
 //
 const [postDataSecond,  setPostDataSecond] = useState<any>({});
 
+const [favbtn,setFavbtn]=useState(1)
 
 
 
@@ -55,20 +59,20 @@ const [postDataSecond,  setPostDataSecond] = useState<any>({});
 // // })
 // }
 
-const postData2=[...postData]
-    for(let i = 0; i<postData.length; i++){
-        if(postData[i].postId === postId){
-            postData2[i].favorites.push()
-        }
-    }
+// const postData2=[...postData]
+//     for(let i = 0; i<postData.length; i++){
+//         if(postData[i].postId === postId){
+//             postData2[i].favorites.push()
+//         }
+//     }
 
-const postData3=[...postData]
-    for(let i = 0; i<postData.length; i++){
-        if(postData[i].postId === postId){
-            postData3[i].comments.push()
-        }
+// const postData3=[...postData]
+//     for(let i = 0; i<postData.length; i++){
+//         if(postData[i].postId === postId){
+//             postData3[i].comments.push()
+//         }
 
-    }
+//     }
 
 useEffect(()=>{
 onAuthStateChanged(auth, async (user) => {
@@ -144,7 +148,7 @@ GetLoginUserName(user).then((loginUserData:any)=>{
 
 }})
 },
-[]
+[favbtn]
 // [postData]
 )
 
@@ -172,24 +176,40 @@ return (
         const hour = timestamp.getHours()
         const min = timestamp.getMinutes()
         const seco = timestamp.getSeconds()
+        const favos = [...data.favorites]
+        const com =[...data.comments]
         return(
         <>
         <div key={index}>
-        <p>{data.caption}</p>
+        
         <Link to="/PostDetails" state={{postid:data.postId,userid:data.userId}}><img src={data.imageUrl} /></Link>
-        <div>{year}年{month}月{day}日{hour}:{min}:{seco}</div>
 
-    {data.favorites.includes(loginUserName)?(
-    <NoFavBtn postId={data.postId} userName={loginUserName} />
+        {data.favorites.includes(loginUserName)?(
+        <AiFillHeart size={20} color={"red"} 
+         onClick={
+            (e:any) =>{
+                updateDoc(doc(collection(db, "post"), data.postId), {
+                    favorites:arrayRemove(loginUserName),
+                    });
+                setFavbtn(favbtn+1)
+                }
+         } />
     ):(
-    <AddFavBtn postId={data.postId} userName={loginUserName} />
-    )}
+        <AiOutlineHeart size={20} color={"black"} 
+        onClick={
+           (e:any) =>{
+               updateDoc(doc(collection(db, "post"), data.postId), {
+                   favorites:arrayUnion(loginUserName),
+                   });
+               setFavbtn(favbtn+1)
+               }
+        } />
 
-    {loginUserKeep.includes(data.postId) ? (
-      <RemoveKeepButton postId={data.postId} />
-    ) : (
-      <AddKeepButton postId={data.postId} />
-    )}
+    )
+    }
+
+<div>{year}年{month}月{day}日{hour}:{min}:{seco}</div>
+<p>{data.caption}</p>
 
     <input type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)}} />
     <button onClick={async(e:any)=>{
@@ -197,12 +217,14 @@ return (
     updateDoc(doc(collection(db, "post"), data.postId), {
     comments:arrayUnion({userName:loginUserName,commentText:inputComment}),
     });
-    setPostData(()=>postData3)
+    setFavbtn(favbtn+1)
+    // setPostData(()=>postData3)
     setInputComment("")
     }}>コメント</button>
-    <p>♡:{data.favorites}</p>
+    {/* <p>♡:{data.favorites}</p> */}
+    <p>♡:{favos}</p>
     <div>コメント:
-    {data.comments.map((com:any,index:any)=>{
+    {com.map((com:any,index:any)=>{
         return(
         <div key={index}>
         <p>{com.userName}</p>
@@ -232,25 +254,42 @@ return (
         const hour = timestamp.getHours()
         const min = timestamp.getMinutes()
         const seco = timestamp.getSeconds()
+        const favos = [...data.favorites]
+        const com =[...data.comments]
         return(
         <>
         <div key={index}>
-        <p>{data.caption}</p>
+       
         <Link to="/PostDetails" state={{postid:data.postId,userid:data.userId}}><img src={data.imageUrl} /></Link>
-        <div>{year}年{month}月{day}日{hour}:{min}:{seco}</div>
 
         {data.favorites.includes(loginUserName)?(
-        <NoFavBtn postId={data.postId} userName={loginUserName} />
+        <AiFillHeart size={20} color={"red"} 
+         onClick={
+            (e:any) =>{
+                updateDoc(doc(collection(db, "post"), data.postId), {
+                    favorites:arrayRemove(loginUserName),
+                    });
+                setFavbtn(favbtn+1)
+                }
+         } />
     ):(
-        <AddFavBtn postId={data.postId} userName={loginUserName} />
+        <AiOutlineHeart size={20} color={"black"} 
+        onClick={
+           (e:any) =>{
+               updateDoc(doc(collection(db, "post"), data.postId), {
+                   favorites:arrayUnion(loginUserName),
+                   });
+               setFavbtn(favbtn+1)
+               }
+        } />
+
     )
     }
 
-        {loginUserKeep.includes(data.postId) ? (
-            <RemoveKeepButton postId={data.postId} />
-        ) : (
-            <AddKeepButton postId={data.postId} />
-        )}
+    <FaRegComment size={20} color={"black"} />
+
+    <div>{year}年{month}月{day}日{hour}:{min}:{seco}</div>
+    <p>{data.caption}</p>
 
     <input type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)}} />
     <button onClick={async(e:any)=>{
@@ -258,14 +297,16 @@ return (
     updateDoc(doc(collection(db, "post"), data.postId), {
     comments:arrayUnion({userName:loginUserName,commentText:inputComment}),
     });
-    setPostData(()=>postData3)
+    setFavbtn(favbtn+1)
+    // setPostData(()=>postData3)
     setInputComment("")
     }}>コメント</button>
-    <p>♡:{data.favorites}</p>
+      <p>♡:{favos}</p>
+    {/* <p>♡:{data.favorites}</p> */}
     {/* <p>♡：{favorites}</p> */}
     <div>コメント:
     {/* {displayComment.map((data:any,index:any)=>{ */}
-    {data.comments.map((com:any,index:any)=>{
+    {com.map((com:any,index:any)=>{
         return(
         <div key={index}>
         <p>{com.userName}</p>
