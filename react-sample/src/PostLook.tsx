@@ -181,11 +181,11 @@ return (
         return(
         <>
         <div key={index}>
-        
+
         <Link to="/PostDetails" state={{postid:data.postId,userid:data.userId}}><img src={data.imageUrl} /></Link>
 
         {data.favorites.includes(loginUserName)?(
-        <AiFillHeart size={20} color={"red"} 
+        <AiFillHeart size={20} color={"red"}
          onClick={
             (e:any) =>{
                 updateDoc(doc(collection(db, "post"), data.postId), {
@@ -195,7 +195,7 @@ return (
                 }
          } />
     ):(
-        <AiOutlineHeart size={20} color={"black"} 
+        <AiOutlineHeart size={20} color={"black"}
         onClick={
            (e:any) =>{
                updateDoc(doc(collection(db, "post"), data.postId), {
@@ -222,6 +222,12 @@ return (
     setInputComment("")
     }}>コメント</button>
     {/* <p>♡:{data.favorites}</p> */}
+
+    {loginUserKeep.includes(data.postId) ? (
+      <RemoveKeepButton postId={data.postId} />
+    ) : (
+      <AddKeepButton postId={data.postId} />
+    )}
     <p>♡:{favos}</p>
     <div>コメント:
     {com.map((com:any,index:any)=>{
@@ -259,11 +265,11 @@ return (
         return(
         <>
         <div key={index}>
-       
+
         <Link to="/PostDetails" state={{postid:data.postId,userid:data.userId}}><img src={data.imageUrl} /></Link>
 
         {data.favorites.includes(loginUserName)?(
-        <AiFillHeart size={20} color={"red"} 
+        <AiFillHeart size={20} color={"red"}
          onClick={
             (e:any) =>{
                 updateDoc(doc(collection(db, "post"), data.postId), {
@@ -273,7 +279,7 @@ return (
                 }
          } />
     ):(
-        <AiOutlineHeart size={20} color={"black"} 
+        <AiOutlineHeart size={20} color={"black"}
         onClick={
            (e:any) =>{
                updateDoc(doc(collection(db, "post"), data.postId), {
@@ -287,6 +293,12 @@ return (
     }
 
     <FaRegComment size={20} color={"black"} />
+
+    {loginUserKeep.includes(data.postId) ? (
+      <RemoveKeepButton postId={data.postId} />
+    ) : (
+      <AddKeepButton postId={data.postId} />
+    )}
 
     <div>{year}年{month}月{day}日{hour}:{min}:{seco}</div>
     <p>{data.caption}</p>

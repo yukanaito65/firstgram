@@ -134,7 +134,7 @@ function SearchPage() {
     setDisplaySwitch(b);
   };
 
-  console.log("");
+  console.log(dataArr);
 
   return (
     <>
