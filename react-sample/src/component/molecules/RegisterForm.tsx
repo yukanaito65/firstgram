@@ -4,8 +4,7 @@ import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import React, { useState } from 'react'
 import { IoAddCircle } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
-import { auth, db } from '../../firebase';
-import storage from '../../firebase-sec';
+import { auth, db, storage } from '../../firebase';
 import CommonIcon from '../atoms/pictures/CommonIcon';
 import Icon from '../atoms/pictures/Icon';
 import RegisterIcon from '../atoms/pictures/RegisterIcon';

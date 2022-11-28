@@ -12,7 +12,7 @@ import { onAuthStateChanged } from "@firebase/auth";
 import type { User } from "../../types/types";
 import { Link,useNavigate } from "react-router-dom";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import storage from "../../firebase-sec";
+import { storage } from "../../firebase";
 import { getAuth } from "firebase/auth";
 import Header from "../molecules/Header";
 import Footer from "../molecules/Footer";
@@ -161,7 +161,7 @@ function AccountEditPage() {
                 )}
               </>
             )}
-            
+
             <tr>
               <td className="setting_table_title setting_table_td">
               <label htmlFor="settingUserName">ユーザーネーム</label>
