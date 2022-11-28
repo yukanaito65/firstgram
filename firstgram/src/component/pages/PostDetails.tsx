@@ -1,18 +1,18 @@
  import { useEffect, useState } from "react";
-import { auth, db } from "./firebase";
+import { auth, db } from "../../firebase";
 import {collection,getDoc,doc, deleteDoc, updateDoc, arrayUnion, arrayRemove,} from "firebase/firestore";
 import { Link, useLocation } from "react-router-dom";
-import firebasePostDetails from "./component/utils/firebasePostDetails";
+import firebasePostDetails from "../utils/firebasePostDetails";
 import { onAuthStateChanged } from "firebase/auth";
-import LoginUserName from "./component/utils/GetLoginUserData";
-import Footer from "./component/molecules/Footer";
-import Header from "./component/molecules/Header";
-import GetLoginUserData from "./component/utils/GetLoginUserData";
-import FavoriteUpdata from "./component/utils/FavoriteUpdata";
+import LoginUserName from "../utils/GetLoginUserData";
+import Footer from "../molecules/Footer";
+import Header from "../molecules/Header";
+import GetLoginUserData from "../utils/GetLoginUserData";
+import FavoriteUpdata from "../utils/FavoriteUpdata";
 import { AiFillHeart,AiOutlineHeart } from "react-icons/ai";
-import CommonIcon from "./component/atoms/pictures/CommonIcon";
-import RemoveKeepButton from "./component/atoms/button/RemoveKeepButton";
-import AddKeepButton from "./component/atoms/button/AddKeepButton";
+import CommonIcon from "../atoms/pictures/CommonIcon";
+import RemoveKeepButton from "../atoms/button/RemoveKeepButton";
+import AddKeepButton from "../atoms/button/AddKeepButton";
 
 interface State {
       postid:string,

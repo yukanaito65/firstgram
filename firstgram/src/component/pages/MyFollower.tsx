@@ -9,11 +9,11 @@ import {
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import GetFollowerData from "./component/data/GetFollowerData";
-import Footer from "./component/molecules/Footer";
-import Header from "./component/molecules/Header";
-import UserList from "./component/pages/UserList";
-import { auth, db } from "./firebase";
+import GetFollowerData from "../data/GetFollowerData";
+import Footer from "../molecules/Footer";
+import Header from "../molecules/Header";
+import UserList from "./UserList";
+import { auth, db } from "../../firebase";
 
 function MyFollower() {
   //ログインユーザーの情報

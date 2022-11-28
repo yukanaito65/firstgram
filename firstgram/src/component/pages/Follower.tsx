@@ -1,18 +1,16 @@
 import { onAuthStateChanged } from "firebase/auth";
 import {
   collection,
-  doc,
-  getDoc,
   getDocs,
   query,
   where,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { Link, Navigate, useLocation } from "react-router-dom";
-import Footer from "./component/molecules/Footer";
-import Header from "./component/molecules/Header";
-import UserList from "./component/pages/UserList";
-import { auth, db } from "./firebase";
+import { Link, useLocation } from "react-router-dom";
+import Footer from "../molecules/Footer";
+import Header from "../molecules/Header";
+import UserList from "./UserList";
+import { auth, db } from "../../firebase";
 
 interface State {
   userId: string;

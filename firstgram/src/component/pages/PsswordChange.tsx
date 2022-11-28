@@ -19,12 +19,12 @@ import {
   updateDoc,
   arrayRemove,
 } from "firebase/firestore";
-import { db } from "./firebase";
+import { db } from "../../firebase";
 import { useEffect } from "react";
 import { onAuthStateChanged } from "@firebase/auth";
-import type { User } from "./types/types";
-import Header from "./component/molecules/Header";
-import Footer from "./component/molecules/Footer";
+import type { User } from "../../types/types";
+import Header from "../molecules/Header";
+import Footer from "../molecules/Footer";
 import { Link } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";

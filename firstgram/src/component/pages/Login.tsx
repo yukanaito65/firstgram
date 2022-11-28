@@ -1,11 +1,11 @@
 import { onAuthStateChanged } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
-import Logo from "./component/atoms/pictures/Logo";
-import Footer from "./component/molecules/Footer";
-import Header from "./component/molecules/Header";
-import LoginForm from "./component/molecules/LoginForm";
-import { auth } from "./firebase";
+import Logo from "../atoms/pictures/Logo";
+import Footer from "../molecules/Footer";
+import Header from "../molecules/Header";
+import LoginForm from "../molecules/LoginForm";
+import { auth } from "../../firebase";
 
 function Login() {
   //ログインを判定する設定
