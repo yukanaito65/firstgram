@@ -26,7 +26,8 @@ import type { User } from "./types/types";
 import Header from "./component/molecules/Header";
 import Footer from "./component/molecules/Footer";
 import { Link } from "react-router-dom";
-import { IoIosArrowBack } from "react-icons/io"
+import { IoIosArrowBack } from "react-icons/io";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 export function PsswordChange() {
   const auth = getAuth();
@@ -38,6 +39,9 @@ export function PsswordChange() {
   const [newPassValue, setNewPassValue] = useState<any>("");
   const [cNewPassValue, setCNewPassValue] = useState<any>("");
   const [nowEmailValue, setNowEmailValue] = useState<any>("");
+  const [isRevealNowPassword, setIsRevealNowPassword] = useState(false);
+  const [isRevealNewPassword, setIsRevealNewPassword] = useState(false);
+  const [isRevealConfirmPassword, setIsRevealConfirmPassword] = useState(false);
 
   useEffect(() => {
     //ログイン判定
@@ -186,27 +190,45 @@ export function PsswordChange() {
   };
 
   const userDeleteAlert = () => {
-    if (window.confirm('本当にアカウントを削除しますか')) {
-      userDelete()
-  } else {
-      console.log('キャンセルボタンが押されました。')
+    if (window.confirm("本当にアカウントを削除しますか")) {
+      userDelete();
+    } else {
+      console.log("キャンセルボタンが押されました。");
+    }
+  };
+
+  // パスワードの表示/非表示
+  const toggleNowPassword = () => {
+    setIsRevealNowPassword((prevState) => !prevState);
+  };
+  const toggleNewPassword = () => {
+    setIsRevealNewPassword((prevState) => !prevState);
+  };
+
+  const toggleConfirmPassword = () => {
+    setIsRevealConfirmPassword((prevState) => !prevState);
   }
+
+  // backボタン
+  const backBtn = () => {
+    navigate(-1);
   }
+  
 
   return (
     <div>
       <Header show={true} />
       <h1 className="margin-bottom_20">アカウント情報変更</h1>
       <table className="setting_table">
-      <tr>
-        <td className="setting_table_td setting_table_title">
-        <label htmlFor="settingEmail">現在のメールアドレス</label>
-        </td>
-        <td className="setting_table_td setting_table_content">
-        <p>{nowEmailValue}</p>
-        </td>
-      </tr>
-      {/* <div>
+        <tr>
+          <td className="setting_table_td setting_table_title">
+            <label htmlFor="settingEmail">現在のメールアドレス</label>
+          </td>
+          <td className="setting_table_td setting_table_content">
+            <p>{nowEmailValue}</p>
+          </td>
+        </tr>
+        {/* <div>
         <label htmlFor="settingEmail">新しいメールアドレス</label>
         <input
           type="email"
@@ -216,72 +238,86 @@ export function PsswordChange() {
           id="settingEmail"
         ></input>
       </div> */}
-      <tr>
-        <td className="setting_table_td setting_table_title">
-        <label htmlFor="settingPassword">現在のパスワード</label>
-        </td>
-        <td className="setting_table_td setting_table_content">
-        <input
-          type="password"
-          value={nowPassValue}
-          onChange={(e) => setNowPassValue(e.target.value)}
-          name="settingPassword"
-          id="settingPassword"
-        ></input>
-        </td>
-      </tr>
+        <tr>
+          <td className="setting_table_td setting_table_title">
+            <label htmlFor="settingPassword">現在のパスワード</label>
+          </td>
+          <td className="setting_table_td setting_table_content">
+            <input
+              type={isRevealNowPassword ? "text" : "password"}
+              value={nowPassValue}
+              onChange={(e) => setNowPassValue(e.target.value)}
+              name="settingPassword"
+              id="settingPassword"
+            ></input>
+            <div onClick={toggleNowPassword} role="presentation"
+            className="isRevealPassword_icon">
+              {isRevealNowPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
+            </div>
+          </td>
+        </tr>
 
-      <tr>
-        <td className="setting_table_td setting_table_title">
-        <label htmlFor="settingPassword">新しいパスワード</label>
-        </td>
-        <td className="setting_table_td setting_table_content">
-        <input
-          type="password"
-          value={newPassValue}
-          onChange={(e) => setNewPassValue(e.target.value)}
-          name="settingPassword"
-          id="settingPassword"
-        ></input>
-        </td>
-      </tr>
+        <tr>
+          <td className="setting_table_td setting_table_title">
+            <label htmlFor="settingPassword">新しいパスワード</label>
+          </td>
+          <td className="setting_table_td setting_table_content">
+            <input
+              type={isRevealNewPassword ? "text" : "password"}
+              value={newPassValue}
+              onChange={(e) => setNewPassValue(e.target.value)}
+              name="settingPassword"
+              id="settingPassword"
+            ></input>
+            <div onClick={toggleNewPassword} role="presentation"
+            className="isRevealPassword_icon">
+              {isRevealNewPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
+            </div>
+          </td>
+        </tr>
 
-      <tr>
-        <td className="setting_table_td setting_table_title">
-        <label htmlFor="settingCPassword">新しいパスワード（確認）</label>
-        </td>
-        <td className="setting_table_td setting_table_content">
-        <input
-          type="password"
-          value={cNewPassValue}
-          onChange={(e) => setCNewPassValue(e.target.value)}
-          name="settingCPassword"
-          id="settingCPassword"
-          placeholder="再度パスワードを入力"
-        ></input>
-        
-        {newPassValue.length > 0 && newPassValue !== cNewPassValue ? (
-          <p>新しいパスワードと新しいパワード（確認）が一致していません</p>
-        ) : (
-          <></>
-        )}
-        </td>
-      </tr>
+        <tr>
+          <td className="setting_table_td setting_table_title">
+            <label htmlFor="settingCPassword">新しいパスワード（確認）</label>
+          </td>
+          <td className="setting_table_td setting_table_content">
+            <input
+              type={isRevealConfirmPassword ? "text" : "password"}
+              value={cNewPassValue}
+              onChange={(e) => setCNewPassValue(e.target.value)}
+              name="settingCPassword"
+              id="settingCPassword"
+              placeholder="再度パスワードを入力"
+            ></input>
+            <div onClick={toggleConfirmPassword} role="presentation"
+            className="isRevealPassword_icon">
+              {isRevealConfirmPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
+            </div>
+
+            {newPassValue.length > 0 && newPassValue !== cNewPassValue ? (
+              <p>新しいパスワードと新しいパワード(確認)が一致していません</p>
+            ) : (
+              <></>
+            )}
+          </td>
+        </tr>
       </table>
 
       <div className="confirm_btn">
-      <button onClick={dataUpdate}>確定</button>
+        <button onClick={dataUpdate}>確定</button>
       </div>
 
       <div className="account_delete">
-      <button className="margin_left_auto" onClick={userDeleteAlert}>アカウントを削除</button>
+        <button className="margin_left_auto" onClick={userDeleteAlert}>
+          アカウントを削除
+        </button>
       </div>
 
       <div className="back_btn">
-              <Link to="/">
-                <IoIosArrowBack color="white" size={40} className="to_back" />
-              </Link>
-            </div>
+        <div onClick={backBtn}>
+          <IoIosArrowBack color="white" size={40} className="to_back" />
+        </div>
+      </div>
 
       <Footer />
     </div>

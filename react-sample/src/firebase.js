@@ -3,7 +3,6 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getStorage } from "firebase/storage"
 
-
 // Your web app's Firebase configuration
 // const firebaseConfig = {
 //   apiKey: "AIzaSyAKqvjXcfg59UE5XBtzXAr7z3dzAa3O2zc",
@@ -23,6 +22,7 @@ import { getStorage } from "firebase/storage"
 //   appId: "1:595176906429:web:09162605721036572e21d4"
 // };
 
+
 const firebaseConfig = {
   // apiKey: "AIzaSyB5ojtvdlzeFl6pzQkME8Z0ySNDNIjaNQ4",
   apiKey: process.env.REACT_APP_NOT_SECRET_CODE,
@@ -32,7 +32,7 @@ const firebaseConfig = {
   messagingSenderId: "697679529997",
   appId: "1:697679529997:web:37ca51ced0c41613b4ed44"
 };
-
+//apiKey: process.env.REACT_APP_NOT_SECRET_CODE
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -42,9 +42,8 @@ const db = getFirestore(app);
 const storage = getStorage(app);
 
 
-
 // 上記2つの変数をどこででも使えるようにexportする
-export { db , storage};
+export { db, storage };
 
 //Firebaseの認証機能を使う場合に必要な記述
 export const auth = getAuth(app);

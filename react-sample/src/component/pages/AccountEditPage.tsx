@@ -12,7 +12,7 @@ import { onAuthStateChanged } from "@firebase/auth";
 import type { User } from "../../types/types";
 import { Link,useNavigate } from "react-router-dom";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import {storage} from "../../firebase";
+import { storage } from "../../firebase";
 import { getAuth } from "firebase/auth";
 import Header from "../molecules/Header";
 import Footer from "../molecules/Footer";
@@ -63,8 +63,10 @@ function AccountEditPage() {
     });
   }, []);
 
-  // Authenticationの変更
+  // getAuthを使えるように定義
   const auth = getAuth();
+
+  // useNavigateを使えるように定義
   const navigate = useNavigate();
 
   // 確定時にfiresoterにデータ送信
@@ -161,7 +163,7 @@ function AccountEditPage() {
                 )}
               </>
             )}
-            
+
             <tr>
               <td className="setting_table_title setting_table_td">
               <label htmlFor="settingUserName">ユーザーネーム</label>
@@ -218,7 +220,7 @@ function AccountEditPage() {
           </div>
         </>
       ) : (
-        <p>データが表示されません</p>
+        <p className="text-align_center">データが表示されません</p>
       )}
       <Footer />
     </div>
