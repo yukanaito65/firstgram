@@ -1,29 +1,29 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Register from "./Register";
-import Login from "./Login";
-import Mypage from "./Mypage";
-import NewPost from "./NewPost";
+import Register from "./component/pages/Register";
+import Login from "./component/pages/Login";
+import Mypage from "./component/pages/Mypage";
+import NewPost from "./component/pages/NewPost";
 import AccountEditPage from "./component/pages/AccountEditPage";
 import AccountSettingPage from "./component/pages/AccountSettingPage";
 import "./index.css"
 // import Follow from "./Follow";
 // import Follower from "./Follower";
-import PostDetails from "./PostDetails";
-import PostLook from "./PostLook";
+import PostDetails from "./component/pages/PostDetails";
+import PostLook from "./component/pages/PostLook";
 import DeleteCompPage from "./component/pages/DeleteCompPage";
-import PsswordChange from "./PsswordChange"
-import PostEditing from "./PostEditing";
+import PsswordChange from "./component/pages/PsswordChange";
+import PostEditing from "./component/pages/PostEditing";
 
 // import FavolitePostLook from "./FavolitePostLook";
 
 import DMPage from "./component/pages/DMPage";
 import SearchPage from "./component/pages/SearchPage";
-import Profile from "./Profile";
-import Follow from "./Follow";
-import Follower from "./Follower";
-import MyFollower from "./MyFollower";
-import MyFollow from "./MyFollow";
-import KeepList from "./KeepList";
+import Profile from "./component/pages/Profile";
+import Follow from "./component/pages/Follow";
+import Follower from "./component/pages/Follower";
+import MyFollower from "./component/pages/MyFollower";
+import MyFollow from "./component/pages/MyFollow";
+import KeepList from "./component/pages/KeepList";
 
 
 

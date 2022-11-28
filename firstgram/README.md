@@ -39,6 +39,29 @@ snsの画像投稿アプリを作成(instagram参考)
 - プロフィール編集機能
 - アカウント削除機能
 
+## ブランチ運用
+- main          : リリース用のソースコード
+- develop       : 開発中のソースコード
+- feather/機能名 : 各機能のソースコード
+
+## ディレクトリ構造
+|- pubric
+|- src
+  |- component
+    |- atoms
+    |- data
+    |- molecules
+    |- organisms
+    |- pages
+    |- templates
+    |- utils
+  |- css
+  |- hooks
+  |- redux
+  |- sass
+  |- types
+
+
 ## プロジェクトのスクリーンショット
 
 ## こだわりポイント

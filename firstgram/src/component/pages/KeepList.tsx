@@ -1,13 +1,11 @@
 import { onAuthStateChanged } from "firebase/auth";
 import { collection, doc, getDoc, getDocs, query, QuerySnapshot, where } from "firebase/firestore";
-import { setUseProxies } from "immer";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import MyPost from "./component/atoms/pictures/MyPost";
-import Footer from "./component/molecules/Footer";
-import Header from "./component/molecules/Header";
-import MyPostList from "./component/molecules/MyPostList";
-import { auth, db } from "./firebase";
+import MyPost from "../atoms/pictures/MyPost";
+import Footer from "../molecules/Footer";
+import Header from "../molecules/Header";
+import { auth, db } from "../../firebase";
 
 function KeepList() {
   //keepPostsの中に入っているpostIdを元にpostのimageUrl取得

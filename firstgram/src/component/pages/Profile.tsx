@@ -11,20 +11,20 @@ import {
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import AddFollowButton from "./component/atoms/button/AddFollowButton";
+import AddFollowButton from "../atoms/button/AddFollowButton";
 // import FollowButton from "./component/atoms/button/FollowButton";
-import RemoveFollowButton from "./component/atoms/button/RemoveFollowButton";
-import FollowerCount from "./component/atoms/user/FollowerCount";
-import CommonIcon from "./component/atoms/pictures/CommonIcon";
-import UserName from "./component/atoms/user/UserName";
-import MyPostList from "./component/molecules/MyPostList";
-import { auth, db } from "./firebase";
-import { Post } from "./types/types";
-import PostCount from "./component/atoms/user/PostCount";
-import FollowCount from "./component/atoms/user/FollowCount";
-import Header from "./component/molecules/Header";
-import Footer from "./component/molecules/Footer";
-import Name from "./component/atoms/user/Name";
+import RemoveFollowButton from "../atoms/button/RemoveFollowButton";
+import FollowerCount from "../atoms/user/FollowerCount";
+import CommonIcon from "../atoms/pictures/CommonIcon";
+import UserName from "../atoms/user/UserName";
+import MyPostList from "../molecules/MyPostList";
+import { auth, db } from "../../firebase";
+import { Post } from "../../types/types";
+import PostCount from "../atoms/user/PostCount";
+import FollowCount from "../atoms/user/FollowCount";
+import Header from "../molecules/Header";
+import Footer from "../molecules/Footer";
+import Name from "../atoms/user/Name";
 
 interface State {
   userId: string;

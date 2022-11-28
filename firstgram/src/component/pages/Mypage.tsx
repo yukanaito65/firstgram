@@ -11,16 +11,16 @@ import {
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
-import Icon from "./component/atoms/pictures/Icon";
-import UserName from "./component/atoms/user/UserName";
-import MyPostList from "./component/molecules/MyPostList";
-import { auth, db } from "./firebase";
-import { User } from "./types/types";
-import { Post } from "./types/types";
-import Footer from "./component/molecules/Footer";
-import Header from "./component/molecules/Header";
-import MyPageInfo from "./component/molecules/MyPageInfo";
-import Name from "./component/atoms/user/Name";
+import Icon from "../atoms/pictures/Icon";
+import UserName from "../atoms/user/UserName";
+import MyPostList from "../molecules/MyPostList";
+import { auth, db } from "../../firebase";
+import { User } from "../../types/types";
+import { Post } from "../../types/types";
+import Footer from "../molecules/Footer";
+import Header from "../molecules/Header";
+import MyPageInfo from "../molecules/MyPageInfo";
+import Name from "../atoms/user/Name";
 
 function MyPage() {
   //ログインしているとログイン情報を持つ
