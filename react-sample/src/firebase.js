@@ -24,7 +24,8 @@ import { getStorage } from "firebase/storage"
 // };
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB5ojtvdlzeFl6pzQkME8Z0ySNDNIjaNQ4",
+  // apiKey: "AIzaSyB5ojtvdlzeFl6pzQkME8Z0ySNDNIjaNQ4",
+  apiKey: process.env.REACT_APP_NOT_SECRET_CODE,
   authDomain: "test2-1dcda.firebaseapp.com",
   projectId: "test2-1dcda",
   storageBucket: "test2-1dcda.appspot.com",

@@ -15,6 +15,7 @@ import Footer from "./component/molecules/Footer";
 import Header from "./component/molecules/Header";
 import GetLoginUserName from './component/utils/GetLoginUserData';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import { FaRegComment } from 'react-icons/fa';
 
 
 
@@ -43,7 +44,7 @@ const [loginUserKeep, setLoginUserKeep] = useState<any>("");
 //
 const [postDataSecond,  setPostDataSecond] = useState<any>({});
 
-const [favbtn,setFavbtn]=useState("")
+const [favbtn,setFavbtn]=useState(1)
 
 
 
@@ -190,7 +191,7 @@ return (
                 updateDoc(doc(collection(db, "post"), data.postId), {
                     favorites:arrayRemove(loginUserName),
                     });
-                setFavbtn("1")
+                setFavbtn(favbtn+1)
                 }
          } />
     ):(
@@ -200,7 +201,7 @@ return (
                updateDoc(doc(collection(db, "post"), data.postId), {
                    favorites:arrayUnion(loginUserName),
                    });
-               setFavbtn("2")
+               setFavbtn(favbtn+1)
                }
         } />
 
@@ -216,7 +217,7 @@ return (
     updateDoc(doc(collection(db, "post"), data.postId), {
     comments:arrayUnion({userName:loginUserName,commentText:inputComment}),
     });
-    setFavbtn("3")
+    setFavbtn(favbtn+1)
     // setPostData(()=>postData3)
     setInputComment("")
     }}>コメント</button>
@@ -268,7 +269,7 @@ return (
                 updateDoc(doc(collection(db, "post"), data.postId), {
                     favorites:arrayRemove(loginUserName),
                     });
-                setFavbtn("1")
+                setFavbtn(favbtn+1)
                 }
          } />
     ):(
@@ -278,15 +279,17 @@ return (
                updateDoc(doc(collection(db, "post"), data.postId), {
                    favorites:arrayUnion(loginUserName),
                    });
-               setFavbtn("2")
+               setFavbtn(favbtn+1)
                }
         } />
 
     )
     }
 
-            <div>{year}年{month}月{day}日{hour}:{min}:{seco}</div>
-        <p>{data.caption}</p>
+    <FaRegComment size={20} color={"black"} />
+
+    <div>{year}年{month}月{day}日{hour}:{min}:{seco}</div>
+    <p>{data.caption}</p>
 
     <input type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)}} />
     <button onClick={async(e:any)=>{
@@ -294,7 +297,7 @@ return (
     updateDoc(doc(collection(db, "post"), data.postId), {
     comments:arrayUnion({userName:loginUserName,commentText:inputComment}),
     });
-    setFavbtn("3")
+    setFavbtn(favbtn+1)
     // setPostData(()=>postData3)
     setInputComment("")
     }}>コメント</button>
