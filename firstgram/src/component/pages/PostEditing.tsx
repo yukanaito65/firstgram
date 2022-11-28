@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import firebasePostDetails from "./component/utils/firebasePostDetails";
-import FirestoreUpdata from "./component/utils/FirestoreUpdata";
-import Footer from "./component/molecules/Footer";
-import Header from "./component/molecules/Header";
+import firebasePostDetails from "../utils/firebasePostDetails";
+import FirestoreUpdata from "../utils/FirestoreUpdata";
+import Footer from "../molecules/Footer";
+import Header from "../molecules/Header";
 
 interface State {
     postid:string,
