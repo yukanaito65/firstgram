@@ -8,12 +8,12 @@ import { Link, useActionData, useLocation, useRouteLoaderData } from 'react-rout
 import AddKeepButton from './component/atoms/button/AddKeepButton';
 import RemoveKeepButton from './component/atoms/button/RemoveKeepButton';
 
-import AddFavBtn from './AddFavBtn';
+import AddFavBtn from './component/atoms/button/AddFavBtn';
 import { auth, db } from './firebase';
-import NoFavBtn from './NoFavBtn';
+import NoFavBtn from './component/atoms/button/NoFavBtn';
 import Footer from "./component/molecules/Footer";
 import Header from "./component/molecules/Header";
-import GetLoginUserName from './GetLoginUserData';
+import GetLoginUserName from './component/utils/GetLoginUserData';
 
 
 
@@ -185,6 +185,12 @@ return (
     <AddFavBtn postId={data.postId} userName={loginUserName} />
     )}
 
+    {loginUserKeep.includes(data.postId) ? (
+      <RemoveKeepButton postId={data.postId} />
+    ) : (
+      <AddKeepButton postId={data.postId} />
+    )}
+
     <input type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)}} />
     <button onClick={async(e:any)=>{
     // 押された投稿のcommentにinputCommentを配列で追加
@@ -239,6 +245,12 @@ return (
         <AddFavBtn postId={data.postId} userName={loginUserName} />
     )
     }
+
+        {loginUserKeep.includes(data.postId) ? (
+            <RemoveKeepButton postId={data.postId} />
+        ) : (
+            <AddKeepButton postId={data.postId} />
+        )}
 
     <input type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)}} />
     <button onClick={async(e:any)=>{

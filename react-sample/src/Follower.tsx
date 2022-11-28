@@ -1,3 +1,4 @@
+import { onAuthStateChanged } from "firebase/auth";
 import {
   collection,
   doc,
@@ -11,7 +12,7 @@ import { Link, Navigate, useLocation } from "react-router-dom";
 import Footer from "./component/molecules/Footer";
 import Header from "./component/molecules/Header";
 import UserList from "./component/pages/UserList";
-import { db } from "./firebase";
+import { auth, db } from "./firebase";
 
 interface State {
   userId: string;
@@ -22,41 +23,44 @@ interface State {
 function Follower() {
   const [followerUsers, setFollowerUsers] = useState<any>([]);
 
+  const [loading, setLoading] = useState(true);
+
   //各ページからデータ取得
   const location = useLocation();
-  const { userId, follower, uid } = location.state as State;
+  const { userId, uid } = location.state as State;
 
   useEffect(() => {
-    const followerArray: any = [];
+    onAuthStateChanged(auth, async (currentUser: any) => {
+      setLoading(false);
 
-    follower.map(async (followerUserId: any) => {
-      const userCollectionRef = collection(db, "user");
+      const followerUserCollectionRef = query(
+        collection(db, "user"),
+        where("follow", "array-contains", userId)
+      );
 
-      const userDocRefId = doc(userCollectionRef, followerUserId);
+      const followerUserDocId = await getDocs(followerUserCollectionRef);
 
-      const userDocId = await getDoc(userDocRefId);
+      const newFollowerUserDocIds = followerUserDocId.docs as any[];
 
-      const userDataId = userDocId.data();
-
-      console.log(userDataId);
-      followerArray.push(userDataId);
-      setFollowerUsers(followerArray);
-    }); //map
+      const followerUserArray = newFollowerUserDocIds.map((doc) => doc.data());
+      setFollowerUsers(followerUserArray);
+    });
   }, []);
 
   console.log(followerUsers);
 
   return (
     <>
-    <Header show={true} />
-      <Link to={"/profile"} state={{ userId: userId }}>
-        ⬅︎
-      </Link>
-      <UserList
-      usersData={followerUsers}
-      uid={uid}
-      />
-      <Footer />
+      {!loading && (
+        <>
+          <Header show={true} />
+          <Link to={"/profile"} state={{ userId: userId }}>
+            ⬅︎
+          </Link>
+          <UserList usersData={followerUsers} uid={uid} />
+          <Footer />
+        </>
+      )}
     </>
   ); //return
 }

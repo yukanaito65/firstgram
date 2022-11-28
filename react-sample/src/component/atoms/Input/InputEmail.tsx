@@ -1,21 +1,14 @@
-import React, { useState } from "react";
-
 function InputEmail(props:any) {
-  // const [textState, setTextState] = useState("");
-
-  // const emailChange = (e: any) => {
-  //   setTextState(e.target.value);
-  //   props.handleChange();
-  // };
 
   return (
     <div>
       <input
         type="email"
         name="email"
-        value={props.loginPassword}
+        value={props.loginEmail}
         placeholder="メールアドレス"
-        onChange={props.handleChange}
+        onChange={props.emailChange}
+        style={{width:"80%", height: "35px", backgroundColor: "#f7f7f7",outline: "solid #d3d3d3", border: "none"}}
       />
     </div>
   );

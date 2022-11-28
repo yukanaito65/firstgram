@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { getDownloadURL, ref, uploadBytes, uploadBytesResumable } from "firebase/storage";
 import { addDoc, arrayUnion, collection, doc, getDoc, serverTimestamp, updateDoc } from "firebase/firestore";
-import { auth, db } from "./firebase";
-import { storage } from "./firebase";
+import { auth, db, storage } from "./firebase";
 import {Link} from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { AiOutlineAreaChart } from "react-icons/ai";
@@ -115,7 +114,7 @@ onAuthStateChanged(auth, async (user) => {
 
 return (
     <>
-    {/* <Header /> */}
+    <Header show={true} />
     {loading ? (
         <div>
             <button>
@@ -147,7 +146,7 @@ return (
     <AiOutlineAreaChart size={40}/>
     <input name="imageURL" type="file" accept=".png, .jpeg, .jpg" onChange={ InputImage } />
     </div>
-    
+
     <div className ="Textarea" >
     <textarea value={textState} placeholder="コメントを入力
     してください" onChange={InputText} />

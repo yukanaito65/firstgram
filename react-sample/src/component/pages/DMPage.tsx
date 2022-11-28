@@ -15,7 +15,7 @@ import {
 import { db } from "../../firebase";
 import { useEffect } from "react";
 import { onAuthStateChanged } from "@firebase/auth";
-import SendDM from "../pages/SendDM";
+import SendDM from "../molecules/SendDM";
 import { useNavigate } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import Header from "../molecules/Header";

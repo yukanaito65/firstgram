@@ -29,9 +29,11 @@ function LoginForm() {
   //   });
   // });
 
-  const handleChange = (e:any)=>{
+  const emailChange = (e:any)=>{
 setLoginEmail(e.target.value);
-setLoginPassword(e.target.value);
+  }
+  const passChange = (e:any)=> {
+    setLoginPassword(e.target.value);
   }
 
   return (
@@ -40,28 +42,8 @@ setLoginPassword(e.target.value);
       onSubmit={handleSubmit}
       style={{lineHeight: "5rem"}}
       >
-        <div>
-          <input
-            type="email"
-            name="email"
-            value={loginEmail}
-            onChange={(e) => setLoginEmail(e.target.value)}
-            placeholder="メールアドレス"
-            style={{width:"80%", height: "35px", backgroundColor: "#f7f7f7",outline: "solid #d3d3d3", border: "none"}}
-          />
-        </div>
-        {/* <InputEmail handleChange={handleChange} loginEmail={loginEmail}/>
-        <InputPass handleChange={handleChange} loginPassword={loginPassword} /> */}
-        <div>
-          <input
-            type="password"
-            name="password"
-            value={loginPassword}
-            onChange={(e) => setLoginPassword(e.target.value)}
-            placeholder="パスワード"
-            style={{width:"80%", height: "35px", backgroundColor: "#f7f7f7",outline: "solid #d3d3d3", border: "none"}}
-          />
-        </div>
+        <InputEmail emailChange={emailChange} loginEmail={loginEmail}/>
+        <InputPass passChange={passChange} loginPassword={loginPassword} />
         <LoginButton />
       </form>
     </>

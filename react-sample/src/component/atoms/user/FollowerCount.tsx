@@ -17,7 +17,6 @@ function FollowerCount(props: any) {
       to={props.link}
       state={{
         userId: props.userId,
-        follower: props.followerList,
         uid: props.uid,
       }}
     >

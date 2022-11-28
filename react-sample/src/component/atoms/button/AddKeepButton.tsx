@@ -96,11 +96,10 @@ function AddKeepButton(props: any) {
       {!loading && (
         <>
           {keepBtn === false ? (
-            <button onClick={() =>{
-               addKeep()
-              //  window.location.reload()
-              }
-              }>
+            <button
+            onClick={()=>addKeep()}
+            className="keep_btn"
+              >
                 <FaRegBookmark />
               </button>
           ) : (

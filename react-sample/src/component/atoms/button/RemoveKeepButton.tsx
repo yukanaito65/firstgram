@@ -102,9 +102,9 @@ function RemoveKeepButton(props: any) {
                removeKeep()
               //  window.location.reload()
               }}
-              style={{backgroundColor:"none", color:"none"}}
+              className="keep_btn"
               >
-                <FaBookmark style={{color:"black"}}/>
+                <FaBookmark className="keep_btn_remove" />
               </button>
           ) : (
             <AddKeepButton postId={props.postId} />

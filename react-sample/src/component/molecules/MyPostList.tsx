@@ -25,8 +25,7 @@ function MyPostList(props: any) {
         </div>
       ) : (
         <div>
-          <p>初めて投稿してみよう！</p>
-          <Link to="/NewPost/">新規投稿はこちら</Link>
+          {props.message}
         </div>
       )}
     </div>

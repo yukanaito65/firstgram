@@ -1,6 +1,6 @@
 import { collection, doc, getDoc } from 'firebase/firestore';
 import React, { useState } from 'react'
-import { db } from './firebase';
+import { db } from '../../firebase';
 
 const firebasePostDetails = async(postid:string,userid:string) =>{
     const postDataCollectionRef = collection(db, "post") ;

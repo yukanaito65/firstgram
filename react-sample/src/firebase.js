@@ -22,6 +22,7 @@ import { getStorage } from "firebase/storage"
 //   appId: "1:595176906429:web:09162605721036572e21d4"
 // };
 
+
 const firebaseConfig = {
   // apiKey: "AIzaSyB5ojtvdlzeFl6pzQkME8Z0ySNDNIjaNQ4",
   apiKey: process.env.REACT_APP_NOT_SECRET_CODE,
@@ -31,7 +32,7 @@ const firebaseConfig = {
   messagingSenderId: "697679529997",
   appId: "1:697679529997:web:37ca51ced0c41613b4ed44"
 };
-
+//apiKey: process.env.REACT_APP_NOT_SECRET_CODE
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

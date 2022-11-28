@@ -10,7 +10,7 @@ import {
   where,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import Icon from "./component/atoms/pictures/Icon";
 import UserName from "./component/atoms/user/UserName";
 import MyPostList from "./component/molecules/MyPostList";
@@ -173,7 +173,12 @@ function MyPage() {
                 <Name users={users}/>
               </span>
               <div>{users.profile}</div>
-              <MyPostList posts={posts} users={users} />
+              <MyPostList
+              posts={posts}
+              users={users}
+              message={<><p>初めて投稿してみよう！</p>
+              <Link to="/NewPost">新規投稿はこちら</Link></>}
+              />
               <Footer />
             </>
           )}

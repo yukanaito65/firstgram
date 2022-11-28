@@ -7,7 +7,7 @@ function FollowCount(props: any) {
     <div style={{textAlign: "center", width: "80px"}}>
     <Link
     to={props.link}
-    state={{ userId: props.userId, follow: props.followList, uid: props.uid }}
+    state={{ userId: props.userId, uid: props.uid }}
     >
       <p>
         <span style={{fontWeight:"bold"}}>{props.followList.length}</span><br/>

@@ -1,7 +1,7 @@
 import { arrayRemove, collection, doc, updateDoc } from 'firebase/firestore';
 import React, { useState } from 'react'
 import AddFavBtn from './AddFavBtn';
-import { db } from './firebase';
+import { db } from '../../../firebase';
 
 interface State {
     postId:string,

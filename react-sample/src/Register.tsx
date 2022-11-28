@@ -5,10 +5,9 @@ import {
 import React, { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { auth } from "./firebase";
-import { db } from "./firebase";
+import { db, storage } from "./firebase";
 import { setDoc, doc, getDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { storage } from "./firebase";
 import RegisterForm from "./component/molecules/RegisterForm";
 import Logo from "./component/atoms/pictures/Logo";
 import Header from "./component/molecules/Header";

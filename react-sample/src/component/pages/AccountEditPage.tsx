@@ -163,7 +163,7 @@ function AccountEditPage() {
                 )}
               </>
             )}
-            
+
             <tr>
               <td className="setting_table_title setting_table_td">
               <label htmlFor="settingUserName">ユーザーネーム</label>
