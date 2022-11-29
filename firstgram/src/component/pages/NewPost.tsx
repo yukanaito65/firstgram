@@ -96,7 +96,7 @@ onAuthStateChanged(auth, async (user) => {
     const docusesinformation = doc(db, "user", user.uid);
     // ドキュメント更新(postId[]を作成、docRef.idを追加)
     updateDoc(docusesinformation, {
-        post: arrayUnion(docRef.id),
+        posts: arrayUnion(docRef.id),
     });
     updateDoc(docImagePost, {
         userId:user.uid,

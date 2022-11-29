@@ -13,3 +13,8 @@ export const followerCount: any = createSlice({
 
 export default followerCount.reducer;
 export const {followerData}=followerCount.actions;
+
+
+//export cont selectTasks = (state)=>
+//↑使う時はuseSelector
+//fetchはextraReducerを使う？

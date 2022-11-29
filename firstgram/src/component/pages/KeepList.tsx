@@ -6,6 +6,7 @@ import MyPost from "../atoms/pictures/MyPost";
 import Footer from "../molecules/Footer";
 import Header from "../molecules/Header";
 import { auth, db } from "../../firebase";
+import MyPostList from "../molecules/MyPostList";
 
 function KeepList() {
   //keepPostsの中に入っているpostIdを元にpostのimageUrl取得
