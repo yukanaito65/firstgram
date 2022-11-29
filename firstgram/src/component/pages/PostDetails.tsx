@@ -145,13 +145,13 @@ const postUserDoc = await getDoc(postUserDocRef);
 // 取得したデータから必要なものを取り出す
 const postUserData = postUserDoc.data();
 // 投稿者のpostを取り出す
-const postUserPost = postUserData?.post
+const postUserPost = postUserData?.posts
 
 const index = postUserPost.indexOf(postid);
 postUserPost.splice(index, 1)
 console.log(postUserPost)
 await updateDoc(postUserDocRef,{
-      post: postUserPost
+      posts: postUserPost
 });
 await deleteDoc(doc(db, "post", postid));
 }

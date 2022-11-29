@@ -28,9 +28,12 @@ import Footer from "../molecules/Footer";
 import { IoIosArrowBack } from "react-icons/io";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
+const auth = getAuth();
+const currentUser: any = auth.currentUser;
+const currentUserId = currentUser?.uid;
+
 export function PsswordChange() {
-  const auth = getAuth();
-  const currentUser: any = auth.currentUser;
+
   console.log(currentUser);
   const navigate = useNavigate();
 
@@ -44,7 +47,7 @@ export function PsswordChange() {
 
   useEffect(() => {
     //ログイン判定
-    onAuthStateChanged(auth, async (user) => {
+    onAuthStateChanged(auth, (user) => {
       if (!user) {
         console.log("ログアウト状態です");
       } else {
@@ -59,16 +62,15 @@ export function PsswordChange() {
         console.log(docData);
 
         // 上記を元にドキュメントのデータを取得
-        const userDocId = await getDoc(docData);
-        console.log(docData);
+        getDoc(docData).then((userDocId) => {
+          // 取得したデータから必要なものを取り出す
+          const userDataId: any = userDocId.data();
 
-        // 取得したデータから必要なものを取り出す
-        const userDataId: any = userDocId.data();
-
-        // inputの初期値を取得データに変更
-        setNowEmailValue(userDataId.email);
-
+          // inputの初期値を取得データに変更
+          setNowEmailValue(userDataId.email);
+        });
         console.log("ログイン状態です");
+        console.log(docData);
       }
     });
   }, []);
@@ -107,22 +109,22 @@ export function PsswordChange() {
     updatePassword(nowPassValue, newPassValue);
   };
 
-  const currentUserId = currentUser?.uid;
+  
 
   // 該当するPostデータの削除
-  const deletePostData = async () => {
+  const deletePostData = () => {
     // currentUserの投稿を取得
     const q = query(
       collection(db, "post"),
       where("userId", "==", currentUserId)
     );
-    const querySnapshot = await getDocs(q);
-    console.log(querySnapshot);
-    querySnapshot.forEach(async (docdata) => {
-      const data = (docdata.id, " => ", docdata.data());
-      const id = data.postId;
-      await deleteDoc(doc(db, "post", id));
-    });
+    getDocs(q).then((querySnapshot: any) => {
+      for(const docdata of querySnapshot) {
+        const data = (docdata.id, " => ", docdata.data());
+        const id = data.postId;
+        deleteDoc(doc(db, "post", id));
+      }
+      });
   };
 
   //   currentUserをフォローしているユーザーのfollow配列からcurrentUserのuserIdを消す
@@ -134,23 +136,22 @@ export function PsswordChange() {
     const currentUserData = doc(userCollectionRef, currentUserId);
 
     // 上記を元にcurrentUserのドキュメントのデータを取得
-    const currentUserDocData = await getDoc(currentUserData);
-    console.log(currentUserDocData);
-
-    // 取得したドキュメントデータからfollow配列を取得
+    getDoc(currentUserData).then((currentUserDocData) => {
+      // 取得したドキュメントデータからfollow配列を取得
     const followerUserIdArr: string[] = currentUserDocData.get("follower");
     console.log(followerUserIdArr);
 
     for (const followerUserId of followerUserIdArr) {
       const followerUserData = doc(db, "user", followerUserId);
-      await updateDoc(followerUserData, {
+      updateDoc(followerUserData, {
         follow: arrayRemove(currentUserId),
       });
     }
+    })
   };
 
   // currentUserがフォローしているユーザーのfollower配列からcurrentUserのuserIdを消す
-  const followerArrDelete = async () => {
+  const followerArrDelete = () => {
     //コレクションへの参照を取得
     const userCollectionRef = collection(db, "user");
 
@@ -158,24 +159,26 @@ export function PsswordChange() {
     const currentUserData = doc(userCollectionRef, currentUserId);
 
     // 上記を元にcurrentUserのドキュメントのデータを取得
-    const currentUserDocData = await getDoc(currentUserData);
-    console.log(currentUserDocData);
-
-    // 取得したドキュメントデータからfollow配列を取得
+    getDoc(currentUserData).then((currentUserDocData) => {
+      // 取得したドキュメントデータからfollow配列を取得
     const followUserIdArr: string[] = currentUserDocData.get("follow");
 
     for (const followUserId of followUserIdArr) {
       const followUserData = doc(db, "user", followUserId);
-      await updateDoc(followUserData, {
+      updateDoc(followUserData, {
         follower: arrayRemove(currentUserId),
       });
     }
+    });
+
+    
   };
 
   // データ削除
-  const userDelete = async () => {
-    await deleteDoc(doc(db, "user", `${currentUserId}`));
-    deleteUser(currentUser)
+  const userDelete = () => {
+    deleteDoc(doc(db, "user", `${currentUserId}`)).then(() => {
+      deleteUser(currentUser);
+    })
       .then(() => {
         deletePostData();
         followArrDelete();
@@ -206,13 +209,12 @@ export function PsswordChange() {
 
   const toggleConfirmPassword = () => {
     setIsRevealConfirmPassword((prevState) => !prevState);
-  }
+  };
 
   // backボタン
   const backBtn = () => {
     navigate(-1);
-  }
-  
+  };
 
   return (
     <div>
@@ -249,8 +251,11 @@ export function PsswordChange() {
               name="settingPassword"
               id="settingPassword"
             ></input>
-            <div onClick={toggleNowPassword} role="presentation"
-            className="isRevealPassword_icon">
+            <div
+              onClick={toggleNowPassword}
+              role="presentation"
+              className="isRevealPassword_icon"
+            >
               {isRevealNowPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
             </div>
           </td>
@@ -268,8 +273,11 @@ export function PsswordChange() {
               name="settingPassword"
               id="settingPassword"
             ></input>
-            <div onClick={toggleNewPassword} role="presentation"
-            className="isRevealPassword_icon">
+            <div
+              onClick={toggleNewPassword}
+              role="presentation"
+              className="isRevealPassword_icon"
+            >
               {isRevealNewPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
             </div>
           </td>
@@ -288,8 +296,11 @@ export function PsswordChange() {
               id="settingCPassword"
               placeholder="再度パスワードを入力"
             ></input>
-            <div onClick={toggleConfirmPassword} role="presentation"
-            className="isRevealPassword_icon">
+            <div
+              onClick={toggleConfirmPassword}
+              role="presentation"
+              className="isRevealPassword_icon"
+            >
               {isRevealConfirmPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
             </div>
 
