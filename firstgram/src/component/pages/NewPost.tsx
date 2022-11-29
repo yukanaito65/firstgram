@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { getDownloadURL, ref, uploadBytes, uploadBytesResumable } from "firebase/storage";
-import { addDoc, arrayUnion, collection, doc, getDoc, serverTimestamp, updateDoc } from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { addDoc, arrayUnion, collection, doc, serverTimestamp, updateDoc } from "firebase/firestore";
 import { auth, db, storage } from "../../firebase";
 import {Link} from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { AiOutlineAreaChart } from "react-icons/ai";
 import Footer from "../molecules/Footer";
 import Header from "../molecules/Header";
-// import "./css/newPost.css";
+import "../../css/newPost.css"
 
 
 const NewPost = (props:any) => {
@@ -20,7 +20,7 @@ const NewPost = (props:any) => {
     // コメント
     const [textState, setTextState] = useState("");
       //ログイン状態保持(userが値を持てばログイン状態)
-    const [user, setUser] = useState<any>("");
+    // const [user, setUser] = useState<any>("");
 
 // コメントの更新
 const InputText = (e:any)=>{
@@ -96,7 +96,7 @@ onAuthStateChanged(auth, async (user) => {
     const docusesinformation = doc(db, "user", user.uid);
     // ドキュメント更新(postId[]を作成、docRef.idを追加)
     updateDoc(docusesinformation, {
-        post: arrayUnion(docRef.id),
+        posts: arrayUnion(docRef.id),
     });
     updateDoc(docImagePost, {
         userId:user.uid,

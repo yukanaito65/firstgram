@@ -536,6 +536,7 @@ button:hover {
 .keep_btn {
   background-color: transparent;
   color: black;
+  size:30px;
 }
 
 .keep_btn_remove {
