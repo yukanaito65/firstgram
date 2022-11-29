@@ -25,7 +25,6 @@ import { onAuthStateChanged } from "@firebase/auth";
 import type { User } from "../../types/types";
 import Header from "../molecules/Header";
 import Footer from "../molecules/Footer";
-import { Link } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
