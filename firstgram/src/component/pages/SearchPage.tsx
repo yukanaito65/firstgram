@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   getAuth,
-  updatePassword as firebaseUpdatePassword,
 } from "firebase/auth";
 import {
   getDoc,
@@ -15,7 +14,7 @@ import { onAuthStateChanged } from "@firebase/auth";
 import { db } from "../../firebase";
 import Header from "../molecules/Header";
 import Footer from "../molecules/Footer";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 
@@ -27,7 +26,8 @@ import { Link, useLocation } from "react-router-dom";
 // 上記の配列を使ってmapで回して表示する
 
 
-
+const auth = getAuth();
+const currentUserId = auth.currentUser?.uid;
 function SearchPage() {
   // inputタグ内の状態管理
   const [searchValue, setSearchValue] = useState<string>("");
@@ -42,10 +42,7 @@ function SearchPage() {
     { userId: string; name: string; userName: string; icon: string }[]
   >([]);
 
-  // 検索結果のデータの表示/非表示を管理
-  const [displaySwitch, setDisplaySwitch] = useState<boolean>(false);
 
-  const auth = getAuth();
   // まずuseEffect内で前userデータのuserNameとnameとtonametouserIdを取得
   useEffect(() => {
     //ログイン判定
@@ -78,10 +75,6 @@ function SearchPage() {
       }
     });
   }, []);
-
-  useEffect(() => {
-    console.log(dataArr);
-  },[displaySwitch])
 
   // 「検索」クリック時にinputタグ内の文字と一致するユーザーのuserIdを配列に格納
   // 格納されたuserIdの任意の情報を取得
@@ -129,9 +122,7 @@ function SearchPage() {
     };
     const a = userDataArr;
     console.log(a);
-    const b = true;
     setDataArr(userDataArr);
-    setDisplaySwitch(b);
   };
 
   console.log(dataArr);
@@ -141,7 +132,7 @@ function SearchPage() {
     <Header show={true} />
     <div className="margin"></div>
     <form className="searchpage_form">
-      <div className="dmpage_form_wrapper">
+      <div className="searchpage_form_wrapper">
       <input
       className="searchpage_form_input"
         type="search"
@@ -160,7 +151,10 @@ function SearchPage() {
         dataArr.map((a) => {
           return(
           <>
-          <Link to="/profile" state={{userid:a.userId}}>
+          <Link
+        to={a.userId === currentUserId ? "/mypage" : "/profile"}
+        state={{ userId: a.userId }}
+      >
             <img src={a.icon} alt="ユーザーアイコン" />
             <p>{a.name}</p>
             <p>{a.userName}</p>

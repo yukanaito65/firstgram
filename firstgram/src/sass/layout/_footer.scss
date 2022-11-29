@@ -1,0 +1,29 @@
+.footer {
+    width: 65%;
+    background-color: #f7f7f7;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 0;
+  }
+  
+  .footer-width {
+    width: 100%;
+    display: block;
+    text-align: center;
+  }
+  
+  .footer-border-right {
+    border-right: 2px solid rgb(128, 128, 128);
+    margin-bottom: 15px;
+    margin-top: 15px;
+  }
+  
+  .footer-mypage {
+    margin-bottom: 15px;
+    margin-top: 15px;
+  }
+  
+  .icon {
+    margin: auto;
+  }
