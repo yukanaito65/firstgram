@@ -169,7 +169,6 @@ return (
 <div style={{marginLeft:"auto"}}>
 <AiOutlineEllipsis style={{display:"block"}} size={40} color={"rgb(38, 38, 38)"}/>
 </div>
-
 </div>
 
 
@@ -189,7 +188,7 @@ return (
 </div>
 
 <div style={{margin:"10px 5px 0px 5px"}}>
-<AiOutlineMessage size={30} color={"rgb(38, 38, 38)"}/>
+<Link to="/"><AiOutlineMessage size={30} color={"rgb(38, 38, 38)"}/></Link>
 </div>
 
 <div style={{margin:"5px 5px 5px auto"}}>
@@ -220,7 +219,7 @@ return (
 <input style={{width:"100%"}} type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)}}></input>
 </div>
 
-<button onClick={AddComment}>コメント</button>
+<button onClick={AddComment}>投稿する</button>
 
 </div>
 
@@ -237,7 +236,6 @@ return (
 </div>
 
 
-<Link to="/"><button>戻る</button></Link>
 <div>
 {loginUserPost ?(
 <>
