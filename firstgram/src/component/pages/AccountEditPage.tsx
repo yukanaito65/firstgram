@@ -133,11 +133,11 @@ function AccountEditPage() {
             ) : (
               <>
                 {isUploaded ? (
-                  <tr>
-                    <td className="icon-image setting_table_td">
-                    <img alt="ユーザーアイコン" src={iconValue} />
+                  <tr className="setting_table_tr">
+                    <td className="setting_table_title">
+                    <img className="icon-image" alt="ユーザーアイコン" src={iconValue} />
                     </td>
-                    <td className="setting_table_td">
+                    <td className="setting_table_content">
                     <input
                       name="settingIcon"
                       type="file"
@@ -147,11 +147,11 @@ function AccountEditPage() {
                     </td>
                   </tr>
                 ) : (
-                  <tr>
-                    <td className="icon-image setting_table_td">
-                    <img alt="ユーザーアイコン" src={iconValue} />
+                  <tr className="setting_table_tr">
+                    <td className="setting_table_title">
+                    <img className="icon-image" alt="ユーザーアイコン" src={iconValue} />
                     </td>
-                    <td className="setting_table_td">
+                    <td className="setting_table_content">
                     <input
                       name="settingIcon"
                       type="file"
@@ -164,11 +164,11 @@ function AccountEditPage() {
               </>
             )}
 
-            <tr>
-              <td className="setting_table_title setting_table_td">
+            <tr className="setting_table_tr">
+              <td className="setting_table_title">
               <label htmlFor="settingUserName">ユーザーネーム</label>
               </td>
-              <td className="setting_table_content setting_table_td">
+              <td className="setting_table_content">
               <input
                 type="text"
                 value={userNameValue}
@@ -179,11 +179,11 @@ function AccountEditPage() {
               </td>
             </tr>
 
-            <tr>
-              <td className="setting_table_title setting_table_td">
+            <tr className="setting_table_tr">
+              <td className="setting_table_title">
               <label htmlFor="settingName">名前</label>
               </td>
-              <td className="setting_table_content setting_table_td">
+              <td className="setting_table_content">
               <input
                 type="text"
                 value={nameValue}
@@ -194,11 +194,11 @@ function AccountEditPage() {
               </td>
             </tr>
 
-            <tr>
-              <td className="setting_table_title setting_table_td">
+            <tr className="setting_table_tr">
+              <td className="setting_table_title">
               <label htmlFor="settingProfile">自己紹介</label>
               </td>
-              <td className="setting_table_content setting_table_td">
+              <td className="setting_table_content">
               <textarea
                 value={profileValue}
                 onChange={(e) => setProfileValue(e.target.value)}

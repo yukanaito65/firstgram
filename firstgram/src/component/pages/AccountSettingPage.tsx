@@ -20,11 +20,10 @@ function AccountSettingPage() {
   //ログイン状態を保持
   //Authenticationに登録されている情報を持つ
   const [user, setUser] = useState<any>("");
-  const [userDocRefId, setUserDocRefId] = useState<any>("");
 
   useEffect(() => {
     //ログイン判定
-    onAuthStateChanged(auth, async (user) => {
+    onAuthStateChanged(auth, (user) => {
       if (!user) {
         console.log("ログアウト状態です");
       } else {
@@ -39,21 +38,29 @@ function AccountSettingPage() {
         console.log(userCollectionRef);
 
         // 上記を元にドキュメントへの参照を取得
-        setUserDocRefId(doc(userCollectionRef, user.uid));
-        console.log(doc(userCollectionRef, user.uid));
         const docDtata = doc(userCollectionRef, user.uid);
 
         // 上記を元にドキュメントのデータを取得
-        const userDocId = await getDoc(docDtata);
+        // const userDocId = await getDoc(docDtata);
 
-        // 取得したデータから必要なものを取り出す
-        const userDataId: any = userDocId.data();
+        // // 取得したデータから必要なものを取り出す
+        // const userDataId: any = userDocId.data();
+
+        // // inputの初期値を取得データに変更
+        // setUserNameValue(userDataId.userName);
+        // setNameValue(userDataId.name);
+        // setProfileValue(userDataId.profile);
+        // setEmailValue(userDataId.email);
+
+        getDoc(docDtata).then((userDocId) => {
+          const userDataId: any = userDocId.data();
 
         // inputの初期値を取得データに変更
         setUserNameValue(userDataId.userName);
         setNameValue(userDataId.name);
         setProfileValue(userDataId.profile);
         setEmailValue(userDataId.email);
+        })
 
         console.log("ログイン状態です");
       }
@@ -82,40 +89,40 @@ function AccountSettingPage() {
               <Icon />
             </div>
             <table className="setting_table">
-              <tr className="setting_block">
+              <tr className="setting_table_tr">
                 <td className="setting_table_title setting_table_td">
                   ユーザーネーム
                 </td>
                 <td className="setting_table_td">{userNameValue}</td>
               </tr>
 
-              <tr className="setting_block">
+              <tr className="setting_table_tr">
                 <td className="setting_table_title setting_table_td">名前</td>
                 <td className="setting_table_td">{nameValue}</td>
               </tr>
 
-              <tr className="setting_block">
+              <tr className="setting_table_tr">
                 <td className="setting_table_title setting_table_td">
                   自己紹介
                 </td>
                 <td className="setting_table_td">{profileValue}</td>
               </tr>
 
-              <tr className="setting_block">
+              <tr className="setting_table_tr">
                 <td className="setting_table_title setting_table_td">
                   メールアドレス
                 </td>
                 <td className="setting_table_td">{emailValue}</td>
               </tr>
 
-              <tr className="setting_block">
+              <tr className="setting_table_tr">
                 <td className="setting_table_title setting_table_td">
                   パスワード
                 </td>
                 <td className="setting_table_td">****</td>
               </tr>
             </table>
-            <div className="to_passChange">
+            <div className="confirm_btn">
               <Link to="/passwordChange">
                 <button>パスワード変更</button>
               </Link>

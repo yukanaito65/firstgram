@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
-  getAuth,
-  updatePassword as firebaseUpdatePassword,
+  getAuth
 } from "firebase/auth";
 import {
   collection,
