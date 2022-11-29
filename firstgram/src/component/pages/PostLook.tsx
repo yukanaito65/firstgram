@@ -112,8 +112,12 @@ function PostLook() {
             postDataArray.push(followUserPost)
         });
         })
+
         // ログインしているユーザーのpost情報を配列に格納
         const myPostId = userDatas?.posts
+
+        console.log(userDatas?.posts)
+
         for(let postid of myPostId ){
                 const information = doc(db, "post", postid);
                 const DataDoc =  await getDoc(information);
@@ -149,8 +153,7 @@ function PostLook() {
     // [postData]
     )
 
-
-
+    console.log(postData)
 
     // 日付順に並び替え
     postData.sort((a: any, b: any) => {
