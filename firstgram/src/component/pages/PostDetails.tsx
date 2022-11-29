@@ -13,6 +13,7 @@ import { AiFillHeart,AiOutlineHeart } from "react-icons/ai";
 import CommonIcon from "../atoms/pictures/CommonIcon";
 import Remove from "../atoms/button/RemoveKeepButton";
 import AddKeepButton from "../atoms/button/AddKeepButton";
+import RemoveKeepButton from "../atoms/button/RemoveKeepButton";
 
 interface State {
       postid:string,
@@ -20,6 +21,8 @@ interface State {
 }
 
 function PostDetails() {
+
+      const [user, setUser] = useState<any>("");
 // ログインユーザー
 const [loginUserPost,setLoginUserPost]=useState(false);
 // ログインしているユーザーのuserNameを格納
@@ -70,6 +73,8 @@ const {postid,userid} = location.state as State
 useEffect(()=>{
 //ログイン判定
 onAuthStateChanged(auth, async (user) => {
+
+      setUser(user);
 
 GetLoginUserData(user).then((loginUserData:any)=>{
 setLoginUserName(loginUserData.userName);
@@ -159,7 +164,7 @@ return (
 <>
 <Header show={true} />
 {/* <img src={icon} /> */}
-<Link to={userid === uid ? "/mypage" : "/profile"} state={{ userId: userid}}><CommonIcon icon={icon}/></Link>
+<Link to={userid === user.uid ? "/mypage" : "/profile"} state={{ userId: userid}}><CommonIcon icon={icon}/></Link>
 <p>{postUserName}</p>
 <img src={imgUrl} />
 <p>{caption}</p>
