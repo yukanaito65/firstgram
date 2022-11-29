@@ -29,7 +29,6 @@ body {
   padding: 80px 10px 120px 10px;
   min-height: 100vh;
   position: relative; /*←相対位置*/
-  padding-bottom: 120px; /*←footerの高さ*/
   box-sizing: border-box; /*←全て含めてmin-height:100vhに*/
 }
 
@@ -315,33 +314,34 @@ button:hover {
   margin-bottom: 20px;
 }
 
+.setting_block {
+
+}
+
 .setting_table {
   width: 100%;
   padding: 10px 0;
+  border-collapse: collapse;
 }
 
-.setting_table_td {
-  padding: 20px 10px;
+.setting_table_tr {
   border-bottom: 1px dashed rgb(38, 38, 38);
+  height: 5em;
 }
 
 .setting_table_title {
   width: 30%;
+  padding: 10px;
 }
 
 .setting_table_content {
-  width: 70%;
-  display: flex;
-}
-
-.to_passChange {
-  text-align: center;
-  margin: 5px auto;
+  padding: 10px;
 }
 
 /* account edit */
 .confirm_btn {
   text-align: center;
+  margin: 10px;
 }
 
 /* password change */
@@ -488,6 +488,11 @@ button:hover {
   z-index: 100;
 }
 
+.searchpage_form_wrapper {
+  width: 100%;
+  padding: 30px 10px 15px 20px;
+}
+
 .searchpage_form_input {
   width: 90%;
   line-height: 30px;
@@ -502,13 +507,6 @@ button:hover {
   margin: 2px 0 1px 3px;
   font-size: 16px;
   font-weight: 500;
-}
-
-.searchpage_form {
-  width: 65%;
-  margin: 10px auto;
-  position: fixed;
-  top: 53px;
 }
 
 .no_matchUser {
