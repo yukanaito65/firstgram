@@ -2,7 +2,6 @@ import { onAuthStateChanged } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import Logo from "../atoms/pictures/Logo";
-import Footer from "../molecules/Footer";
 import Header from "../molecules/Header";
 import LoginForm from "../molecules/LoginForm";
 import { auth } from "../../firebase";

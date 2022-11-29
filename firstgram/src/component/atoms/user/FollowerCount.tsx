@@ -1,6 +1,3 @@
-import React, { useState } from "react";
-import { IoStorefrontSharp } from "react-icons/io5";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 //followerList,link,userId,uid

@@ -11,7 +11,7 @@ import GetLoginUserData from "../utils/GetLoginUserData";
 import FavoriteUpdata from "../utils/FavoriteUpdata";
 import { AiFillHeart,AiOutlineHeart } from "react-icons/ai";
 import CommonIcon from "../atoms/pictures/CommonIcon";
-import RemoveKeepButton from "../atoms/button/RemoveKeepButton";
+import Remove from "../atoms/button/RemoveKeepButton";
 import AddKeepButton from "../atoms/button/AddKeepButton";
 
 interface State {
@@ -159,7 +159,7 @@ return (
 <>
 <Header show={true} />
 {/* <img src={icon} /> */}
-<Link to="/profile" state={{ userId: userid}}><CommonIcon icon={icon}/></Link>
+<Link to={userid === uid ? "/mypage" : "/profile"} state={{ userId: userid}}><CommonIcon icon={icon}/></Link>
 <p>{postUserName}</p>
 <img src={imgUrl} />
 <p>{caption}</p>

@@ -1,13 +1,7 @@
-import {
-  createUserWithEmailAndPassword,
-  onAuthStateChanged,
-} from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { auth } from "../../firebase";
-import { db, storage } from "../../firebase";
-import { setDoc, doc, getDoc } from "firebase/firestore";
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import RegisterForm from "../molecules/RegisterForm";
 import Logo from "../atoms/pictures/Logo";
 import Header from "../molecules/Header";
