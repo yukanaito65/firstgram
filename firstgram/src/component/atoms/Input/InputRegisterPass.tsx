@@ -1,8 +1,18 @@
 // import "../../../css/validation"
 
+import { useState } from "react";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+
 function InputRegisterPass(props: any) {
+
+  const [isRevealConfirmPassword, setIsRevealConfirmPassword] = useState(false);
+
+  const toggleConfirmPassword = () => {
+    setIsRevealConfirmPassword((prevState) => !prevState);
+  };
+
   return (
-    <div className="input_fieldset">
+    <div className="input_fieldset" style={{position: "relative"}}>
       <span className="register_form_requiredIcon">＊</span>
       <input
         type="password"
@@ -20,6 +30,14 @@ function InputRegisterPass(props: any) {
         }}
         required
       />
+      <span
+        onClick={toggleConfirmPassword}
+        role="presentation"
+        className="input_isRevealPassword_icon"
+      >
+        {isRevealConfirmPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
+      </span>
+
       <span className="input-error-message messageBox">
         正しい形式で入力してください
       </span>
