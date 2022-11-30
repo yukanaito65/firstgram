@@ -115,9 +115,7 @@ function PostLook() {
 
         // ログインしているユーザーのpost情報を配列に格納
         const myPostId = userDatas?.posts
-
         console.log(userDatas?.posts)
-
         for(let postid of myPostId ){
                 const information = doc(db, "post", postid);
                 const DataDoc =  await getDoc(information);
