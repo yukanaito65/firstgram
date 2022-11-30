@@ -5,7 +5,7 @@ type Props = {
   children?: ReactNode;
 };
 //imageUrlをpropsで受け取る
-//投稿１つ分の写真(mypageとprofileの投稿一覧と検索一覧)
+//投稿１つ分の写真(myPageとprofileの投稿一覧と検索一覧)
 const MyPost: FC<Props> = (props) => {
   // const MyPost=(props:any) =>{
   return (

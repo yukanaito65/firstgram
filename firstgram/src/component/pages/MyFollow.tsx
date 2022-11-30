@@ -1,8 +1,6 @@
 import { onAuthStateChanged } from "firebase/auth";
 import {
   collection,
-  doc,
-  getDoc,
   getDocs,
   query,
   where,
@@ -11,7 +9,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from "../molecules/Footer";
 import Header from "../molecules/Header";
-import UserList from "./UserList";
+import UserList from "../organisms/UserList";
 import { auth, db } from "../../firebase";
 
 function MyFollow() {

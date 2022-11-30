@@ -8,10 +8,11 @@ import Footer from "../molecules/Footer";
 import Header from "../molecules/Header";
 import GetLoginUserData from "../utils/GetLoginUserData";
 import FavoriteUpdata from "../utils/FavoriteUpdata";
+
 import { AiFillHeart,AiOutlineClose,AiOutlineEllipsis,AiOutlineHeart, AiOutlineMessage } from "react-icons/ai";
-import CommonIcon from "../atoms/pictures/CommonIcon";
-import RemoveKeepButton from "../atoms/button/RemoveKeepButton";
+import CommonIcon from "../atoms/icon/CommonIcon";
 import AddKeepButton from "../atoms/button/AddKeepButton";
+import RemoveKeepButton from "../atoms/button/RemoveKeepButton";
 import { FaRegComment } from "react-icons/fa";
 
 interface State {
@@ -20,6 +21,8 @@ interface State {
 }
 
 function PostDetails() {
+
+      const [user, setUser] = useState<any>("");
 // ログインユーザー
 const [loginUserPost,setLoginUserPost]=useState(false);
 // ログインしているユーザーのuserNameを格納
@@ -75,6 +78,8 @@ const {postid,userid} = location.state as State
 useEffect(()=>{
 //ログイン判定
 onAuthStateChanged(auth, async (user) => {
+
+      setUser(user);
 
 GetLoginUserData(user).then((loginUserData:any)=>{
 setLoginUserName(loginUserData.userName);
@@ -179,7 +184,7 @@ UserKeepPosts.splice(index, 1)
 console.log(UserKeepPosts)
 await updateDoc(doc(collection(db,"user"),keepUserId),{
       keepPosts: UserKeepPosts
-});    
+});
 });
 
 // postを削除
@@ -240,7 +245,7 @@ return (
       <div style={{marginLeft:"auto"}}>
       <AiOutlineClose  style={{display:"block"}} size={27} color={"rgb(38, 38, 38)"} onClick={Back} />
       </div>
-    
+
       </>
 ):(
       <>
@@ -298,8 +303,8 @@ return (
 <div style={{display:"flex",width:"100%"}}>
 
 <div style={{display:"flex",width:"70%",height:"30px",margin:"5px"}} >
-<input 
-style={{width:"100%"}} 
+<input
+style={{width:"100%"}}
 type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)}}></input>
 </div>
 
@@ -336,11 +341,8 @@ type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)
 ):(
 <>
 <div style={{display:"flex",alignItems:"center",width:"100%"}}>
-
-{/* <Link to="/profile" state={{ userId: userid}}><img src={icon} alt="icon" style ={{width:"100px",height:"100px"}}/></Link> */}
-<Link to="/profile" state={{ userId: userid}}><CommonIcon icon={icon} /></Link>
+<Link to={userid === user.uid ? "/mypage" : "/profile"} state={{ userId: userid}}><CommonIcon icon={icon}/></Link>
 <p style ={{fontSize:"20px",marginLeft:"5px"}}>{postUserName }</p>
-
 <div style={{marginLeft:"auto"}}>
 <Link to="/"><AiOutlineEllipsis style={{display:"block"}} size={40} color={"rgb(38, 38, 38)"} onClick={Select}/></Link>
 </div>
@@ -357,9 +359,9 @@ type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)
 
 <div style={{margin:"10px 5px 0px 5px"}}>
 {favorites.includes(loginUserName)?(
-<AiFillHeart size={30} color={"red"} onClick={NoFavorite}/>
+ <AiFillHeart size={30} color={"red"} onClick={NoFavorite}/>
 ):(
-<AiOutlineHeart size={30} color={"rgb(38, 38, 38)"} onClick={Favorite}/>
+ <AiOutlineHeart size={30} color={"rgb(38, 38, 38)"} onClick={Favorite}/>
 )}
 </div>
 
@@ -370,9 +372,9 @@ type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)
 <div style={{margin:"5px 5px 5px auto"}}>
 {/* 保存ボタン追加!ログインユーザーのkeepPosts配列(loginUserKeep)に今表示しているpostのpostId(postId)が存在したら保存解除ボタン、存在しなかったら保存するボタン */}
 {loginUserKeep.includes(postid) ? (
-      <RemoveKeepButton postId={postid} size={30} color={"rgb(38, 38, 38)"}/>
+      <RemoveKeepButton postId={postid} size={30} />
 ) : (
-      <AddKeepButton postId={postid} size={30} color={"rgb(38, 38, 38)"}/>
+      <AddKeepButton postId={postid} size={30} />
 )}
 </div>
 

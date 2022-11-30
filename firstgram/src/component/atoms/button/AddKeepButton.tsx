@@ -100,7 +100,7 @@ function AddKeepButton(props: any) {
             onClick={()=>addKeep()}
             className="keep_btn"
               >
-                <FaRegBookmark />
+                <FaRegBookmark className="keep_btn_img" />
               </button>
           ) : (
             <RemoveKeepButton postId={props.postId} />

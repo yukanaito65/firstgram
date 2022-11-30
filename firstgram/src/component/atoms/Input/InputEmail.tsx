@@ -5,10 +5,11 @@ function InputEmail(props:any) {
       <input
         type="email"
         name="email"
-        value={props.loginEmail}
+        value={props.valueEmail}
         placeholder="メールアドレス"
         onChange={props.emailChange}
         style={{width:"80%", height: "35px", backgroundColor: "#f7f7f7",outline: "solid #d3d3d3", border: "none"}}
+        required
       />
     </div>
   );

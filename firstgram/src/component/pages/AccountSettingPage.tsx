@@ -10,7 +10,7 @@ import {
 import { useEffect } from "react";
 import { onAuthStateChanged } from "@firebase/auth";
 import type { User } from "../../types/types";
-import Icon from "../atoms/pictures/Icon";
+import Icon from "../atoms/icon/Icon";
 import { Link,useNavigate } from "react-router-dom";
 import Header from "../molecules/Header";
 import Footer from "../molecules/Footer";
@@ -126,9 +126,9 @@ function AccountSettingPage() {
               <Link to="/passwordChange">
                 <button>パスワード変更</button>
               </Link>
-            
 
-            
+
+
               <Link to="/AccountEditPage">
                 <button>プロフィール編集</button>
               </Link>

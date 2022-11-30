@@ -1,4 +1,3 @@
-import React from "react";
 import { User } from "../../types/types";
 import UserData from "../molecules/UserData";
 

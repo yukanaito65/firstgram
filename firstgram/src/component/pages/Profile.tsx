@@ -15,7 +15,7 @@ import AddFollowButton from "../atoms/button/AddFollowButton";
 // import FollowButton from "./component/atoms/button/FollowButton";
 import RemoveFollowButton from "../atoms/button/RemoveFollowButton";
 import FollowerCount from "../atoms/user/FollowerCount";
-import CommonIcon from "../atoms/pictures/CommonIcon";
+import CommonIcon from "../atoms/icon/CommonIcon";
 import UserName from "../atoms/user/UserName";
 import MyPostList from "../molecules/MyPostList";
 import { auth, db } from "../../firebase";
@@ -55,6 +55,8 @@ function Profile() {
 
   // const [followerNum,setFollowerNum] = useState(0);
 
+  const [userCollectionRef,setUserCollectionRef] = useState<any>("");
+
   //各ページからデータ取得
   const location = useLocation();
   const { userId } = location.state as State;
@@ -66,8 +68,9 @@ function Profile() {
       setUser(currentUser);
 
       const userCollectionRef = collection(db, "user");
+      setUserCollectionRef(userCollectionRef);
 
-      //ログインユーザーのfollow配列取得
+      //ログインユーザーのfollow配列取得(フォローボタン用)
       const userDocRefId = doc(userCollectionRef, currentUser.uid);
 
       const userDocId = await getDoc(userDocRefId);
@@ -108,6 +111,7 @@ function Profile() {
       setPosts(postDataArray);
     });
   }, []);
+
 
   console.log(profileUsers); //[]
   console.log(profileUsers.follow); //undefined
@@ -160,8 +164,8 @@ function Profile() {
                 {/* <Link to={"/follower"} state={{ userId: userId, follower:followerList, uid: user.uid }}>
             <div>{followerNum}follower</div>
           </Link> */}
-
-                {/* <FollowerCount
+{/*
+                <FollowerCount
            followerList={followerList}
            link={"/follower"}
            uid={user.uid}
