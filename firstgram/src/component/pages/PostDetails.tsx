@@ -140,8 +140,26 @@ const AddComment =async(e:any)=>{
       setDisplayComment(postData.Comments)
       })
       setInputComment("")
+}
 
-      // keeppostとってこれてるか確認
+const ClickDelition = async(e:any) =>{
+// userのpostId削除
+// 投稿者のuser情報取得
+const postUserDocRef = doc(collection(db,"user"),userid)
+// 上記を元にドキュメントのデータを取得
+const postUserDoc = await getDoc(postUserDocRef);
+// 取得したデータから必要なものを取り出す
+const postUserData = postUserDoc.data();
+// 投稿者のpostを取り出す
+const postUserPost = postUserData?.posts
+const index = postUserPost.indexOf(postid);
+postUserPost.splice(index, 1)
+// console.log(postUserPost)
+await updateDoc(postUserDocRef,{
+      posts: postUserPost
+});
+
+// UserのkeepPosts削除
 const DeleteKeepPosts = query(collection(db,"user"),
 where("keepPosts", "array-contains", postid));
 const DeleteKeepPostsUsers:any[]=[];
@@ -152,42 +170,22 @@ DeleteKeepPostsUser.forEach((doc) => {
     );
     DeleteKeepPostsUsers.push(users)
 });
-
-}
-
-const ClickDelition = async(e:any) =>{
-// 投稿者のuser情報取得
-const postUserDocRef = doc(collection(db,"user"),userid)
-// 上記を元にドキュメントのデータを取得
-const postUserDoc = await getDoc(postUserDocRef);
-// 取得したデータから必要なものを取り出す
-const postUserData = postUserDoc.data();
-// 投稿者のpostを取り出す
-const postUserPost = postUserData?.posts
-
-
-const index = postUserPost.indexOf(postid);
-postUserPost.splice(index, 1)
-console.log(postUserPost)
-await updateDoc(postUserDocRef,{
-      posts: postUserPost
-});
-
-
-const DeleteKeepPosts = query(collection(db,"user"),
-where("keepPosts", "array-contains", postid));
-
-const DeleteKeepPostsUsers:any[]=[];
-const DeleteKeepPostsUser = await getDocs(DeleteKeepPosts);
-DeleteKeepPostsUser.forEach((doc) => {
-    const users =(doc.id, " => ", doc.data());
-    DeleteKeepPostsUsers.push(users)
-});
-
 console.log(DeleteKeepPostsUsers)
+DeleteKeepPostsUsers.forEach(async(userData) => {
+const keepUserId = userData?.userId
+const UserKeepPosts = userData?.keepPosts
+const index = UserKeepPosts.indexOf(postid);
+UserKeepPosts.splice(index, 1)
+console.log(UserKeepPosts)
+await updateDoc(doc(collection(db,"user"),keepUserId),{
+      keepPosts: UserKeepPosts
+});    
+});
 
+// postを削除
 await deleteDoc(doc(db, "post", postid));
 }
+
 
 const Select = (e:any) =>{
       setSelect(true)
