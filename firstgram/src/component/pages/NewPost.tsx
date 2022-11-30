@@ -115,10 +115,10 @@ onAuthStateChanged(auth, async (user) => {
 return (
     <>
     <Header show={true} />
+
     {loading ? (
         <div>
             <button>
-            <p>uploading</p>
             <input name="imageURL" type="file" accept=".png, .jpeg, .jpg"
             onChange={ InputImage }/>
             </button>
@@ -142,14 +142,18 @@ return (
     <div>
 
 
-    <div className ="FileBtn ">
+    {/* <div className ="FileBtn" > */}
+    <div style={{width:"100%",height:"60px"}}>
     <AiOutlineAreaChart size={40}/>
-    <input name="imageURL" type="file" accept=".png, .jpeg, .jpg" onChange={ InputImage } />
+    <input name="imageURL" type="file" accept=".png, .jpeg, .jpg" onChange={ InputImage } 
+    style={{opacity: "0",height:"100px"}}/>
     </div>
 
-    <div className ="Textarea" >
+    {/* <div className ="Textarea" > */}
+    <div style={{width:"100%",height:"60px"}}>
     <textarea value={textState} placeholder="コメントを入力
-    してください" onChange={InputText} />
+    してください" onChange={InputText} 
+    style={{width:"100%",height:"100px"}}/>
     </div>
 
     <Link to="/NewPost/" ><button onClick={OnFirebase}>投稿</button></Link>

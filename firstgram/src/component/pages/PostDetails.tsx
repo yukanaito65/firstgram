@@ -366,9 +366,9 @@ type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)
 </div>
 
 <div style={{margin:"10px 5px 0px 5px"}}>
-<Link to="/"><AiOutlineMessage size={30} color={"rgb(38, 38, 38)"}/></Link>
+<Link to="/"><AiOutlineMessage size={30} color={"rgb(38, 38, 38)"} onClick={CommentDisplay} /></Link>
 </div>
-
+ 
 <div style={{margin:"5px 5px 5px auto"}}>
 {/* 保存ボタン追加!ログインユーザーのkeepPosts配列(loginUserKeep)に今表示しているpostのpostId(postId)が存在したら保存解除ボタン、存在しなかったら保存するボタン */}
 {loginUserKeep.includes(postid) ? (
@@ -393,25 +393,38 @@ type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)
 
 <div style={{display:"flex",width:"100%"}}>
 
-<div style={{display:"flex",width:"80%",height:"30px",margin:"5px"}} >
-<input style={{width:"100%"}} type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)}}></input>
+<div style={{display:"flex",width:"70%",height:"30px",margin:"5px"}} >
+<input
+style={{width:"100%"}}
+type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)}}></input>
 </div>
 
+<div style={{marginLeft:"auto",width:"30%"}}>
 <button onClick={AddComment}>投稿する</button>
+</div>
 
 </div>
 
-
-<div>
-{displayComment.map((data:any,index:any)=>{
+{commentDisplay ? (
+      <>
+      <div style={{display:"flex"}}>
+    <div>
+    {displayComment.map((data:any,index:any)=>{
     return(
-    <div key={index} style={{display:"flex",fontSize:"16px"}}>
+    <div key={index} style={{display:"flex",fontSize:"16px",width:"100%",margin:"3px"}}>
     <p style={{fontWeight:"500"}}>{data.userName}</p>
     <p style={{marginLeft:"5px"}}>{data.commentText}</p>
     </div>
     )
-})}
-</div>
+    })}
+    </div>
+    <AiOutlineClose  style={{display:"block",margin: "auto 0 0 auto",alignItems:"center"}} size={15} color={"rgb(38, 38, 38)"} onClick={CommentBack} />
+      </div>
+      </>
+):(
+      <>
+      </>
+)}
 </>
 )}
 </div>
