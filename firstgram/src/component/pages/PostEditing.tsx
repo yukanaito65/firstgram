@@ -39,8 +39,8 @@ return (
 <div>
 <img src={imgUrl} />
 <input type="text" value={text} onChange={(e)=>{setText(e.target.value)}}></input>
-<Link to="/PostLook"><button onClick={Updata}>編集完了</button></Link>
-<Link to="/PostLook"><button>戻る</button></Link>
+<Link to="/"><button onClick={Updata}>編集完了</button></Link>
+<Link to="/"><button>戻る</button></Link>
 </div>
 <Footer />
 </>
