@@ -15,6 +15,7 @@ import { db } from "../../firebase";
 import Header from "../molecules/Header";
 import Footer from "../molecules/Footer";
 import { Link } from "react-router-dom";
+import CommonIcon from "../atoms/pictures/CommonIcon";
 
 
 
@@ -155,7 +156,7 @@ function SearchPage() {
         to={a.userId === currentUserId ? "/mypage" : "/profile"}
         state={{ userId: a.userId }}
       >
-            <img src={a.icon} alt="ユーザーアイコン" />
+        <CommonIcon icon={a.icon} />
             <p>{a.name}</p>
             <p>{a.userName}</p>
           </Link>

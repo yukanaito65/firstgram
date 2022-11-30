@@ -66,6 +66,10 @@ h1 {
   margin: 5px;
 }
 
+input, textarea {
+  padding: 5px;
+}
+
 /* ボタン共通 */
 button {
   justify-self: center;
