@@ -594,3 +594,16 @@ input:valid ~ .input-error-message {
 input:placeholder-shown ~ .messageBox {
   display: none;
 }
+
+.register_form_requiredText {
+  color: red;
+  font-size: 14px;
+  margin-left: 50px;
+  text-align: left;
+}
+
+.register_form_requiredIcon {
+  color: red;
+  font-size: 10px;
+  margin-right: 1%;
+}

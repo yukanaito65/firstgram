@@ -1,3 +1,4 @@
+import { spawn } from "child_process";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
@@ -12,6 +13,7 @@ import InputCPass from "../atoms/Input/InputCPass";
 import InputEmail from "../atoms/Input/InputEmail";
 import InputPass from "../atoms/Input/InputPass";
 import InputRegister from "../atoms/Input/InputRegister";
+import InputRegisterPass from "../atoms/Input/InputRegisterPass";
 import InputRequiredRegister from "../atoms/Input/InputRequiredRegister";
 import InputUserRegister from "../atoms/Input/InputRequiredRegister";
 
@@ -125,9 +127,7 @@ function RegisterForm() {
       {/* 登録ボタンを押した時にhandleSubmitを実行 */}
       <form onSubmit={handleSubmit} style={{ lineHeight: "5rem" }}>
         <div style={{ width: "130px", height: "auto", margin: "0 auto" }}>
-          <label htmlFor="iconImage">
-            <RegisterIcon />
-          </label>
+
           {loading ? (
             <>
               <p>uploading</p>
@@ -163,6 +163,10 @@ function RegisterForm() {
                   />
                 </div>
               ) : (
+                <>
+                <label htmlFor="iconImage">
+            <RegisterIcon />
+          </label>
                 <input
                   name="imageURL"
                   id="iconImage"
@@ -171,13 +175,15 @@ function RegisterForm() {
                   onChange={InputImage}
                   style={{ display: "none" }}
                 />
+                </>
               )}
             </>
           )}
           {/* </label> */}
         </div>
+        <p className="register_form_requiredText">＊：必須項目</p>
         {/* <div> */}
-          <InputEmail emailChange={emailChange} valueEmail={registerEmail} />
+          <InputEmail emailChange={emailChange} valueEmail={registerEmail} requiredIcon={<span className="register_form_requiredIcon">＊</span>} />
           {/* <input
             type="email"
             name="email"
@@ -227,7 +233,7 @@ function RegisterForm() {
           />
         </div> */}
 
-        <InputPass valuePassword={registerPassword} placeholder={"パスワード(英半角子文字、半角数字を必ず含み、6文字以上)"} passChange={passChange} />
+        <InputRegisterPass valuePassword={registerPassword}  passChange={passChange} />
         {/* <div>
           <input
             type="password"
@@ -246,7 +252,7 @@ function RegisterForm() {
         </div> */}
 
         {/* <InputRequiredRegister type={"password"} name={"Cpassword"} placeholder={"確認用パスワード"} equal={"email"} /> */}
-        <InputCPass />
+        <InputCPass passwordValue={registerPassword}/>
         {/* <div>
           <input
             type="password"
