@@ -146,6 +146,27 @@ button:hover {
   border-radius: 50%;
 }
 
+.post-icon-image {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  border: solid 1px lightgray;
+}
+
+.post-icon-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.post-noIconImage{
+  width: 100%;
+  height: 100%;
+  background-color: #d3d3d3;
+  border-radius: 50%;
+}
+
 /* -------------------------------------- */
 /* 保留 */
 
@@ -538,8 +559,55 @@ button:hover {
 .keep_btn {
   background-color: transparent;
   color: black;
+  padding: 0;
+
+  /* size:30px; */
 }
 
-.keep_btn_remove {
+.keep_btn_img {
+  width: 30px;
+  height: 30px;
+}
+
+/* .keep_btn_remove {
   color: black;
+  width: 30px;
+  height: 30px;
+} */
+
+/* 会員登録 */
+.input-error-message {
+  color: red;
+}
+input:invalid ~ .input-error-message {
+  display: block;
+}
+
+/* input:invalid ~ .input-ok-message {
+  display: none;
+} */
+
+input:valid ~ .input-error-message {
+  display: none;
+}
+
+/* input:valid ~ .input-ok-message {
+  display: block;
+} */
+
+input:placeholder-shown ~ .messageBox {
+  display: none;
+}
+
+.register_form_requiredText {
+  color: red;
+  font-size: 14px;
+  margin-left: 50px;
+  text-align: left;
+}
+
+.register_form_requiredIcon {
+  color: red;
+  font-size: 10px;
+  margin-right: 1%;
 }

@@ -9,7 +9,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Footer from "../molecules/Footer";
 import Header from "../molecules/Header";
-import UserList from "./UserList";
+import UserList from "../organisms/UserList";
 import { auth, db } from "../../firebase";
 
 interface State {

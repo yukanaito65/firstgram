@@ -1,4 +1,4 @@
-import { onAuthStateChanged, signOut } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 import {
   collection,
   CollectionReference,
@@ -11,7 +11,7 @@ import {
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
-import Icon from "../atoms/pictures/Icon";
+import Icon from "../atoms/icon/Icon";
 import UserName from "../atoms/user/UserName";
 import MyPostList from "../molecules/MyPostList";
 import { auth, db } from "../../firebase";

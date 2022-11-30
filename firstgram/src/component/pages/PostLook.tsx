@@ -14,7 +14,7 @@ import NoFavBtn from '../atoms/button/NoFavBtn';
 import Footer from "../molecules/Footer";
 import Header from "../molecules/Header";
 import GetLoginUserName from '../utils/GetLoginUserData';
-import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import { AiFillHeart, AiOutlineHeart, AiOutlineMessage } from 'react-icons/ai';
 import { FaRegComment } from 'react-icons/fa';
 
 function PostLook() {
@@ -28,23 +28,23 @@ function PostLook() {
     const [inputComment, setInputComment] = useState<any>("");
     // ログインしているユーザーのuserNameを格納
     const [loginUserName, setLoginUserName] = useState<any>("");
-    
-    
+
+
     // ログインしているユーザーのfollowしている人のIdの配列
     const [followUser, setFollowUser] = useState<any>([]);
-    
+
     // ログインしているユーザーのpostの配列
     const [myPostId, setMyPostID] = useState<any>([]);
-    
+
     const [loginUserKeep, setLoginUserKeep] = useState<any>("");
-    
+
     //
     const [postDataSecond,  setPostDataSecond] = useState<any>({});
-    
+
     const [favbtn,setFavbtn]=useState(1)
-    
-    
-    
+
+
+
     // const setFavorites2 = (postId:any)=>{
     //     // setPostData(()=>{
     //             for(let i = 0; i<postData.length; i++){
@@ -55,40 +55,40 @@ function PostLook() {
     //         }
     // // })
     // }
-    
+
     // const postData2=[...postData]
     //     for(let i = 0; i<postData.length; i++){
     //         if(postData[i].postId === postId){
     //             postData2[i].favorites.push()
     //         }
     //     }
-    
+
     // const postData3=[...postData]
     //     for(let i = 0; i<postData.length; i++){
     //         if(postData[i].postId === postId){
     //             postData3[i].comments.push()
     //         }
-    
+
     //     }
-    
+
     useEffect(()=>{
     onAuthStateChanged(auth, async (user) => {
     // ログインしているユーザーのuserNameをuseStateで保持
     GetLoginUserName(user).then((loginUserData:any)=>{
             setLoginUserName(loginUserData.userName);
     })
-    
+
         if (!user) {
         console.log("ログアウト状態です");
         } else {
-    
-    
+
+
         // ログインしているユーザーのデータ取得
         // GetLoginUserName(user).then((loginUserData:any)=>{
         //     setFollowUser(loginUserData.follow);
         //     setMyPostID(loginUserData.post)
         // })
-    
+
             //ログインしているユーザーのドキュメントへの参照を取得
             const docusesinformation = doc(db, "user", user.uid);
             //上記を元にドキュメントのデータを取得
@@ -97,12 +97,12 @@ function PostLook() {
             const userDatas = userDataDoc.data();
             // ログインしているユーザーのフォローしている人のuseridを配列に格納
             const UseLoginUserFollowUserIdArray =  userDatas?.follow
-    
-    
+
+
             setFollowUser(UseLoginUserFollowUserIdArray)
-    
+
         const postDataArray:any[]=[];
-    
+
         // followuserのpostドキュメントを配列に格納
         UseLoginUserFollowUserIdArray.forEach(async(followUserId:any)=>{
         const q = query(collection(db, "post"), where("userId", "==", followUserId));
@@ -112,8 +112,10 @@ function PostLook() {
             postDataArray.push(followUserPost)
         });
         })
+
         // ログインしているユーザーのpost情報を配列に格納
         const myPostId = userDatas?.posts
+        console.log(userDatas?.posts)
         for(let postid of myPostId ){
                 const information = doc(db, "post", postid);
                 const DataDoc =  await getDoc(information);
@@ -121,17 +123,17 @@ function PostLook() {
                 // console.log(postDatas)
                 postDataArray.push(Datas)
         }
-    
+
         // データを保持
         setPostData(postDataArray)
-    
+
     // ランダムの数値のpostを取得
         const getRandomArbitrary =(min:number, max:number)=> {
             min = Math.ceil(min);
             max = Math.floor(max);
             return Math.floor(Math.random() * (max - min + 1) + min)
         }
-    
+
         const randomArray:any[]=[];
         const q = query(collection(db, "post"), where("number", "==", getRandomArbitrary(1,5)));
         const querySnapshot = await getDocs(q);
@@ -140,23 +142,22 @@ function PostLook() {
             randomArray.push(followUserPost)
         });
         setRamData(randomArray)
-    
-    
-    
+
+
+
     }})
     },
     [favbtn]
     // [postData]
     )
-    
-    
-    
-    
+
+    console.log(postData)
+
     // 日付順に並び替え
     postData.sort((a: any, b: any) => {
     return a.postDate.toDate() > b.postDate.toDate()  ? -1 : 1;
     });
-    
+
     return (
     <>
     <Header show={true} />
@@ -178,11 +179,14 @@ function PostLook() {
             return(
             <>
             <div key={index}>
-    
+
             <Link to="/PostDetails" state={{postid:data.postId,userid:data.userId}}><img src={data.imageUrl} /></Link>
-    
+
+            <div style={{display: "flex"}}>
+
+            <div style={{margin:"10px 5px 0px 5px"}}>
             {data.favorites.includes(loginUserName)?(
-            <AiFillHeart size={20} color={"red"}
+            <AiFillHeart size={30} color={"red"}
              onClick={
                 (e:any) =>{
                     updateDoc(doc(collection(db, "post"), data.postId), {
@@ -192,7 +196,7 @@ function PostLook() {
                     }
              } />
         ):(
-            <AiOutlineHeart size={20} color={"black"}
+            <AiOutlineHeart size={30} color={"black"}
             onClick={
                (e:any) =>{
                    updateDoc(doc(collection(db, "post"), data.postId), {
@@ -201,13 +205,26 @@ function PostLook() {
                    setFavbtn(favbtn+1)
                    }
             } />
-    
         )
         }
-    
+        </div>
+
+        <div style={{margin:"10px 5px 0px 5px"}}>
+        <AiOutlineMessage size={30} color={"black"} />
+        </div>
+
+        <div style={{margin:"5px 5px 5px auto"}}>
+        {loginUserKeep.includes(data.postId) ? (
+          <RemoveKeepButton postId={data.postId} />
+        ) : (
+          <AddKeepButton postId={data.postId} />
+        )}
+        </div>
+    </div>
+
     <div>{year}年{month}月{day}日{hour}:{min}:{seco}</div>
     <p>{data.caption}</p>
-    
+
         <input type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)}} />
         <button onClick={async(e:any)=>{
         // 押された投稿のcommentにinputCommentを配列で追加
@@ -219,12 +236,10 @@ function PostLook() {
         setInputComment("")
         }}>コメント</button>
         {/* <p>♡:{data.favorites}</p> */}
-    
-        {loginUserKeep.includes(data.postId) ? (
-          <RemoveKeepButton postId={data.postId} />
-        ) : (
-          <AddKeepButton postId={data.postId} />
-        )}
+
+
+
+
         <p>♡:{favos}</p>
         <div>コメント:
         {com.map((com:any,index:any)=>{
@@ -243,9 +258,9 @@ function PostLook() {
         </div>
         <Link to="/mypage"><button>マイページ</button></Link>
         </>
-    
+
     ):(
-    
+
         <>
         { console.log("followUserある")}
         <div>
@@ -262,11 +277,13 @@ function PostLook() {
             return(
             <>
             <div key={index}>
-    
+
             <Link to="/PostDetails" state={{postid:data.postId,userid:data.userId}}><img src={data.imageUrl} /></Link>
-    
+
+        <div style={{display: "flex"}}>
+            <div style={{margin:"10px 5px 0px 5px"}}>
             {data.favorites.includes(loginUserName)?(
-            <AiFillHeart size={20} color={"red"}
+            <AiFillHeart size={30} color={"red"}
              onClick={
                 (e:any) =>{
                     updateDoc(doc(collection(db, "post"), data.postId), {
@@ -276,7 +293,7 @@ function PostLook() {
                     }
              } />
         ):(
-            <AiOutlineHeart size={20} color={"black"}
+            <AiOutlineHeart size={30} color={"black"}
             onClick={
                (e:any) =>{
                    updateDoc(doc(collection(db, "post"), data.postId), {
@@ -285,21 +302,26 @@ function PostLook() {
                    setFavbtn(favbtn+1)
                    }
             } />
-    
         )
         }
-    
-        <FaRegComment size={20} color={"black"} />
-    
+        </div>
+
+        <div style={{margin:"10px 5px 0px 5px"}}>
+        <AiOutlineMessage size={30} color={"black"} />
+        </div>
+
+        <div style={{margin:"5px 5px 5px auto"}}>
         {loginUserKeep.includes(data.postId) ? (
           <RemoveKeepButton postId={data.postId} />
         ) : (
           <AddKeepButton postId={data.postId} />
         )}
-    
+        </div>
+        </div>
+
         <div>{year}年{month}月{day}日{hour}:{min}:{seco}</div>
         <p>{data.caption}</p>
-    
+
         <input type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)}} />
         <button onClick={async(e:any)=>{
         // 押された投稿のcommentにinputCommentを配列で追加
@@ -324,13 +346,12 @@ function PostLook() {
             )
         })}
         </div>
-    
+
             </div>
              </>
             )
         })}
         </div>
-        <Link to="/mypage"><button>マイページ</button></Link>
         </>
     )}
     </div>
@@ -338,5 +359,5 @@ function PostLook() {
     </>
     )
     };
-    
+
     export default PostLook;

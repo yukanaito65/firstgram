@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import CommonIcon from "../atoms/pictures/CommonIcon";
+import CommonIcon from "../atoms/icon/CommonIcon";
 import Name from "../atoms/user/Name";
 import UserName from "../atoms/user/UserName";
 
