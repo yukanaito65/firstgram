@@ -14,7 +14,7 @@ import NoFavBtn from '../atoms/button/NoFavBtn';
 import Footer from "../molecules/Footer";
 import Header from "../molecules/Header";
 import GetLoginUserName from '../utils/GetLoginUserData';
-import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import { AiFillHeart, AiOutlineHeart, AiOutlineMessage } from 'react-icons/ai';
 import { FaRegComment } from 'react-icons/fa';
 
 function PostLook() {
@@ -184,8 +184,11 @@ function PostLook() {
 
             <Link to="/PostDetails" state={{postid:data.postId,userid:data.userId}}><img src={data.imageUrl} /></Link>
 
+            <div style={{display: "flex"}}>
+
+            <div style={{margin:"10px 5px 0px 5px"}}>
             {data.favorites.includes(loginUserName)?(
-            <AiFillHeart size={20} color={"red"}
+            <AiFillHeart size={30} color={"red"}
              onClick={
                 (e:any) =>{
                     updateDoc(doc(collection(db, "post"), data.postId), {
@@ -195,7 +198,7 @@ function PostLook() {
                     }
              } />
         ):(
-            <AiOutlineHeart size={20} color={"black"}
+            <AiOutlineHeart size={30} color={"black"}
             onClick={
                (e:any) =>{
                    updateDoc(doc(collection(db, "post"), data.postId), {
@@ -204,9 +207,22 @@ function PostLook() {
                    setFavbtn(favbtn+1)
                    }
             } />
-
         )
         }
+        </div>
+
+        <div style={{margin:"10px 5px 0px 5px"}}>
+        <AiOutlineMessage size={30} color={"black"} />
+        </div>
+
+        <div style={{margin:"5px 5px 5px auto"}}>
+        {loginUserKeep.includes(data.postId) ? (
+          <RemoveKeepButton postId={data.postId} />
+        ) : (
+          <AddKeepButton postId={data.postId} />
+        )}
+        </div>
+    </div>
 
     <div>{year}年{month}月{day}日{hour}:{min}:{seco}</div>
     <p>{data.caption}</p>
@@ -223,11 +239,9 @@ function PostLook() {
         }}>コメント</button>
         {/* <p>♡:{data.favorites}</p> */}
 
-        {loginUserKeep.includes(data.postId) ? (
-          <RemoveKeepButton postId={data.postId} />
-        ) : (
-          <AddKeepButton postId={data.postId} />
-        )}
+
+
+
         <p>♡:{favos}</p>
         <div>コメント:
         {com.map((com:any,index:any)=>{
@@ -268,8 +282,10 @@ function PostLook() {
 
             <Link to="/PostDetails" state={{postid:data.postId,userid:data.userId}}><img src={data.imageUrl} /></Link>
 
+        <div style={{display: "flex"}}>
+            <div style={{margin:"10px 5px 0px 5px"}}>
             {data.favorites.includes(loginUserName)?(
-            <AiFillHeart size={20} color={"red"}
+            <AiFillHeart size={30} color={"red"}
              onClick={
                 (e:any) =>{
                     updateDoc(doc(collection(db, "post"), data.postId), {
@@ -279,7 +295,7 @@ function PostLook() {
                     }
              } />
         ):(
-            <AiOutlineHeart size={20} color={"black"}
+            <AiOutlineHeart size={30} color={"black"}
             onClick={
                (e:any) =>{
                    updateDoc(doc(collection(db, "post"), data.postId), {
@@ -288,17 +304,22 @@ function PostLook() {
                    setFavbtn(favbtn+1)
                    }
             } />
-
         )
         }
+        </div>
 
-        <FaRegComment size={20} color={"black"} />
+        <div style={{margin:"10px 5px 0px 5px"}}>
+        <AiOutlineMessage size={30} color={"black"} />
+        </div>
 
+        <div style={{margin:"5px 5px 5px auto"}}>
         {loginUserKeep.includes(data.postId) ? (
           <RemoveKeepButton postId={data.postId} />
         ) : (
           <AddKeepButton postId={data.postId} />
         )}
+        </div>
+        </div>
 
         <div>{year}年{month}月{day}日{hour}:{min}:{seco}</div>
         <p>{data.caption}</p>

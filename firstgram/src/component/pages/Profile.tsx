@@ -15,7 +15,7 @@ import AddFollowButton from "../atoms/button/AddFollowButton";
 // import FollowButton from "./component/atoms/button/FollowButton";
 import RemoveFollowButton from "../atoms/button/RemoveFollowButton";
 import FollowerCount from "../atoms/user/FollowerCount";
-import CommonIcon from "../atoms/pictures/CommonIcon";
+import CommonIcon from "../atoms/icon/CommonIcon";
 import UserName from "../atoms/user/UserName";
 import MyPostList from "../molecules/MyPostList";
 import { auth, db } from "../../firebase";

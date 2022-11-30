@@ -9,7 +9,7 @@ import Header from "../molecules/Header";
 import GetLoginUserData from "../utils/GetLoginUserData";
 import FavoriteUpdata from "../utils/FavoriteUpdata";
 import { AiFillHeart,AiOutlineEllipsis,AiOutlineHeart, AiOutlineMessage } from "react-icons/ai";
-import CommonIcon from "../atoms/pictures/CommonIcon";
+import CommonIcon from "../atoms/icon/CommonIcon";
 import Remove from "../atoms/button/RemoveKeepButton";
 import AddKeepButton from "../atoms/button/AddKeepButton";
 import RemoveKeepButton from "../atoms/button/RemoveKeepButton";
@@ -186,9 +186,9 @@ return (
 
 <div style={{margin:"10px 5px 0px 5px"}}>
 {favorites.includes(loginUserName)?(
-<AiFillHeart size={30} color={"red"} onClick={NoFavorite}/>
+ <AiFillHeart size={30} color={"red"} onClick={NoFavorite}/>
 ):(
-<AiOutlineHeart size={30} color={"rgb(38, 38, 38)"} onClick={Favorite}/>
+ <AiOutlineHeart size={30} color={"rgb(38, 38, 38)"} onClick={Favorite}/>
 )}
 </div>
 
@@ -199,9 +199,9 @@ return (
 <div style={{margin:"5px 5px 5px auto"}}>
 {/* 保存ボタン追加!ログインユーザーのkeepPosts配列(loginUserKeep)に今表示しているpostのpostId(postId)が存在したら保存解除ボタン、存在しなかったら保存するボタン */}
 {loginUserKeep.includes(postid) ? (
-      <RemoveKeepButton postId={postid} size={30} color={"rgb(38, 38, 38)"}/>
+      <RemoveKeepButton postId={postid} size={30} />
 ) : (
-      <AddKeepButton postId={postid} size={30} color={"rgb(38, 38, 38)"}/>
+      <AddKeepButton postId={postid} size={30} />
 )}
 </div>
 

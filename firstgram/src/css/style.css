@@ -555,9 +555,42 @@ button:hover {
 .keep_btn {
   background-color: transparent;
   color: black;
-  size:30px;
+  padding: 0;
+
+  /* size:30px; */
 }
 
-.keep_btn_remove {
+.keep_btn_img {
+  width: 30px;
+  height: 30px;
+}
+
+/* .keep_btn_remove {
   color: black;
+  width: 30px;
+  height: 30px;
+} */
+
+/* 会員登録 */
+.input-error-message {
+  color: red;
+}
+input:invalid ~ .input-error-message {
+  display: block;
+}
+
+/* input:invalid ~ .input-ok-message {
+  display: none;
+} */
+
+input:valid ~ .input-error-message {
+  display: none;
+}
+
+/* input:valid ~ .input-ok-message {
+  display: block;
+} */
+
+input:placeholder-shown ~ .messageBox {
+  display: none;
 }

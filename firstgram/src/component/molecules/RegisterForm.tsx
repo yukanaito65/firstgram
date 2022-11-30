@@ -1,12 +1,21 @@
-import { createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
-import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
-import React, { useState } from 'react'
-import { auth, db, storage } from '../../firebase';
-import RegisterIcon from '../atoms/pictures/RegisterIcon';
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+} from "firebase/auth";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import React, { useState } from "react";
+import { auth, db, storage } from "../../firebase";
+import RegisterButton from "../atoms/button/RegisterButton";
+import RegisterIcon from "../atoms/icon/RegisterIcon";
+import InputCPass from "../atoms/Input/InputCPass";
+import InputEmail from "../atoms/Input/InputEmail";
+import InputPass from "../atoms/Input/InputPass";
+import InputRegister from "../atoms/Input/InputRegister";
+import InputRequiredRegister from "../atoms/Input/InputRequiredRegister";
+import InputUserRegister from "../atoms/Input/InputRequiredRegister";
 
 function RegisterForm() {
-
   //Authenticationに登録するemailとpassword
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
@@ -103,112 +112,175 @@ function RegisterForm() {
       alert("正しく入力してください");
     }
   };
+
+  const emailChange = (e: any) => {
+    setRegisterEmail(e.target.value);
+  };
+  const passChange = (e: any) => {
+    setRegisterPassword(e.target.value);
+  };
+
   return (
     <>
-    {/* 登録ボタンを押した時にhandleSubmitを実行 */}
-    <form
-    onSubmit={handleSubmit}
-    style={{lineHeight: "5rem"}}
-    >
-      <div style={{width: "130px", height:"auto",margin: "0 auto"}}>
-      <label htmlFor="iconImage">
-          <RegisterIcon />
+      {/* 登録ボタンを押した時にhandleSubmitを実行 */}
+      <form onSubmit={handleSubmit} style={{ lineHeight: "5rem" }}>
+        <div style={{ width: "130px", height: "auto", margin: "0 auto" }}>
+          <label htmlFor="iconImage">
+            <RegisterIcon />
           </label>
-        {loading ? (
-          <>
-            <p>uploading</p>
-            <input
-              name="imageURL"
-              id="iconImage"
-              type="file"
-              accept=".png, .jpeg, .jpg"
-              onChange={InputImage}
-              style={{display: "none"}}
-            />
-          </>
-        ) : (
-          <>
-            {isUploaded ? (
-              <div style={{
-                borderRadius: "50%",
-                width: "120px",
-                height: "120px",
-                border: "solid 1px lightgray",
-              }}>
-              <img
-              alt="icon"
-              src={imgSrc}
-              style={{ width: "100%", height: "100%", objectFit: "cover",borderRadius: "50%", }}
-              />
-              </div>
-            ) : (
+          {loading ? (
+            <>
+              <p>uploading</p>
               <input
                 name="imageURL"
                 id="iconImage"
                 type="file"
                 accept=".png, .jpeg, .jpg"
                 onChange={InputImage}
-                style={{display: "none"}}
+                style={{ display: "none" }}
               />
-            )}
-          </>
-        )}
-{/* </label> */}
-      </div>
-      <div>
-        <input
-          type="email"
-          name="email"
-          value={registerEmail}
-          onChange={(e) => setRegisterEmail(e.target.value)}
-          placeholder="メールアドレス"
-          style={{width:"80%", height: "35px", backgroundColor: "#f7f7f7",outline: "solid #d3d3d3", border: "none"}}
-        />
-      </div>
-      <div>
-        <input
-        type="text"
-        name="userName"
-        placeholder='ユーザーネーム'
-        style={{width:"80%", height: "35px", backgroundColor: "#f7f7f7",outline: "solid #d3d3d3", border: "none"}}
-        />
-      </div>
-      <div>
-        <input
-        type="text"
-        name="name"
-      placeholder='ネーム'
-      style={{width:"80%", height: "35px", backgroundColor: "#f7f7f7",outline: "solid #d3d3d3", border: "none"}} />
-      </div>
-      <div>
-        <input
-          type="password"
-          name="password"
-          value={registerPassword}
-          onChange={(e) => setRegisterPassword(e.target.value)}
-          placeholder="パスワード"
-          style={{width:"80%", height: "35px", backgroundColor: "#f7f7f7",outline: "solid #d3d3d3", border: "none"}}
-        />
-      </div>
-      <div>
-        <input
-        type="password"
-        name="Cpassword"
-        placeholder='確認用パスワード'
-        style={{width:"80%", height: "35px", backgroundColor: "#f7f7f7",outline: "solid #d3d3d3", border: "none"}}
-         />
-      </div>
-      <div>
-        <input
-        type="textarea"
-        name="profile"
-        placeholder='自己紹介'
-        style={{width:"80%", height: "35px", backgroundColor: "#f7f7f7",outline: "solid #d3d3d3", border: "none"}}/>
-      </div>
-      <button>登録</button>
-    </form>
-  </>
-  )
+            </>
+          ) : (
+            <>
+              {isUploaded ? (
+                <div
+                  style={{
+                    borderRadius: "50%",
+                    width: "120px",
+                    height: "120px",
+                    border: "solid 1px lightgray",
+                  }}
+                >
+                  <img
+                    alt="icon"
+                    src={imgSrc}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      borderRadius: "50%",
+                    }}
+                  />
+                </div>
+              ) : (
+                <input
+                  name="imageURL"
+                  id="iconImage"
+                  type="file"
+                  accept=".png, .jpeg, .jpg"
+                  onChange={InputImage}
+                  style={{ display: "none" }}
+                />
+              )}
+            </>
+          )}
+          {/* </label> */}
+        </div>
+        {/* <div> */}
+          <InputEmail emailChange={emailChange} valueEmail={registerEmail} />
+          {/* <input
+            type="email"
+            name="email"
+            value={registerEmail}
+            onChange={(e) => setRegisterEmail(e.target.value)}
+            placeholder="メールアドレス"
+            style={{
+              width: "80%",
+              height: "35px",
+              backgroundColor: "#f7f7f7",
+              outline: "solid #d3d3d3",
+              border: "none",
+            }}
+          /> */}
+        {/* </div> */}
+
+        <InputRequiredRegister type={"text"} name={"userName"} placeholder={"ユーザーID(半角英数字4文字以上) 例:kanako0123"} pattern={"^([a-zA-Z0-9]{4,})$"} />
+        {/* <div>
+          <input
+            type="text"
+            name="userName"
+            placeholder="ユーザーネーム"
+            style={{
+              width: "80%",
+              height: "35px",
+              backgroundColor: "#f7f7f7",
+              outline: "solid #d3d3d3",
+              border: "none",
+            }}
+          />
+        </div> */}
+
+
+        <InputRequiredRegister type={"text"} name={"name"} placeholder={"ネーム"} />
+        {/* <div>
+          <input
+            type="text"
+            name="name"
+            placeholder="ネーム"
+            style={{
+              width: "80%",
+              height: "35px",
+              backgroundColor: "#f7f7f7",
+              outline: "solid #d3d3d3",
+              border: "none",
+            }}
+          />
+        </div> */}
+
+        <InputPass valuePassword={registerPassword} placeholder={"パスワード(英半角子文字、半角数字を必ず含み、6文字以上)"} passChange={passChange} />
+        {/* <div>
+          <input
+            type="password"
+            name="password"
+            value={registerPassword}
+            onChange={(e) => setRegisterPassword(e.target.value)}
+            placeholder="パスワード"
+            style={{
+              width: "80%",
+              height: "35px",
+              backgroundColor: "#f7f7f7",
+              outline: "solid #d3d3d3",
+              border: "none",
+            }}
+          />
+        </div> */}
+
+        {/* <InputRequiredRegister type={"password"} name={"Cpassword"} placeholder={"確認用パスワード"} equal={"email"} /> */}
+        <InputCPass />
+        {/* <div>
+          <input
+            type="password"
+            name="Cpassword"
+            placeholder="確認用パスワード"
+            style={{
+              width: "80%",
+              height: "35px",
+              backgroundColor: "#f7f7f7",
+              outline: "solid #d3d3d3",
+              border: "none",
+            }}
+          />
+        </div> */}
+
+        <InputRegister type={"textarea"} name={"profile"} placeholder={"自己紹介"} />
+        {/* <div>
+          <input
+            type="textarea"
+            name="profile"
+            placeholder="自己紹介"
+            style={{
+              width: "80%",
+              height: "35px",
+              backgroundColor: "#f7f7f7",
+              outline: "solid #d3d3d3",
+              border: "none",
+            }}
+          />
+        </div> */}
+        <RegisterButton />
+      </form>
+    </>
+  );
 }
 
-export default RegisterForm
+export default RegisterForm;
