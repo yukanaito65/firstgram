@@ -66,6 +66,10 @@ h1 {
   margin: 5px;
 }
 
+input, textarea {
+  padding: 5px;
+}
+
 /* ボタン共通 */
 button {
   justify-self: center;
@@ -571,6 +575,13 @@ button:hover {
   height: 30px;
 } */
 
+/* ログイン・会員登録共通 */
+.input_isRevealPassword_icon {
+  position: absolute;
+  top: 10%;
+  left: 85%;
+}
+
 /* 会員登録 */
 .input-error-message {
   color: red;
@@ -593,4 +604,17 @@ input:valid ~ .input-error-message {
 
 input:placeholder-shown ~ .messageBox {
   display: none;
+}
+
+.register_form_requiredText {
+  color: red;
+  font-size: 14px;
+  margin-left: 50px;
+  text-align: left;
+}
+
+.register_form_requiredIcon {
+  color: red;
+  font-size: 10px;
+  margin-right: 1%;
 }

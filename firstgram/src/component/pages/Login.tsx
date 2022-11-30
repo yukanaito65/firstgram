@@ -26,6 +26,7 @@ function Login() {
       ) : (
         <>
           <div style={{ display: "flex" }}>
+
             <div style={{ width: "50%", height: "50%" }}>
               <img
                 src={`${process.env.PUBLIC_URL}/iphone.png`}
@@ -49,7 +50,7 @@ function Login() {
               <LoginForm />
 
               <p>
-                アカウントをお持ちでないですか？
+                アカウントをお持ちでないですか？<br />
                 <Link to={`/register`}>
                   <span style={{ color: "#0d6efd" }}>登録する</span>
                 </Link>

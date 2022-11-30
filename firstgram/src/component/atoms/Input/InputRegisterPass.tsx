@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+// import "../../../css/validation"
+
+import { useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
-function InputCPass(props: any) {
+function InputRegisterPass(props: any) {
 
   const [isRevealConfirmPassword, setIsRevealConfirmPassword] = useState(false);
 
@@ -10,20 +12,21 @@ function InputCPass(props: any) {
   };
 
   return (
-    <div style={{position: "relative"}}>
+    <div className="input_fieldset" style={{position: "relative"}}>
       <span className="register_form_requiredIcon">＊</span>
       <input
-        type={isRevealConfirmPassword ? "text" : "password"}
-        name="Cpassword"
-        placeholder="確認用パスワード"
-        data-equal-to="email"
-        pattern={props.passwordValue}
+        type="password"
+        name="password"
+        value={props.valuePassword}
+        placeholder="パスワード(半角英小文字、数字を含む6文字以上)"
+        onChange={props.passChange}
+        pattern="(?=.*?[a-z])(?=.*?\d)[a-z\d]{6,}"
         style={{
           width: "80%",
           height: "35px",
           backgroundColor: "#f7f7f7",
           outline: "solid #d3d3d3",
-          border: "none"
+          border: "none",
         }}
         required
       />
@@ -34,11 +37,13 @@ function InputCPass(props: any) {
       >
         {isRevealConfirmPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
       </span>
+
       <span className="input-error-message messageBox">
-        パスワードが一致しません
+        正しい形式で入力してください
       </span>
+      {/* <span className="input-ok-message messageBox">OK!</span> */}
     </div>
   );
 }
 
-export default InputCPass;
+export default InputRegisterPass;

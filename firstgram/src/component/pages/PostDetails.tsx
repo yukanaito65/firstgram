@@ -8,12 +8,12 @@ import Footer from "../molecules/Footer";
 import Header from "../molecules/Header";
 import GetLoginUserData from "../utils/GetLoginUserData";
 import FavoriteUpdata from "../utils/FavoriteUpdata";
-
 import { AiFillHeart,AiOutlineClose,AiOutlineEllipsis,AiOutlineHeart, AiOutlineMessage } from "react-icons/ai";
 import CommonIcon from "../atoms/icon/CommonIcon";
 import AddKeepButton from "../atoms/button/AddKeepButton";
 import RemoveKeepButton from "../atoms/button/RemoveKeepButton";
 import { FaRegComment } from "react-icons/fa";
+import PostIcon from "../atoms/icon/PostIcon";
 
 interface State {
       postid:string,
@@ -217,7 +217,7 @@ return (
 <div style={{display:"flex",alignItems:"center",width:"100%"}}>
 
 {/* <Link to="/profile" state={{ userId: userid}}><img src={icon} alt="icon" style ={{width:"100px",height:"100px"}}/></Link> */}
-<Link to="/profile" state={{ userId: userid}}><CommonIcon icon={icon} /></Link>
+<Link to={userid === user.uid ? "/mypage" : "/profile"} state={{ userId: userid}}><PostIcon icon={icon} /></Link>
 <p style ={{fontSize:"20px",marginLeft:"5px"}}>{postUserName }</p>
 
 {/* <div style={{marginLeft:"auto"}}>
@@ -281,9 +281,9 @@ return (
 <div style={{margin:"5px 5px 5px auto"}}>
 {/* 保存ボタン追加!ログインユーザーのkeepPosts配列(loginUserKeep)に今表示しているpostのpostId(postId)が存在したら保存解除ボタン、存在しなかったら保存するボタン */}
 {loginUserKeep.includes(postid) ? (
-      <RemoveKeepButton postId={postid} size={30} color={"rgb(38, 38, 38)"}/>
+      <RemoveKeepButton postId={postid} />
 ) : (
-      <AddKeepButton postId={postid} size={30} color={"rgb(38, 38, 38)"}/>
+      <AddKeepButton postId={postid} />
 )}
 </div>
 
@@ -341,7 +341,7 @@ type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)
 ):(
 <>
 <div style={{display:"flex",alignItems:"center",width:"100%"}}>
-<Link to={userid === user.uid ? "/mypage" : "/profile"} state={{ userId: userid}}><CommonIcon icon={icon}/></Link>
+<Link to={userid === user.uid ? "/mypage" : "/profile"} state={{ userId: userid}}><PostIcon icon={icon}/></Link>
 <p style ={{fontSize:"20px",marginLeft:"5px"}}>{postUserName }</p>
 <div style={{marginLeft:"auto"}}>
 <Link to="/"><AiOutlineEllipsis style={{display:"block"}} size={40} color={"rgb(38, 38, 38)"} onClick={Select}/></Link>
@@ -372,9 +372,9 @@ type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)
 <div style={{margin:"5px 5px 5px auto"}}>
 {/* 保存ボタン追加!ログインユーザーのkeepPosts配列(loginUserKeep)に今表示しているpostのpostId(postId)が存在したら保存解除ボタン、存在しなかったら保存するボタン */}
 {loginUserKeep.includes(postid) ? (
-      <RemoveKeepButton postId={postid} size={30} />
+      <RemoveKeepButton postId={postid} />
 ) : (
-      <AddKeepButton postId={postid} size={30} />
+      <AddKeepButton postId={postid} />
 )}
 </div>
 
