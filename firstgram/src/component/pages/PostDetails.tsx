@@ -9,11 +9,11 @@ import Header from "../molecules/Header";
 import GetLoginUserData from "../utils/GetLoginUserData";
 import FavoriteUpdata from "../utils/FavoriteUpdata";
 import { AiFillHeart,AiOutlineClose,AiOutlineEllipsis,AiOutlineHeart, AiOutlineMessage } from "react-icons/ai";
-import CommonIcon from "../atoms/icon/CommonIcon";
 import AddKeepButton from "../atoms/button/AddKeepButton";
 import RemoveKeepButton from "../atoms/button/RemoveKeepButton";
-import { FaRegComment } from "react-icons/fa";
 import PostIcon from "../atoms/icon/PostIcon";
+import Post from "../atoms/icon/Post";
+import CommentsDisplay from "../molecules/CommentsDisplay";
 
 interface State {
       postid:string,
@@ -22,7 +22,7 @@ interface State {
 
 function PostDetails() {
 
-      const [user, setUser] = useState<any>("");
+const [user, setUser] = useState<any>("");
 // ログインユーザー
 const [loginUserPost,setLoginUserPost]=useState(false);
 // ログインしているユーザーのuserNameを格納
@@ -34,8 +34,6 @@ const [loginUserKeep, setLoginUserKeep] = useState("");
 const [imgUrl, setImgUrl] = useState<any>("");
 // captionを格納
 const [caption, setCaption] = useState<any>("");
-// timeを格納
-// const [Time, setTime] = useState<any>("");
 // favolitesを格納
 const [favorites, setFavorites] = useState<any>([]);
 
@@ -54,22 +52,6 @@ const[select,setSelect]=useState<boolean>(false)
 // コメントの表示非表示
 const[commentDisplay, setCommentDisplay] = useState<boolean>(false)
 
-// // timeを格納
-// const [time, settime] = useState<any>("");
-// // yearを格納
-// const [year, setYear] = useState<any>("");
-// // monthを格納
-// const [month, setMonth] = useState<any>("");
-// // dayを格納
-// const [day, setDay] = useState<any>("");
-// // dayを格納
-// const [hour, setHour] = useState<any>("");
-// // dayを格納
-// const [min, setMin] = useState<any>("");
-// // dayを格納
-// const [seco, setSeco] = useState<any>("");
-
-// const currentUserId = auth.currentUser?.uid
 
 // postlookからデータを持ってくる
 const location = useLocation();
@@ -215,16 +197,11 @@ return (
 {loginUserPost ?(
 <>
 <div style={{display:"flex",alignItems:"center",width:"100%"}}>
-
-{/* <Link to="/profile" state={{ userId: userid}}><img src={icon} alt="icon" style ={{width:"100px",height:"100px"}}/></Link> */}
-<Link to={userid === user.uid ? "/mypage" : "/profile"} state={{ userId: userid}}><PostIcon icon={icon} /></Link>
+<Link to={userid === user.uid ? "/mypage" : "/profile"} state={{ userId: userid}}>
+<PostIcon icon={icon} />
+</Link>
 <p style ={{fontSize:"20px",marginLeft:"5px"}}>{postUserName }</p>
 
-{/* <div style={{marginLeft:"auto"}}>
-<AiOutlineEllipsis style={{display:"block"}} size={40} color={"rgb(38, 38, 38)"} onClick={Select}/>
-</div> */}
-
-{/* <div style={{marginLeft:"auto"}}> */}
 {select ? (
       <>
       <div style={{marginLeft:"auto"}}>
@@ -254,15 +231,14 @@ return (
 </div>
       </>
 )}
-{/* </div> */}
 
 </div>
 
 
-
-<div style={{width:"100%",marginTop:"10px"}} >
-<img src={imgUrl} style={{margin:"auto",display:"block"}} />
-</div>
+<Post imgUrl={imgUrl} />
+{/* <div style={{width:"100%",marginTop:"10px"}} >
+<img alt="" src={imgUrl} style={{margin:"auto",display:"block"}} />
+</div> */}
 
 <div style={{display:"flex"}}>
 
@@ -317,17 +293,8 @@ type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)
 {commentDisplay ? (
       <>
       <div style={{display:"flex"}}>
-    <div>
-    {displayComment.map((data:any,index:any)=>{
-    return(
-    <div key={index} style={{display:"flex",fontSize:"16px",width:"100%",margin:"3px"}}>
-    <p style={{fontWeight:"500"}}>{data.userName}</p>
-    <p style={{marginLeft:"5px"}}>{data.commentText}</p>
-    </div>
-    )
-    })}
-    </div>
-    <AiOutlineClose  style={{display:"block",margin: "auto 0 0 auto",alignItems:"center"}} size={15} color={"rgb(38, 38, 38)"} onClick={CommentBack} />
+      <CommentsDisplay displayComment={displayComment} />
+      <AiOutlineClose  style={{display:"block",margin: "auto 0 0 auto",alignItems:"center"}} size={15} color={"rgb(38, 38, 38)"} onClick={CommentBack} />
       </div>
       </>
 ):(
@@ -366,9 +333,9 @@ type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)
 </div>
 
 <div style={{margin:"10px 5px 0px 5px"}}>
-<Link to="/"><AiOutlineMessage size={30} color={"rgb(38, 38, 38)"}/></Link>
+<Link to="/"><AiOutlineMessage size={30} color={"rgb(38, 38, 38)"} onClick={CommentDisplay} /></Link>
 </div>
-
+ 
 <div style={{margin:"5px 5px 5px auto"}}>
 {/* 保存ボタン追加!ログインユーザーのkeepPosts配列(loginUserKeep)に今表示しているpostのpostId(postId)が存在したら保存解除ボタン、存在しなかったら保存するボタン */}
 {loginUserKeep.includes(postid) ? (
@@ -393,25 +360,29 @@ type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)
 
 <div style={{display:"flex",width:"100%"}}>
 
-<div style={{display:"flex",width:"80%",height:"30px",margin:"5px"}} >
-<input style={{width:"100%"}} type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)}}></input>
+<div style={{display:"flex",width:"70%",height:"30px",margin:"5px"}} >
+<input
+style={{width:"100%"}}
+type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)}}></input>
 </div>
 
+<div style={{marginLeft:"auto",width:"30%"}}>
 <button onClick={AddComment}>投稿する</button>
+</div>
 
 </div>
 
-
-<div>
-{displayComment.map((data:any,index:any)=>{
-    return(
-    <div key={index} style={{display:"flex",fontSize:"16px"}}>
-    <p style={{fontWeight:"500"}}>{data.userName}</p>
-    <p style={{marginLeft:"5px"}}>{data.commentText}</p>
-    </div>
-    )
-})}
-</div>
+{commentDisplay ? (
+      <>
+      <div style={{display:"flex"}}>
+      <CommentsDisplay displayComment={displayComment} />
+      <AiOutlineClose  style={{display:"block",margin: "auto 0 0 auto",alignItems:"center"}} size={15} color={"rgb(38, 38, 38)"} onClick={CommentBack} />
+      </div>
+      </>
+):(
+      <>
+      </>
+)}
 </>
 )}
 </div>

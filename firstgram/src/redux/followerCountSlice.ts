@@ -4,6 +4,7 @@ import { collection, doc, getDoc } from "firebase/firestore";
 import { useLocation } from "react-router-dom";
 import { auth, db } from "../firebase";
 
+
 interface State {
   userId: string;
 }
