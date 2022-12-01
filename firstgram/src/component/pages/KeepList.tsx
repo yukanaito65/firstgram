@@ -7,6 +7,7 @@ import Footer from "../molecules/Footer";
 import Header from "../molecules/Header";
 import { auth, db } from "../../firebase";
 import MyPostList from "../molecules/MyPostList";
+import KeepPostList from "../molecules/KeepPostList";
 
 function KeepList() {
   //keepPostsの中に入っているpostIdを元にpostのimageUrl取得
@@ -83,8 +84,8 @@ function KeepList() {
         <>
         <Header show={true} />
           <Link to={"/mypage"}>⬅︎</Link>
-
-          {keepPostIds.length > 0 ? (
+<KeepPostList keepPosts={keepPosts} keepPostIds={keepPostIds} />
+          {/* {keepPostIds.length > 0 ? (
             <div>
           {keepPosts.map((keepPost: any) => {
             return (
@@ -101,7 +102,7 @@ function KeepList() {
             <div>
               <p>保存済みの投稿はありません</p>
             </div>
-          )}
+          )} */}
           <Footer />
         </>
       )}

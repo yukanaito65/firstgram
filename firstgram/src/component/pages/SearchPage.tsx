@@ -15,7 +15,7 @@ import { db } from "../../firebase";
 import Header from "../molecules/Header";
 import Footer from "../molecules/Footer";
 import { Link } from "react-router-dom";
-import CommonIcon from "../atoms/pictures/CommonIcon";
+import CommonIcon from "../atoms/icon/CommonIcon";
 
 
 
@@ -93,7 +93,7 @@ function SearchPage() {
         searchResultList.push(userId);
       }
     });
-    
+
     // 検索に引っかかったuserの任意情報を格納
     const userDataArr: {
       userId: string;

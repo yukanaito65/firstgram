@@ -1,4 +1,4 @@
-import Icon from "../atoms/pictures/Icon";
+import Icon from "../atoms/icon/Icon";
 import { NGetLoginUserData } from "../data/NGetLoginUserData";
 
 function LoginUserDtataTable() {
@@ -10,7 +10,7 @@ function LoginUserDtataTable() {
   const nameValue = firestoreUserData?.name;
   const profileValue = firestoreUserData?.profile;
   const emailValue = firestoreUserData?.email;
-  
+
   return (
     <>
     {authUserData ? (
@@ -53,7 +53,7 @@ function LoginUserDtataTable() {
     ):(
       <p>データが表示されません</p>
     )}
-      
+
     </>
   );
 }

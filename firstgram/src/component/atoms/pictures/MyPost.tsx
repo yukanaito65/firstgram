@@ -12,9 +12,11 @@ const MyPost: FC<Props> = (props) => {
     // <div style={{width: "350px", height: "350px"}}>
     <>
       <img
+      className="myPost"
       src={props.imageUrl}
       alt="投稿"
-      style={{width: "300px", height: "300px", objectFit: "cover"}}
+      // style={{width: "300px", height: "300px", objectFit: "cover"}}
+      // style={{width: "100%",height: "100%", objectFit: "cover"}}
        />
     </>
   );

@@ -10,7 +10,7 @@ function PostIcon(props: any) {
         />
       ) : (
         <img
-        className="post-noIconImage"
+        className="noIconImage"
           src={`${process.env.PUBLIC_URL}/noIcon.png`}
           alt="NoImage"
         />

@@ -122,17 +122,13 @@ button:hover {
 
 .icon-image {
   border-radius: 50%;
-  width: 120px;
-  height: 120px;
+  width: 14%;
+  /* height: 120px; */
+  aspect-ratio: 1/1;
   border: solid 1px lightgray;
 }
 
 .icon-image img {
-  /* height: 100px;
-  width: 100px;
-  border-radius: 50%;
-  border: 1px solid rgb(156, 156, 156);
-  margin: 5px; */
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -148,8 +144,10 @@ button:hover {
 
 .post-icon-image {
   border-radius: 50%;
+  width: 40%;
   width: 100px;
-  height: 100px;
+  /* height: 100px; */
+  aspect-ratio: 1/1;
   border: solid 1px lightgray;
 }
 
@@ -160,12 +158,12 @@ button:hover {
   border-radius: 50%;
 }
 
-.post-noIconImage{
+/* .post-noIconImage{
   width: 100%;
   height: 100%;
   background-color: #d3d3d3;
   border-radius: 50%;
-}
+} */
 
 /* -------------------------------------- */
 /* 保留 */
@@ -617,4 +615,23 @@ input:placeholder-shown ~ .messageBox {
   color: red;
   font-size: 10px;
   margin-right: 1%;
+}
+
+/* MyPostListコンポーネント */
+.myPostList {
+  display: flex;
+  flex-wrap: wrap;
+   gap: 3px;
+}
+
+.myPostList_image-div{
+  width: calc((100% - 3px *2 ) /3);
+  aspect-ratio: 1/1;
+}
+
+/* MyPostコンポーネント */
+.myPost{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
