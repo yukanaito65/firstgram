@@ -1,23 +1,18 @@
 import React, { useState } from "react";
-import {
-  getAuth,
-} from "firebase/auth";
-import {
-  getDoc,
-  doc,
-  collection,
-  query,
-  getDocs,
-} from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+import { getDoc, doc, collection, query, getDocs } from "firebase/firestore";
 import { useEffect } from "react";
 import { onAuthStateChanged } from "@firebase/auth";
 import { db } from "../../firebase";
 import Header from "../molecules/Header";
 import Footer from "../molecules/Footer";
 import { Link } from "react-router-dom";
-import CommonIcon from "../atoms/pictures/CommonIcon";
-
-
+import CommonIcon from "../atoms/icon/CommonIcon";
+import { NGetLoginUserData } from "../data/NGetLoginUserData";
+import { GetAllUserData } from "../data/GetAllUserData";
+import { DocumentData } from "firebase/firestore";
+import { async } from "@firebase/util";
+import SearchForm from "../molecules/SearchForm";
 
 // 流れ
 // まず前userのuserNameとnameとuserIdを取得し配列に入れる
@@ -25,7 +20,6 @@ import CommonIcon from "../atoms/pictures/CommonIcon";
 // 配列内で被ってるユーザーがいる可能性があるため、重複を消す
 // 上記の配列をforEachで回しデータを取得し、それらを新たな配列に格納する
 // 上記の配列を使ってmapで回して表示する
-
 
 const auth = getAuth();
 const currentUserId = auth.currentUser?.uid;
@@ -38,11 +32,29 @@ function SearchPage() {
     { userId: string; name: string; userName: string }[]
   >([]);
 
-    // 最終的にmapで回して表示する検索結果のuser情報の管理
+  // 最終的にmapで回して表示する検索結果のuser情報の管理
   const [dataArr, setDataArr] = useState<
     { userId: string; name: string; userName: string; icon: string }[]
   >([]);
 
+  // 取得した全userのデータを入れる箱
+  const userDataList: {
+    userId: string;
+    name: string;
+    userName: string;
+  }[] = [];
+
+  // const getAllUserDataArr: DocumentData[] = GetAllUserData();
+
+  // getAllUserDataArr.forEach((element) => {
+  //   userDataList.push({
+  //     userId: element.userId,
+  //     name: element.name,
+  //     userName: element.userName,
+  //   });
+  // });
+
+  // console.log(getAllUserDataArr)
 
   // まずuseEffect内で前userデータのuserNameとnameとtonametouserIdを取得
   useEffect(() => {
@@ -51,18 +63,12 @@ function SearchPage() {
       if (!user) {
         console.log("ログアウト状態です");
       } else {
-        // 取得した全userのデータを入れる箱
-        const userDataList: {
-          userId: string;
-          name: string;
-          userName: string;
-        }[] = [];
+
         const userQuery = query(collection(db, "user"));
         getDocs(userQuery).then((data) => {
           data.forEach((docdata) => {
             // console.log(docdata.data());
             const data = (docdata.id, " => ", docdata.data());
-            console.log(data);
             userDataList.push({
               userId: data.userId,
               name: data.name,
@@ -88,12 +94,11 @@ function SearchPage() {
       const userId = user.userId;
       if (userName.includes(searchValue)) {
         searchResultList.push(userId);
-      }
-      else if(name.includes(searchValue)) {
+      } else if (name.includes(searchValue)) {
         searchResultList.push(userId);
       }
     });
-    
+
     // 検索に引っかかったuserの任意情報を格納
     const userDataArr: {
       userId: string;
@@ -101,7 +106,7 @@ function SearchPage() {
       userName: string;
       icon: string;
     }[] = [];
-    for(const userId of searchResultList) {
+    for (const userId of searchResultList) {
       console.log(1);
       const resultUserDoc = doc(db, "user", userId);
       console.log(resultUserDoc);
@@ -119,10 +124,7 @@ function SearchPage() {
           icon: getData.icon,
         });
       }
-      console.log(userDataArr);
-    };
-    const a = userDataArr;
-    console.log(a);
+    }
     setDataArr(userDataArr);
   };
 
@@ -130,45 +132,47 @@ function SearchPage() {
 
   return (
     <>
-    <Header show={true} />
-    <div className="margin"></div>
-    <form className="searchpage_form">
-      <div className="searchpage_form_wrapper">
-      <input
-      className="searchpage_form_input"
-        type="search"
-        value={searchValue}
-        onChange={(e) => setSearchValue(e.target.value)}
-        placeholder="検索ワードを入力"
-      />
-      <button
-      type="button"
-      className="searchpage_form_btn"
-      onClick={() => onClickSearch()}>検索</button>
-      </div>
+      <Header show={true} />
+      <div className="margin"></div>
+      <form className="searchpage_form">
+        <div className="searchpage_form_wrapper">
+          <input
+            className="searchpage_form_input"
+            type="search"
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+            placeholder="検索ワードを入力"
+          />
+          <button
+            type="button"
+            className="searchpage_form_btn"
+            onClick={() => onClickSearch()}
+          >
+            検索
+          </button>
+        </div>
       </form>
-      {dataArr.length > 0 ?
-     (
+      {/* <SearchForm props={onClickSearch()} /> */}
+      {dataArr.length > 0 ? (
         dataArr.map((a) => {
-          return(
-          <>
-          <Link
-        to={a.userId === currentUserId ? "/mypage" : "/profile"}
-        state={{ userId: a.userId }}
-      >
-        <CommonIcon icon={a.icon} />
-            <p>{a.name}</p>
-            <p>{a.userName}</p>
-          </Link>
-          </>
-          )
+          return (
+            <>
+              <Link
+                to={a.userId === currentUserId ? "/mypage" : "/profile"}
+                state={{ userId: a.userId }}
+              >
+                <CommonIcon icon={a.icon} />
+                <p>{a.name}</p>
+                <p>{a.userName}</p>
+              </Link>
+            </>
+          );
         })
       ) : (
         <div className="no_matchUser">
-      <p>該当するユーザーがいません</p>
-      </div>
-      )
-      }
+          <p>該当するユーザーがいません</p>
+        </div>
+      )}
       <Footer />
     </>
   );
