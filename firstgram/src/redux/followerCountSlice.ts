@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const followerCount: any = createSlice({
+export const followerCount: any = createSlice({
+
   name: "followerList",
   // initialState: { follower: [] },
   initialState:"",

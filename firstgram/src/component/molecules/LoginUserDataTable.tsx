@@ -1,4 +1,4 @@
-import Icon from "../atoms/pictures/Icon";
+import Icon from "../atoms/icon/Icon";
 import { NGetLoginUserData } from "../data/NGetLoginUserData";
 
 function LoginUserDtataTable() {
