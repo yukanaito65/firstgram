@@ -22,6 +22,7 @@ import { Auth } from "@firebase/auth";
 import UpdateIcon from "../data/UpdateIcon";
 import BackBtn from "../atoms/button/BackBtn";
 
+
 function AccountEditPage() {
 
   const LoginUserData: {
@@ -43,6 +44,9 @@ function AccountEditPage() {
    const [profileValue, setProfileValue] = useState<string | undefined>(profile);
    const [iconValue, setIconValue] = useState<string | undefined>(icon);
 
+   // useNavigateを使えるように定義
+  const navigate = useNavigate();
+
    useEffect(() => {
     setUserNameValue(userName);
     setNameValue(name);
@@ -50,37 +54,16 @@ function AccountEditPage() {
     setIconValue(icon);
    },[profile])
 
-  // //  確定ボタンクリック時に実行
-  // const ChangeConfirm = (e: any) => {
-  //   e.preventDefault();
-  //   ChangeUserDataBtn({
-  //     icon: iconValue,
-  //     userName: userNameValue,
-  //     name: nameValue,
-  //     profile: profileValue,
-  //   });
-  // };
-
-  // useNavigateを使えるように定義
-  const navigate = useNavigate();
-
-  // 確定時にfiresoterにデータ送信
-  const handleSubmit = (e: any) => {
+  //  確定ボタンクリック時に実行
+  const ChangeConfirm = (e: any) => {
     e.preventDefault();
-
-    const userCollectionRef = collection(
-      db,
-      "user"
-    ) as CollectionReference<User>;
-    const docDtata = doc(userCollectionRef, authUserData.uid);
-
-    updateDoc(docDtata, {
+    ChangeUserDataBtn({
       icon: iconValue,
       userName: userNameValue,
       name: nameValue,
       profile: profileValue,
     });
-    navigate("/mypage");
+    navigate("/mypage")
   };
 
   return (
@@ -139,7 +122,7 @@ function AccountEditPage() {
             </tr>
           </table>
           <div className="confirm_btn">
-            <button onClick={handleSubmit}>確定</button>
+            <button onClick={ChangeConfirm}>確定</button>
           </div>
           <BackBtn />
         </>

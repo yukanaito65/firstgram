@@ -17,25 +17,26 @@ interface Props {
   profile: string | undefined;
 }
 
-function ChangeUserDataBtn({ icon, userName, name, profile }: Props) {
+function ChangeUserDataBtn( props : Props) {
   // getAuthを使えるように定義
   const auth: Auth = getAuth();
+  // const navigate = useNavigate();
   const currentUser = auth.currentUser;
   const currentUserId: string | undefined = currentUser?.uid;
 
   // useNavigateを使えるように定義
-  const navigate = useNavigate();
+  
 
   const userCollectionRef = collection(db, "user") as CollectionReference<User>;
   const docDtata = doc(userCollectionRef, currentUserId);
 
   updateDoc(docDtata, {
-    icon: icon,
-    userName: userName,
-    name: name,
-    profile: profile,
+    icon: props.icon,
+    userName: props.userName,
+    name: props.name,
+    profile: props.profile,
   });
-  navigate("/mypage");
+  // navigate("/mypage");
 }
 
 export default ChangeUserDataBtn;
