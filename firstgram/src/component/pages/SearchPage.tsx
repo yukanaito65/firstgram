@@ -44,44 +44,16 @@ function SearchPage() {
     userName: string;
   }[] = [];
 
+GetAllUserData(setDataList);
   // const getAllUserDataArr: DocumentData[] = GetAllUserData();
 
-  // getAllUserDataArr.forEach((element) => {
-  //   userDataList.push({
-  //     userId: element.userId,
-  //     name: element.name,
-  //     userName: element.userName,
-  //   });
-  // });
-
-  // console.log(getAllUserDataArr)
-
-  // まずuseEffect内で前userデータのuserNameとnameとtonametouserIdを取得
-  useEffect(() => {
-    //ログイン判定
-    onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        console.log("ログアウト状態です");
-      } else {
-
-        const userQuery = query(collection(db, "user"));
-        getDocs(userQuery).then((data) => {
-          data.forEach((docdata) => {
-            // console.log(docdata.data());
-            const data = (docdata.id, " => ", docdata.data());
-            userDataList.push({
-              userId: data.userId,
-              name: data.name,
-              userName: data.userName,
-            });
-          });
-          console.log(userDataList);
-          setDataList(userDataList);
-        });
-        console.log(dataList);
-      }
+  dataList.forEach((element) => {
+    userDataList.push({
+      userId: element.userId,
+      name: element.name,
+      userName: element.userName,
     });
-  }, []);
+  });
 
   // 「検索」クリック時にinputタグ内の文字と一致するユーザーのuserIdを配列に格納
   // 格納されたuserIdの任意の情報を取得
@@ -99,23 +71,20 @@ function SearchPage() {
       }
     });
 
-    // 検索に引っかかったuserの任意情報を格納
-    const userDataArr: {
-      userId: string;
-      name: string;
-      userName: string;
-      icon: string;
-    }[] = [];
-    for (const userId of searchResultList) {
-      console.log(1);
-      const resultUserDoc = doc(db, "user", userId);
-      console.log(resultUserDoc);
+  // 検索に引っかかったuserの任意情報を格納
+  const userDataArr: {
+    userId: string;
+    name: string;
+    userName: string;
+    icon: string;
+  }[] = [];
+  for (const userId of searchResultList) {
+    console.log(1);
+    const resultUserDoc = doc(db, "user", userId);
+    console.log(resultUserDoc);
 
-      const resultUserData = await getDoc(resultUserDoc);
-      console.log(resultUserData);
-
+    getDoc(resultUserDoc).then((resultUserData) => {
       const getData: any = resultUserData.data();
-      console.log(getData);
       if (getData) {
         userDataArr.push({
           userId: getData.userId,
@@ -124,9 +93,11 @@ function SearchPage() {
           icon: getData.icon,
         });
       }
-    }
-    setDataArr(userDataArr);
-  };
+      setDataArr(userDataArr);
+    })
+  }
+  
+}
 
   console.log(dataArr);
 
