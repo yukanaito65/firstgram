@@ -1,29 +1,23 @@
 import { onAuthStateChanged } from 'firebase/auth';
-
-
-import { collection, doc, getDoc, getDocs, query, updateDoc, where ,serverTimestamp, arrayUnion, arrayRemove} from 'firebase/firestore';
-import { connectStorageEmulator } from 'firebase/storage';
-import React, { useEffect, useState } from 'react'
-import { Link, useActionData, useLocation, useRouteLoaderData } from 'react-router-dom';
+import { collection, doc, getDoc, getDocs, query, updateDoc, where , arrayUnion, arrayRemove} from 'firebase/firestore';
+import  { useEffect, useState } from 'react'
+import { Link} from 'react-router-dom';
 import AddKeepButton from '../atoms/button/AddKeepButton';
 import RemoveKeepButton from '../atoms/button/RemoveKeepButton';
-
-import AddFavBtn from '../atoms/button/AddFavBtn';
 import { auth, db } from '../../firebase';
-import NoFavBtn from '../atoms/button/NoFavBtn';
 import Footer from "../molecules/Footer";
 import Header from "../molecules/Header";
 import GetLoginUserName from '../utils/GetLoginUserData';
 import { AiFillHeart, AiOutlineClose, AiOutlineHeart, AiOutlineMessage } from 'react-icons/ai';
-import { FaRegComment } from 'react-icons/fa';
+import PostLookDisplay from '../molecules/PostLookDisplay';
 
 function PostLook() {
     // followuserのpostidからとってきたpostData
     const [postData, setPostData] = useState<any>([]);
     // followuserのpostidからとってきたpostData
     const [ramData, setRamData] = useState<any>([]);
-    // postid保持
-    const[postId,setPostId]=useState<any>("");
+    // // postid保持
+    // const[postId,setPostId]=useState<any>("");
     // inputcommentを格納
     const [inputComment, setInputComment] = useState<any>("");
     // ログインしているユーザーのuserNameを格納
@@ -34,12 +28,12 @@ function PostLook() {
     const [followUser, setFollowUser] = useState<any>([]);
 
     // ログインしているユーザーのpostの配列
-    const [myPostId, setMyPostID] = useState<any>([]);
+    // const [myPostId, setMyPostID] = useState<any>([]);
 
     const [loginUserKeep, setLoginUserKeep] = useState<any>("");
 
     //
-    const [postDataSecond,  setPostDataSecond] = useState<any>({});
+    // const [postDataSecond,  setPostDataSecond] = useState<any>({});
 
     const [favbtn,setFavbtn]=useState(1)
 // コメントの表示非表示
@@ -122,10 +116,7 @@ const[commentDisplay, setCommentDisplay] = useState<boolean>(false)
     }})
     },
     [favbtn]
-    // [postData]
     )
-
-    console.log(postData)
 
     // 日付順に並び替え
     postData.sort((a: any, b: any) => {
@@ -206,6 +197,9 @@ const[commentDisplay, setCommentDisplay] = useState<boolean>(false)
         </div>
 
         </div>
+
+        {/* いいね数、投稿時間、キャプションコンポーネント */}
+        <PostLookDisplay postData={postData} />
 
         {/* いいね数、投稿時間 */}
         <div style ={{fontSize:"16px",display:"flex"}}>
