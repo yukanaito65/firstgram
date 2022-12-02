@@ -4,6 +4,7 @@ import firebasePostDetails from "../utils/firebasePostDetails";
 import FirestoreUpdata from "../utils/FirestoreUpdata";
 import Footer from "../molecules/Footer";
 import Header from "../molecules/Header";
+import BackBtn from "../atoms/button/BackBtn";
 
 interface State {
     postid:string,
@@ -26,7 +27,7 @@ firebasePostDetails(postid,userid).then((postData)=>{
 setimgUrl(postData.Imgurl)
 setText(postData.Caption)
 })
-}, [])
+})
 
 const Updata = ((e:any)=>{
 console.log(text)
@@ -37,10 +38,10 @@ return (
 <>
 <Header show={true} />
 <div>
-<img src={imgUrl} />
+<img alt="" src={imgUrl} />
 <input type="text" value={text} onChange={(e)=>{setText(e.target.value)}}></input>
 <Link to="/"><button onClick={Updata}>編集完了</button></Link>
-<Link to="/"><button>戻る</button></Link>
+<BackBtn />
 </div>
 <Footer />
 </>

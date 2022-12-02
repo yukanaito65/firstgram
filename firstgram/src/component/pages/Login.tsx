@@ -26,6 +26,7 @@ function Login() {
       ) : (
         <>
           <div style={{ display: "flex" }}>
+
             <div style={{ width: "50%", height: "50%" }}>
               <img
                 src={`${process.env.PUBLIC_URL}/iphone.png`}

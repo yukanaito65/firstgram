@@ -575,6 +575,13 @@ button:hover {
   height: 30px;
 } */
 
+/* ログイン・会員登録共通 */
+.input_isRevealPassword_icon {
+  position: absolute;
+  top: 10%;
+  left: 85%;
+}
+
 /* 会員登録 */
 .input-error-message {
   color: red;
