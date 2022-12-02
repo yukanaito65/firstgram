@@ -39,7 +39,7 @@ return (
 <Header show={true} />
 <div>
 <img alt="" src={imgUrl} />
-<input type="text" value={text} onChange={(e)=>{setText(e.target.value)}}></input>
+<textarea  value={text} onChange={(e)=>{setText(e.target.value)}}></textarea>
 <Link to="/"><button onClick={Updata}>編集完了</button></Link>
 <BackBtn />
 </div>

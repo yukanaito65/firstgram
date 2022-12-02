@@ -1,8 +1,8 @@
 import Icon from "../atoms/icon/Icon";
-import { NGetLoginUserData } from "../data/NGetLoginUserData";
+import { GetLoginUserData }  from "../data/GetLoginUserData"
 
 function LoginUserDtataTable() {
-  const LoginUserData = NGetLoginUserData();
+  const LoginUserData = GetLoginUserData();
   const authUserData = LoginUserData.authUserData;
   const firestoreUserData = LoginUserData.firestoreUserData;
 

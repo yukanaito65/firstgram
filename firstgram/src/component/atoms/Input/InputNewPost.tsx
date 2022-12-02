@@ -10,7 +10,9 @@ const InputText = (e:any)=>{
 return (
     <div>
     <textarea value={textState} placeholder="コメントを入力
-    してください" onChange={InputText} style={{width:"100%",height:"100px"}}/>
+    してください" onChange={InputText} 
+    style={{width:"100%",height:"100px"}}
+    />
     </div>
 )
 }

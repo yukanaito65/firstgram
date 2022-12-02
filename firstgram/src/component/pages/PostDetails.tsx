@@ -27,11 +27,12 @@ import {
   AiOutlineMessage,
 } from "react-icons/ai";
 import PostIcon from "../atoms/icon/PostIcon";
-import Post from "../atoms/icon/Post";
+import Post from "../atoms/pictures/Img";
 import CommentsDisplay from "../molecules/CommentsDisplay";
 import KeepButton from "../atoms/button/KeepButton";
 import FavoLength from "../molecules/FavoLength";
 import Caption from "../molecules/Caption";
+import Img from "../atoms/pictures/Img";
 
 interface State {
   postid: string;
@@ -296,7 +297,9 @@ function PostDetails() {
                 </>
               )}
             </div>
-            <Post imgUrl={imgUrl} />
+
+            <Img imgUrl={imgUrl} />
+
             <div style={{ display: "flex" }}>
               <div style={{ margin: "10px 5px 0px 5px" }}>
                 {favorites.includes(loginUserName) ? (
@@ -396,7 +399,9 @@ function PostDetails() {
               </div>
             </div>
 
-            <Post imgUrl={imgUrl} />
+
+            <Img imgUrl={imgUrl} />
+
 
             <div style={{ display: "flex" }}>
               <div style={{ margin: "10px 5px 0px 5px" }}>

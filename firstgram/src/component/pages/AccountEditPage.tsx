@@ -1,24 +1,11 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import type { User } from "../../types/types";
-import { Link } from "react-router-dom";
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { storage } from "../../firebase";
 import Header from "../molecules/Header";
 import Footer from "../molecules/Footer";
-import { IoIosArrowBack } from "react-icons/io";
-import { NGetLoginUserData } from "../data/NGetLoginUserData";
+import { GetLoginUserData } from "../data/GetLoginUserData";
 import ChangeUserDataBtn from "../atoms/button/ChangeUserDataBtn";
-import {
-  doc,
-  collection,
-  updateDoc,
-  CollectionReference,
-} from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
-import { getAuth } from "firebase/auth";
-import { db } from "../../firebase";
-import { Auth } from "@firebase/auth";
 import UpdateIcon from "../data/UpdateIcon";
 import BackBtn from "../atoms/button/BackBtn";
 
@@ -28,7 +15,7 @@ function AccountEditPage() {
   const LoginUserData: {
     authUserData: any;
     firestoreUserData: User | undefined;
-  } = NGetLoginUserData();
+  } = GetLoginUserData();
   const authUserData = LoginUserData.authUserData;
   const firestoreUserData = LoginUserData.firestoreUserData;
   console.log(authUserData.uid);
