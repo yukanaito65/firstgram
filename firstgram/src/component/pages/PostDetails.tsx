@@ -190,9 +190,11 @@ return (
 {loginUserPost ?(
 <>
 <div style={{display:"flex",alignItems:"center",width:"100%"}}>
+<div className="postDetails_postIcon">
 <Link to={userid === user.uid ? "/mypage" : "/profile"} state={{ userId: userid}}>
 <PostIcon icon={icon} />
 </Link>
+</div>
 <p style ={{fontSize:"20px",marginLeft:"5px"}}>{postUserName }</p>
 
 {select ? (
@@ -274,7 +276,11 @@ type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)
 ):(
 <>
 <div style={{display:"flex",alignItems:"center",width:"100%"}}>
-<Link to={userid === user.uid ? "/mypage" : "/profile"} state={{ userId: userid}}><PostIcon icon={icon}/></Link>
+<div className="postDetails_postIcon">
+<Link to={userid === user.uid ? "/mypage" : "/profile"} state={{ userId: userid}}>
+      <PostIcon icon={icon}/>
+</Link>
+</div>
 <p style ={{fontSize:"20px",marginLeft:"5px"}}>{postUserName }</p>
 <div style={{marginLeft:"auto"}}>
 <Link to="/"><AiOutlineEllipsis style={{display:"block"}} size={40} color={"rgb(38, 38, 38)"} onClick={Select}/></Link>
@@ -299,7 +305,7 @@ type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)
 <div style={{margin:"10px 5px 0px 5px"}}>
 <Link to="/"><AiOutlineMessage size={30} color={"rgb(38, 38, 38)"} onClick={CommentDisplay} /></Link>
 </div>
- 
+
 <div style={{margin:"5px 5px 5px auto"}}>
 <KeepButton loginUserKeep={loginUserKeep} data={postid} />
 </div>

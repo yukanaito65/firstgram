@@ -13,7 +13,6 @@ import React, { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import Icon from "../atoms/icon/Icon";
 import UserName from "../atoms/user/UserName";
-import MyPostList from "../molecules/MyPostList";
 import { auth, db } from "../../firebase";
 import { User } from "../../types/types";
 import { Post } from "../../types/types";
@@ -21,6 +20,7 @@ import Footer from "../molecules/Footer";
 import Header from "../molecules/Header";
 import MyPageInfo from "../molecules/MyPageInfo";
 import Name from "../atoms/user/Name";
+import ThreeRowsPostList from "../molecules/ThreeRowsPostList";
 
 function MyPage() {
   //ログインしているとログイン情報を持つ
@@ -117,7 +117,6 @@ function MyPage() {
   // console.log(postList); //userコレクションからログインユーザーの情報を取得して、post配列の中身だけ格納している
   console.log(followList);
 
-
   return (
     <>
       {/* loadingがfalseのときのみマイページを表示する設定。loadingがfalseのときのみ */}
@@ -129,55 +128,77 @@ function MyPage() {
           ) : (
             <>
               <Header show={true} />
-              <div style={{textAlign: "center", fontSize: "20px", fontWeight: "bold"}}>
+              <div
+                style={{
+                  textAlign: "center",
+                  fontSize: "20px",
+                  fontWeight: "bold",
+                }}
+              >
                 <UserName users={users} />
               </div>
-                {/* <div>{users.userName}</div> */}
-                {/* <Link to={`/dmPage`}>
+              {/* <div>{users.userName}</div> */}
+              {/* <Link to={`/dmPage`}>
                   <button>DM</button>
                 </Link> */}
 
-              <div style={{display: "flex", justifyContent: "space-between", gap: "10%", margin: "10px 20px",  alignItems: "center"}}>
-              <Icon />
-              <MyPageInfo
-              posts={posts}
-              followerList={followerList}
-              followList={followList}
-              uid={user.uid}
-              />
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  gap: "10%",
+                  margin: "10px 20px",
+                  alignItems: "center",
+                }}
+              >
+                <Icon />
+                <MyPageInfo
+                  posts={posts}
+                  followerList={followerList}
+                  followList={followList}
+                  uid={user.uid}
+                />
               </div>
               {/* <div> */}
-                {/* <PostCount posts={posts} /> */}
-                {/* <div>{posts.length}投稿</div> */}
+              {/* <PostCount posts={posts} /> */}
+              {/* <div>{posts.length}投稿</div> */}
 
-                {/* <Link to={"/myFollower"}>
+              {/* <Link to={"/myFollower"}>
                   <div>{followerList.length}フォロワー</div>
                 </Link> */}
 
-                {/* <FollowerCount
+              {/* <FollowerCount
                   followerList={followerList}
                   link={"/myFollower"}
                   uid={user.uid}
                 /> */}
 
-                {/* <FollowCount
+              {/* <FollowCount
                   followList={followList}
                   link={"/myFollow"}
                   uid={user.uid}
                 /> */}
-                {/* <Link to={"/myFollow"}>
+              {/* <Link to={"/myFollow"}>
                   <div>{followList.length}フォロー中</div>
                 </Link> */}
               {/* </div> */}
-              <span style={{fontWeight: "bold"}}>
-                <Name users={users}/>
+              <span style={{ fontWeight: "bold" }}>
+                <Name users={users} />
               </span>
-              <div>{users.profile}</div>
-              <MyPostList
-              posts={posts}
-              users={users}
-              message={<><p>初めて投稿してみよう！</p>
-              <Link to="/NewPost">新規投稿はこちら</Link></>}
+              <div style={{ marginTop: "10px", marginBottom: "10px" }}>
+                {users.profile}
+              </div>
+              <ThreeRowsPostList
+                posts={posts}
+                // users={users}
+                message={
+                  <>
+                    <p>初めて投稿してみよう！</p>
+                    <Link to="/NewPost" className="threeRowsPostList_message_link">
+                      新規投稿はこちら
+                    </Link>
+                  </>
+                }
               />
               <Footer />
             </>

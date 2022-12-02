@@ -39,7 +39,7 @@ function InputRegisterPass(props: any) {
       </span>
 
       <span className="input-error-message messageBox">
-        正しい形式で入力してください
+        正しい形式で入力してください(半角英小文字、数字を含む6文字以上)
       </span>
       {/* <span className="input-ok-message messageBox">OK!</span> */}
     </div>
