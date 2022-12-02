@@ -48,9 +48,7 @@ function UpdateIcon(props: any) {
         setIsUploaded(true);
         // 画像のダウンロード
         getDownloadURL(storageRef).then((url) => {
-          console.log(props.iconPropsFunc(url))
           props.iconPropsFunc(url);
-          console.log(props.iconPropsValue);
         });
       }
     );

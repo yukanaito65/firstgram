@@ -1,9 +1,13 @@
 import React from "react";
-import { useState } from "react";
+import Btn from "../atoms/button/Btn";
 
-function SearchForm(onClickProps: any, inputValueProps: string) {
-     // inputタグ内の状態管理
-  const [searchValue, setSearchValue] = useState<string>("");
+interface Props {
+  inputValue: string,
+  propsOnChange: any,
+  onClickSearch: () => void,
+}
+
+function SearchForm(props: Props) {
   return (
     <div>
       <form className="searchpage_form">
@@ -11,17 +15,11 @@ function SearchForm(onClickProps: any, inputValueProps: string) {
           <input
             className="searchpage_form_input"
             type="search"
-            value={inputValueProps}
-            onChange={(e) => inputValueProps = e.target.value}
+            value={props.inputValue}
+            onChange={(e) => props.propsOnChange(e.target.value)}
             placeholder="検索ワードを入力"
           />
-          <button
-            type="button"
-            className="searchpage_form_btn"
-            onClick={() => onClickProps()}
-          >
-            検索
-          </button>
+          <Btn propsOnClick={props.onClickSearch} />
         </div>
       </form>
     </div>

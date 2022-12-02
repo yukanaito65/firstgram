@@ -1,17 +1,12 @@
 import React, { useState } from "react";
 import { getAuth } from "firebase/auth";
-import { getDoc, doc, collection, query, getDocs } from "firebase/firestore";
-import { useEffect } from "react";
-import { onAuthStateChanged } from "@firebase/auth";
+import { getDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase";
 import Header from "../molecules/Header";
 import Footer from "../molecules/Footer";
 import { Link } from "react-router-dom";
 import CommonIcon from "../atoms/icon/CommonIcon";
-import { NGetLoginUserData } from "../data/NGetLoginUserData";
 import { GetAllUserData } from "../data/GetAllUserData";
-import { DocumentData } from "firebase/firestore";
-import { async } from "@firebase/util";
 import SearchForm from "../molecules/SearchForm";
 
 // 流れ
@@ -44,8 +39,7 @@ function SearchPage() {
     userName: string;
   }[] = [];
 
-GetAllUserData(setDataList);
-  // const getAllUserDataArr: DocumentData[] = GetAllUserData();
+  GetAllUserData(setDataList);
 
   dataList.forEach((element) => {
     userDataList.push({
@@ -57,7 +51,7 @@ GetAllUserData(setDataList);
 
   // 「検索」クリック時にinputタグ内の文字と一致するユーザーのuserIdを配列に格納
   // 格納されたuserIdの任意の情報を取得
-  const onClickSearch = async () => {
+  const onClickSearch = () => {
     // 検索に引っかかったuserのuserIdを格納
     const searchResultList: string[] = [];
     dataList.forEach((user) => {
@@ -71,33 +65,32 @@ GetAllUserData(setDataList);
       }
     });
 
-  // 検索に引っかかったuserの任意情報を格納
-  const userDataArr: {
-    userId: string;
-    name: string;
-    userName: string;
-    icon: string;
-  }[] = [];
-  for (const userId of searchResultList) {
-    console.log(1);
-    const resultUserDoc = doc(db, "user", userId);
-    console.log(resultUserDoc);
+    // 検索に引っかかったuserの任意情報を格納
+    const userDataArr: {
+      userId: string;
+      name: string;
+      userName: string;
+      icon: string;
+    }[] = [];
+    for (const userId of searchResultList) {
+      console.log(1);
+      const resultUserDoc = doc(db, "user", userId);
+      console.log(resultUserDoc);
 
-    getDoc(resultUserDoc).then((resultUserData) => {
-      const getData: any = resultUserData.data();
-      if (getData) {
-        userDataArr.push({
-          userId: getData.userId,
-          name: getData.name,
-          userName: getData.userName,
-          icon: getData.icon,
-        });
-      }
-      setDataArr(userDataArr);
-    })
-  }
-  
-}
+      getDoc(resultUserDoc).then((resultUserData) => {
+        const getData: any = resultUserData.data();
+        if (getData) {
+          userDataArr.push({
+            userId: getData.userId,
+            name: getData.name,
+            userName: getData.userName,
+            icon: getData.icon,
+          });
+        }
+        setDataArr(userDataArr);
+      });
+    }
+  };
 
   console.log(dataArr);
 
@@ -106,24 +99,12 @@ GetAllUserData(setDataList);
       <Header show={true} />
       <div className="margin"></div>
       <form className="searchpage_form">
-        <div className="searchpage_form_wrapper">
-          <input
-            className="searchpage_form_input"
-            type="search"
-            value={searchValue}
-            onChange={(e) => setSearchValue(e.target.value)}
-            placeholder="検索ワードを入力"
-          />
-          <button
-            type="button"
-            className="searchpage_form_btn"
-            onClick={() => onClickSearch()}
-          >
-            検索
-          </button>
-        </div>
+        <SearchForm
+          inputValue={searchValue}
+          propsOnChange={setSearchValue}
+          onClickSearch={() => onClickSearch()}
+        />
       </form>
-      {/* <SearchForm props={onClickSearch()} /> */}
       {dataArr.length > 0 ? (
         dataArr.map((a) => {
           return (
