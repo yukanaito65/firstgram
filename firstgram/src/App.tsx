@@ -57,6 +57,7 @@ function App() {
             <Route path={`/searchPage`} element={<SearchPage />} />
             <Route path={`/profile`} element={<Profile />} />
             <Route path={`/keep`} element={<KeepList />} />
+            {/* <Route path={`/InputNewPost`} element={<InputNewPost />} /> */}
           </Routes>
         </BrowserRouter>
       </div>

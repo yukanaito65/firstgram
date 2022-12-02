@@ -176,6 +176,7 @@ function PostLook() {
                           display: "flex",
                           alignItems: "center",
                           width: "100%",
+                          marginTop:"30px"
                         }}
                       >
                         <Link
@@ -339,11 +340,13 @@ function PostLook() {
                 return (
                   <>
                     <div key={index}>
+
                       <div
                         style={{
                           display: "flex",
                           alignItems: "center",
                           width: "100%",
+                          marginTop:"30px"
                         }}
                       >
                         <div className="postDetails_postIcon">
@@ -366,7 +369,7 @@ function PostLook() {
                       >
 
                         <Img imgUrl={data.imageUrl} />
-=
+
                       </Link>
 
                       {/* いいねコメント保存 */}
@@ -417,7 +420,7 @@ function PostLook() {
                         <div style={{ margin: "5px 5px 0px auto" }}>
                           <KeepButton
                             loginUserKeep={loginUserKeep}
-                            data={data}
+                            data={data.postId}
                           />
                         </div>
                       </div>

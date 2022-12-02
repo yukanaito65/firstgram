@@ -8,6 +8,12 @@ import "../../css/newPost.css"
 import NewPostUploadAuter from "../molecules/NewPostUploadAuter";
 // import InputNewPost from "../atoms/Input/InputNewPost";
 import BackBtn from "../atoms/button/BackBtn";
+import { Link } from "react-router-dom";
+
+interface State {
+    postid: string;
+    userid: string;
+  }
 
 const NewPost = (props:any) => {
 //loadingしているかしてないか監視する
@@ -56,15 +62,55 @@ return (
         {isUploaded ? (
             <>
             <NewPostUploadAuter imgSrc={imgSrc} />
+            {/* <textarea value={textState} placeholder="コメントを入力してください" onChange={InputText} 
+            style={{width:"100%",height:"100px"}} />
+            <Link to="/" ><button onClick={OnFirebase}>投稿</button></Link> */}
+            {/* <Link to="InputNewPost" state={{ imgSrc:imgSrc }}>次へ</Link> */}
             {/* <InputNewPost /> */}
             </>
         ):(
             <>
-            <div style={{border:"solid 1px #333 ",height:"300px"}}>
-            <AiOutlineAreaChart size={40} style={{alignItems:"center",width:"100%"}}/>
+            <div style={{border:"solid 1px #333 ",height:"300px", textAlign:"center",
+            display: "flex",justifyContent: "center",alignItems: "center",flexDirection: "column"}}>
+            
+            <div style={{
+                // alignItems:"center",
+                width:"100%",
+                // margin:"0 auto"
+                }}>
+            <AiOutlineAreaChart size={40} style={{
+                // alignItems:"center",
+                width:"100%",
+                // margin:"0 auto"
+                }}/>
+            </div>
+
+            <div style={{
+                // border: "1px solid",
+                borderRadius: "3px",
+                // display: "inline-block",
+                padding: "3px",
+                position: "relative",
+                backgroundColor:"#0d6efd",
+                margin:"0 auto",
+                alignItems:"center",
+                width:"200px",
+
+                
+            }}>
+            <p style={{color:"#fff"}}>コンピューターから選択</p>
             <input name="imageURL" type="file" accept=".png, .jpeg, .jpg" onChange={ InputImage } 
-            // style={{opacity:}}
+            style={{
+                height: "100%",
+                left: "0",
+                opacity: "0",
+                position: "absolute",
+                top: "0",
+                width: "100%"
+            }}
             />
+            </div>
+
             </div>
             <BackBtn />
             </>
