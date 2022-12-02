@@ -18,7 +18,6 @@ import { Link } from "react-router-dom";
 import CommonIcon from "../atoms/icon/CommonIcon";
 
 
-
 // 流れ
 // まず前userのuserNameとnameとuserIdを取得し配列に入れる
 // その中からinputタグ内の文字を含むuserを配列に格納する
