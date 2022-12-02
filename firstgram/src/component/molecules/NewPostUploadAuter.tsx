@@ -13,7 +13,7 @@ function NewPostUploadAuter(props:State) {
 // コメント
  const [textState, setTextState] = useState("");
 
-    // firestoreに追加
+// firestoreに追加
 const OnFirebase = async(e:any) => {
     // if(textState === ""){
     // console.log("テキストの入力がありません")
@@ -82,12 +82,17 @@ const InputText = (e:any)=>{
 
   return (
     <div>
-    <img alt="" src={props.imgSrc} />
+    <div style={{height:"300px"}}>
+    <img alt="" src={props.imgSrc} style={{height:"300px",width:"100%"}}/>
+    </div>
     {/* <InputNewPost /> */}
     <textarea rows={10} cols={40} name="inputPost" value={textState}
-    placeholder="コメントを入力してください" onChange={InputText} />
-    <Link to="/" ><button onClick={OnFirebase}>投稿</button></Link>
+    placeholder="コメントを入力してください" onChange={InputText} style={{height:"300px",width:"100%",marginTop:"5px"}} />
+
+    <div style={{display:"flex",width:"100%",justifyContent: "space-between"}}>
     <BackBtn />
+    <Link to="/" ><button onClick={OnFirebase}  style={{textAlign:"right"}}>投稿</button></Link>
+    </div>
     </div>
   )
 }

@@ -176,6 +176,7 @@ function PostLook() {
                           display: "flex",
                           alignItems: "center",
                           width: "100%",
+                          marginTop:"30px"
                         }}
                       >
                         <Link
@@ -339,11 +340,13 @@ function PostLook() {
                 return (
                   <>
                     <div key={index}>
+
                       <div
                         style={{
                           display: "flex",
                           alignItems: "center",
                           width: "100%",
+                          marginTop:"30px"
                         }}
                       >
                         <div className="postDetails_postIcon">
@@ -365,6 +368,7 @@ function PostLook() {
                         state={{ postid: data.postId, userid: data.userId }}
                       >
                         <Img imgUrl={data.imageUrl} />
+
                       </Link>
 
                       {/* いいねコメント保存 */}
