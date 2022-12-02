@@ -17,7 +17,6 @@ import RemoveFollowButton from "../atoms/button/RemoveFollowButton";
 import FollowerCount from "../atoms/user/FollowerCount";
 import CommonIcon from "../atoms/icon/CommonIcon";
 import UserName from "../atoms/user/UserName";
-import MyPostList from "../molecules/MyPostList";
 import { auth, db } from "../../firebase";
 import { Post } from "../../types/types";
 import PostCount from "../atoms/user/PostCount";
@@ -25,6 +24,7 @@ import FollowCount from "../atoms/user/FollowCount";
 import Header from "../molecules/Header";
 import Footer from "../molecules/Footer";
 import Name from "../atoms/user/Name";
+import ThreeRowsPostList from "../molecules/ThreeRowsPostList";
 
 interface State {
   userId: string;
@@ -55,7 +55,7 @@ function Profile() {
 
   // const [followerNum,setFollowerNum] = useState(0);
 
-  const [userCollectionRef,setUserCollectionRef] = useState<any>("");
+  const [userCollectionRef, setUserCollectionRef] = useState<any>("");
 
   //各ページからデータ取得
   const location = useLocation();
@@ -112,7 +112,6 @@ function Profile() {
     });
   }, []);
 
-
   console.log(profileUsers); //[]
   console.log(profileUsers.follow); //undefined
   console.log(posts); //[]
@@ -164,7 +163,7 @@ function Profile() {
                 {/* <Link to={"/follower"} state={{ userId: userId, follower:followerList, uid: user.uid }}>
             <div>{followerNum}follower</div>
           </Link> */}
-{/*
+                {/*
                 <FollowerCount
            followerList={followerList}
            link={"/follower"}
@@ -187,30 +186,35 @@ function Profile() {
             <span style={{ fontWeight: "bold" }}>
               <Name users={profileUsers} />
             </span>
-            <div>{profileUsers.profile}</div>
-
-          <div style={{display: "flex", gap: "5%"}}>
-            {usersFollow.includes(userId) ? (
-              <>
-                <RemoveFollowButton
-                  userId={userId}
-                  // onClick={()=>setFollowerNum(followerNum)}
-                  // followerNum={followerNum}
-                />
-              </>
-            ) : (
-              <>
-                <AddFollowButton userId={userId} />
-              </>
-            )}
-
-            <Link to={`/dmPage`} state={{ userId: userId }}>
-              <button>DM</button>
-            </Link>
-
+            <div style={{ marginTop: "10px", marginBottom: "10px" }}>
+              {profileUsers.profile}
             </div>
 
-            <MyPostList posts={posts} users={profileUsers} message={<p>投稿がありません</p>} />
+            <div style={{ display: "flex", gap: "5%" }}>
+              {usersFollow.includes(userId) ? (
+                <>
+                  <RemoveFollowButton
+                    userId={userId}
+                    // onClick={()=>setFollowerNum(followerNum)}
+                    // followerNum={followerNum}
+                  />
+                </>
+              ) : (
+                <>
+                  <AddFollowButton userId={userId} />
+                </>
+              )}
+
+              <Link to={`/dmPage`} state={{ userId: userId }}>
+                <button>DM</button>
+              </Link>
+            </div>
+
+            <ThreeRowsPostList
+              posts={posts}
+              // users={profileUsers}
+              message={<p>投稿がありません</p>}
+            />
           </div>
           <Footer />
         </>

@@ -1,18 +1,23 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import MyPost from '../atoms/pictures/MyPost';
+import MyPost from '../atoms/pictures/Post';
 
+//keepPostIds,keepPosts
+//一覧に並んでいる投稿のそれぞれのユーザーidが必要
 function KeepPostList(props:any) {
   return (
     <>
-    {props.keepPostIds.length > 0 ? (
+    {props.keepPosts.length > 0 ? (
             <div className="myPostList">
           {props.keepPosts.map((keepPost: any) => {
             return (
               <div className='myPostList_image-div'>
                 <Link
                   to={"/PostDetails"}
-                  state={{ userid: keepPost.userId, postid: keepPost.postId }}
+                  state={{
+                    userid: keepPost.userId,
+                    postid: keepPost.postId
+                  }}
                 >
                   <MyPost imageUrl={keepPost.imageUrl} />
                 </Link>

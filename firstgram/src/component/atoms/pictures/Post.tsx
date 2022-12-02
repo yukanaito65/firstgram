@@ -6,13 +6,13 @@ type Props = {
 };
 //imageUrlをpropsで受け取る
 //投稿１つ分の写真(myPageとprofileの投稿一覧と検索一覧)
-const MyPost: FC<Props> = (props) => {
+const Post: FC<Props> = (props) => {
   // const MyPost=(props:any) =>{
   return (
     // <div style={{width: "350px", height: "350px"}}>
     <>
       <img
-      className="myPost"
+      className="post"
       src={props.imageUrl}
       alt="投稿"
       // style={{width: "300px", height: "300px", objectFit: "cover"}}
@@ -22,4 +22,4 @@ const MyPost: FC<Props> = (props) => {
   );
 };
 
-export default MyPost;
+export default Post;
