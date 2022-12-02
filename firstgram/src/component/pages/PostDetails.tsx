@@ -9,11 +9,12 @@ import Header from "../molecules/Header";
 import GetLoginUserData from "../utils/GetLoginUserData";
 import FavoriteUpdata from "../utils/FavoriteUpdata";
 import { AiFillHeart,AiOutlineClose,AiOutlineEllipsis,AiOutlineHeart, AiOutlineMessage } from "react-icons/ai";
-import AddKeepButton from "../atoms/button/AddKeepButton";
-import RemoveKeepButton from "../atoms/button/RemoveKeepButton";
 import PostIcon from "../atoms/icon/PostIcon";
 import Post from "../atoms/icon/Post";
 import CommentsDisplay from "../molecules/CommentsDisplay";
+import KeepButton from "../atoms/button/KeepButton";
+import FavoLength from "../molecules/FavoLength";
+import Caption from "../molecules/Caption";
 
 interface State {
       postid:string,
@@ -76,15 +77,8 @@ setLoginUserPost(false)
 }
 })
 
-
-
-
 // 画面遷移したら、firestoreから画像、caption,falolites,commmentを取得、保持
 firebasePostDetails(postid,userid).then((postData)=>{
-
-// setKeepList(loginUserKeep);
-// setDisplayPostId(postId)
-
 setImgUrl(postData.Imgurl)
 setCaption(postData.Caption)
 setFavorites(postData.Favorites)
@@ -153,7 +147,6 @@ const DeleteKeepPostsUsers:any[]=[];
 const DeleteKeepPostsUser = await getDocs(DeleteKeepPosts);
 DeleteKeepPostsUser.forEach((doc) => {
     const users =(doc.id, " => ", doc.data()
-//     .keepPosts
     );
     DeleteKeepPostsUsers.push(users)
 });
@@ -233,15 +226,8 @@ return (
 )}
 
 </div>
-
-
 <Post imgUrl={imgUrl} />
-{/* <div style={{width:"100%",marginTop:"10px"}} >
-<img alt="" src={imgUrl} style={{margin:"auto",display:"block"}} />
-</div> */}
-
 <div style={{display:"flex"}}>
-
 <div style={{margin:"10px 5px 0px 5px"}}>
 {favorites.includes(loginUserName)?(
 <AiFillHeart size={30} color={"red"} onClick={NoFavorite}/>
@@ -255,41 +241,24 @@ return (
 </div>
 
 <div style={{margin:"5px 5px 5px auto"}}>
-{/* 保存ボタン追加!ログインユーザーのkeepPosts配列(loginUserKeep)に今表示しているpostのpostId(postId)が存在したら保存解除ボタン、存在しなかったら保存するボタン */}
-{loginUserKeep.includes(postid) ? (
-      <RemoveKeepButton postId={postid} />
-) : (
-      <AddKeepButton postId={postid} />
-)}
+<KeepButton loginUserKeep={loginUserKeep} data={postid} />
+</div>
 </div>
 
-</div>
-
-
-<div style ={{fontSize:"18px",marginLeft:"5px"}}>
-いいね！: {favorites.length}人
-</div>
-
-
-<div style ={{fontSize:"16px",margin:"5px"}}>
-<p>{caption}</p>
-</div>
+<FavoLength favos={favorites} />
+<Caption data={caption} />
 
 
 <div style={{display:"flex",width:"100%"}}>
-
 <div style={{display:"flex",width:"70%",height:"30px",margin:"5px"}} >
 <input
 style={{width:"100%"}}
 type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)}}></input>
 </div>
-
 <div style={{marginLeft:"auto",width:"30%"}}>
 <button onClick={AddComment}>投稿する</button>
 </div>
-
 </div>
-
 {commentDisplay ? (
       <>
       <div style={{display:"flex"}}>
@@ -301,10 +270,7 @@ type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)
       <>
       </>
 )}
-
-
 </>
-
 ):(
 <>
 <div style={{display:"flex",alignItems:"center",width:"100%"}}>
@@ -318,9 +284,7 @@ type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)
 
 
 
-<div style={{width:"100%",marginTop:"10px"}} >
-<img src={imgUrl} style={{margin:"auto",display:"block"}} />
-</div>
+<Post imgUrl={imgUrl} />
 
 <div style={{display:"flex"}}>
 
@@ -337,25 +301,16 @@ type="text" value={inputComment} onChange={(e)=>{setInputComment(e.target.value)
 </div>
  
 <div style={{margin:"5px 5px 5px auto"}}>
-{/* 保存ボタン追加!ログインユーザーのkeepPosts配列(loginUserKeep)に今表示しているpostのpostId(postId)が存在したら保存解除ボタン、存在しなかったら保存するボタン */}
-{loginUserKeep.includes(postid) ? (
-      <RemoveKeepButton postId={postid} />
-) : (
-      <AddKeepButton postId={postid} />
-)}
+<KeepButton loginUserKeep={loginUserKeep} data={postid} />
 </div>
 
 </div>
 
 
-<div style ={{fontSize:"18px",marginLeft:"5px"}}>
-いいね！: {favorites.length}人
-</div>
+<FavoLength favos={favorites} />
 
 
-<div style ={{fontSize:"16px",margin:"5px"}}>
-<p>{caption}</p>
-</div>
+<Caption data={caption} />
 
 
 <div style={{display:"flex",width:"100%"}}>

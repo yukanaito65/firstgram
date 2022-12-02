@@ -1,5 +1,5 @@
 import { onAuthStateChanged } from 'firebase/auth';
-import { addDoc, arrayUnion, collection, doc, serverTimestamp, updateDoc } from 'firebase/firestore';
+import { addDoc, arrayUnion, collection, doc, getDoc, serverTimestamp, updateDoc } from 'firebase/firestore';
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { auth, db } from '../../firebase';
@@ -53,12 +53,23 @@ const OnFirebase = async(e:any) => {
         console.log("ログイン状態です");
         //ログイン済みユーザーのドキュメントへの参照を取得
         const docusesinformation = doc(db, "user", user.uid);
+// 上記を元にドキュメントのデータを取得
+const postUserDoc = await getDoc(docusesinformation)
+// 取得したデータから必要なものを取り出す
+const postUserData = postUserDoc.data();
+// 投稿者のpostを取り出す
+const postUserIcon = postUserData?.icon
+
+const postUserName =postUserData?.userName
+ 
         // ドキュメント更新(postId[]を作成、docRef.idを追加)
         updateDoc(docusesinformation, {
             posts: arrayUnion(docRef.id),
         });
         updateDoc(docImagePost, {
             userId:user.uid,
+            icon:postUserIcon,
+            userName:postUserName
         });
     }})
 // };

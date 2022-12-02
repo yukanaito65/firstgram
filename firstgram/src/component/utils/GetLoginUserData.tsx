@@ -12,12 +12,14 @@ const GetLoginUserData =async(user:any) =>{
          // ログインしているユーザーのフォローしている人のuseridを配列に格納
         const follow =  userData?.follow
         const post = userData?.post
+        const userId = userData?.userId
   return (
     {
     userName:userName,
     keepPosts:keepPosts,
     follow:follow,
-    post:post
+    post:post,
+    userId:userId
     }
   )
 }
