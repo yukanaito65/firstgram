@@ -171,7 +171,6 @@ function PostLook() {
                 return (
                   <>
                     <div key={index}>
-
                       <div
                         style={{
                           display: "flex",
@@ -183,12 +182,15 @@ function PostLook() {
                           to={data.userId === userId ? "/mypage" : "/profile"}
                           state={{ userId: data.userId }}
                         >
+                      <div className="postDetails_postIcon">
                           <PostIcon icon={data.icon} />
+                      </div>
                         </Link>
                         <p style={{ fontSize: "20px", marginLeft: "5px" }}>
                           {data.userName}
                         </p>
                       </div>
+
 
                       {/* 画像 */}
                       <Link
@@ -196,7 +198,6 @@ function PostLook() {
                         state={{ postid: data.postId, userid: data.userId }}
                       >
                         <Img imgUrl={data.imageUrl} />
-
                       </Link>
 
                       {/* いいねコメント保存 */}
@@ -345,12 +346,14 @@ function PostLook() {
                           width: "100%",
                         }}
                       >
-                        <Link
-                          to={data.userId === userId ? "/mypage" : "/profile"}
-                          state={{ userId: data.userId }}
-                        >
-                          <PostIcon icon={data.icon} />
-                        </Link>
+                        <div className="postDetails_postIcon">
+                          <Link
+                            to={data.userId === userId ? "/mypage" : "/profile"}
+                            state={{ userId: data.userId }}
+                          >
+                            <PostIcon icon={data.icon} />
+                          </Link>
+                        </div>
                         <p style={{ fontSize: "20px", marginLeft: "5px" }}>
                           {data.userName}
                         </p>
