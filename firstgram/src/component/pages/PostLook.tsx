@@ -366,7 +366,6 @@ function PostLook() {
                       >
 
                         <Img imgUrl={data.imageUrl} />
-=
                       </Link>
 
                       {/* いいねコメント保存 */}
