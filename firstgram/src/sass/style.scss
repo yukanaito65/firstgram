@@ -1,31 +1,14 @@
-/*--------------------------------------*
- * foundation
- *--------------------------------------*/
- @use "./foundation/base";
-
  /*--------------------------------------*
-  * layout
+  * component
   *--------------------------------------*/
  @use "./layout/header";
  @use "./layout/footer";
- 
+
  /*--------------------------------------*
-  * object
-  *--------------------------------------*/
- /*-------------------
-  * component
-  -------------------*/
- @use "./object/component/button";
- @use "./object/component/inner";
+ * foundation
+ *--------------------------------------*/
+ @use "./foundation/base";
  
- /*-------------------
-  * project
-  -------------------*/
-  @use "./object/project/display";
  
- /*-------------------
-  * utility
-  -------------------*/
-  @use "./object/utility/margin";
-  
-  
+// https://pikawaka.com/html-css/bem
+// 上みたいな感じでかこ〜

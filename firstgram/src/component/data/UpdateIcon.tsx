@@ -1,24 +1,6 @@
 import React, { useState } from "react";
-import { useEffect } from "react";
-import type { User } from "../../types/types";
-import { Link } from "react-router-dom";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../../firebase";
-import Header from "../molecules/Header";
-import Footer from "../molecules/Footer";
-import { IoIosArrowBack } from "react-icons/io";
-import { NGetLoginUserData } from "../data/NGetLoginUserData";
-import ChangeUserDataBtn from "../atoms/button/ChangeUserDataBtn";
-import {
-  doc,
-  collection,
-  updateDoc,
-  CollectionReference,
-} from "firebase/firestore";
-import { useNavigate } from "react-router-dom";
-import { getAuth } from "firebase/auth";
-import { db } from "../../firebase";
-import { Auth } from "@firebase/auth";
 
 function UpdateIcon(props: any) {
   //loadingしているかしてないか監視する
