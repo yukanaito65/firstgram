@@ -364,9 +364,7 @@ function PostLook() {
                         to="/PostDetails"
                         state={{ postid: data.postId, userid: data.userId }}
                       >
-
                         <Img imgUrl={data.imageUrl} />
-=
                       </Link>
 
                       {/* いいねコメント保存 */}
@@ -417,7 +415,7 @@ function PostLook() {
                         <div style={{ margin: "5px 5px 0px auto" }}>
                           <KeepButton
                             loginUserKeep={loginUserKeep}
-                            data={data}
+                            data={data.postId}
                           />
                         </div>
                       </div>
