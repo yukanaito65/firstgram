@@ -127,7 +127,6 @@ function RegisterForm() {
       {/* 登録ボタンを押した時にhandleSubmitを実行 */}
       <form onSubmit={handleSubmit} style={{ lineHeight: "5rem" }}>
         <div style={{ width: "130px", height: "auto", margin: "0 auto" }}>
-
           {loading ? (
             <>
               <p>uploading</p>
@@ -164,17 +163,17 @@ function RegisterForm() {
                 </div>
               ) : (
                 <>
-                <label htmlFor="iconImage">
-            <RegisterIcon />
-          </label>
-                <input
-                  name="imageURL"
-                  id="iconImage"
-                  type="file"
-                  accept=".png, .jpeg, .jpg"
-                  onChange={InputImage}
-                  style={{ display: "none" }}
-                />
+                  <label htmlFor="iconImage">
+                    <RegisterIcon />
+                  </label>
+                  <input
+                    name="imageURL"
+                    id="iconImage"
+                    type="file"
+                    accept=".png, .jpeg, .jpg"
+                    onChange={InputImage}
+                    style={{ display: "none" }}
+                  />
                 </>
               )}
             </>
@@ -183,8 +182,12 @@ function RegisterForm() {
         </div>
         <p className="register_form_requiredText">＊：必須項目</p>
         {/* <div> */}
-          <InputEmail emailChange={emailChange} valueEmail={registerEmail} requiredIcon={<span className="register_form_requiredIcon">＊</span>} />
-          {/* <input
+        <InputEmail
+          emailChange={emailChange}
+          valueEmail={registerEmail}
+          requiredIcon={<span className="register_form_requiredIcon">＊</span>}
+        />
+        {/* <input
             type="email"
             name="email"
             value={registerEmail}
@@ -200,7 +203,13 @@ function RegisterForm() {
           /> */}
         {/* </div> */}
 
-        <InputRequiredRegister type={"text"} name={"userName"} placeholder={"ユーザーID(半角英数字4文字以上) 例:kanako0123"} pattern={"^([a-zA-Z0-9]{4,})$"} message={"半角英数字4文字以上"} />
+        <InputRequiredRegister
+          type={"text"}
+          name={"userName"}
+          placeholder={"ユーザーID(半角英数字4文字以上) 例:kanako0123"}
+          pattern={"^([a-zA-Z0-9]{4,})$"}
+          message={"半角英数字4文字以上"}
+        />
         {/* <div>
           <input
             type="text"
@@ -216,8 +225,11 @@ function RegisterForm() {
           />
         </div> */}
 
-
-        <InputRequiredRegister type={"text"} name={"name"} placeholder={"ネーム"} />
+        <InputRequiredRegister
+          type={"text"}
+          name={"name"}
+          placeholder={"ネーム"}
+        />
         {/* <div>
           <input
             type="text"
@@ -233,7 +245,10 @@ function RegisterForm() {
           />
         </div> */}
 
-        <InputRegisterPass valuePassword={registerPassword}  passChange={passChange} />
+        <InputRegisterPass
+          valuePassword={registerPassword}
+          passChange={passChange}
+        />
         {/* <div>
           <input
             type="password"
@@ -252,7 +267,7 @@ function RegisterForm() {
         </div> */}
 
         {/* <InputRequiredRegister type={"password"} name={"Cpassword"} placeholder={"確認用パスワード"} equal={"email"} /> */}
-        <InputCPass passwordValue={registerPassword}/>
+        <InputCPass passwordValue={registerPassword} />
         {/* <div>
           <input
             type="password"
@@ -268,7 +283,11 @@ function RegisterForm() {
           />
         </div> */}
 
-        <InputRegister type={"textarea"} name={"profile"} placeholder={"自己紹介"} />
+        <InputRegister
+          type={"textarea"}
+          name={"profile"}
+          placeholder={"自己紹介"}
+        />
         {/* <div>
           <input
             type="textarea"

@@ -169,7 +169,9 @@ function PostLook() {
                 return (
                   <>
                     <div key={index}>
-                      <PostIcon icon={data.icon} />
+                      <div className="postDetails_postIcon">
+                        <PostIcon icon={data.icon} />
+                      </div>
                       {/* <img alt="" src={data.icon} /> */}
                       <p>{data.userName}</p>
 
@@ -327,12 +329,14 @@ function PostLook() {
                           width: "100%",
                         }}
                       >
-                        <Link
-                          to={data.userId === userId ? "/mypage" : "/profile"}
-                          state={{ userId: data.userId }}
-                        >
-                          <PostIcon icon={data.icon} />
-                        </Link>
+                        <div className="postDetails_postIcon">
+                          <Link
+                            to={data.userId === userId ? "/mypage" : "/profile"}
+                            state={{ userId: data.userId }}
+                          >
+                            <PostIcon icon={data.icon} />
+                          </Link>
+                        </div>
                         <p style={{ fontSize: "20px", marginLeft: "5px" }}>
                           {data.userName}
                         </p>
