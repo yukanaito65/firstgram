@@ -297,7 +297,9 @@ function PostDetails() {
                 </>
               )}
             </div>
+
             <Img imgUrl={imgUrl} />
+
             <div style={{ display: "flex" }}>
               <div style={{ margin: "10px 5px 0px 5px" }}>
                 {favorites.includes(loginUserName) ? (
@@ -397,7 +399,9 @@ function PostDetails() {
               </div>
             </div>
 
+
             <Img imgUrl={imgUrl} />
+
 
             <div style={{ display: "flex" }}>
               <div style={{ margin: "10px 5px 0px 5px" }}>

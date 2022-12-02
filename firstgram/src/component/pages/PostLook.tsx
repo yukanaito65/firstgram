@@ -31,7 +31,9 @@ import FavoLength from "../molecules/FavoLength";
 import Caption from "../molecules/Caption";
 import Icon from "../atoms/icon/Icon";
 import PostIcon from "../atoms/icon/PostIcon";
+
 import Img from "../atoms/pictures/Img";
+
 
 function PostLook() {
   // followuserのpostidからとってきたpostData
@@ -169,6 +171,7 @@ function PostLook() {
                 return (
                   <>
                     <div key={index}>
+
                       <div
                         style={{
                           display: "flex",
@@ -193,6 +196,7 @@ function PostLook() {
                         state={{ postid: data.postId, userid: data.userId }}
                       >
                         <Img imgUrl={data.imageUrl} />
+
                       </Link>
 
                       {/* いいねコメント保存 */}
@@ -357,7 +361,9 @@ function PostLook() {
                         to="/PostDetails"
                         state={{ postid: data.postId, userid: data.userId }}
                       >
+
                         <Img imgUrl={data.imageUrl} />
+=
                       </Link>
 
                       {/* いいねコメント保存 */}
