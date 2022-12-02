@@ -262,7 +262,7 @@ function PostDetails() {
                             padding: "5px 0",
                           }}
                         >
-                          <Link to="/">
+                          <Link to="/Delete">
                             <button
                               onClick={ClickDelition}
                               className="nav_menu_btn"
