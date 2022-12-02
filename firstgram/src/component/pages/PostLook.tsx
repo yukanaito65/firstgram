@@ -416,7 +416,7 @@ function PostLook() {
                         <div style={{ margin: "5px 5px 0px auto" }}>
                           <KeepButton
                             loginUserKeep={loginUserKeep}
-                            data={data}
+                            data={data.postId}
                           />
                         </div>
                       </div>
