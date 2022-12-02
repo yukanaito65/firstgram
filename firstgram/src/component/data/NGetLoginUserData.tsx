@@ -43,6 +43,7 @@ export function NGetLoginUserData() {
            // //取得したデータから必要なものを取り出す
         const userDataId: User | undefined = userDocId.data();
         setFirestoreUserData(userDataId);
+        console.log(userDataId);
         })
       }
     });
