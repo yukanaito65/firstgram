@@ -9,7 +9,14 @@ import Footer from "../molecules/Footer";
 import Header from "../molecules/Header";
 import GetLoginUserName from '../utils/GetLoginUserData';
 import { AiFillHeart, AiOutlineClose, AiOutlineHeart, AiOutlineMessage } from 'react-icons/ai';
-import PostLookDisplay from '../molecules/PostLookDisplay';
+import CommentsDisplay from '../molecules/CommentsDisplay';
+import KeepButton from '../atoms/button/KeepButton';
+import Time from '../molecules/Time';
+import Post from '../atoms/icon/Post';
+import FavoLength from '../molecules/FavoLength';
+import Caption from '../molecules/Caption';
+import Icon from '../atoms/icon/Icon';
+import PostIcon from '../atoms/icon/PostIcon';
 
 function PostLook() {
     // followuserのpostidからとってきたpostData
@@ -38,12 +45,15 @@ function PostLook() {
     const [favbtn,setFavbtn]=useState(1)
 // コメントの表示非表示
 const[commentDisplay, setCommentDisplay] = useState<boolean>(false)
+
+const [userId,setUserId] =useState("")
     
     useEffect(()=>{
     onAuthStateChanged(auth, async (user) => {
     // ログインしているユーザーのuserNameをuseStateで保持
     GetLoginUserName(user).then((loginUserData:any)=>{
             setLoginUserName(loginUserData.userName);
+            setUserId(loginUserData.userId)
     })
 
         if (!user) {
@@ -111,11 +121,12 @@ const[commentDisplay, setCommentDisplay] = useState<boolean>(false)
         });
         setRamData(randomArray)
 
-
+        // console.log(postData)
 
     }})
     },
     [favbtn]
+
     )
 
     // 日付順に並び替え
@@ -131,6 +142,8 @@ const[commentDisplay, setCommentDisplay] = useState<boolean>(false)
     setCommentDisplay(false)
 }
 
+
+
     return (
     <>
     <Header show={true} />
@@ -138,24 +151,23 @@ const[commentDisplay, setCommentDisplay] = useState<boolean>(false)
     {followUser.length === 0 ? (
         <>
         <div>
-        {postData.map((data:any,index:any)=>{
-            const timestamp = data.postDate.toDate()
-            const year = timestamp.getFullYear()
-            const month = (timestamp.getMonth()+1)
-            const day = timestamp.getDate()
-            const hour = timestamp.getHours()
-            const min = timestamp.getMinutes()
-            const seco = timestamp.getSeconds()
+        {ramData.map((data:any,index:any)=>{
             const favos = [...data.favorites]
             const com =[...data.comments]
             return(
             <>
+
         <div key={index}>
         
+        <PostIcon icon={data.icon} />
+        {/* <img alt="" src={data.icon} /> */}
+        <p>{data.userName}</p>
+
+
         {/* 画像 */}
-        <div style={{width:"100%",marginTop:"10px"}} >
-        <Link to="/PostDetails" state={{postid:data.postId,userid:data.userId}}><img src={data.imageUrl} style={{margin:"auto",display:"block"}}/></Link>
-        </div>
+        <Link to="/PostDetails" state={{postid:data.postId,userid:data.userId}}>
+        <Post imgUrl={data.imageUrl} />
+        </Link>
         
         {/* いいねコメント保存 */}
         <div style={{display: "flex",marginBottom:"0"}}>
@@ -168,8 +180,7 @@ const[commentDisplay, setCommentDisplay] = useState<boolean>(false)
                 favorites:arrayRemove(loginUserName),
                 });
             setFavbtn(favbtn+1)
-            }
-        } />
+            }} />
         ):(
         <AiOutlineHeart size={30} color={"black"}
         onClick={(e:any) =>{
@@ -189,44 +200,27 @@ const[commentDisplay, setCommentDisplay] = useState<boolean>(false)
 
         {/* 保存ボタン */}
         <div style={{margin:"5px 5px 0px auto"}}>
-        {loginUserKeep.includes(data.postId) ? (
-        <RemoveKeepButton postId={data.postId} />
-        ) : (
-        <AddKeepButton postId={data.postId} />
-        )}
+        <KeepButton loginUserKeep={loginUserKeep} data={data.postId} />
         </div>
 
         </div>
 
-        {/* いいね数、投稿時間、キャプションコンポーネント */}
-        <PostLookDisplay postData={postData} />
 
         {/* いいね数、投稿時間 */}
-        <div style ={{fontSize:"16px",display:"flex"}}>
-        <div style={{marginLeft:"5px",}}>いいね！: {favos.length}人</div>
-        <div style={{marginLeft:"auto"}}>{year}年{month}月{day}日{hour}:{min}:{seco}</div>
+        <div style ={{display:"flex"}}>
+        <FavoLength favos={favos} />
+        <Time data={data.postDate} />
         </div>
 
         {/* キャプション */}
-        <div style ={{fontSize:"16px",margin:"5px"}}>
-        <p>{data.caption}</p>
-        </div>
+        <Caption data={data.caption} />
         
 
         <div>
         {commentDisplay ? (
         <>
         {/* コメント表示 */}
-        <div>
-    {com.map((data:any,index:any)=>{
-    return(
-    <div key={index} style={{display:"flex",fontSize:"14px",width:"100%",margin:"3px"}}>
-    <p style={{fontWeight:"500"}}>{data.userName}</p>
-    <p style={{marginLeft:"5px"}}>{data.commentText}</p>
-    </div>
-    )
-    })}
-    </div>
+        <CommentsDisplay displayComment={com} />
 
         <div style ={{display:"flex",width:"100%"}}>
         {/* コメント投稿セット */}
@@ -247,43 +241,37 @@ const[commentDisplay, setCommentDisplay] = useState<boolean>(false)
          </div>
         <AiOutlineClose  style={{display:"block",margin: "15px 0 0 auto",alignItems:"center"}} size={15} color={"rgb(38, 38, 38)"} onClick={CommentBack} />
         </div>
-
         </>
         ):(
         <>
         </>
         )}
         </div>
-
-  
-
         </div>
         </>
         )})}
         </div>
         </>
-       
 ):(
         <>
         <div>
         {postData.map((data:any,index:any)=>{
-            const timestamp = data.postDate.toDate()
-            const year = timestamp.getFullYear()
-            const month = (timestamp.getMonth()+1)
-            const day = timestamp.getDate()
-            const hour = timestamp.getHours()
-            const min = timestamp.getMinutes()
-            const seco = timestamp.getSeconds()
             const favos = [...data.favorites]
             const com =[...data.comments]
             return(
             <>
         <div key={index}>
+
+        <div style={{display:"flex",alignItems:"center",width:"100%"}}>
+        <Link to={data.userId === userId ? "/mypage" : "/profile"} state={{ userId: data.userId}}>
+        <PostIcon icon={data.icon} /></Link>
+        <p style ={{fontSize:"20px",marginLeft:"5px"}}>{data.userName }</p>
+        </div>
         
         {/* 画像 */}
-        <div style={{width:"100%",marginTop:"10px"}} >
-        <Link to="/PostDetails" state={{postid:data.postId,userid:data.userId}}><img src={data.imageUrl} style={{margin:"auto",display:"block"}}/></Link>
-        </div>
+        <Link to="/PostDetails" state={{postid:data.postId,userid:data.userId}}>
+        <Post imgUrl={data.imageUrl} />
+        </Link>
         
         {/* いいねコメント保存 */}
         <div style={{display: "flex",marginBottom:"0"}}>
@@ -296,8 +284,7 @@ const[commentDisplay, setCommentDisplay] = useState<boolean>(false)
                 favorites:arrayRemove(loginUserName),
                 });
             setFavbtn(favbtn+1)
-            }
-        } />
+            }} />
         ):(
         <AiOutlineHeart size={30} color={"black"}
         onClick={(e:any) =>{
@@ -305,8 +292,7 @@ const[commentDisplay, setCommentDisplay] = useState<boolean>(false)
                 favorites:arrayUnion(loginUserName),
             });
             setFavbtn(favbtn+1)
-            }
-        } />
+            }} />
         )}
         </div>
 
@@ -317,41 +303,25 @@ const[commentDisplay, setCommentDisplay] = useState<boolean>(false)
 
         {/* 保存ボタン */}
         <div style={{margin:"5px 5px 0px auto"}}>
-        {loginUserKeep.includes(data.postId) ? (
-        <RemoveKeepButton postId={data.postId} />
-        ) : (
-        <AddKeepButton postId={data.postId} />
-        )}
+        <KeepButton loginUserKeep={loginUserKeep} data={data} />
         </div>
 
         </div>
 
         {/* いいね数、投稿時間 */}
-        <div style ={{fontSize:"16px",display:"flex"}}>
-        <div style={{marginLeft:"5px",}}>いいね！: {favos.length}人</div>
-        <div style={{marginLeft:"auto"}}>{year}年{month}月{day}日{hour}:{min}:{seco}</div>
+        <div style ={{display:"flex"}}>
+        <FavoLength favos={favos} />
+        <Time data={data.postDate} />
         </div>
 
         {/* キャプション */}
-        <div style ={{fontSize:"16px",margin:"5px"}}>
-        <p>{data.caption}</p>
-        </div>
+        <Caption data={data.caption} />
         
-
         <div>
         {commentDisplay ? (
         <>
         {/* コメント表示 */}
-        <div>
-    {com.map((data:any,index:any)=>{
-    return(
-    <div key={index} style={{display:"flex",fontSize:"14px",width:"100%",margin:"3px"}}>
-    <p style={{fontWeight:"500"}}>{data.userName}</p>
-    <p style={{marginLeft:"5px"}}>{data.commentText}</p>
-    </div>
-    )
-    })}
-    </div>
+        <CommentsDisplay displayComment={com} />
 
         <div style ={{display:"flex",width:"100%"}}>
         {/* コメント投稿セット */}
@@ -379,9 +349,6 @@ const[commentDisplay, setCommentDisplay] = useState<boolean>(false)
         </>
         )}
         </div>
-
-  
-
         </div>
         </>
         )})}
