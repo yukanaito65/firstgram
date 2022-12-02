@@ -367,7 +367,6 @@ function PostLook() {
                         to="/PostDetails"
                         state={{ postid: data.postId, userid: data.userId }}
                       >
-
                         <Img imgUrl={data.imageUrl} />
 
                       </Link>
