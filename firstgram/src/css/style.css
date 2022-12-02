@@ -26,7 +26,8 @@ body {
   width: 65%;
   margin: 0 auto;
   overflow-x: hidden;
-  padding: 80px 10px 120px 10px;
+  padding-top: 80px;
+  padding-bottom: 120px;
   min-height: 100vh;
   position: relative; /*←相対位置*/
   box-sizing: border-box; /*←全て含めてmin-height:100vhに*/
@@ -66,7 +67,8 @@ h1 {
   margin: 5px;
 }
 
-input, textarea {
+input,
+textarea {
   padding: 5px;
 }
 
@@ -122,17 +124,13 @@ button:hover {
 
 .icon-image {
   border-radius: 50%;
-  width: 120px;
-  height: 120px;
+  width: 14%;
+  /* height: 120px; */
+  aspect-ratio: 1/1;
   border: solid 1px lightgray;
 }
 
 .icon-image img {
-  /* height: 100px;
-  width: 100px;
-  border-radius: 50%;
-  border: 1px solid rgb(156, 156, 156);
-  margin: 5px; */
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -148,8 +146,10 @@ button:hover {
 
 .post-icon-image {
   border-radius: 50%;
-  width: 100px;
-  height: 100px;
+  width: 100%;
+  /* width: 100px; */
+  /* height: 100px; */
+  aspect-ratio: 1/1;
   border: solid 1px lightgray;
 }
 
@@ -160,12 +160,16 @@ button:hover {
   border-radius: 50%;
 }
 
-.post-noIconImage{
+.postDetails_postIcon {
+  width: 10%;
+  /* aspect-ratio: 1/1; */
+}
+/* .post-noIconImage{
   width: 100%;
   height: 100%;
   background-color: #d3d3d3;
   border-radius: 50%;
-}
+} */
 
 /* -------------------------------------- */
 /* 保留 */
@@ -340,7 +344,6 @@ button:hover {
 }
 
 .setting_block {
-
 }
 
 .setting_table {
@@ -541,13 +544,13 @@ button:hover {
 
 .searchpage_form_input::-webkit-search-cancel-button {
   -webkit-appearance: none;
-  cursor:pointer;
+  cursor: pointer;
   background-image: url(../../public/x_icon.png);
   background-repeat: no-repeat;
   background-size: cover;
   padding-right: 0px;
-  width:15px;
-  height:15px;
+  width: 15px;
+  height: 15px;
 }
 
 .text-align_center {
@@ -585,9 +588,14 @@ button:hover {
 /* 会員登録 */
 .input-error-message {
   color: red;
+  font-size: 13px;
 }
 input:invalid ~ .input-error-message {
   display: block;
+  height: 30px;
+  text-align: left;
+  margin-left: 70px;
+  line-height: 1rem;
 }
 
 /* input:invalid ~ .input-ok-message {
@@ -617,4 +625,41 @@ input:placeholder-shown ~ .messageBox {
   color: red;
   font-size: 10px;
   margin-right: 1%;
+}
+
+/* InputRequiredRegisterコンポーネント */
+.input_required {
+  width: 80%;
+  height: 35px;
+  background-color: #f7f7f7;
+  outline: solid #d3d3d3;
+  border: none;
+}
+
+/* ThreeRowsPostListコンポーネント */
+.threeRowsPostList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+}
+
+.threeRowsPostList_image-div {
+  width: calc((100% - 3px * 2) / 3);
+  aspect-ratio: 1/1;
+}
+
+.threeRowsPostList_message {
+  margin-top: 10%;
+  text-align: center;
+}
+
+/* ThreeRowsPostListコンポーネントに渡している値(myPageから) */
+.threeRowsPostList_message_link {
+  color: #0d6efd;
+}
+/* Postコンポーネント */
+.post {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }

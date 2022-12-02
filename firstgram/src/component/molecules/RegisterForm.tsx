@@ -200,7 +200,7 @@ function RegisterForm() {
           /> */}
         {/* </div> */}
 
-        <InputRequiredRegister type={"text"} name={"userName"} placeholder={"ユーザーID(半角英数字4文字以上) 例:kanako0123"} pattern={"^([a-zA-Z0-9]{4,})$"} />
+        <InputRequiredRegister type={"text"} name={"userName"} placeholder={"ユーザーID(半角英数字4文字以上) 例:kanako0123"} pattern={"^([a-zA-Z0-9]{4,})$"} message={"半角英数字4文字以上"} />
         {/* <div>
           <input
             type="text"

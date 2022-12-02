@@ -10,17 +10,19 @@ function InputRequiredRegister(props: any) {
         placeholder={props.placeholder}
         pattern={props.pattern}
         data-equal-to={props.equal}
-        style={{
-          width: "80%",
-          height: "35px",
-          backgroundColor: "#f7f7f7",
-          outline: "solid #d3d3d3",
-          border: "none",
-        }}
+        className="input_required"
+        // style={{
+        //   width: "80%",
+        //   height: "35px",
+        //   backgroundColor: "#f7f7f7",
+        //   outline: "solid #d3d3d3",
+        //   border: "none",
+        // }}
         required
       />
       <span className="input-error-message messageBox">
-        正しい形式で入力してください
+        正しい形式で入力してください({props.message})
+        {props.errorMessage}
       </span>
     </div>
   );
