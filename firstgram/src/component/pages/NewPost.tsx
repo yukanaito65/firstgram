@@ -6,7 +6,7 @@ import Footer from "../molecules/Footer";
 import Header from "../molecules/Header";
 import "../../css/newPost.css"
 import NewPostUploadAuter from "../molecules/NewPostUploadAuter";
-import InputNewPost from "../atoms/Input/InputNewPost";
+// import InputNewPost from "../atoms/Input/InputNewPost";
 import BackBtn from "../atoms/button/BackBtn";
 
 const NewPost = (props:any) => {
@@ -56,12 +56,16 @@ return (
         {isUploaded ? (
             <>
             <NewPostUploadAuter imgSrc={imgSrc} />
+            {/* <InputNewPost /> */}
             </>
         ):(
             <>
+            <div style={{border:"solid 1px #333 ",height:"300px"}}>
             <AiOutlineAreaChart size={40} style={{alignItems:"center",width:"100%"}}/>
-            <input name="imageURL" type="file" accept=".png, .jpeg, .jpg" onChange={ InputImage } />
-            <InputNewPost />
+            <input name="imageURL" type="file" accept=".png, .jpeg, .jpg" onChange={ InputImage } 
+            // style={{opacity:}}
+            />
+            </div>
             <BackBtn />
             </>
         )}

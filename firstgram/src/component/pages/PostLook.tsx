@@ -27,11 +27,13 @@ import {
 import CommentsDisplay from "../molecules/CommentsDisplay";
 import KeepButton from "../atoms/button/KeepButton";
 import Time from "../molecules/Time";
-import Post from "../atoms/icon/Post";
 import FavoLength from "../molecules/FavoLength";
 import Caption from "../molecules/Caption";
 import Icon from "../atoms/icon/Icon";
 import PostIcon from "../atoms/icon/PostIcon";
+
+import Img from "../atoms/pictures/Img";
+
 
 function PostLook() {
   // followuserのpostidからとってきたpostData
@@ -169,16 +171,32 @@ function PostLook() {
                 return (
                   <>
                     <div key={index}>
-                      <PostIcon icon={data.icon} />
-                      {/* <img alt="" src={data.icon} /> */}
-                      <p>{data.userName}</p>
+
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          width: "100%",
+                        }}
+                      >
+                        <Link
+                          to={data.userId === userId ? "/mypage" : "/profile"}
+                          state={{ userId: data.userId }}
+                        >
+                          <PostIcon icon={data.icon} />
+                        </Link>
+                        <p style={{ fontSize: "20px", marginLeft: "5px" }}>
+                          {data.userName}
+                        </p>
+                      </div>
 
                       {/* 画像 */}
                       <Link
                         to="/PostDetails"
                         state={{ postid: data.postId, userid: data.userId }}
                       >
-                        <Post imgUrl={data.imageUrl} />
+                        <Img imgUrl={data.imageUrl} />
+
                       </Link>
 
                       {/* いいねコメント保存 */}
@@ -343,7 +361,9 @@ function PostLook() {
                         to="/PostDetails"
                         state={{ postid: data.postId, userid: data.userId }}
                       >
-                        <Post imgUrl={data.imageUrl} />
+
+                        <Img imgUrl={data.imageUrl} />
+=
                       </Link>
 
                       {/* いいねコメント保存 */}
