@@ -1,3 +1,6 @@
+@use "../../global/setting" as *;
+@use "../../global/mixin" as *;
+
 *,
 *:before,
 *:after {
@@ -15,8 +18,8 @@ html {
 }
 
 body {
-  background-color: #f7f7f7;
-  color: rgb(38, 38, 38);
+  background-color: $color-base;
+  color: $color-black;
   font-size: 1.6rem;
   font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN",
     "Hiragino Sans", Meiryo, sans-serif;
@@ -30,15 +33,6 @@ body {
   box-sizing: border-box;
 }
 
-button {
-  border: none;
-  background-color: #0d6efd;
-  color: #fff;
-  padding: 5px 15px;
-  font-size: 16px;
-  border-radius: 8px;
-}
-
 img,
 video,
 object {
@@ -49,7 +43,7 @@ object {
 a {
   text-decoration: none;
   transition: 0.4s;
-  color: rgb(38, 38, 38);
+  color: $color-black;
 }
 a:hover {
   text-decoration: none;

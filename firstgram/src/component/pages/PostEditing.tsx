@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import firebasePostDetails from "../utils/firebasePostDetails";
 import FirestoreUpdata from "../utils/FirestoreUpdata";
-import Footer from "../molecules/Footer";
-import Header from "../molecules/Header";
+import Footer from "../organisms/Footer";
+import Header from "../organisms/Header";
 import BackBtn from "../atoms/button/BackBtn";
 
 interface State {

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Footer from '../molecules/Footer'
-import Header from '../molecules/Header'
+import Footer from '../organisms/Footer'
+import Header from '../organisms/Header'
 
 function Delete() {
   return (

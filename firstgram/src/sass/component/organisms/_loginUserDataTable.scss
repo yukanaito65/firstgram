@@ -1,0 +1,21 @@
+@use "../../global/setting" as *;
+@use "../../global/mixin" as *;
+
+.userDataTable {
+    width: 100%;
+    padding: 10px 0;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    &__tr {
+        border-bottom: 1px dashed $color-black;
+        height: 5em;
+        &--title {
+            width: 30%;
+            padding: 10px;
+        }
+        &--content {
+            width: 70%;
+            padding: 10px;
+        }
+    }
+}
