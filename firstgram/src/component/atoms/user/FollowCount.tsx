@@ -10,10 +10,16 @@ interface Props {
 //followList,link,userId,uid
 function FollowCount(props: Props) {
   return (
-    <div style={{ textAlign: "center", width: "80px" }}>
+    <div
+    // style={{ textAlign: "center", width: "80px" }}
+    className="followCount">
       <Link to={props.link} state={{ userId: props.userId, uid: props.uid }}>
         <p>
-          <span style={{ fontWeight: "bold" }}>{props.followList.length}</span>
+          <span
+          // style={{ fontWeight: "bold" }}
+          className="followCount__number">
+            {props.followList.length}
+          </span>
           <br />
           フォロー中
         </p>

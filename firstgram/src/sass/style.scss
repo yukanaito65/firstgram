@@ -5,20 +5,19 @@
 @use "./layout/footer";
 
 /*--------------------------------------*
-  * component/atoms/button
+  * component/atoms
 *--------------------------------------*/
-@use "./component/atoms/button/AddFollowButton";
-@use "./component/atoms/button/LoginButton";
+@use "./component/atoms/button";
+@use "./component/atoms/icon";
+@use "./component/atoms/input";
+@use "./component/atoms/pictures";
+@use "./component/atoms/user";
 
-/*--------------------------------------*
- * component/atoms/input
-*--------------------------------------*/
-@use "./component/atoms/input/InputRegister";
-@use "./component/atoms/input/formInput";
 
 /*--------------------------------------*
   * molecules
 *--------------------------------------*/
+@use "./component/molecules";
 /*--------------------------------------*
   * organisms
 *--------------------------------------*/
@@ -31,7 +30,6 @@
 /*--------------------------------------*
  * component/pages
 *--------------------------------------*/
-@use "./component/pages/Login";
 @use "./component/pages";
 /*--------------------------------------*
  * foundation

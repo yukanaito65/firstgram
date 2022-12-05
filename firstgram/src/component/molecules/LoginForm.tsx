@@ -40,6 +40,7 @@ function LoginForm() {
     <>
       <form onSubmit={handleSubmit}
       // style={{ lineHeight: "5rem" }}
+      className="formFrame"
       >
         <InputEmail emailChange={emailChange} valueEmail={loginEmail} />
         <InputPass passChange={passChange} valuePassword={loginPassword} />

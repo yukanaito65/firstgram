@@ -98,9 +98,9 @@ function AddKeepButton(props: any) {
           {keepBtn === false ? (
             <button
             onClick={()=>addKeep()}
-            className="keep_btn"
+            className="keepBtn"
               >
-                <FaRegBookmark className="keep_btn_img" />
+                <FaRegBookmark className="keepBtn__img" />
               </button>
           ) : (
             <RemoveKeepButton postId={props.postId} />

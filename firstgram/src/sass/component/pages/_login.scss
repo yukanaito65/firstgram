@@ -1,3 +1,5 @@
+@use "../../global/setting" as *;
+
 .login {
   display: flex;
   justify-content: space-around;
@@ -11,7 +13,7 @@
     height: 100%;
   }
   &__contents {
-    background-color: #fff;
+    background-color: $color-base;
     outline: solid #d3d3d3;
     text-align: center;
     width: 50%;
@@ -22,6 +24,6 @@
     margin: 10% auto;
   }
   &__link {
-    color: #0d6efd;
+    color: $color-btn;
   }
 }

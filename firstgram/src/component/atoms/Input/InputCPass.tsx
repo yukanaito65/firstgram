@@ -10,7 +10,10 @@ function InputCPass(props: any) {
   };
 
   return (
-    <div style={{position: "relative"}}>
+    <div
+    // style={{position: "relative"}}
+    className="form"
+    >
       <span className="form__requiredIcon">＊</span>
       <input
         type={isRevealConfirmPassword ? "text" : "password"}
@@ -31,7 +34,7 @@ function InputCPass(props: any) {
       <span
         onClick={toggleConfirmPassword}
         role="presentation"
-        className="input_isRevealPassword_icon"
+        className="form_isRevealPasswordIcon"
       >
         {isRevealConfirmPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
       </span>

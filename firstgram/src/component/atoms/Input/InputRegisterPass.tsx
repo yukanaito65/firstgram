@@ -12,7 +12,10 @@ function InputRegisterPass(props: any) {
   };
 
   return (
-    <div className="input_fieldset" style={{position: "relative"}}>
+    <div className="input_fieldset"
+    style={{position: "relative"}}
+    // className="form"
+    >
       <span className="form__requiredIcon">＊</span>
       <input
         type={isRevealConfirmPassword ? "text" : "password"}
@@ -34,7 +37,7 @@ function InputRegisterPass(props: any) {
       <span
         onClick={toggleConfirmPassword}
         role="presentation"
-        className="input_isRevealPassword_icon"
+        className="form_isRevealPasswordIcon"
       >
         {isRevealConfirmPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
       </span>

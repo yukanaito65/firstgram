@@ -1,0 +1,10 @@
+@use "../../../global/mixin/iconImg";
+@use "../../../global/mixin/noIconImg";
+@use "../../global/setting" as *;
+
+.addIcon {
+  color: $color-btn;
+  position: absolute;
+  top: 75%;
+  left: 65%;
+}

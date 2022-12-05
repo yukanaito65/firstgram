@@ -1,0 +1,10 @@
+.userData{
+  display: flex;
+  gap: 3%;
+  align-items: center;
+  margin-top: 3%;
+
+  &__userName {
+    font-weight: bold;
+  }
+}

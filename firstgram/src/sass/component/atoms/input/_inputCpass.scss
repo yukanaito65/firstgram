@@ -1,4 +1,8 @@
+@use "../../global/setting" as *;
+
 .form {
+  position: relative;
+
   &__requiredIcon {
     color: red;
     font-size: 10px;
@@ -7,9 +11,14 @@
   &__input {
     width: 80%;
     height: 35px;
-    background-color: #f7f7f7;
+    background-color: $color-base;
     outline: solid #d3d3d3;
     border: none;
+  }
+  &__isRevealPasswordIcon {
+    position: absolute;
+    top: 10%;
+    left: 85%;
   }
   &__error-message {
     color: red;

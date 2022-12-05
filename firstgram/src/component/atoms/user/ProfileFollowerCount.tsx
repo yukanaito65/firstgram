@@ -15,7 +15,10 @@ function ProfileFollowerCount(props: Props) {
   //ログインユーザーのuid
   //そのページを表示している人のuserIdとfollower配列
   return (
-    <div style={{textAlign: "center", width: "80px"}}>
+    <div
+    // style={{textAlign: "center", width: "80px"}}
+    className="profileFollowerCount"
+    >
     <Link
       to={props.link}
       state={{
@@ -24,7 +27,9 @@ function ProfileFollowerCount(props: Props) {
       }}
     >
       <p>
-      <span style={{fontWeight:"bold"}}>
+      <span
+      // style={{fontWeight:"bold"}}
+      className="profileFollowerCount__number">
         {/* {props.followerList.length} */}
         {props.followerCount}
         </span><br/>

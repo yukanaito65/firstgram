@@ -14,7 +14,10 @@ function InputPass(props: Props) {
   };
 
   return (
-    <div style={{ position: "relative" }}>
+    <div
+    // style={{ position: "relative" }}
+    className="form"
+    >
       <input
         type={isRevealConfirmPassword ? "text" : "password"}
         name="password"
@@ -28,7 +31,7 @@ function InputPass(props: Props) {
       <span
         onClick={toggleConfirmPassword}
         role="presentation"
-        className="input_isRevealPassword_icon"
+        className="form_isRevealPasswordIcon"
       >
         {isRevealConfirmPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
       </span>

@@ -131,11 +131,12 @@ function MyPage() {
             <>
               <Header show={true} />
               <div
-                style={{
-                  textAlign: "center",
-                  fontSize: "20px",
-                  fontWeight: "bold",
-                }}
+                // style={{
+                //   textAlign: "center",
+                //   fontSize: "20px",
+                //   fontWeight: "bold",
+                // }}
+                className="myPage__userName"
               >
                 <UserName users={users} />
               </div>
@@ -145,13 +146,14 @@ function MyPage() {
                 </Link> */}
 
               <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  gap: "10%",
-                  margin: "10px 20px",
-                  alignItems: "center",
-                }}
+                // style={{
+                //   display: "flex",
+                //   justifyContent: "space-between",
+                //   gap: "10%",
+                //   margin: "10px 20px",
+                //   alignItems: "center",
+                // }}
+                className="myPage__info"
               >
                 <Icon />
                 <MyPageInfo
@@ -184,10 +186,16 @@ function MyPage() {
                   <div>{followList.length}フォロー中</div>
                 </Link> */}
               {/* </div> */}
-              <span style={{ fontWeight: "bold" }}>
+              <span
+              // style={{ fontWeight: "bold" }}
+              className="myPage__name"
+              >
                 <Name users={users} />
               </span>
-              <div style={{ marginTop: "10px", marginBottom: "10px" }}>
+              <div
+              // style={{ marginTop: "10px", marginBottom: "10px" }}
+              className="myPage__profile"
+              >
                 {users.profile}
               </div>
               <ThreeRowsPostList
@@ -196,7 +204,7 @@ function MyPage() {
                 message={
                   <>
                     <p>初めて投稿してみよう！</p>
-                    <Link to="/NewPost" className="threeRowsPostList_message_link">
+                    <Link to="/NewPost" className="myPage_messageLink">
                       新規投稿はこちら
                     </Link>
                   </>

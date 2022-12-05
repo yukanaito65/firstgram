@@ -153,33 +153,36 @@ function Profile() {
           <Header show={true} />
           <div>
             <div
-              style={{
-                textAlign: "center",
-                fontSize: "20px",
-                fontWeight: "bold",
-              }}
+              // style={{
+              //   textAlign: "center",
+              //   fontSize: "20px",
+              //   fontWeight: "bold",
+              // }}
+              className="profile__userName"
             >
               <UserName users={profileUsers} />
             </div>
 
             <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                gap: "10%",
-                margin: "10px 20px",
-                alignItems: "center",
-              }}
+              // style={{
+              //   display: "flex",
+              //   justifyContent: "space-between",
+              //   gap: "10%",
+              //   margin: "10px 20px",
+              //   alignItems: "center",
+              // }}
+              className="profile__info"
             >
               <CommonIcon icon={profileUsers.icon} />
 
               <div
-                style={{
-                  display: "flex",
-                  width: "330px",
-                  justifyContent: "space-between",
-                  position: "relative",
-                }}
+                // style={{
+                //   display: "flex",
+                //   width: "330px",
+                //   justifyContent: "space-between",
+                //   position: "relative",
+                // }}
+                className="profile__threeCount"
               >
                 <PostCount posts={posts} />
                 {/* <Link to={"/follower"} state={{ userId: userId, follower:followerList, uid: user.uid }}>
@@ -212,14 +215,20 @@ function Profile() {
               {/* <p>{followerNum.length}aaa</p> */}
             </div>
 
-            <span style={{ fontWeight: "bold" }}>
+            <span
+            // style={{ fontWeight: "bold" }}
+            className="profile__name">
               <Name users={profileUsers} />
             </span>
-            <div style={{ marginTop: "10px", marginBottom: "10px" }}>
+            <div
+            // style={{ marginTop: "10px", marginBottom: "10px" }}
+            className="profile__profile">
               {profileUsers.profile}
             </div>
 
-            <div style={{ display: "flex", gap: "5%" }}>
+            <div
+            // style={{ display: "flex", gap: "5%" }}
+            className="profile__btn">
               {usersFollow.includes(userId) ? (
                 <>
                   <RemoveFollowButton

@@ -48,7 +48,7 @@ function Login() {
               //   width: "50%",
               // }}
             >
-              <h1 className="login_logo"
+              <h1 className="login__logo"
                 // style={{ width: "100px", height: "100px", margin: "10% auto" }}
               >
                 <Logo />

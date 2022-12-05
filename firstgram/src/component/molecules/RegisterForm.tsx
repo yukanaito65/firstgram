@@ -125,8 +125,12 @@ function RegisterForm() {
   return (
     <>
       {/* 登録ボタンを押した時にhandleSubmitを実行 */}
-      <form onSubmit={handleSubmit} style={{ lineHeight: "5rem" }}>
-        <div style={{ width: "130px", height: "auto", margin: "0 auto" }}>
+      <form onSubmit={handleSubmit}
+      // style={{ lineHeight: "5rem" }}
+      className="form">
+        <div
+        // style={{ width: "130px", height: "auto", margin: "0 auto" }}
+        className="form__icon">
           {loading ? (
             <>
               <p>uploading</p>
@@ -136,29 +140,32 @@ function RegisterForm() {
                 type="file"
                 accept=".png, .jpeg, .jpg"
                 onChange={InputImage}
-                style={{ display: "none" }}
+                // style={{ display: "none" }}
+                className="form__loading-input"
               />
             </>
           ) : (
             <>
               {isUploaded ? (
                 <div
-                  style={{
-                    borderRadius: "50%",
-                    width: "120px",
-                    height: "120px",
-                    border: "solid 1px lightgray",
-                  }}
+                  // style={{
+                  //   borderRadius: "50%",
+                  //   width: "120px",
+                  //   height: "120px",
+                  //   border: "solid 1px lightgray",
+                  // }}
+                  className="form__loaded-image"
                 >
                   <img
                     alt="icon"
                     src={imgSrc}
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      borderRadius: "50%",
-                    }}
+                    // style={{
+                    //   width: "100%",
+                    //   height: "100%",
+                    //   objectFit: "cover",
+                    //   borderRadius: "50%",
+                    // }}
+                    className="form__loaded-image--img"
                   />
                 </div>
               ) : (
@@ -172,7 +179,8 @@ function RegisterForm() {
                     type="file"
                     accept=".png, .jpeg, .jpg"
                     onChange={InputImage}
-                    style={{ display: "none" }}
+                    // style={{ display: "none" }}
+                    className="form__loading-input"
                   />
                 </>
               )}
@@ -180,12 +188,12 @@ function RegisterForm() {
           )}
           {/* </label> */}
         </div>
-        <p className="register_form_requiredText">＊：必須項目</p>
+        <p className="form__requiredText">＊：必須項目</p>
         {/* <div> */}
         <InputEmail
           emailChange={emailChange}
           valueEmail={registerEmail}
-          requiredIcon={<span className="register_form_requiredIcon">＊</span>}
+          requiredIcon={<span className="form__requiredIcon">＊</span>}
         />
         {/* <input
             type="email"
