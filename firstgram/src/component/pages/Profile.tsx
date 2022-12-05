@@ -21,8 +21,8 @@ import { auth, db } from "../../firebase";
 import { Post } from "../../types/types";
 import PostCount from "../atoms/user/PostCount";
 import FollowCount from "../atoms/user/FollowCount";
-import Header from "../molecules/Header";
-import Footer from "../molecules/Footer";
+import Header from "../organisms/Header";
+import Footer from "../organisms/Footer";
 import Name from "../atoms/user/Name";
 import ThreeRowsPostList from "../molecules/ThreeRowsPostList";
 

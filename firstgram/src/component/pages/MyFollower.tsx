@@ -8,8 +8,8 @@ import {
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import GetFollowerData from "../data/GetFollowerData";
-import Footer from "../molecules/Footer";
-import Header from "../molecules/Header";
+import Footer from "../organisms/Footer";
+import Header from "../organisms/Header";
 import UserList from "../organisms/UserList";
 import { auth, db } from "../../firebase";
 

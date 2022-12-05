@@ -1,5 +1,5 @@
-import Header from "../molecules/Header";
-import Footer from "../molecules/Footer";
+import Header from "../organisms/Header";
+import Footer from "../organisms/Footer";
 import LoginUserDtataTable from "../organisms/LoginUserDataTable";
 import BackBtn from "../atoms/button/BackBtn";
 import { Link } from "react-router-dom";
@@ -16,11 +16,11 @@ function AccountSettingPage() {
         <LoginUserDtataTable />
         <div className="accountSetting__btns">
           <Link to="/passwordChange">
-            <button className="accountSetting__passChangeBtn">パスワード変更</button>
+            <button className="accountSetting__passChangeBtn button">パスワード変更</button>
           </Link>
 
           <Link to="/AccountEditPage">
-            <button>プロフィール編集</button>
+            <button className="button">プロフィール編集</button>
           </Link>
         </div>
       </div>

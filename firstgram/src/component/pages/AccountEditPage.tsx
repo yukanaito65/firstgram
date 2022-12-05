@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import type { User } from "../../types/types";
-import Header from "../molecules/Header";
-import Footer from "../molecules/Footer";
+import Header from "../organisms/Header";
+import Footer from "../organisms/Footer";
 import { GetLoginUserData } from "../data/GetLoginUserData";
 import ChangeUserDataBtn from "../atoms/button/ChangeUserDataBtn";
 import { useNavigate } from "react-router-dom";
