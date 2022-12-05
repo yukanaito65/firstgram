@@ -19,7 +19,7 @@ function SearchForm(props: Props) {
             onChange={(e) => props.propsOnChange(e.target.value)}
             placeholder="検索ワードを入力"
           />
-          <Btn propsOnClick={props.onClickSearch} />
+          <Btn onClick={props.onClickSearch} text={"検索"} />
         </div>
       </form>
     </div>
