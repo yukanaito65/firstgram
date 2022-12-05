@@ -602,8 +602,8 @@ input:invalid ~ .input-error-message {
   display: block;
   height: 30px;
   text-align: left;
-  margin-left: 70px;
-  line-height: 1rem;
+  margin-left: 40px;
+  line-height: 1.5rem;
 }
 
 /* input:invalid ~ .input-ok-message {

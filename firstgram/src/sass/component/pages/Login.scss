@@ -1,0 +1,27 @@
+.login {
+  display: flex;
+  justify-content: space-around;
+
+  &__iphone {
+    width: 60%;
+    height: 60%;
+  }
+  &__img {
+    width: 100%;
+    height: 100%;
+  }
+  &__contents {
+    background-color: #fff;
+    outline: solid #d3d3d3;
+    text-align: center;
+    width: 50%;
+  }
+  &__logo {
+    width: 100px;
+    height: 100px;
+    margin: 10% auto;
+  }
+  &__link {
+    color: #0d6efd;
+  }
+}

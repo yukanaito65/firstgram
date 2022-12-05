@@ -1,14 +1,32 @@
  /*--------------------------------------*
   * component
   *--------------------------------------*/
- @use "./layout/header";
- @use "./layout/footer";
+//  @use "./layout/header";
+//  @use "./layout/footer";
 
+
+  /*--------------------------------------*
+ * component/atoms/button
+ *--------------------------------------*/
+ @use "./component/atoms/button/AddFollowButton";
+ @use "./component/atoms/button/LoginButton";
+
+  /*--------------------------------------*
+ * component/atoms/input
+ *--------------------------------------*/
+ @use "./component/atoms/input/InputRegister";
+ @use "./component/atoms/input/formInput";
+
+
+ /*--------------------------------------*
+ * component/pages
+ *--------------------------------------*/
+@use "./component/pages/Login";
  /*--------------------------------------*
  * foundation
  *--------------------------------------*/
  @use "./foundation/base";
- 
- 
+
+
 // https://pikawaka.com/html-css/bem
 // 上みたいな感じでかこ〜

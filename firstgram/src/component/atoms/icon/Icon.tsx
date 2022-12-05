@@ -11,7 +11,7 @@ import type { User } from "../../../types/types";
 
 function Icon() {
   //取得してきたデータを保持
-  const [users, setUsers] = useState<any>([]);
+  const [users, setUsers] = useState< User | undefined>();
 
   //ログイン状態を保持
   //Authenticationに登録されている情報を持つ
@@ -64,9 +64,9 @@ function Icon() {
           //   border: "solid 1px lightgray",
           // }}
         >
-          {user && users.icon !== "" ? (
+          {user && users?.icon !== "" ? (
             <img
-              src={users.icon}
+              src={users?.icon}
               alt="icon"
               // style={{ width: "100%", height: "100%", objectFit: "cover",borderRadius: "50%" }}
             />

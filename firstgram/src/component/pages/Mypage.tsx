@@ -6,6 +6,7 @@ import {
   getDoc,
   getDocs,
   query,
+  QueryDocumentSnapshot,
   QuerySnapshot,
   where,
 } from "firebase/firestore";
@@ -31,7 +32,8 @@ function MyPage() {
 
   //取得してきたデータを保持
   const [users, setUsers] = useState<any>([]);
-  const [posts, setPosts] = useState<QuerySnapshot[]>([]);
+  // const [posts, setPosts] = useState<QuerySnapshot[]>([]);
+  const [posts, setPosts] = useState<Post[]>([]);
 
   //userのpost配列
   // const [postList, setPostList] = useState<any>({ post: [] });
@@ -68,7 +70,7 @@ function MyPage() {
         console.log(userDocId);
 
         // //取得したデータから必要なものを取り出す
-        const userDataId: any = userDocId.data();
+        const userDataId = userDocId.data();
         console.log(userDataId);
         setUsers(userDataId);
 
@@ -80,7 +82,7 @@ function MyPage() {
           setFollowerList(userDataId.follower);
           console.log(userDataId.name);
           console.log(userDataId.follow);
-          console.log(userDataId.post);
+          console.log(userDataId.posts);
         }
 
         //postコレクションへの参照を取得(userIdが一致しているドキュメントのみ)
@@ -92,12 +94,12 @@ function MyPage() {
         console.log(postCollectionRef); //Zcがひとつ
 
         // 上記を元にドキュメントのデータを取得(post)
-        const postDocId: any = await getDocs(postCollectionRef);
+        const postDocId = await getDocs(postCollectionRef);
         console.log(postDocId.docs); // 配列(3)[rl,rl,rl]
         console.log(postDocId); //ol
 
         //上記を元にデータの中身を取り出す。map()を使えるようにする。
-        const newPostDocIds = postDocId.docs as any[];
+        const newPostDocIds = postDocId.docs as QueryDocumentSnapshot<Post>[];
         const postDataArray = newPostDocIds.map((id) => id.data());
         console.log(postDataArray); //(3)[{},{},{}]
         setPosts(postDataArray);
@@ -113,9 +115,9 @@ function MyPage() {
   // };
 
   // console.log(users.name);  //ここに書くとレンダリングされた時に実行されてundefinedになる
-  console.log(posts); //postコレクションからuidと等しいドキュメントを取得したものが格納されている
+  // console.log(posts); //postコレクションからuidと等しいドキュメントを取得したものが格納されている
   // console.log(postList); //userコレクションからログインユーザーの情報を取得して、post配列の中身だけ格納している
-  console.log(followList);
+  // console.log(followList);
 
   return (
     <>

@@ -29,16 +29,18 @@ function LoginForm() {
   //   });
   // });
 
-  const emailChange = (e: any) => {
+  const emailChange = (e:{ target: HTMLButtonElement }) => {
     setLoginEmail(e.target.value);
   };
-  const passChange = (e: any) => {
+  const passChange = (e: { target: HTMLButtonElement }) => {
     setLoginPassword(e.target.value);
   };
 
   return (
     <>
-      <form onSubmit={handleSubmit} style={{ lineHeight: "5rem" }}>
+      <form onSubmit={handleSubmit}
+      // style={{ lineHeight: "5rem" }}
+      >
         <InputEmail emailChange={emailChange} valueEmail={loginEmail} />
         <InputPass passChange={passChange} valuePassword={loginPassword} />
         <LoginButton />

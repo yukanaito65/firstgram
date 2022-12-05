@@ -1,14 +1,13 @@
 import { Link } from "react-router-dom";
 
-interface Props  {
-  followerList: string[],
-  link:string;
-  uid: string,
-  userId?: string;
+interface Props {
+  followerCount:number;
+  link: string;
+  uid: string;
+  userId: string;
 }
-
 //followerList,link,userId,uid
-function FollowerCount(props: Props) {
+function ProfileFollowerCount(props: Props) {
   // const [followerNum, setFollowerNum] = useState<any>(props.followerList.length);
 
   // const followerNum = useSelector((state:any)=>state.followerCountSlice.follower);
@@ -26,8 +25,8 @@ function FollowerCount(props: Props) {
     >
       <p>
       <span style={{fontWeight:"bold"}}>
-        {props.followerList.length}
-        {/* {props.followerCount} */}
+        {/* {props.followerList.length} */}
+        {props.followerCount}
         </span><br/>
         フォロワー
       </p>
@@ -37,4 +36,4 @@ function FollowerCount(props: Props) {
   );
 }
 
-export default FollowerCount;
+export default ProfileFollowerCount;

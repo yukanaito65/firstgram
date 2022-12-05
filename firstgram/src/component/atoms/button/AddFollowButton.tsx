@@ -13,9 +13,14 @@ import { followerData } from "../../../redux/followerCountSlice";
 import FollowerCount from "../user/FollowerCount";
 import RemoveFollowButton from "./RemoveFollowButton";
 
+interface Props {
+  userId:string;
+  followerCount: number;
+  setFollowerCount:React.Dispatch<React.SetStateAction<number>>;
+}
 //profileに配置するボタン
 //userIdを受け取る
-function AddFollowButton(props: any) {
+function AddFollowButton(props: Props) {
   const [loading, setLoading] = useState(true);
 
   //ログインユーザーの情報
@@ -29,9 +34,11 @@ function AddFollowButton(props: any) {
   const [followUserDocRefId, setFollowUserDocRefId] = useState<any>("");
 
   //フォローしているユーザーの情報[{1人目},{2人目}....]
-  const [followUsers, setFollowUsers] = useState<any[]>([]);
+  // const [followUsers, setFollowUsers] = useState<any>([]);
 
-  const [followerList, setFollowerList] = useState<any>({follower: []})
+  // const [followerList, setFollowerList] = useState<any>({follower: []})
+
+  // const [profileFollowerCount, setProfileFollowerCount] = useState<any>(props.followerCount);
 
   useEffect(() => {
     onAuthStateChanged(auth, async (currentUser: any) => {
@@ -53,25 +60,28 @@ function AddFollowButton(props: any) {
       const followUserDocRefId = doc(userCollectionRef, props.userId);
       setFollowUserDocRefId(followUserDocRefId);
 
-      const followUserDocId: any = await getDoc(followUserDocRefId);
+      const followUserDocId = await getDoc(followUserDocRefId);
 
       const followUserDataId = followUserDocId.data();
-      setFollowUsers(followUserDataId);
-      setFollowerList(followUserDataId.follower);
+      // setFollowUsers(followUserDataId);
+      // setFollowerList(followUserDataId?.follower);
 
 
-      console.log(props.userId);
-      console.log(userDataId);
+
+      // setProfileFollowerCount(profileFollowerCount);
+
+      // console.log(props.userId);
+      // console.log(userDataId);
       // console.log(userDataId.follow); //undefined
-      console.log(followUserDataId);
+      // console.log(followUserDataId);
     }); //onAuth
   }, []);
 
   //useEffectの中のコードよりも先に外のコードが処理される→初期表示の時にundefinedになってしまう
-  console.log(props.userId);
-  console.log(users);
-  console.log(users.follow);
-  console.log(followUsers);
+  // console.log(props.userId);
+  // console.log(users);
+  // console.log(users.follow);
+  // console.log(followUsers);
 
   //ログインユーザーのfollow配列に今表示しているユーザーのuserIdが存在したら、フォロー外すボタン、存在しなかったらフォローするボタン
   const [followBtn, setFollowBtn] = useState<boolean>(false);
@@ -90,11 +100,17 @@ function AddFollowButton(props: any) {
     });
     console.log("add");
     setFollowBtn(true);
+    // setProfileFollowerCount(profileFollowerCount);
+
+    //空白だと押した時に白くなる＝set関数が動いている
+    //followerCount入れるとなにもかわらない
+    //入ってほしい値は新たに取得したデータ
+    props.setFollowerCount(props.followerCount+1);
 
     //redux
     // dispatch(followerData(props.followerList));
   };
-  console.log(users.follower);
+  // console.log(users.follower);
 
   return (
     <>
@@ -104,19 +120,24 @@ function AddFollowButton(props: any) {
 
           {followBtn === false ? (
             <>
-            <span style={{position: "absolute", top:"20%", left: "75%" }}>
+            {/* <span style={{position: "absolute", top:"20%", left: "75%" }}>
             <FollowerCount
             followerList={followerList}
             link={"/follower"}
             userId={props.userId}
             uid={user.uid}
             />
-            </span>
+            </span> */}
+            {/* {props.followerCount} */}
             <button onClick={() => addFollow()}>フォローする</button>
             {/* <p>{followerList.length}</p> */}
             </>
           ) : (
-            <RemoveFollowButton userId={props.userId} />
+            <RemoveFollowButton
+            userId={props.userId}
+            followerCount={props.followerCount}
+            setFollowerCount={props.setFollowerCount}
+             />
           )}
         </>
       )}

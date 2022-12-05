@@ -32,7 +32,7 @@ function Register() {
               backgroundColor: "#ffff",
               outline: "solid #d3d3d3",
               textAlign: "center",
-              width: "65%",
+              width: "70%",
               margin: "0 auto"
             }}
           >

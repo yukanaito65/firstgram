@@ -1,10 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { User } from "../../types/types";
 import CommonIcon from "../atoms/icon/CommonIcon";
 import Name from "../atoms/user/Name";
 import UserName from "../atoms/user/UserName";
 
-function UserData(props: any) {
+
+interface Props {
+  users: User;
+  uid: string;
+}
+
+function UserData(props: Props) {
   return (
       <Link
         to={props.users.userId === props.uid ? "/mypage" : "/profile"}

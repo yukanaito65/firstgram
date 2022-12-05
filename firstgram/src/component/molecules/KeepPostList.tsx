@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import MyPost from '../atoms/pictures/Post';
+import MyPost from '../atoms/pictures/OneThirdPost';
 
 //keepPostIds,keepPosts
 //一覧に並んでいる投稿のそれぞれのユーザーidが必要

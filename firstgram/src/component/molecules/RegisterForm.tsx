@@ -32,7 +32,7 @@ function RegisterForm() {
   const [imgSrc, setImgSrc] = useState("");
 
   //画像アップロード＆URL取得
-  const InputImage = (e: any) => {
+  const InputImage = (e:any) => {
     const file = e.target.files[0];
 
     // パスと名前で参照を作成
@@ -62,7 +62,7 @@ function RegisterForm() {
   };
 
   //Authenticationへのユーザー登録、FireStoreへのデータ新規追加
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e:any) => {
     e.preventDefault();
 
     try {
@@ -115,10 +115,10 @@ function RegisterForm() {
     }
   };
 
-  const emailChange = (e: any) => {
+  const emailChange = (e: { target: HTMLButtonElement }) => {
     setRegisterEmail(e.target.value);
   };
-  const passChange = (e: any) => {
+  const passChange = (e: { target: HTMLButtonElement }) => {
     setRegisterPassword(e.target.value);
   };
 
