@@ -1,0 +1,673 @@
+/* ------------------------------------ */
+/* 共通のcss */
+*,
+*:before,
+*:after {
+  -o-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html {
+  font-size: 62.5%;
+  line-height: 1.6;
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #f7f7f7;
+  color: rgb(38, 38, 38);
+  font-size: 1.6rem;
+  font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN",
+    "Hiragino Sans", Meiryo, sans-serif;
+  min-width: 350px;
+  max-width: 600px;
+  /* width: 65%; */
+  width: 100%;
+  margin: 0 auto;
+  overflow-x: hidden;
+  padding-top: 90px;
+  padding-bottom: 120px;
+  min-height: 100vh;
+  position: relative; /*←相対位置*/
+  box-sizing: border-box; /*←全て含めてmin-height:100vhに*/
+}
+
+button {
+  border: none;
+  background-color: #0d6efd;
+  color: #fff;
+  padding: 5px 15px;
+  font-size: 16px;
+  border-radius: 8px;
+}
+
+img,
+video,
+object {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  transition: 0.4s;
+  color: rgb(38, 38, 38);
+}
+a:hover {
+  text-decoration: none;
+}
+
+p {
+  display: block;
+}
+
+h1 {
+  font-size: 20px;
+  margin: 5px;
+}
+
+input,
+textarea {
+  padding: 5px;
+}
+
+/* ボタン共通 */
+button {
+  justify-self: center;
+  border: none;
+  background-color: #0d6efd;
+  color: #fff;
+  padding: 5px 15px;
+  font-size: 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin: 5px;
+}
+
+button:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+/* 戻るボタン */
+.to_back {
+  background-color: rgb(38, 38, 38);
+  border-radius: 50%;
+  padding: 10px;
+}
+
+.to_back:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.to_back2 {
+  border: 2px solid rgb(38, 38, 38);
+  border-radius: 50%;
+  padding: 7px;
+}
+
+.to_back2:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+/* ユーザーアイコン */
+/* .icon-image img {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  border: 1px solid rgb(156, 156, 156);
+  margin: 5px;
+} */
+
+.icon-image {
+  border-radius: 50%;
+  width: 14%;
+  /* height: 120px; */
+  aspect-ratio: 1/1;
+  border: solid 1px lightgray;
+}
+
+.icon-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.noIconImage {
+  width: 100%;
+  height: 100%;
+  background-color: #d3d3d3;
+  border-radius: 50%;
+}
+
+.post-icon-image {
+  border-radius: 50%;
+  width: 100%;
+  /* width: 100px; */
+  /* height: 100px; */
+  aspect-ratio: 1/1;
+  border: solid 1px lightgray;
+}
+
+.post-icon-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.postDetails_postIcon {
+  width: 10%;
+  /* aspect-ratio: 1/1; */
+}
+/* .post-noIconImage{
+  width: 100%;
+  height: 100%;
+  background-color: #d3d3d3;
+  border-radius: 50%;
+} */
+
+/* -------------------------------------- */
+/* 保留 */
+
+.l-header {
+  width: 100%;
+  background-color: #1b4b36;
+}
+
+.c-inner {
+  width: 85%;
+}
+
+.p-display {
+  display: flex;
+}
+
+.u-margin-auto {
+  margin: 30px auto 30px 0;
+}
+
+.u-margin50 {
+  margin: 50px;
+}
+
+.u-margin100 {
+  margin: 100px;
+}
+
+/* ----------------------------------- */
+/* header */
+.header {
+  /* width: 65%; */
+  width: 100%;
+  max-width: 600px;
+  min-width: 350px;
+  background: -moz-linear-gradient(#ffb03c, #ff708d);
+  background: -webkit-linear-gradient(#ffb03c, #ff708d);
+  background: linear-gradient(to right, #ffb03c, #ff708d);
+  color: #fff;
+  position: fixed;
+  margin: 0 auto;
+  z-index: 999;
+  top: 0;
+  box-sizing: border-box;
+}
+
+.header-warpper {
+  width: 85%;
+  display: flex;
+  margin: 0 auto;
+}
+
+.header-logo {
+  width: 10%;
+  margin: auto 0;
+}
+
+.header-btns {
+  margin: auto 0 auto auto;
+  display: flex;
+}
+
+.header-post-btn {
+  width: 10%;
+  background: none;
+  border: none;
+}
+
+.header-post-btn:hover {
+  cursor: pointer;
+}
+
+.header-menu-btn {
+  width: 10%;
+  background: none;
+  border: none;
+}
+
+.header-menu-btn:hover {
+  cursor: pointer;
+}
+
+/* nav */
+.nav {
+  width: 65%;
+  margin: 0 auto;
+}
+
+.nav_menu_ul {
+  padding: 5px 0;
+  position: fixed;
+  top: 100px;
+  right: 25%;
+  list-style: none;
+  width: 20%;
+  background-color: #f7f7f7;
+  box-shadow: 0 0px 10px 7px rgb(0 0 0 / 10%);
+  font-size: 19px;
+  z-index: 800;
+}
+
+.nav_menu_li {
+  width: 100%;
+  border-bottom: 2px solid #e7e7e7;
+  padding: 5px 0;
+}
+
+.nav_menu_li:last-child {
+  border: none;
+}
+
+.nav_menu_btn:hover {
+  cursor: pointer;
+}
+
+.nav_menu_btn {
+  width: 100%;
+  background: none;
+  border: none;
+  color: rgb(38, 38, 38);
+  padding: 3px 15px;
+  text-align: left;
+  justify-content: space-between;
+  height: 100%;
+  display: flex;
+}
+
+.nav_menu_icon {
+  color: rgb(38, 38, 38);
+  margin-left: auto;
+  margin-right: 5px;
+}
+
+.nav_menu_btn:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+/* footer */
+.footer {
+  /* width: 65%; */
+  width: 100%;
+  max-width: 600px;
+  min-width: 350px;
+  background-color: #f7f7f7;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 0;
+}
+
+.footer-width {
+  width: 100%;
+  display: block;
+  text-align: center;
+}
+
+.footer-border-right {
+  border-right: 2px solid rgb(128, 128, 128);
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+.footer-mypage {
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+.icon {
+  margin: auto;
+}
+
+/* -------------------------------------- */
+/* account setting */
+.margin-bottom_20 {
+  margin-bottom: 20px;
+}
+
+.setting_block {
+}
+
+.setting_table {
+  width: 100%;
+  padding: 10px 0;
+  border-collapse: collapse;
+}
+
+.setting_table_tr {
+  border-bottom: 1px dashed rgb(38, 38, 38);
+  height: 5em;
+}
+
+.setting_table_title {
+  width: 30%;
+  padding: 10px;
+}
+
+.setting_table_content {
+  padding: 10px;
+}
+
+/* account edit */
+.confirm_btn {
+  text-align: center;
+  margin: 10px;
+}
+
+/* password change */
+.account_delete {
+  text-align: right;
+}
+
+.margin_left_auto {
+  background-color: rgb(255, 67, 67);
+}
+
+.back_btn {
+  margin-top: 50px;
+}
+
+.isRevealPassword_icon {
+  margin: auto 5px;
+}
+/* ------------------------------------- */
+/* dmページ */
+
+.dmpage_top {
+  display: flex;
+  position: fixed;
+  top: 63px;
+  width: 65%;
+  background-color: #fff;
+  padding-top: 10px;
+  box-shadow: 0px 10px 10px -8px rgba(0, 0, 0, 0.5);
+}
+
+.dmpage_back_btn {
+  padding-top: 15px;
+  display: block;
+}
+
+.dmpage_back_btn:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.dm_another_info {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.dm_another_text {
+  margin: auto 10px;
+}
+
+.dm_another_name {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.dm_another_userName {
+  font-size: 13px;
+}
+
+.margin {
+  height: 60px;
+}
+
+.dmpage_wrapper {
+  margin-top: 100px;
+}
+
+.dm_right {
+  width: 30%;
+  font-size: 13px;
+  margin: 10px 10px 10px auto;
+}
+
+.dm_message_right {
+  border-radius: 15px;
+  color: #fff;
+  background-color: #6ebe79;
+  padding: 15px;
+}
+
+.dm_date_right {
+  padding-left: 10px;
+}
+
+.dm_left {
+  width: 30%;
+  font-size: 13px;
+  margin: 10px auto 10px 10px;
+}
+
+.dm_message_left {
+  border-radius: 15px;
+  color: #fff;
+  background-color: #6ebe79;
+  padding: 15px;
+}
+
+.dm_date_left {
+  display: block;
+  text-align: right;
+  padding-right: 10px;
+}
+
+.dmpage_form {
+  width: 65%;
+  margin: 10px auto;
+  background-color: #1b4b36;
+  position: fixed;
+  bottom: 62px;
+}
+
+.dmpage_form_wrapper {
+  width: 100%;
+  padding: 15px 10px 15px 20px;
+}
+
+.dmpage_form_input {
+  width: 90%;
+  line-height: 30px;
+  border: none;
+  border-radius: 5px;
+  padding: 2px 10px;
+}
+
+.dmpage_form_btn {
+  background: none;
+  color: #fff;
+  margin: 2px 0 2px 5px;
+  font-size: 15px;
+}
+
+.dmpage_margin_20 {
+  height: 20px;
+}
+
+/* ----------------------------------- */
+/* search page */
+
+.searchpage_form {
+  width: 65%;
+  margin: 10px auto;
+  position: fixed;
+  top: 55px;
+  z-index: 100;
+}
+
+.searchpage_form_wrapper {
+  width: 100%;
+  padding: 30px 10px 15px 20px;
+}
+
+.searchpage_form_input {
+  width: 90%;
+  line-height: 30px;
+  border: 2px solid #1b4b36;
+  border-radius: 5px;
+  padding: 2px 10px;
+}
+
+.searchpage_form_btn {
+  background: none;
+  color: rgb(38, 38, 38);
+  margin: 2px 0 1px 3px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.no_matchUser {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.searchpage_form_input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  cursor: pointer;
+  background-image: url(../../public/x_icon.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-right: 0px;
+  width: 15px;
+  height: 15px;
+}
+
+.text-align_center {
+  text-align: center;
+  display: block;
+}
+
+/* keepボタン */
+.keep_btn {
+  background-color: transparent;
+  color: black;
+  padding: 0;
+
+  /* size:30px; */
+}
+
+.keep_btn_img {
+  width: 30px;
+  height: 30px;
+}
+
+/* .keep_btn_remove {
+  color: black;
+  width: 30px;
+  height: 30px;
+} */
+
+/* ログイン・会員登録共通 */
+.input_isRevealPassword_icon {
+  position: absolute;
+  top: 10%;
+  left: 85%;
+}
+
+/* 会員登録 */
+.input-error-message {
+  color: red;
+  font-size: 13px;
+}
+input:invalid ~ .input-error-message {
+  display: block;
+  height: 30px;
+  text-align: left;
+  margin-left: 70px;
+  line-height: 1rem;
+}
+
+/* input:invalid ~ .input-ok-message {
+  display: none;
+} */
+
+input:valid ~ .input-error-message {
+  display: none;
+}
+
+/* input:valid ~ .input-ok-message {
+  display: block;
+} */
+
+input:placeholder-shown ~ .messageBox {
+  display: none;
+}
+
+.register_form_requiredText {
+  color: red;
+  font-size: 14px;
+  margin-left: 50px;
+  text-align: left;
+}
+
+.register_form_requiredIcon {
+  color: red;
+  font-size: 10px;
+  margin-right: 1%;
+}
+
+/* InputRequiredRegisterコンポーネント */
+.input_required {
+  width: 80%;
+  height: 35px;
+  background-color: #f7f7f7;
+  outline: solid #d3d3d3;
+  border: none;
+}
+
+/* ThreeRowsPostListコンポーネント */
+.threeRowsPostList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+}
+
+.threeRowsPostList_image-div {
+  width: calc((100% - 3px * 2) / 3);
+  aspect-ratio: 1/1;
+}
+
+.threeRowsPostList_message {
+  margin-top: 10%;
+  text-align: center;
+}
+
+/* ThreeRowsPostListコンポーネントに渡している値(myPageから) */
+.threeRowsPostList_message_link {
+  color: #0d6efd;
+}
+/* Postコンポーネント */
+.post {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

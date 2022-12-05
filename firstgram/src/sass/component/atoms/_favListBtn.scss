@@ -1,0 +1,23 @@
+@use "../../global/setting" as *;
+@use "../../global/mixin" as *;
+
+.navBtn {
+  width: 100%;
+  background: none;
+  border: none;
+  color: $color-black;
+  padding: 3px 15px;
+  text-align: left;
+  justify-content: space-between;
+  height: 100%;
+  display: flex;
+  &--icon {
+    color: $color-black;
+    margin-left: auto;
+    margin-right: 5px;
+    &:hover {
+        cursor: pointer;
+        opacity: 0.6;
+    }
+  }
+}
