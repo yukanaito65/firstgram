@@ -33,6 +33,7 @@ import Icon from "../atoms/icon/Icon";
 import PostIcon from "../atoms/icon/PostIcon";
 
 import Img from "../atoms/pictures/Img";
+import { Post } from "../../types/types";
 
 
 function PostLook() {
@@ -150,11 +151,11 @@ function PostLook() {
     return a.postDate.toDate() > b.postDate.toDate() ? -1 : 1;
   });
 
-  const CommentDisplay = (e: any) => {
+  const CommentDisplay = (e: React.MouseEvent) => {
     setCommentDisplay(true);
   };
 
-  const CommentBack = (e: any) => {
+  const CommentBack = (e: React.MouseEvent) => {
     setCommentDisplay(false);
   };
 
@@ -165,7 +166,7 @@ function PostLook() {
         {followUser.length === 0 ? (
           <>
             <div>
-              {ramData.map((data: any, index: any) => {
+              {ramData.map((data: Post, index:string) => {
                 const favos = [...data.favorites];
                 const com = [...data.comments];
                 return (
@@ -209,7 +210,7 @@ function PostLook() {
                             <AiFillHeart
                               size={30}
                               color={"red"}
-                              onClick={(e: any) => {
+                              onClick={(e:React.MouseEvent) => {
                                 updateDoc(
                                   doc(collection(db, "post"), data.postId),
                                   {
@@ -223,7 +224,7 @@ function PostLook() {
                             <AiOutlineHeart
                               size={30}
                               color={"black"}
-                              onClick={(e: any) => {
+                              onClick={(e:React.MouseEvent) => {
                                 updateDoc(
                                   doc(collection(db, "post"), data.postId),
                                   {
@@ -291,7 +292,7 @@ function PostLook() {
 
                               <div style={{ marginLeft: "auto", width: "30%" }}>
                                 <button
-                                  onClick={async (e: any) => {
+                                  onClick={async (e:React.MouseEvent) => {
                                     // 押された投稿のcommentにinputCommentを配列で追加
                                     updateDoc(
                                       doc(collection(db, "post"), data.postId),
@@ -334,7 +335,7 @@ function PostLook() {
         ) : (
           <>
             <div>
-              {postData.map((data: any, index: any) => {
+              {postData.map((data: Post, index: string) => {
                 const favos = [...data.favorites];
                 const com = [...data.comments];
                 return (
@@ -379,7 +380,7 @@ function PostLook() {
                             <AiFillHeart
                               size={30}
                               color={"red"}
-                              onClick={(e: any) => {
+                              onClick={(e: React.MouseEvent) => {
                                 updateDoc(
                                   doc(collection(db, "post"), data.postId),
                                   {
@@ -393,7 +394,7 @@ function PostLook() {
                             <AiOutlineHeart
                               size={30}
                               color={"black"}
-                              onClick={(e: any) => {
+                              onClick={(e: React.MouseEvent) => {
                                 updateDoc(
                                   doc(collection(db, "post"), data.postId),
                                   {
@@ -461,7 +462,7 @@ function PostLook() {
 
                               <div style={{ marginLeft: "auto", width: "30%" }}>
                                 <button
-                                  onClick={async (e: any) => {
+                                  onClick={async (e: React.MouseEvent) => {
                                     // 押された投稿のcommentにinputCommentを配列で追加
                                     updateDoc(
                                       doc(collection(db, "post"), data.postId),

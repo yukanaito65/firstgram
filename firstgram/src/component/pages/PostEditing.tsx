@@ -18,9 +18,9 @@ const location = useLocation();
 const {postid,userid} = location.state as State
 
 // 画像urlを格納
-const [imgUrl, setimgUrl] = useState<any>("");
+const [imgUrl, setimgUrl] = useState<string>("");
 // textを格納
-const [text, setText] = useState<any>("");
+const [text, setText] = useState<string>("");
 
 useEffect(()=>{
 firebasePostDetails(postid,userid).then((postData)=>{

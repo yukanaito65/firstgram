@@ -11,6 +11,7 @@ import {
   query,
   where,
   getDocs,
+  DocumentData,
 } from "firebase/firestore";
 import { Link, useLocation } from "react-router-dom";
 import firebasePostDetails from "../utils/firebasePostDetails";
@@ -42,11 +43,11 @@ interface State {
 function PostDetails() {
   const [user, setUser] = useState<any>("");
   // ログインユーザー
-  const [loginUserPost, setLoginUserPost] = useState(false);
+  const [loginUserPost, setLoginUserPost] = useState<boolean>(false);
   // ログインしているユーザーのuserNameを格納
-  const [loginUserName, setLoginUserName] = useState<any>("");
+  const [loginUserName, setLoginUserName] = useState<string>("");
   // ログインしているユーザーのkeepPostsを格納(保存ボタン用)
-  const [loginUserKeep, setLoginUserKeep] = useState("");
+  const [loginUserKeep, setLoginUserKeep] = useState<string>("");
 
   // 画像urlを格納
   const [imgUrl, setImgUrl] = useState<any>("");
@@ -79,7 +80,7 @@ function PostDetails() {
     onAuthStateChanged(auth, async (user) => {
       setUser(user);
 
-      GetLoginUserData(user).then((loginUserData: any) => {
+      GetLoginUserData(user).then((loginUserData:any) => {
         setLoginUserName(loginUserData.userName);
         setLoginUserKeep(loginUserData.keepPosts);
       });
@@ -105,7 +106,7 @@ function PostDetails() {
   }, []);
 
   // お気に入りボタンがクリックされたら
-  const Favorite = async (e: any) => {
+  const Favorite = async (e:any) => {
     // 押された投稿のFavolitesにloginUserNameを配列で追加
     FavoriteUpdata(postid, loginUserName, arrayUnion);
     // firestoreからfavolitesを取得、保持
@@ -115,7 +116,7 @@ function PostDetails() {
   };
 
   // お気に入り取り消し機能
-  const NoFavorite = async (e: any) => {
+  const NoFavorite = async (e:any) => {
     // 押された投稿のFavolitesからloginUserNameを削除
     FavoriteUpdata(postid, loginUserName, arrayRemove);
     // firestoreからfavolitesを取得、保持
@@ -163,7 +164,7 @@ function PostDetails() {
       collection(db, "user"),
       where("keepPosts", "array-contains", postid)
     );
-    const DeleteKeepPostsUsers: any[] = [];
+    const DeleteKeepPostsUsers: DocumentData[] = [];
     const DeleteKeepPostsUser = await getDocs(DeleteKeepPosts);
     DeleteKeepPostsUser.forEach((doc) => {
       const users = (doc.id, " => ", doc.data());
