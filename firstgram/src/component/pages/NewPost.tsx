@@ -2,8 +2,8 @@ import { useState } from "react";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../../firebase";
 import { AiOutlineAreaChart } from "react-icons/ai";
-import Footer from "../molecules/Footer";
-import Header from "../molecules/Header";
+import Footer from "../organisms/Footer";
+import Header from "../organisms/Header";
 import "../../css/newPost.css"
 import NewPostUploadAuter from "../molecules/NewPostUploadAuter";
 // import InputNewPost from "../atoms/Input/InputNewPost";

@@ -15,8 +15,8 @@ import { Link } from "react-router-dom";
 import AddKeepButton from "../atoms/button/AddKeepButton";
 import RemoveKeepButton from "../atoms/button/RemoveKeepButton";
 import { auth, db } from "../../firebase";
-import Footer from "../molecules/Footer";
-import Header from "../molecules/Header";
+import Footer from "../organisms/Footer";
+import Header from "../organisms/Header";
 import GetLoginUserName from "../utils/GetLoginUserData";
 import {
   AiFillHeart,

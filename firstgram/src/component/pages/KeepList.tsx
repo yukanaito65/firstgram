@@ -12,8 +12,8 @@ import {
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Footer from "../molecules/Footer";
-import Header from "../molecules/Header";
+import Footer from "../organisms/Footer";
+import Header from "../organisms/Header";
 import { auth, db } from "../../firebase";
 import ThreeRowsPostList from "../molecules/ThreeRowsPostList";
 import { Post, User } from "../../types/types";
