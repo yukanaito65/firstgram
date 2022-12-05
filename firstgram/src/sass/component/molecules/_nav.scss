@@ -1,0 +1,27 @@
+@use "../../global/setting" as *;
+@use "../../global/mixin" as *;
+
+.nav {
+  width: 65%;
+  margin: 0 auto;
+  &__ul {
+    padding: 5px 0;
+    position: fixed;
+    top: 100px;
+    right: 25%;
+    list-style: none;
+    width: 20%;
+    background-color: $color-base;
+    box-shadow: 0 0px 10px 7px rgb(0 0 0 / 10%);
+    font-size: 19px;
+    z-index: 800;
+    &--li {
+        width: 100%;
+        border-bottom: 2px solid #e7e7e7;
+        padding: 5px 0;
+        &:last-child {
+            border: none;
+        }
+    }
+  }
+}

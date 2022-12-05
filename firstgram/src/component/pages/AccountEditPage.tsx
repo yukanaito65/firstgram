@@ -8,6 +8,8 @@ import ChangeUserDataBtn from "../atoms/button/ChangeUserDataBtn";
 import { useNavigate } from "react-router-dom";
 import UpdateIcon from "../data/UpdateIcon";
 import BackBtn from "../atoms/button/BackBtn";
+import InputText from "../atoms/Input/InputText";
+import Btn from "../atoms/button/Btn";
 
 
 function AccountEditPage() {
@@ -50,7 +52,7 @@ function AccountEditPage() {
       name: nameValue,
       profile: profileValue,
     });
-    navigate("/mypage")
+    navigate("/mypage/")
   };
 
   return (
@@ -58,7 +60,7 @@ function AccountEditPage() {
       <Header show={true} />
       <h1 className="margin-bottom_20">プロフィール編集</h1>
       {authUserData ? (
-        <>
+        <div>
         <UpdateIcon iconPropsFunc={setIconValue} iconPropsValue={iconValue} />
             
             <table className="setting_table">
@@ -67,13 +69,11 @@ function AccountEditPage() {
                 <label htmlFor="settingUserName">ユーザーネーム</label>
               </td>
               <td className="setting_table_content">
-                <input
-                  type="text"
-                  value={userNameValue}
-                  onChange={(e) => setUserNameValue(e.target.value)}
-                  name="settingUserName"
-                  id="settingUserName"
-                ></input>
+              <InputText
+                inputValue={userNameValue}
+                onChange={setUserNameValue}
+                inputName="settingUserName"
+              />
               </td>
             </tr>
 
@@ -82,13 +82,11 @@ function AccountEditPage() {
                 <label htmlFor="settingName">名前</label>
               </td>
               <td className="setting_table_content">
-                <input
-                  type="text"
-                  value={nameValue}
-                  onChange={(e) => setNameValue(e.target.value)}
-                  name="settingName"
-                  id="settingName"
-                ></input>
+                <InputText
+                inputValue={nameValue}
+                onChange={setNameValue}
+                inputName="settingName"
+              />
               </td>
             </tr>
 
@@ -101,18 +99,17 @@ function AccountEditPage() {
                   value={profileValue}
                   onChange={(e) => setProfileValue(e.target.value)}
                   name="settingProfile"
-                  id="settingProfile"
                   cols={40}
                   rows={3}
-                ></textarea>
+                />
               </td>
             </tr>
           </table>
           <div className="confirm_btn">
-            <button onClick={ChangeConfirm}>確定</button>
+            <Btn onClick={ChangeConfirm} text="更新" />
           </div>
           <BackBtn />
-        </>
+        </div>
       ) : (
         <p className="text-align_center">データが表示されません</p>
       )}
