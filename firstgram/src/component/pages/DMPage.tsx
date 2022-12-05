@@ -17,8 +17,8 @@ import { onAuthStateChanged } from "@firebase/auth";
 import SendDM from "../molecules/SendDM";
 import { useNavigate } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
-import Header from "../molecules/Header";
-import Footer from "../molecules/Footer";
+import Header from "../organisms/Header";
+import Footer from "../organisms/Footer";
 import { useLocation, Link } from "react-router-dom";
 
 interface State {

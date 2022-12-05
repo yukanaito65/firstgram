@@ -4,7 +4,7 @@ import { Link, Navigate } from "react-router-dom";
 import { auth } from "../../firebase";
 import RegisterForm from "../molecules/RegisterForm";
 import Logo from "../atoms/pictures/Logo";
-import Header from "../molecules/Header";
+import Header from "../organisms/Header";
 
 function Register() {
   // //ログイン状態保持(userが値を持てばログイン状態)

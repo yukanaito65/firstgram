@@ -19,36 +19,36 @@ function LoginUserDtataTable() {
             <Icon />
           </div>
 
-          <table className="setting_table">
-            <tr className="setting_table_tr">
+          <table className="userDataTable">
+            <tr className="userDataTable__tr">
               <td className="setting_table_title setting_table_td">
                 ユーザーネーム
               </td>
               <td className="setting_table_td">{userNameValue}</td>
             </tr>
 
-            <tr className="setting_table_tr">
-              <td className="setting_table_title setting_table_td">名前</td>
-              <td className="setting_table_td">{nameValue}</td>
+            <tr className="userDataTable__tr">
+              <td className="userDataTable__tr--title">名前</td>
+              <td className="userDataTable__tr--content">{nameValue}</td>
             </tr>
 
-            <tr className="setting_table_tr">
-              <td className="setting_table_title setting_table_td">自己紹介</td>
-              <td className="setting_table_td">{profileValue}</td>
+            <tr className="userDataTable__tr">
+              <td className="userDataTable__tr--titlesetting_table_title setting_table_td">自己紹介</td>
+              <td className="userDataTable__tr--content">{profileValue}</td>
             </tr>
 
-            <tr className="setting_table_tr">
-              <td className="setting_table_title setting_table_td">
+            <tr className="userDataTable__tr">
+              <td className="userDataTable__tr--title">
                 メールアドレス
               </td>
-              <td className="setting_table_td">{emailValue}</td>
+              <td className="userDataTable__tr--content">{emailValue}</td>
             </tr>
 
-            <tr className="setting_table_tr">
-              <td className="setting_table_title setting_table_td">
+            <tr className="userDataTable__tr">
+              <td className="userDataTable__tr--title">
                 パスワード
               </td>
-              <td className="setting_table_td">****</td>
+              <td className="userDataTable__tr--content">****</td>
             </tr>
           </table>
         </>

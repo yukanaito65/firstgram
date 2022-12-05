@@ -16,8 +16,8 @@ import {
 import { Link, useLocation } from "react-router-dom";
 import firebasePostDetails from "../utils/firebasePostDetails";
 import { onAuthStateChanged } from "firebase/auth";
-import Footer from "../molecules/Footer";
-import Header from "../molecules/Header";
+import Footer from "../organisms/Footer";
+import Header from "../organisms/Header";
 import GetLoginUserData from "../utils/GetLoginUserData";
 import FavoriteUpdata from "../utils/FavoriteUpdata";
 import {
