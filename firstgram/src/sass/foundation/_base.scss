@@ -1,5 +1,5 @@
-@use "../../global/setting" as *;
-@use "../../global/mixin" as *;
+@use "../global/setting" as *;
+@use "../global/mixin" as *;
 
 *,
 *:before,
@@ -27,7 +27,7 @@ body {
   width: 65%;
   margin: 0 auto;
   overflow-x: hidden;
-  padding: 80px 10px 120px 10px;
+  padding: 80px 0 120px 0;
   min-height: 100vh;
   position: relative;
   box-sizing: border-box;
@@ -60,4 +60,8 @@ h1 {
 
 input, textarea {
   padding: 5px;
+}
+
+li {
+  list-style: none;
 }

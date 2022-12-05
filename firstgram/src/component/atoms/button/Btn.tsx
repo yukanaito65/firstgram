@@ -1,13 +1,12 @@
-import React from "react";
+interface Props {
+  onClick: ((e:any) => void) | (() => void);
+  text: string;
+}
 
-function Btn(props: any) {
+function Btn(props: Props) {
   return (
-    <button
-      type="button"
-      className="searchpage_form_btn"
-      onClick={props.propsOnClick}
-    >
-      検索
+    <button type="button" onClick={props.onClick}>
+      {props.text}
     </button>
   );
 }
