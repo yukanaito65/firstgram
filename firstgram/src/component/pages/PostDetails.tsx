@@ -204,22 +204,30 @@ function PostDetails() {
 
   return (
     <>
+    <div className="postdetails">
       <Header show={true} />
       <div>
         {loginUserPost ? (
           <>
             <div
-              style={{ display: "flex", alignItems: "center", width: "100%" }}
+            className="postdetails__iconusername"
+              // style={{ display: "flex", alignItems: "center", width: "100%" }}
             >
-              <div className="postDetails_postIcon">
+              {/* <div className="postDetails_postIcon"> */}
+                <div className="postdetails__icon">
                 <Link
                   to={userid === user.uid ? "/mypage" : "/profile"}
                   state={{ userId: userid }}
                 >
                   <PostIcon icon={icon} />
                 </Link>
-              </div>
-              <p style={{ fontSize: "20px", marginLeft: "5px" }}>
+                </div>
+              {/* </div> */}
+
+              <p 
+              className="postdetais__username"
+              // style={{ fontSize: "20px", marginLeft: "5px" }}
+              >
                 {postUserName}
               </p>
 
@@ -276,9 +284,13 @@ function PostDetails() {
                     </nav>
                   </div>
 
-                  <div style={{ marginLeft: "auto" }}>
+                  <div 
+                  className="postdetails__closebtn"
+                  // style={{ marginLeft: "auto" }}
+                  >
                     <AiOutlineClose
-                      style={{ display: "block" }}
+                    className="postdetails__closebtnicon"
+                      // style={{ display: "block" }}
                       size={27}
                       color={"rgb(38, 38, 38)"}
                       onClick={Back}
@@ -287,9 +299,13 @@ function PostDetails() {
                 </>
               ) : (
                 <>
-                  <div style={{ marginLeft: "auto" }}>
+                  <div 
+                   className="postdetails__closebtn"
+                  // style={{ marginLeft: "auto" }}
+                  >
                     <AiOutlineEllipsis
-                      style={{ display: "block" }}
+                    className="postdetails__closebtnicon"
+                      // style={{ display: "block" }}
                       size={40}
                       color={"rgb(38, 38, 38)"}
                       onClick={Select}
@@ -301,8 +317,14 @@ function PostDetails() {
 
             <Img imgUrl={imgUrl} />
 
-            <div style={{ display: "flex" }}>
-              <div style={{ margin: "10px 5px 0px 5px" }}>
+            <div 
+            className="postdetails__favocomkeep"
+            // style={{ display: "flex" }}
+            >
+              <div 
+              className="postdetails__favo"
+              // style={{ margin: "10px 5px 0px 5px" }}
+              >
                 {favorites.includes(loginUserName) ? (
                   <AiFillHeart size={30} color={"red"} onClick={NoFavorite} />
                 ) : (
@@ -314,7 +336,10 @@ function PostDetails() {
                 )}
               </div>
 
-              <div style={{ margin: "10px 5px 0px 5px" }}>
+              <div 
+              className="postdetails__com"
+              // style={{ margin: "10px 5px 0px 5px" }}
+              >
                 <AiOutlineMessage
                   size={30}
                   color={"rgb(38, 38, 38)"}
@@ -322,25 +347,30 @@ function PostDetails() {
                 />
               </div>
 
-              <div style={{ margin: "5px 5px 5px auto" }}>
+              <div className="postdetails__keep"
+              // style={{ margin: "5px 5px 5px auto" }}
+              >
                 <KeepButton loginUserKeep={loginUserKeep} data={postid} />
               </div>
-            </div>
+              </div>
 
             <FavoLength favos={favorites} />
             <Caption data={caption} />
 
-            <div style={{ display: "flex", width: "100%" }}>
-              <div
-                style={{
-                  display: "flex",
-                  width: "70%",
-                  height: "30px",
-                  margin: "5px",
-                }}
+            <div className="postdetails__postcommentset"
+            // style={{ display: "flex", width: "100%" }}
+            >
+              <div className="postdetails__postcomment"
+                // style={{
+                //   display: "flex",
+                //   width: "70%",
+                //   height: "30px",
+                //   margin: "5px",
+                // }}
               >
                 <input
-                  style={{ width: "100%" }}
+                className="postdetails__postcommentinput"
+                  // style={{ width: "100%" }}
                   type="text"
                   value={inputComment}
                   onChange={(e) => {
@@ -348,20 +378,26 @@ function PostDetails() {
                   }}
                 ></input>
               </div>
-              <div style={{ marginLeft: "auto", width: "30%" }}>
+              <div 
+              className="postdetails__postcommentbutton"
+              // style={{ marginLeft: "auto", width: "30%" }}
+              >
                 <button onClick={AddComment}>投稿する</button>
               </div>
             </div>
             {commentDisplay ? (
               <>
-                <div style={{ display: "flex" }}>
+                <div className="postdetails__displaycomment"
+                // style={{ display: "flex" }}
+                >
                   <CommentsDisplay displayComment={displayComment} />
                   <AiOutlineClose
-                    style={{
-                      display: "block",
-                      margin: "auto 0 0 auto",
-                      alignItems: "center",
-                    }}
+                  className="postdetails__commentclosebtn"
+                    // style={{
+                    //   display: "block",
+                    //   margin: "auto 0 0 auto",
+                    //   alignItems: "center",
+                    // }}
                     size={15}
                     color={"rgb(38, 38, 38)"}
                     onClick={CommentBack}
@@ -374,10 +410,11 @@ function PostDetails() {
           </>
         ) : (
           <>
-            <div
-              style={{ display: "flex", alignItems: "center", width: "100%" }}
+            <div className="postdetails__iconusername"
+              // style={{ display: "flex", alignItems: "center", width: "100%" }}
             >
-              <div className="postDetails_postIcon">
+              {/* <div className="postDetails_postIcon"> */}
+              <div className="postdetails__icon">
                 <Link
                   to={userid === user.uid ? "/mypage" : "/profile"}
                   state={{ userId: userid }}
@@ -385,13 +422,18 @@ function PostDetails() {
                   <PostIcon icon={icon} />
                 </Link>
               </div>
-              <p style={{ fontSize: "20px", marginLeft: "5px" }}>
+              <p className="postdetails__username"
+              // style={{ fontSize: "20px", marginLeft: "5px" }}
+              >
                 {postUserName}
               </p>
-              <div style={{ marginLeft: "auto" }}>
+              <div className="postdetails__closebtn"
+              style={{ marginLeft: "auto" }}
+              >
                 <Link to="/">
                   <AiOutlineEllipsis
-                    style={{ display: "block" }}
+                  className="postdetails__closebtnicon"
+                    // style={{ display: "block" }}
                     size={40}
                     color={"rgb(38, 38, 38)"}
                     onClick={Select}
@@ -404,8 +446,12 @@ function PostDetails() {
             <Img imgUrl={imgUrl} />
 
 
-            <div style={{ display: "flex" }}>
-              <div style={{ margin: "10px 5px 0px 5px" }}>
+            <div className="postdetails__favocomkeep"
+            // style={{ display: "flex" }}
+            >
+              <div className="postdetails__favo"
+              // style={{ margin: "10px 5px 0px 5px" }}
+              >
                 {favorites.includes(loginUserName) ? (
                   <AiFillHeart size={30} color={"red"} onClick={NoFavorite} />
                 ) : (
@@ -417,7 +463,9 @@ function PostDetails() {
                 )}
               </div>
 
-              <div style={{ margin: "10px 5px 0px 5px" }}>
+              <div className="postdetails__com"
+              // style={{ margin: "10px 5px 0px 5px" }}
+              >
                 <Link to="/">
                   <AiOutlineMessage
                     size={30}
@@ -427,7 +475,9 @@ function PostDetails() {
                 </Link>
               </div>
 
-              <div style={{ margin: "5px 5px 5px auto" }}>
+              <div className="postdetails__keep"
+              // style={{ margin: "5px 5px 5px auto" }}
+              >
                 <KeepButton loginUserKeep={loginUserKeep} data={postid} />
               </div>
             </div>
@@ -436,17 +486,19 @@ function PostDetails() {
 
             <Caption data={caption} />
 
-            <div style={{ display: "flex", width: "100%" }}>
-              <div
-                style={{
-                  display: "flex",
-                  width: "70%",
-                  height: "30px",
-                  margin: "5px",
-                }}
+            <div className="postdetails__postcommentset"
+            // style={{ display: "flex", width: "100%" }}
+            >
+              <div className="postdetails__postcomment"
+                // style={{
+                //   display: "flex",
+                //   width: "70%",
+                //   height: "30px",
+                //   margin: "5px",
+                // }}
               >
-                <input
-                  style={{ width: "100%" }}
+                <input className="postdetails__postcommentinput"
+                  // style={{ width: "100%" }}
                   type="text"
                   value={inputComment}
                   onChange={(e) => {
@@ -455,21 +507,26 @@ function PostDetails() {
                 ></input>
               </div>
 
-              <div style={{ marginLeft: "auto", width: "30%" }}>
+              <div className="postdetails__postcommentbutton"
+              // style={{ marginLeft: "auto", width: "30%" }}
+              >
                 <button onClick={AddComment}>投稿する</button>
               </div>
             </div>
 
             {commentDisplay ? (
               <>
-                <div style={{ display: "flex" }}>
+                <div className="postdetails__displaycomment"
+                // style={{ display: "flex" }}
+                >
                   <CommentsDisplay displayComment={displayComment} />
                   <AiOutlineClose
-                    style={{
-                      display: "block",
-                      margin: "auto 0 0 auto",
-                      alignItems: "center",
-                    }}
+                  className="postdetails__commentclosebtn"
+                    // style={{
+                    //   display: "block",
+                    //   margin: "auto 0 0 auto",
+                    //   alignItems: "center",
+                    // }}
                     size={15}
                     color={"rgb(38, 38, 38)"}
                     onClick={CommentBack}
@@ -484,6 +541,7 @@ function PostDetails() {
       </div>
 
       <Footer />
+      </div>
     </>
   );
 }
