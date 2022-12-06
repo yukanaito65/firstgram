@@ -1,7 +1,7 @@
 @use "../../../global/setting" as *;
 
 .form {
-  position: relative;
+  // position: relative;
 
   &__requiredIcon {
     color: red;
@@ -14,6 +14,7 @@
     background-color: $color-base;
     outline: solid #d3d3d3;
     border: none;
+    position: relative;
   }
   &__isRevealPasswordIcon {
     position: absolute;
