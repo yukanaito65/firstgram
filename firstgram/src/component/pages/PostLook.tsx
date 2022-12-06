@@ -369,7 +369,7 @@ function PostLook() {
                         // }}
                       >
                         {/* <div className="postDetails_postIcon"> */}
-                        <div className="postlook__icon">
+                        <div className="postlook__postIcon">
                           <Link
                             to={data.userId === userId ? "/mypage" : "/profile"}
                             state={{ userId: data.userId }}
@@ -377,7 +377,7 @@ function PostLook() {
                             <PostIcon icon={data.icon} />
                           </Link>
                         </div>
-                        
+
                         <p className="postlook__username"
                         // style={{ fontSize: "20px", marginLeft: "5px" }}
                         >

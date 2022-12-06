@@ -98,7 +98,7 @@ const InputText = (e:any)=>{
     >
     <BackBtn />
     <Link to="/" >
-    <button onClick={OnFirebase}  className="newpostuploadauter__postbtn"
+    <button onClick={OnFirebase}  className="newpostuploadauter__postbtn btn"
     // style={{textAlign:"right"}}
     >投稿</button></Link>
     </div>
