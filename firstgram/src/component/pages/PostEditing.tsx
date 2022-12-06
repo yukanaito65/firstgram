@@ -39,9 +39,8 @@ function PostEditing() {
     <>
       <Header show={true} />
       <div className="postediting">
-        <Img imgUrl={imgUrl} />
+      <Img imgUrl={imgUrl} />
 
-     
         <textarea className="postediting__textarea"
           value={text}
           onChange={(e) => {

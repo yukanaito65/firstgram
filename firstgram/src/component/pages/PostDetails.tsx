@@ -453,13 +453,12 @@ function PostDetails() {
               <div className="postdetails__com"
               // style={{ margin: "10px 5px 0px 5px" }}
               >
-                <Link to="/">
+               
                   <AiOutlineMessage
                     size={30}
                     color={"rgb(38, 38, 38)"}
                     onClick={CommentDisplay}
                   />
-                </Link>
               </div>
 
               <div className="postdetails__keep"
