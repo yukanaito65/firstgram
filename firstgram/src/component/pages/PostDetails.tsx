@@ -261,20 +261,19 @@ function PostDetails() {
                             to="/PostEditing"
                             state={{ postid: postid, userid: userid }}
                           >
-                            <button className="nav_menu_btn">編集</button>
+                            <button className="navBtn">編集</button>
                           </Link>
                         </li>
                         <li
                           style={{
                             width: "100%",
-                            borderBottom: "2px solid #e7e7e7",
                             padding: "5px 0",
                           }}
                         >
                           <Link to="/Delete">
                             <button
                               onClick={ClickDelition}
-                              className="nav_menu_btn"
+                              className="navBtn"
                             >
                               削除
                             </button>
@@ -428,19 +427,6 @@ function PostDetails() {
               >
                 {postUserName}
               </p>
-              <div className="postdetails__closebtn"
-              style={{ marginLeft: "auto" }}
-              >
-                <Link to="/">
-                  <AiOutlineEllipsis
-                  className="postdetails__closebtnicon"
-                    // style={{ display: "block" }}
-                    size={40}
-                    color={"rgb(38, 38, 38)"}
-                    onClick={Select}
-                  />
-                </Link>
-              </div>
             </div>
 
 
@@ -467,13 +453,12 @@ function PostDetails() {
               <div className="postdetails__com"
               // style={{ margin: "10px 5px 0px 5px" }}
               >
-                <Link to="/">
+               
                   <AiOutlineMessage
                     size={30}
                     color={"rgb(38, 38, 38)"}
                     onClick={CommentDisplay}
                   />
-                </Link>
               </div>
 
               <div className="postdetails__keep"
