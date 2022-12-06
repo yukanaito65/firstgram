@@ -19,6 +19,7 @@ function CommonIcon(props: Props) {
         <img
           src={props.icon}
           alt="icon"
+          className="icon-image__img"
           // style={{ width: "100%", height: "100%", objectFit: "cover",borderRadius:"50%" }}
         />
       ) : (

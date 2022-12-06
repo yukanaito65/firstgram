@@ -1,19 +1,17 @@
-@mixin post-icon-image() {
+@mixin post-icon-image {
   border-radius: 50%;
   width: 100%;
   aspect-ratio: 1/1;
   border: solid 1px lightgray;
 }
 
-@mixin post-icon-image() {
-  img{
+@mixin post-icon-image__img {
   border-radius: 50%;
   width: 100%;
-  aspect-ratio: 1/1;
-  border: solid 1px lightgray;
-  }
+  height: 100%;
+  object-fit: cover;
 }
 
-@mixin postDetails_postIcon() {
+@mixin postDetails_postIcon {
   width: 10%;
 }
