@@ -37,7 +37,7 @@ function InputRegisterPass(props: any) {
       <span
         onClick={toggleConfirmPassword}
         role="presentation"
-        className="form_isRevealPasswordIcon"
+        className="form__isRevealPasswordIcon"
       >
         {isRevealConfirmPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
       </span>

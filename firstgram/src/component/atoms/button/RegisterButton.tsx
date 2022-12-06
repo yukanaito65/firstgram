@@ -2,7 +2,7 @@ import React from 'react'
 
 function RegisterButton() {
   return (
-    <button>
+    <button className='btn'>
       登録
     </button>
   )

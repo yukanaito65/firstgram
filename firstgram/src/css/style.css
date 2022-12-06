@@ -83,6 +83,24 @@
   border-radius: 50%;
 }
 
+.registerIcon {
+  position: relative;
+}
+
+.icon-image {
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  border: solid 1px lightgray;
+}
+
+.noIconImage {
+  width: 100%;
+  height: 100%;
+  background-color: #d3d3d3;
+  border-radius: 50%;
+}
+
 .addIcon {
   color: #0d6efd;
   position: absolute;
@@ -90,9 +108,6 @@
   left: 65%;
 }
 
-.form {
-  position: relative;
-}
 .form__requiredIcon {
   color: red;
   font-size: 10px;
@@ -104,6 +119,7 @@
   background-color: #f7f7f7;
   outline: solid #d3d3d3;
   border: none;
+  position: relative;
 }
 .form__isRevealPasswordIcon {
   position: absolute;
@@ -588,8 +604,8 @@ input:placeholder-shown ~ .form__messageBox {
   justify-content: space-around;
 }
 .login__iphone {
-  width: 60%;
-  height: 60%;
+  width: 35%;
+  height: auto;
 }
 .login__img {
   width: 100%;
