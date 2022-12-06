@@ -3,7 +3,7 @@ import React from 'react'
 
 function LoginButton() {
   return (
-    <button>
+    <button className='btn'>
       ログイン
     </button>
   )

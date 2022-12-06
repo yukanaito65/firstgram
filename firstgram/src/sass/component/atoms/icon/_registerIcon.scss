@@ -2,6 +2,18 @@
 @use "../../../global/mixin/noIconImg";
 @use "../../../global/setting" as *;
 
+.registerIcon {
+  position: relative;
+}
+.icon-image {
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  border: solid 1px lightgray;
+}
+.noIconImage {
+  @include noIconImg.noIconImage;
+}
 .addIcon {
   color: $color-btn;
   position: absolute;
