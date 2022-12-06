@@ -9,7 +9,7 @@ function BackBtn() {
   };
   return (
     <div onClick={onClickBack}>
-      <IoIosArrowBack color="white" size={40} className="to_back" />
+      <IoIosArrowBack color="rgb(38, 38, 38)" size={40} className="backBtn__icon" />
     </div>
   );
 }

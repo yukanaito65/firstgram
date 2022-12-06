@@ -62,7 +62,7 @@ function PostEditing() {
           <Link to="/">
             <button onClick={Updata} 
             // style={{ textAlign: "right" }} 
-            className="postediting__btn">
+            className="postediting__btn btn">
               編集完了
             </button>
           </Link>

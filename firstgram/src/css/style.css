@@ -20,6 +20,48 @@
   height: 30px;
 }
 
+.backBtn__icon:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.btn {
+  justify-self: center;
+  border: none;
+  background-color: #0d6efd;
+  color: #fff;
+  padding: 5px 15px;
+  font-size: 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin: 5px;
+}
+.btn:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.navBtn {
+  width: 100%;
+  background: none;
+  border: none;
+  color: rgb(38, 38, 38);
+  padding: 3px 15px;
+  text-align: left;
+  justify-content: space-between;
+  height: 100%;
+  display: flex;
+}
+.navBtn:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}
+.navBtn--icon {
+  color: rgb(38, 38, 38);
+  margin-left: auto;
+  margin-right: 5px;
+}
+
 .icon-image {
   border-radius: 50%;
   width: 14%;
