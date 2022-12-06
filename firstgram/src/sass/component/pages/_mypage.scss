@@ -1,0 +1,26 @@
+@use "../../global/setting" as *;
+
+.myPage {
+  &__userName {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  &__info {
+    display: flex;
+    justify-content: space-around;
+    gap: 10%;
+    margin: 10px 20px;
+    align-items: center;
+  }
+  &__name {
+    font-weight: bold;
+  }
+  &__profile {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  &__messageLink {
+    color: $color-btn;
+  }
+}

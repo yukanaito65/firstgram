@@ -1,3 +1,5 @@
+/*# sourceMappingURL=validation.css.map */
+
 /* .input_fieldset {
   position: relative;
   margin: 0 0 20px 0;
@@ -7,12 +9,12 @@
       width: 100%;
       padding: 10px;
       border: 0;
-      border-bottom: 2px solid $blue;
+    //   border-bottom: 2px solid $blue;
       background-color: transparent;
 
       &:focus {
           & + .label {
-              color: $blue;
+            //   color: $blue;
               font-weight: bolder;
               transform: scale(0.9) translateX(0) translateY(10px);
           }
@@ -24,12 +26,12 @@
       top: 0;
       left: 0;
       z-index: -1;
-      color: $gray;
+    //   color: $gray;
       transition: 0.2s;
       transform: translateX(10px) translateY(30px);
 
       &.completed {
-          color: $gray;
+        //   color: $gray;
           font-weight: bolder;
           transform: scale(0.9) translateX(0) translateY(10px);
       }

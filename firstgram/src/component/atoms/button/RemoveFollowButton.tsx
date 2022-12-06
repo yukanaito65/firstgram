@@ -2,16 +2,24 @@ import { onAuthStateChanged } from "firebase/auth";
 import {
   arrayRemove,
   collection,
+  CollectionReference,
   doc,
+  DocumentReference,
   getDoc,
   updateDoc,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { auth, db } from "../../../firebase";
+import { User } from "../../../types/types";
 import FollowerCount from "../user/FollowerCount";
 import AddFollowButton from "./AddFollowButton";
 
-function RemoveFollowButton(props: any) {
+interface Props {
+  userId:string;
+  followerCount: number;
+  setFollowerCount:React.Dispatch<React.SetStateAction<number>>;
+}
+function RemoveFollowButton(props: Props) {
   const [loading, setLoading] = useState(true);
 
   //ログインユーザーの情報
@@ -25,9 +33,11 @@ function RemoveFollowButton(props: any) {
   const [followUserDocRefId, setFollowUserDocRefId] = useState<any>("");
 
   //フォローしているユーザーの情報[{1人目},{2人目}....]
-  const [followUsers, setFollowUsers] = useState<any[]>([]);
+  // const [followUsers, setFollowUsers] = useState<any>([]);
 
-  const [followerList, setFollowerList] = useState<any>({follower: []})
+  // const [followerList, setFollowerList] = useState<any>({follower: []})
+
+  // const [profileFollowerCount, setProfileFollowerCount] = useState<any>(props.followerCount);
 
   useEffect(() => {
     onAuthStateChanged(auth, async (currentUser: any) => {
@@ -35,7 +45,7 @@ function RemoveFollowButton(props: any) {
       setLoading(false);
 
       //ログインユーザーの情報取得して、usersに格納
-      const userCollectionRef = collection(db, "user");
+      const userCollectionRef = collection(db, "user") as CollectionReference<User>;
 
       const userDocRefId = doc(userCollectionRef, currentUser.uid);
       setUserDocRefId(userDocRefId);
@@ -49,24 +59,27 @@ function RemoveFollowButton(props: any) {
       const followUserDocRefId = doc(userCollectionRef, props.userId);
       setFollowUserDocRefId(followUserDocRefId);
 
-      const followUserDocId: any = await getDoc(followUserDocRefId);
+      const followUserDocId = await getDoc(followUserDocRefId);
 
       const followUserDataId = followUserDocId.data();
-      setFollowUsers(followUserDataId);
-      setFollowerList(followUserDataId.follower);
+      // setFollowUsers(followUserDataId);
+      // setFollowerList(followUserDataId?.follower);
 
-      console.log(props.userId);
-      console.log(userDataId);
+      // setProfileFollowerCount(profileFollowerCount)
+
+
+      // console.log(props.userId);
+      // console.log(userDataId);
       // console.log(userDataId.follow); //undefined
-      console.log(followUserDataId);
+      // console.log(followUserDataId);
     }); //onAuth
   }, []);
 
   //useEffectの中のコードよりも先に外のコードが処理される→初期表示の時にundefinedになってしまう
-  console.log(props.userId);
-  console.log(users);
-  console.log(users.follow); //undefined
-  console.log(followUsers);
+  // console.log(props.userId);
+  // console.log(users);
+  // console.log(users.follow); //undefined
+  // console.log(followUsers);
 
   //ログインユーザーのfollow配列に今表示しているユーザーのuserIdが存在したら、フォロー外すボタン、存在しなかったらフォローするボタン
   const [followBtn, setFollowBtn] = useState<boolean>(true);
@@ -84,6 +97,10 @@ function RemoveFollowButton(props: any) {
     //削除したらtrueにする
     setFollowBtn(false);
     // setFollowerNum(props.followerNum);
+    // setProfileFollowerCount(profileFollowerCount);
+    props.setFollowerCount(props.followerCount-1);
+
+
   };
 
   return (
@@ -92,14 +109,15 @@ function RemoveFollowButton(props: any) {
         <>
           {followBtn === true ? (
             <>
-            <span style={{position: "absolute", top: "20%", left: "75%" }}>
+            {/* <span style={{position: "absolute", top: "20%", left: "75%" }}>
             <FollowerCount
               followerList={followerList}
               link={"/follower"}
               userId={props.userId}
               uid={user.uid}
               />
-              </span>
+              </span> */}
+              {/* {props.followerCount} */}
             <button onClick={() =>{
                removeFollow()
               //  window.location.reload()
@@ -108,7 +126,11 @@ function RemoveFollowButton(props: any) {
               {/* <p>{followerList.length}</p> */}
               </>
           ) : (
-            <AddFollowButton userId={props.userId} />
+            <AddFollowButton
+            userId={props.userId}
+            followerCount={props.followerCount}
+            setFollowerCount={props.setFollowerCount}
+            />
           )}
         </>
       )}

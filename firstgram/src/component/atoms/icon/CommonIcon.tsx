@@ -1,6 +1,10 @@
 import React from "react";
 
-function CommonIcon(props: any) {
+interface Props {
+  icon: string;
+}
+
+function CommonIcon(props: Props) {
   return (
     <div
       className="icon-image"
@@ -15,6 +19,7 @@ function CommonIcon(props: any) {
         <img
           src={props.icon}
           alt="icon"
+          className="icon-image__img"
           // style={{ width: "100%", height: "100%", objectFit: "cover",borderRadius:"50%" }}
         />
       ) : (

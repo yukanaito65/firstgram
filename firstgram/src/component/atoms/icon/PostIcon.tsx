@@ -7,6 +7,7 @@ function PostIcon(props: any) {
         <img
           src={props.icon}
           alt="icon"
+          className="post-icon-image__img"
         />
       ) : (
         <img

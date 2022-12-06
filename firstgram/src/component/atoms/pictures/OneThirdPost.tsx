@@ -1,13 +1,19 @@
 import { FC, ReactNode } from "react";
 
-type Props = {
-  imageUrl: string;
-  children?: ReactNode;
-};
+// type Props = {
+//   imageUrl: string;
+//   children?: ReactNode;
+// };
+
+interface Props {
+  imageUrl:string;
+}
+
 //imageUrlをpropsで受け取る
 //投稿１つ分の写真(myPageとprofileの投稿一覧と検索一覧)
-const Post: FC<Props> = (props) => {
+// const OneThirdPost: FC<Props> = (props) => {
   // const MyPost=(props:any) =>{
+    function OneThirdPost(props:Props) {
   return (
     // <div style={{width: "350px", height: "350px"}}>
     <>
@@ -22,4 +28,4 @@ const Post: FC<Props> = (props) => {
   );
 };
 
-export default Post;
+export default OneThirdPost;

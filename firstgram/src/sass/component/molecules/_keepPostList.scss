@@ -1,0 +1,11 @@
+.keepPostList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+
+  &__image {
+    width: calc((100% - 3px * 2) / 3);
+    aspect-ratio: 1/1;
+  }
+
+}

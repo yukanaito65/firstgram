@@ -180,15 +180,15 @@ function PostLook() {
                         //   marginTop:"30px"
                         // }}
                       >
+                         <div className="postlook__postIcon">
                         <Link
                           to={data.userId === userId ? "/mypage" : "/profile"}
                           state={{ userId: data.userId }}
                         >
                       {/* <div className="postDetails_postIcon"> */}
-                      <div className="postlook__icon">
                           <PostIcon icon={data.icon} />
-                      </div>
                         </Link>
+                        </div>
                         <p className="postlook__username"
                         // style={{ fontSize: "20px", marginLeft: "5px" }}
                         >
