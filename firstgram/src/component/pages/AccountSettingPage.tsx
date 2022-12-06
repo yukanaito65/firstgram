@@ -16,11 +16,11 @@ function AccountSettingPage() {
         <LoginUserDtataTable />
         <div className="accountSetting__btns">
           <Link to="/passwordChange">
-            <button className="accountSetting__passChangeBtn button">パスワード変更</button>
+            <button className="accountSetting__btns--passChangeBtn accountSetting__btns">パスワード変更</button>
           </Link>
 
           <Link to="/AccountEditPage">
-            <button className="button">プロフィール編集</button>
+            <button className="accountSetting__btns">プロフィール編集</button>
           </Link>
         </div>
       </div>
