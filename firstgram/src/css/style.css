@@ -20,6 +20,48 @@
   height: 30px;
 }
 
+.backBtn__icon:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.btn {
+  justify-self: center;
+  border: none;
+  background-color: #0d6efd;
+  color: #fff;
+  padding: 5px 15px;
+  font-size: 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin: 5px;
+}
+.btn:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.navBtn {
+  width: 100%;
+  background: none;
+  border: none;
+  color: rgb(38, 38, 38);
+  padding: 3px 15px;
+  text-align: left;
+  justify-content: space-between;
+  height: 100%;
+  display: flex;
+}
+.navBtn:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}
+.navBtn--icon {
+  color: rgb(38, 38, 38);
+  margin-left: auto;
+  margin-right: 5px;
+}
+
 .icon-image {
   border-radius: 50%;
   width: 14%;
@@ -359,17 +401,6 @@ input:placeholder-shown ~ .form__messageBox {
   flex-wrap: wrap;
   gap: 3px;
 }
-
-.navBtn:hover {
-  cursor: pointer;
-  opacity: 0.6;
-}
-.navBtn--icon {
-  color: rgb(38, 38, 38);
-  margin-left: auto;
-  margin-right: 5px;
-}
-
 .threeRowsPostList__image {
   width: calc((100% - 6px) / 3);
   aspect-ratio: 1/1;
@@ -388,7 +419,6 @@ input:placeholder-shown ~ .form__messageBox {
 .userData__userName {
   font-weight: bold;
 }
-
 
 .nav {
   width: 65%;
@@ -647,6 +677,72 @@ input:placeholder-shown ~ .form__messageBox {
 }
 .registerContents__loginLink {
   color: #0d6efd;
+}
+
+.postediting__textarea {
+  height: 300px;
+  width: 100%;
+  margin-top: 5px;
+}
+.postediting__btns {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.postediting__btn {
+  text-align: right;
+}
+
+.postlook__iconusername {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-top: 30px;
+}
+.postlook__postIcon {
+  width: 10%;
+}
+.postlook__username {
+  font-size: 20px;
+  margin-left: 5px;
+}
+.postlook__favocomkeep {
+  display: flex;
+  margin-bottom: 0;
+}
+.postlook__favo {
+  margin: 10px 5px 0px 5px;
+}
+.postlook__com {
+  margin: 10px 5px 0px 5px;
+}
+.postlook__keep {
+  margin: 5px 5px 0px auto;
+}
+.postlook__favolengthtime {
+  display: flex;
+}
+.postlook__comdisplay {
+  display: flex;
+  width: 100%;
+}
+.postlook__cominput {
+  display: flex;
+  width: 70%;
+  height: 30px;
+  margin: 5px;
+}
+.postlook__input {
+  width: 100%;
+}
+.postlook__btn {
+  margin-left: auto;
+  width: 30%;
+}
+.postlook__closebtn {
+  display: block;
+  margin: 15px 0 0 auto;
+  align-items: center;
 }
 
 *,
