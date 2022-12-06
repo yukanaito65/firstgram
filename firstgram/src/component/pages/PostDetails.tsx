@@ -382,7 +382,8 @@ function PostDetails() {
               className="postdetails__postcommentbutton"
               // style={{ marginLeft: "auto", width: "30%" }}
               >
-                <button onClick={AddComment}>投稿する</button>
+                <button className="btn"
+                onClick={AddComment}>投稿する</button>
               </div>
             </div>
             {commentDisplay ? (
@@ -510,7 +511,8 @@ function PostDetails() {
               <div className="postdetails__postcommentbutton"
               // style={{ marginLeft: "auto", width: "30%" }}
               >
-                <button onClick={AddComment}>投稿する</button>
+                <button className="btn"
+                onClick={AddComment}>投稿する</button>
               </div>
             </div>
 
