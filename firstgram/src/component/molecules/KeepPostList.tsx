@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import MyPost from '../atoms/pictures/Post';
+import OneThirdPost from '../atoms/pictures/OneThirdPost';
 
 //keepPostIds,keepPosts
 //一覧に並んでいる投稿のそれぞれのユーザーidが必要
@@ -8,10 +8,10 @@ function KeepPostList(props:any) {
   return (
     <>
     {props.keepPosts.length > 0 ? (
-            <div className="myPostList">
+            <div className="keepPostList">
           {props.keepPosts.map((keepPost: any) => {
             return (
-              <div className='myPostList_image-div'>
+              <div className='keepPostList_image'>
                 <Link
                   to={"/PostDetails"}
                   state={{
@@ -19,7 +19,7 @@ function KeepPostList(props:any) {
                     postid: keepPost.postId
                   }}
                 >
-                  <MyPost imageUrl={keepPost.imageUrl} />
+                  <OneThirdPost imageUrl={keepPost.imageUrl} />
                 </Link>
                 </div>
             );

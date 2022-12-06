@@ -6,17 +6,17 @@ interface Props {
 
 function Img(props: Props) {
   return (
-    <div className="img">
-    <div className="img__style"
-    // style={{ width: "100%", marginTop: "10px", aspectRatio: "4/3" }}
+    <div
+      // style={{ width: "100%", marginTop: "10px", aspectRatio: "4/3" }}
+      className="postImage"
     >
-      <img className="img__img"
-        alt=""
+      <img
+        alt="投稿"
         src={props.imgUrl}
         // style={{ margin: "auto", display: "block" }}
         // style={{width:"100%",height: "100%", objectFit: "cover"}}
+        className="postImage__img"
       />
-    </div>
     </div>
   );
 }

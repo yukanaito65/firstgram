@@ -1,10 +1,12 @@
-// import "../../../css/validation"
-
 import { useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
-function InputPass(props:any) {
+interface Props {
+  passChange: any;
+  valuePassword: string;
+}
 
+function InputPass(props: Props) {
   const [isRevealConfirmPassword, setIsRevealConfirmPassword] = useState(false);
 
   const toggleConfirmPassword = () => {
@@ -12,20 +14,24 @@ function InputPass(props:any) {
   };
 
   return (
-    <div style={{position: "relative"}}>
+    <div
+    // style={{ position: "relative" }}
+    className="form"
+    >
       <input
-        type="password"
+        type={isRevealConfirmPassword ? "text" : "password"}
         name="password"
         value={props.valuePassword}
         placeholder="パスワード"
+        className="form__input"
         onChange={props.passChange}
-        style={{width:"80%", height: "35px", backgroundColor: "#f7f7f7",outline: "solid #d3d3d3", border: "none"}}
+        // style={{width:"80%", height: "35px", backgroundColor: "#f7f7f7",outline: "solid #d3d3d3", border: "none"}}
         required
       />
       <span
         onClick={toggleConfirmPassword}
         role="presentation"
-        className="input_isRevealPassword_icon"
+        className="form_isRevealPasswordIcon"
       >
         {isRevealConfirmPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
       </span>

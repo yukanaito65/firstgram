@@ -1,10 +1,12 @@
 import { onAuthStateChanged } from "firebase/auth";
 import {
   collection,
+  CollectionReference,
   doc,
   getDoc,
   getDocs,
   query,
+  QueryDocumentSnapshot,
   QuerySnapshot,
   where,
 } from "firebase/firestore";
@@ -14,6 +16,7 @@ import Footer from "../organisms/Footer";
 import Header from "../organisms/Header";
 import { auth, db } from "../../firebase";
 import ThreeRowsPostList from "../molecules/ThreeRowsPostList";
+import { Post, User } from "../../types/types";
 
 function KeepList() {
   //keepPostsの中に入っているpostIdを元にpostのimageUrl取得
@@ -28,7 +31,7 @@ function KeepList() {
   //ログインユーザーの情報の中からkeepPostsを格納
   const [keepPostIds, setKeepPostIds] = useState([]);
 
-  const [keepPosts, setKeepPosts] = useState<QuerySnapshot[]>([]);
+  const [keepPosts, setKeepPosts] = useState<Post[]>([]);
 
   useEffect(() => {
     onAuthStateChanged(auth, async (currentUser: any) => {
@@ -36,7 +39,7 @@ function KeepList() {
       setLoading(false);
 
       //ログインユーザーのkeepPosts配列をkeepListに格納
-      const userCollectionRef = collection(db, "user");
+      const userCollectionRef = collection(db, "user")as CollectionReference<User>;
 
       const userDocRefId = doc(userCollectionRef, currentUser.uid);
 
@@ -64,7 +67,7 @@ function KeepList() {
       const postCollectionRef = query(
         collection(db, "post"),
         where("keeps", "array-contains", currentUser.uid)
-      );
+      )as CollectionReference<Post>;
 
       console.log(postCollectionRef);
 
@@ -72,7 +75,7 @@ function KeepList() {
       console.log(keepPostDocId.docs);
       console.log(keepPostDocId);
 
-      const newKeepPostDocIds = keepPostDocId.docs as any[];
+      const newKeepPostDocIds = keepPostDocId.docs as QueryDocumentSnapshot<Post>[];
       const keepPostArray = newKeepPostDocIds.map((doc) => doc.data());
       setKeepPosts(keepPostArray);
     }); //onAuth

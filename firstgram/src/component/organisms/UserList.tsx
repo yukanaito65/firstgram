@@ -1,7 +1,12 @@
 import { User } from "../../types/types";
 import UserData from "../molecules/UserData";
 
-function UserList(props: any) {
+interface Props {
+  usersData: User[];
+  uid: string;
+}
+
+function UserList(props: Props) {
   return (
     <>
       {props.usersData.length > 0 ? (
