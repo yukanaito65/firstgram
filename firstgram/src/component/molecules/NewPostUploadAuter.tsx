@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { auth, db } from '../../firebase';
 import BackBtn from '../atoms/button/BackBtn';
+import Img from '../atoms/pictures/Img';
 
 interface State {
     imgSrc:any
@@ -81,17 +82,25 @@ const InputText = (e:any)=>{
 }
 
   return (
-    <div>
-    <div style={{height:"300px"}}>
-    <img alt="" src={props.imgSrc} style={{height:"300px",width:"100%"}}/>
-    </div>
+    <div className='newpostuploadauter'>
+    <Img imgUrl={props.imgSrc} 
+    // style={{height:"300px",width:"100%"}}
+    />
     {/* <InputNewPost /> */}
     <textarea rows={10} cols={40} name="inputPost" value={textState}
-    placeholder="コメントを入力してください" onChange={InputText} style={{height:"300px",width:"100%",marginTop:"5px"}} />
+    placeholder="コメントを入力してください" onChange={InputText} 
+    // style={{height:"300px",width:"100%",marginTop:"5px"}}
+    className="newpostuploadauter__textarea"
+    />
 
-    <div style={{display:"flex",width:"100%",justifyContent: "space-between"}}>
+    <div   className="newpostuploadauter__btn"
+    // style={{display:"flex",width:"100%",justifyContent: "space-between"}}
+    >
     <BackBtn />
-    <Link to="/" ><button onClick={OnFirebase}  style={{textAlign:"right"}}>投稿</button></Link>
+    <Link to="/" >
+    <button onClick={OnFirebase}  className="newpostuploadauter__postbtn"
+    // style={{textAlign:"right"}}
+    >投稿</button></Link>
     </div>
     </div>
   )

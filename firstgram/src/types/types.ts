@@ -23,6 +23,8 @@ export type Post = {
   favorites: string[]; //userNameを格納
   keeps: string[]; //userIdを格納
   comments: string[];
+  icon:string;
+  userName:string;
 };
 
 export type Comment = {

@@ -12,7 +12,9 @@ function Time(props:Props) {
     const hour = timestamp.getHours()
     const min = timestamp.getMinutes()
   return (
-    <div style={{marginLeft:"auto",fontSize:"16px"}}>
+    <div className='time'
+    // style={{marginLeft:"auto",fontSize:"16px"}}
+    >
     {year}年{month}月{day}日{hour}:{min}
     </div>
   )
