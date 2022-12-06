@@ -460,6 +460,48 @@ input:placeholder-shown ~ .form__messageBox {
   opacity: 0.6;
 }
 
+.newpostuploadauter__textarea {
+  height: 300px;
+  width: 100%;
+  margin-top: 5px;
+}
+.newpostuploadauter__btn {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.newpostuploadauter__postbtn {
+  text-align: right;
+}
+
+.time {
+  margin-left: auto;
+  font-size: 16px;
+}
+
+.favolength {
+  margin-left: 5px;
+  font-size: 16px;
+}
+
+.commentdisplay__comset {
+  display: flex;
+  font-size: 16px;
+  width: 100%;
+  margin: 3px;
+}
+.commentdisplay__commentdisplay__username {
+  font-weight: 500;
+}
+.commentdisplay__com {
+  margin-left: 5px;
+}
+
+.caption {
+  font-size: 16px;
+  margin: 5px;
+}
+
 .userDataTable {
   width: 100%;
   padding: 10px 0;
@@ -742,6 +784,95 @@ input:placeholder-shown ~ .form__messageBox {
 .postlook__closebtn {
   display: block;
   margin: 15px 0 0 auto;
+  align-items: center;
+}
+
+.newpost__inputfileset {
+  border: solid 1px #333;
+  height: 300px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.newpost__inputfileicon {
+  width: 100%;
+}
+.newpost____input {
+  border-radius: 3px;
+  padding: 3px;
+  position: relative;
+  background-color: #0d6efd;
+  margin: 0 auto;
+  align-items: center;
+  width: 200px;
+}
+.newpost__inputletter {
+  color: #fff;
+}
+.newpost__file {
+  height: 100%;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.postdetails__iconusername {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.postdetails__icon {
+  width: 10%;
+}
+.postdetails__username {
+  font-size: 20px;
+  margin-left: 5px;
+}
+.postdetails__closebtn {
+  margin-left: auto;
+}
+.postdetails__closebtnicon {
+  display: block;
+}
+.postdetails__favocomkeep {
+  display: flex;
+}
+.postdetails__favo {
+  margin: 10px 5px 0px 5px;
+}
+.postdetails__com {
+  margin: 10px 5px 0px 5px;
+}
+.postdetails__keep {
+  margin: 5px 5px 5px auto;
+}
+.postdetails__postcommentset {
+  display: flex;
+  width: 100%;
+}
+.postdetails__postcomment {
+  display: flex;
+  width: 70%;
+  height: 30px;
+  margin: 5px;
+}
+.postdetails__postcommentinput {
+  width: 100%;
+}
+.postdetails__postcommentbutton {
+  margin-left: auto;
+  width: 30%;
+}
+.postdetails__displaycomment {
+  display: flex;
+}
+.postdetails__commentclosebtn {
+  display: block;
+  margin: auto 0 0 auto;
   align-items: center;
 }
 
