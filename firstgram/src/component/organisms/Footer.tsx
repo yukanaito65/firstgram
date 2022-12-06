@@ -11,7 +11,7 @@ function Footer() {
       <ul className="footer__ul">
         {currentPath === "/" ?
         (<li className="footer__ul--li">
-            <FaHome size={35} color={"#1B4B36"} />
+            <FaHome size={35} color={"#FF9168"} className="footer__ul--liLink" />
         </li>) : (
           <li className="footer__ul--li">
           <Link to="/" className="footer__ul--liLink">
@@ -23,7 +23,7 @@ function Footer() {
 
           {currentPath === "/searchPage" ? 
         (<li className="footer__ul--li">
-            <FaSearch size={35} color={"#1B4B36"} />
+            <FaSearch size={35} color={"#FF9168"} className="footer__ul--liLink" />
         </li>) : (
           <li className="footer__ul--li">
           <Link to="/searchPage" className="footer__ul--liLink">
@@ -37,7 +37,7 @@ function Footer() {
         (<li className="footer__ul--li">
             <MdAccountCircle
               size={35}
-              color={"#1B4B36"}
+              color={"#FF9168"}
               className="footer__ul--liIcon"
             />
         </li>) : (

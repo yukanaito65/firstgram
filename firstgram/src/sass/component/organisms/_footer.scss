@@ -6,17 +6,21 @@
     max-width: 600px;
     min-width: 350px;
     background-color: $color-base;
-    display: flex;
-    justify-content: space-between;
     position: fixed;
     bottom: 0;
     &__ul {
         width: 100%;
         margin: 15px;
+        display: flex;
+        justify-content: space-between;
         &--li {
             border-right: 2px solid $color-black;
-            margin: 0;
+            margin: 0 auto;
             padding: 0;
+            width: 100%;
+            &:last-child {
+                border: none;
+            }
         }
         &--liLink {
             width: 100%;
@@ -28,6 +32,7 @@
         }
         &--liIcon {
             margin: auto;
+            display: block;
         }
     }
 }

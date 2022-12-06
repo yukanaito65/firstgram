@@ -9,14 +9,14 @@
   height: 100%;
   display: flex;
 }
+.navBtn:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}
 .navBtn--icon {
   color: rgb(38, 38, 38);
   margin-left: auto;
   margin-right: 5px;
-}
-.navBtn--icon:hover {
-  cursor: pointer;
-  opacity: 0.6;
 }
 
 .nav {
@@ -42,6 +42,21 @@
 }
 .nav__ul--li:last-child {
   border: none;
+}
+.nav__ul--liLogout {
+  width: 100%;
+  background: none;
+  border: none;
+  color: rgb(38, 38, 38);
+  padding: 3px 15px;
+  text-align: left;
+  justify-content: space-between;
+  height: 100%;
+  display: flex;
+}
+.nav__ul--liLogout:hover {
+  cursor: pointer;
+  opacity: 0.6;
 }
 
 .userDataTable {
@@ -106,14 +121,65 @@
   margin: 0 auto;
 }
 
+.footer {
+  width: 100%;
+  max-width: 600px;
+  min-width: 350px;
+  background-color: #f7f7f7;
+  position: fixed;
+  bottom: 0;
+}
+.footer__ul {
+  width: 100%;
+  margin: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+.footer__ul--li {
+  border-right: 2px solid rgb(38, 38, 38);
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+}
+.footer__ul--li:last-child {
+  border: none;
+}
+.footer__ul--liLink {
+  width: 100%;
+  display: block;
+  text-align: center;
+}
+.footer__ul--liLink:hover {
+  cursor: pointer;
+}
+.footer__ul--liIcon {
+  margin: auto;
+  display: block;
+}
+
 .accountSetting__title {
   margin-bottom: 20px;
 }
 .accountSetting__btns {
   display: flex;
 }
-.accountSetting__passChangeBtn {
+.accountSetting__btns--passChangeBtn {
   margin-right: 20px;
+}
+.accountSetting__btns--btn {
+  justify-self: center;
+  border: none;
+  background-color: #0d6efd;
+  color: #fff;
+  padding: 5px 15px;
+  font-size: 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin: 5px;
+}
+.accountSetting__btns--btn:hover {
+  cursor: pointer;
+  opacity: 0.7;
 }
 
 *,
