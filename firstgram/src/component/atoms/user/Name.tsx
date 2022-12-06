@@ -1,6 +1,11 @@
 import React from 'react'
+import { User } from '../../../types/types';
 
-function Name(props:any) {
+interface Props {
+  users: User;
+}
+
+function Name(props:Props) {
   return (
     <div>{props.users.name}</div>
   )

@@ -10,31 +10,35 @@ function InputCPass(props: any) {
   };
 
   return (
-    <div style={{position: "relative"}}>
-      <span className="register_form_requiredIcon">＊</span>
+    <div
+    // style={{position: "relative"}}
+    className="form"
+    >
+      <span className="form__requiredIcon">＊</span>
       <input
         type={isRevealConfirmPassword ? "text" : "password"}
         name="Cpassword"
         placeholder="確認用パスワード"
         data-equal-to="email"
         pattern={props.passwordValue}
-        style={{
-          width: "80%",
-          height: "35px",
-          backgroundColor: "#f7f7f7",
-          outline: "solid #d3d3d3",
-          border: "none"
-        }}
+        className="form__input"
+        // style={{
+        //   width: "80%",
+        //   height: "35px",
+        //   backgroundColor: "#f7f7f7",
+        //   outline: "solid #d3d3d3",
+        //   border: "none"
+        // }}
         required
       />
       <span
         onClick={toggleConfirmPassword}
         role="presentation"
-        className="input_isRevealPassword_icon"
+        className="form_isRevealPasswordIcon"
       >
         {isRevealConfirmPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
       </span>
-      <span className="input-error-message messageBox">
+      <span className="form__error-message form__messageBox">
         パスワードが一致しません
       </span>
     </div>

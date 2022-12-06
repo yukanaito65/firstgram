@@ -1,0 +1,31 @@
+.profile {
+  &__userName {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  &__info {
+    display: flex;
+    justify-content: space-around;
+    gap: 10%;
+    margin: 10px 20px;
+    align-items: center;
+  }
+  &__threeCount {
+    display: flex;
+    width: 330px;
+   justify-content: space-between;
+   position: relative
+  }
+  &__name {
+    font-weight: bold;
+  }
+  &__profile {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  &__btn {
+    display: flex;
+    gap: 5%;
+  }
+}

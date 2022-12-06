@@ -24,10 +24,12 @@ body {
   font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN",
     "Hiragino Sans", Meiryo, sans-serif;
   min-width: 350px;
-  width: 65%;
+  // width: 65%;
+  max-width: 600px;
   margin: 0 auto;
   overflow-x: hidden;
-  padding: 80px 0 120px 0;
+  padding-top: 80px;
+  padding-bottom: 120px;
   min-height: 100vh;
   position: relative;
   box-sizing: border-box;

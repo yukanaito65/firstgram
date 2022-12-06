@@ -6,7 +6,9 @@ interface Props{
 
 function Caption(props:Props) {
   return (
-    <div style ={{fontSize:"16px",margin:"5px"}}>
+    <div className='caption'
+    // style ={{fontSize:"16px",margin:"5px"}}
+    >
     <p>{props.data}</p>
     </div>
   )

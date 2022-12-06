@@ -25,25 +25,31 @@ function Login() {
         <Navigate to={`/mypage`} />
       ) : (
         <>
-          <div style={{ display: "flex" }}>
+          <div className="login"
+          // style={{display:"flex", justifyContent: "space-around"}}
+          >
 
-            <div style={{ width: "50%", height: "50%" }}>
+            <div className="login__iphone"
+            // style={{ width: "35%", height: "auto" }}
+            >
               <img
                 src={`${process.env.PUBLIC_URL}/iphone.png`}
-                alt="Iphone"
-                style={{ width: "100%", height: "100%" }}
+                alt="iphone"
+                className="login__img"
+                // style={{ width: "100%", height: "100%" }}
               />
             </div>
             <div
-              style={{
-                backgroundColor: "#ffff",
-                outline: "solid #d3d3d3",
-                textAlign: "center",
-                width: "35%",
-              }}
+            className="login__contents"
+              // style={{
+              //   backgroundColor: "#ffff",
+              //   outline: "solid #d3d3d3",
+              //   textAlign: "center",
+              //   width: "50%",
+              // }}
             >
-              <h1
-                style={{ width: "100px", height: "100px", margin: "10% auto" }}
+              <h1 className="login__logo"
+                // style={{ width: "100px", height: "100px", margin: "10% auto" }}
               >
                 <Logo />
               </h1>
@@ -52,7 +58,10 @@ function Login() {
               <p>
                 アカウントをお持ちでないですか？<br />
                 <Link to={`/register`}>
-                  <span style={{ color: "#0d6efd" }}>登録する</span>
+                  <span className="login__link"
+                  // style={{ color: "#0d6efd" }}
+                  >
+                    登録する</span>
                 </Link>
               </p>
             </div>

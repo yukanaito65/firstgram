@@ -3,14 +3,14 @@ import React, { useState } from "react";
 function InputRequiredRegister(props: any) {
   return (
     <div>
-      <span className="register_form_requiredIcon">＊</span>
+      <span className="form__requiredIcon">＊</span>
       <input
         type={props.type}
         name={props.name}
         placeholder={props.placeholder}
         pattern={props.pattern}
         data-equal-to={props.equal}
-        className="input_required"
+        className="form__input"
         // style={{
         //   width: "80%",
         //   height: "35px",
@@ -20,7 +20,8 @@ function InputRequiredRegister(props: any) {
         // }}
         required
       />
-      <span className="input-error-message messageBox">
+      {/* <span className="input-error-message messageBox"> */}
+      <span className="form__error-message form__messageBox">
         正しい形式で入力してください({props.message})
         {props.errorMessage}
       </span>

@@ -3,9 +3,11 @@ import {
   collection,
   CollectionReference,
   doc,
+  getCountFromServer,
   getDoc,
   getDocs,
   query,
+  QueryDocumentSnapshot,
   QuerySnapshot,
   where,
 } from "firebase/firestore";
@@ -18,13 +20,14 @@ import FollowerCount from "../atoms/user/FollowerCount";
 import CommonIcon from "../atoms/icon/CommonIcon";
 import UserName from "../atoms/user/UserName";
 import { auth, db } from "../../firebase";
-import { Post } from "../../types/types";
+import { Post, User } from "../../types/types";
 import PostCount from "../atoms/user/PostCount";
 import FollowCount from "../atoms/user/FollowCount";
 import Header from "../organisms/Header";
 import Footer from "../organisms/Footer";
 import Name from "../atoms/user/Name";
 import ThreeRowsPostList from "../molecules/ThreeRowsPostList";
+import ProfileFollowerCount from "../atoms/user/ProfileFollowerCount";
 
 interface State {
   userId: string;
@@ -38,7 +41,7 @@ function Profile() {
 
   //userIdのユーザーの情報
   const [profileUsers, setProfileUsers] = useState<any>([]);
-  const [posts, setPosts] = useState<QuerySnapshot[]>([]);
+  const [posts, setPosts] = useState<Post[]>([]);
 
   const [loading, setLoading] = useState(true);
 
@@ -55,7 +58,9 @@ function Profile() {
 
   // const [followerNum,setFollowerNum] = useState(0);
 
-  const [userCollectionRef, setUserCollectionRef] = useState<any>("");
+  // const [userCollectionRef, setUserCollectionRef] = useState<any>("");
+
+  const [followerCount, setFollowerCount] = useState<any>("");
 
   //各ページからデータ取得
   const location = useLocation();
@@ -67,8 +72,11 @@ function Profile() {
       setLoading(false);
       setUser(currentUser);
 
-      const userCollectionRef = collection(db, "user");
-      setUserCollectionRef(userCollectionRef);
+      const userCollectionRef = collection(
+        db,
+        "user"
+      ) as CollectionReference<User>;
+      // setUserCollectionRef(userCollectionRef);
 
       //ログインユーザーのfollow配列取得(フォローボタン用)
       const userDocRefId = doc(userCollectionRef, currentUser.uid);
@@ -96,6 +104,20 @@ function Profile() {
         // setFollowerNum(profileUserDataId.follower.length);
       }
 
+      //follower数取得
+      //コレクションまるごと取得するから、共通点はそのユーザーをフォロしていること(フォローしている＝フォロワー)
+      const followerCollectionRef = query(
+        userCollectionRef,
+        where("follow", "array-contains", userId)
+      );
+
+      const profileUserFollowerCount = await getCountFromServer(
+        followerCollectionRef
+      );
+
+      setFollowerCount(profileUserFollowerCount.data().count);
+      // console.log(profileUserFollowerCount.data().count);
+
       //投稿一覧取得
       const postCollectionRef: any = query(
         collection(db, "post"),
@@ -103,22 +125,22 @@ function Profile() {
       ) as CollectionReference<Post>;
 
       // 上記を元にドキュメントのデータを取得(post)
-      const postDocId: any = await getDocs(postCollectionRef);
+      const postDocId = await getDocs(postCollectionRef);
 
       //上記を元にデータの中身を取り出す。map()を使えるようにする。
-      const newPostDocIds = postDocId.docs as any[];
+      const newPostDocIds = postDocId.docs as QueryDocumentSnapshot<Post>[];
       const postDataArray = newPostDocIds.map((id) => id.data());
       setPosts(postDataArray);
     });
   }, []);
 
-  console.log(profileUsers); //[]
-  console.log(profileUsers.follow); //undefined
-  console.log(posts); //[]
-  console.log(followList); //follow[]
-  console.log(userId); //id出てる
-  console.log(profileUsers.userId); //undefined
-  console.log(usersFollow);
+  // console.log(profileUsers); //[]
+  // console.log(profileUsers.follow); //undefined
+  // console.log(posts); //[]
+  // console.log(followList); //follow[]
+  // console.log(userId); //id出てる
+  // console.log(profileUsers.userId); //undefined
+  // console.log(usersFollow);
 
   // const dispatch = useDispatch();
 
@@ -131,45 +153,55 @@ function Profile() {
           <Header show={true} />
           <div>
             <div
-              style={{
-                textAlign: "center",
-                fontSize: "20px",
-                fontWeight: "bold",
-              }}
+              // style={{
+              //   textAlign: "center",
+              //   fontSize: "20px",
+              //   fontWeight: "bold",
+              // }}
+              className="profile__userName"
             >
               <UserName users={profileUsers} />
             </div>
 
             <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                gap: "10%",
-                margin: "10px 20px",
-                alignItems: "center",
-              }}
+              // style={{
+              //   display: "flex",
+              //   justifyContent: "space-between",
+              //   gap: "10%",
+              //   margin: "10px 20px",
+              //   alignItems: "center",
+              // }}
+              className="profile__info"
             >
               <CommonIcon icon={profileUsers.icon} />
 
               <div
-                style={{
-                  display: "flex",
-                  width: "330px",
-                  justifyContent: "space-between",
-                  position: "relative",
-                }}
+                // style={{
+                //   display: "flex",
+                //   width: "330px",
+                //   justifyContent: "space-between",
+                //   position: "relative",
+                // }}
+                className="profile__threeCount"
               >
                 <PostCount posts={posts} />
                 {/* <Link to={"/follower"} state={{ userId: userId, follower:followerList, uid: user.uid }}>
-            <div>{followerNum}follower</div>
+            <div>{followerCount}follower</div>
           </Link> */}
-                {/*
-                <FollowerCount
-           followerList={followerList}
-           link={"/follower"}
-           uid={user.uid}
-           userId={userId}
-           /> */}
+
+                <ProfileFollowerCount
+                  //  followerList={followerList}
+                  followerCount={followerCount}
+                  link={"/follower"}
+                  uid={user.uid}
+                  userId={userId}
+                />
+                {/* <FollowerCount
+                followerList={followerList}
+                link={"/follower"}
+                uid={user.uid}
+                userId={userId}
+                /> */}
 
                 <FollowCount
                   followList={followList}
@@ -183,25 +215,37 @@ function Profile() {
               {/* <p>{followerNum.length}aaa</p> */}
             </div>
 
-            <span style={{ fontWeight: "bold" }}>
+            <span
+            // style={{ fontWeight: "bold" }}
+            className="profile__name">
               <Name users={profileUsers} />
             </span>
-            <div style={{ marginTop: "10px", marginBottom: "10px" }}>
+            <div
+            // style={{ marginTop: "10px", marginBottom: "10px" }}
+            className="profile__profile">
               {profileUsers.profile}
             </div>
 
-            <div style={{ display: "flex", gap: "5%" }}>
+            <div
+            // style={{ display: "flex", gap: "5%" }}
+            className="profile__btn">
               {usersFollow.includes(userId) ? (
                 <>
                   <RemoveFollowButton
                     userId={userId}
+                    followerCount={followerCount}
                     // onClick={()=>setFollowerNum(followerNum)}
                     // followerNum={followerNum}
+                    setFollowerCount={setFollowerCount}
                   />
                 </>
               ) : (
                 <>
-                  <AddFollowButton userId={userId} />
+                  <AddFollowButton
+                    userId={userId}
+                    followerCount={followerCount}
+                    setFollowerCount={setFollowerCount}
+                  />
                 </>
               )}
 

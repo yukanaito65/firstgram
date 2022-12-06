@@ -7,14 +7,15 @@ function InputRegister(props: any) {
         type={props.type}
         name={props.name}
         placeholder={props.placeholder}
-        style={{
-          width: "80%",
-          height: "35px",
-          backgroundColor: "#f7f7f7",
-          outline: "solid #d3d3d3",
-          border: "none",
-          marginLeft: "16px"
-        }}
+        className="inputRegister"
+        // style={{
+        //   width: "80%",
+        //   height: "35px",
+        //   backgroundColor: "#f7f7f7",
+        //   outline: "solid #d3d3d3",
+        //   border: "none",
+        //   marginLeft: "16px"
+        // }}
       />
     </div>
   );
