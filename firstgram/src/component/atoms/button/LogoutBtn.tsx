@@ -11,7 +11,7 @@ function LogoutBtn() {
     navigate("/login/");
   };
   return (
-    <button onClick={logout} className="nav_menu_btn">ログアウト</button>
+    <button onClick={logout} className="nav__ul--liLogout">ログアウト</button>
     )
 }
 

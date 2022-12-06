@@ -23,5 +23,20 @@
             border: none;
         }
     }
+    &--liLogout {
+      width: 100%;
+      background: none;
+      border: none;
+      color: rgb(38, 38, 38);
+      padding: 3px 15px;
+      text-align: left;
+      justify-content: space-between;
+      height: 100%;
+      display: flex;
+      &:hover {
+        cursor: pointer;
+        opacity: 0.6;
+      }
+    }
   }
 }
