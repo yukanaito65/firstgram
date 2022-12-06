@@ -28,7 +28,7 @@ function PostEditing() {
       setimgUrl(postData.Imgurl);
       setText(postData.Caption);
     });
-  });
+  },[]);
 
   const Updata = (e: any) => {
     console.log(text);
@@ -37,37 +37,26 @@ function PostEditing() {
 
   return (
     <>
-      <Header show={true} />
       <div className="postediting">
+      <Header show={true} />
       <Img imgUrl={imgUrl} />
-
         <textarea className="postediting__textarea"
           value={text}
           onChange={(e) => {
             setText(e.target.value);
-          }}
-          // style={{ height: "300px", width: "100%", marginTop: "5px" }}
-        ></textarea>
+          }} />
 
-
-        <div className="postediting__btns"
-          // style={{
-          //   display: "flex",
-          //   width: "100%",
-          //   justifyContent: "space-between",
-          // }}
-        >
+        <div className="postediting__btns">
           <BackBtn />
           <Link to="/">
             <button onClick={Updata} 
-            // style={{ textAlign: "right" }} 
             className="postediting__btn btn">
               編集完了
             </button>
           </Link>
         </div>
-      </div>
       <Footer />
+      </div>
     </>
   );
 }
