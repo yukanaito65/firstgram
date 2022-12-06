@@ -34,6 +34,9 @@ import KeepButton from "../atoms/button/KeepButton";
 import FavoLength from "../molecules/FavoLength";
 import Caption from "../molecules/Caption";
 import Img from "../atoms/pictures/Img";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAsyncGet, selectUsers } from "../../redux/loginUserSlice";
+import UserData from "../molecules/UserData";
 
 interface State {
   postid: string;
@@ -75,6 +78,14 @@ function PostDetails() {
   const location = useLocation();
   const { postid, userid } = location.state as State;
 
+  // Redux使うときのやつ
+  // const dispatch = useDispatch();
+  // const userData = useSelector(selectUsers)
+  // useEffect(() => {
+  //   dispatch(fetchAsyncGet());
+  // }, [dispatch]);
+
+
   useEffect(() => {
     //ログイン判定
     onAuthStateChanged(auth, async (user) => {
@@ -84,6 +95,11 @@ function PostDetails() {
         setLoginUserName(loginUserData.userName);
         setLoginUserKeep(loginUserData.keepPosts);
       });
+
+// Redux使うときのやつ
+    // setLoginUserName(userData.userName)
+    // setLoginUserName(userData.keepPosts)
+
 
       if (user?.uid === userid) {
         // useStateでログインしているユーザーの投稿かどうか判定するを保持
