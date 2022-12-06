@@ -1,0 +1,5 @@
+@use "../../../global/mixin/btn";
+
+.btn {
+    @include btn.button;
+}
