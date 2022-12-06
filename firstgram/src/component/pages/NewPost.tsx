@@ -51,6 +51,7 @@ const InputImage = (e:any) => {
 }
 return (
 <>
+<div className="newpost">
 <Header show={true} />
 
     {loading ? (
@@ -70,22 +71,22 @@ return (
             </>
         ):(
             <>
-            <div style={{border:"solid 1px #333 ",height:"300px", textAlign:"center",
+            <div  className="newpost__inputfileset"
+            style={{border:"solid 1px #333 ",height:"300px", textAlign:"center",
             display: "flex",justifyContent: "center",alignItems: "center",flexDirection: "column"}}>
             
-            <div style={{
-                // alignItems:"center",
-                width:"100%",
-                // margin:"0 auto"
-                }}>
-            <AiOutlineAreaChart size={40} style={{
+        
+            <AiOutlineAreaChart 
+            className="newpost__inputfileicon"
+            size={40} 
+            style={{
                 // alignItems:"center",
                 width:"100%",
                 // margin:"0 auto"
                 }}/>
-            </div>
 
-            <div style={{
+            <div className="newpost__input"
+            style={{
                 // border: "1px solid",
                 borderRadius: "3px",
                 // display: "inline-block",
@@ -98,8 +99,11 @@ return (
 
                 
             }}>
-            <p style={{color:"#fff"}}>コンピューターから選択</p>
-            <input name="imageURL" type="file" accept=".png, .jpeg, .jpg" onChange={ InputImage } 
+            <p className="newpost__inputletter"
+            style={{color:"#fff"}}>コンピューターから選択</p>
+            <input
+            className="newpost__file"
+            name="imageURL" type="file" accept=".png, .jpeg, .jpg" onChange={ InputImage } 
             style={{
                 height: "100%",
                 left: "0",
@@ -119,6 +123,7 @@ return (
     )}
 
 <Footer />
+</div>
 </>
 
 );};

@@ -33,6 +33,7 @@ import Icon from "../atoms/icon/Icon";
 import PostIcon from "../atoms/icon/PostIcon";
 
 import Img from "../atoms/pictures/Img";
+import { Post } from "../../types/types";
 
 
 function PostLook() {
@@ -150,44 +151,47 @@ function PostLook() {
     return a.postDate.toDate() > b.postDate.toDate() ? -1 : 1;
   });
 
-  const CommentDisplay = (e: any) => {
+  const CommentDisplay = (e: React.MouseEvent) => {
     setCommentDisplay(true);
   };
 
-  const CommentBack = (e: any) => {
+  const CommentBack = (e: React.MouseEvent) => {
     setCommentDisplay(false);
   };
 
   return (
     <>
       <Header show={true} />
-      <div>
+      <div className="postlook">
         {followUser.length === 0 ? (
           <>
             <div>
-              {ramData.map((data: any, index: any) => {
+              {ramData.map((data: Post, index:string) => {
                 const favos = [...data.favorites];
                 const com = [...data.comments];
                 return (
                   <>
                     <div key={index}>
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          width: "100%",
-                          marginTop:"30px"
-                        }}
+                      <div className="postlook__iconusername"
+                        // style={{
+                        //   display: "flex",
+                        //   alignItems: "center",
+                        //   width: "100%",
+                        //   marginTop:"30px"
+                        // }}
                       >
                         <Link
                           to={data.userId === userId ? "/mypage" : "/profile"}
                           state={{ userId: data.userId }}
                         >
-                      <div className="postDetails_postIcon">
+                      {/* <div className="postDetails_postIcon"> */}
+                      <div className="postlook__icon">
                           <PostIcon icon={data.icon} />
                       </div>
                         </Link>
-                        <p style={{ fontSize: "20px", marginLeft: "5px" }}>
+                        <p className="postlook__username"
+                        // style={{ fontSize: "20px", marginLeft: "5px" }}
+                        >
                           {data.userName}
                         </p>
                       </div>
@@ -202,14 +206,18 @@ function PostLook() {
                       </Link>
 
                       {/* いいねコメント保存 */}
-                      <div style={{ display: "flex", marginBottom: "0" }}>
+                      <div className="postlook__favocomkeep"
+                      // style={{ display: "flex", marginBottom: "0" }}
+                      >
                         {/* いいねボタン */}
-                        <div style={{ margin: "10px 5px 0px 5px" }}>
+                        <div className="postlook__favo"
+                        // style={{ margin: "10px 5px 0px 5px" }}
+                        >
                           {data.favorites.includes(loginUserName) ? (
                             <AiFillHeart
                               size={30}
                               color={"red"}
-                              onClick={(e: any) => {
+                              onClick={(e:React.MouseEvent) => {
                                 updateDoc(
                                   doc(collection(db, "post"), data.postId),
                                   {
@@ -223,7 +231,7 @@ function PostLook() {
                             <AiOutlineHeart
                               size={30}
                               color={"black"}
-                              onClick={(e: any) => {
+                              onClick={(e:React.MouseEvent) => {
                                 updateDoc(
                                   doc(collection(db, "post"), data.postId),
                                   {
@@ -237,7 +245,9 @@ function PostLook() {
                         </div>
 
                         {/* コメントボタン */}
-                        <div style={{ margin: "10px 5px 0px 5px" }}>
+                        <div className="postlook__com"
+                        // style={{ margin: "10px 5px 0px 5px" }}
+                        >
                           <AiOutlineMessage
                             size={30}
                             color={"black"}
@@ -246,7 +256,9 @@ function PostLook() {
                         </div>
 
                         {/* 保存ボタン */}
-                        <div style={{ margin: "5px 5px 0px auto" }}>
+                        <div className="postlook__keep"
+                        // style={{ margin: "5px 5px 0px auto" }}
+                        >
                           <KeepButton
                             loginUserKeep={loginUserKeep}
                             data={data.postId}
@@ -255,7 +267,9 @@ function PostLook() {
                       </div>
 
                       {/* いいね数、投稿時間 */}
-                      <div style={{ display: "flex" }}>
+                      <div className="postlook__favolengthtime"
+                      // style={{ display: "flex" }}
+                      >
                         <FavoLength favos={favos} />
                         <Time data={data.postDate} />
                       </div>
@@ -269,29 +283,33 @@ function PostLook() {
                             {/* コメント表示 */}
                             <CommentsDisplay displayComment={com} />
 
-                            <div style={{ display: "flex", width: "100%" }}>
+                            <div className="postlook__comdisplay"
+                            // style={{ display: "flex", width: "100%" }}
+                            >
                               {/* コメント投稿セット */}
-                              <div
-                                style={{
-                                  display: "flex",
-                                  width: "70%",
-                                  height: "30px",
-                                  margin: "5px",
-                                }}
+                              <div className="cominput"
+                                // style={{
+                                //   display: "flex",
+                                //   width: "70%",
+                                //   height: "30px",
+                                //   margin: "5px",
+                                // }}
                               >
-                                <input
+                                <input className="postlook__input"
                                   type="text"
                                   value={inputComment}
                                   onChange={(e) => {
                                     setInputComment(e.target.value);
                                   }}
-                                  style={{ width: "100%" }}
+                                  // style={{ width: "100%" }}
                                 />
                               </div>
 
-                              <div style={{ marginLeft: "auto", width: "30%" }}>
+                              <div className="postlook__btn"
+                              // style={{ marginLeft: "auto", width: "30%" }}
+                              >
                                 <button
-                                  onClick={async (e: any) => {
+                                  onClick={async (e:React.MouseEvent) => {
                                     // 押された投稿のcommentにinputCommentを配列で追加
                                     updateDoc(
                                       doc(collection(db, "post"), data.postId),
@@ -310,11 +328,12 @@ function PostLook() {
                                 </button>
                               </div>
                               <AiOutlineClose
-                                style={{
-                                  display: "block",
-                                  margin: "15px 0 0 auto",
-                                  alignItems: "center",
-                                }}
+                              className="postlook__closebtn"
+                                // style={{
+                                //   display: "block",
+                                //   margin: "15px 0 0 auto",
+                                //   alignItems: "center",
+                                // }}
                                 size={15}
                                 color={"rgb(38, 38, 38)"}
                                 onClick={CommentBack}
@@ -334,22 +353,23 @@ function PostLook() {
         ) : (
           <>
             <div>
-              {postData.map((data: any, index: any) => {
+              {postData.map((data: Post, index: string) => {
                 const favos = [...data.favorites];
                 const com = [...data.comments];
                 return (
                   <>
                     <div key={index}>
 
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          width: "100%",
-                          marginTop:"30px"
-                        }}
+                      <div className="postlook__iconusername"
+                        // style={{
+                        //   display: "flex",
+                        //   alignItems: "center",
+                        //   width: "100%",
+                        //   marginTop:"30px"
+                        // }}
                       >
-                        <div className="postDetails_postIcon">
+                        {/* <div className="postDetails_postIcon"> */}
+                        <div className="postlook____icon">
                           <Link
                             to={data.userId === userId ? "/mypage" : "/profile"}
                             state={{ userId: data.userId }}
@@ -357,7 +377,9 @@ function PostLook() {
                             <PostIcon icon={data.icon} />
                           </Link>
                         </div>
-                        <p style={{ fontSize: "20px", marginLeft: "5px" }}>
+                        <p className="postlook__username"
+                        // style={{ fontSize: "20px", marginLeft: "5px" }}
+                        >
                           {data.userName}
                         </p>
                       </div>
@@ -372,14 +394,17 @@ function PostLook() {
                       </Link>
 
                       {/* いいねコメント保存 */}
-                      <div style={{ display: "flex", marginBottom: "0" }}>
+                      <div className="postlook__favocomkeep"
+                      style={{ display: "flex", marginBottom: "0" }}>
                         {/* いいねボタン */}
-                        <div style={{ margin: "10px 5px 0px 5px" }}>
+                        <div className="postlook__favo"
+                        // style={{ margin: "10px 5px 0px 5px" }}
+                        >
                           {data.favorites.includes(loginUserName) ? (
                             <AiFillHeart
                               size={30}
                               color={"red"}
-                              onClick={(e: any) => {
+                              onClick={(e: React.MouseEvent) => {
                                 updateDoc(
                                   doc(collection(db, "post"), data.postId),
                                   {
@@ -393,7 +418,7 @@ function PostLook() {
                             <AiOutlineHeart
                               size={30}
                               color={"black"}
-                              onClick={(e: any) => {
+                              onClick={(e: React.MouseEvent) => {
                                 updateDoc(
                                   doc(collection(db, "post"), data.postId),
                                   {
@@ -407,7 +432,9 @@ function PostLook() {
                         </div>
 
                         {/* コメントボタン */}
-                        <div style={{ margin: "10px 5px 0px 5px" }}>
+                        <div className="postlook__com"
+                        // style={{ margin: "10px 5px 0px 5px" }}
+                        >
                           <AiOutlineMessage
                             size={30}
                             color={"black"}
@@ -416,7 +443,9 @@ function PostLook() {
                         </div>
 
                         {/* 保存ボタン */}
-                        <div style={{ margin: "5px 5px 0px auto" }}>
+                        <div className="postlook__keep"
+                        // style={{ margin: "5px 5px 0px auto" }}
+                        >
                           <KeepButton
                             loginUserKeep={loginUserKeep}
                             data={data.postId}
@@ -425,7 +454,9 @@ function PostLook() {
                       </div>
 
                       {/* いいね数、投稿時間 */}
-                      <div style={{ display: "flex" }}>
+                      <div className="postlook__favolengthtime"
+                      // style={{ display: "flex" }}
+                      >
                         <FavoLength favos={favos} />
                         <Time data={data.postDate} />
                       </div>
@@ -439,29 +470,33 @@ function PostLook() {
                             {/* コメント表示 */}
                             <CommentsDisplay displayComment={com} />
 
-                            <div style={{ display: "flex", width: "100%" }}>
+                            <div className="postlook__comdisplay"
+                            // style={{ display: "flex", width: "100%" }}
+                            >
                               {/* コメント投稿セット */}
-                              <div
-                                style={{
-                                  display: "flex",
-                                  width: "70%",
-                                  height: "30px",
-                                  margin: "5px",
-                                }}
+                              <div className="postlook__cominput"
+                                // style={{
+                                //   display: "flex",
+                                //   width: "70%",
+                                //   height: "30px",
+                                //   margin: "5px",
+                                // }}
                               >
-                                <input
+                                <input className="postlook__input"
                                   type="text"
                                   value={inputComment}
                                   onChange={(e) => {
                                     setInputComment(e.target.value);
                                   }}
-                                  style={{ width: "100%" }}
+                                  // style={{ width: "100%" }}
                                 />
                               </div>
 
-                              <div style={{ marginLeft: "auto", width: "30%" }}>
+                              <div className="postlook__btn"
+                              // style={{ marginLeft: "auto", width: "30%" }}
+                              >
                                 <button
-                                  onClick={async (e: any) => {
+                                  onClick={async (e: React.MouseEvent) => {
                                     // 押された投稿のcommentにinputCommentを配列で追加
                                     updateDoc(
                                       doc(collection(db, "post"), data.postId),
@@ -480,11 +515,12 @@ function PostLook() {
                                 </button>
                               </div>
                               <AiOutlineClose
-                                style={{
-                                  display: "block",
-                                  margin: "15px 0 0 auto",
-                                  alignItems: "center",
-                                }}
+                              className="postlook__closebtn"
+                                // style={{
+                                //   display: "block",
+                                //   margin: "15px 0 0 auto",
+                                //   alignItems: "center",
+                                // }}
                                 size={15}
                                 color={"rgb(38, 38, 38)"}
                                 onClick={CommentBack}

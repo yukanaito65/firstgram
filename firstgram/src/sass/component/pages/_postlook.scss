@@ -1,0 +1,53 @@
+.postlook{
+    &__iconusername{
+        display: flex;
+        align-items: center;
+        width: 100%;
+        margin-top:30px;
+    }
+    &__icon{
+        width: 10%;
+    }
+    &__username{
+        font-size: 20px;
+        margin-left: 5px;
+    }
+    &__favocomkeep{
+        display: flex; 
+        margin-bottom: 0;
+    }
+    &__favo{
+        margin: 10px 5px 0px 5px;
+    }
+    &__com{
+        margin: 10px 5px 0px 5px;
+    }
+    &__keep{
+        margin: 5px 5px 0px auto;
+    }
+    &__favolengthtime{
+        display: flex;
+    }
+    &__comdisplay{
+        display: flex;
+        width: 100%;
+    }
+    &__cominput{
+        display: flex;
+        width: 70%;
+        height: 30px;
+        margin: 5px;
+    }
+    &__input{
+        width: 100%;
+    }
+    &__btn{
+        margin-left: auto;
+        width: 30%;
+    }
+    &__closebtn{
+        display: block;
+        margin: 15px 0 0 auto;
+        align-items: center;
+    }
+}

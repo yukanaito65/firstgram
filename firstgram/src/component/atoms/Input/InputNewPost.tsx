@@ -1,11 +1,11 @@
 // import { onAuthStateChanged } from 'firebase/auth';
-// import { addDoc, arrayUnion, collection, doc, getDoc, serverTimestamp, updateDoc } from 'firebase/firestore';
+// import { addDoc, arrayUnion, collection, CollectionReference, doc, getDoc, serverTimestamp, updateDoc } from 'firebase/firestore';
 // import React, { useState } from 'react'
 // import { Link, useLocation } from 'react-router-dom';
 // import { auth, db } from '../../../firebase';
 
 // interface State {
-//     imgSrc:any
+//     imgSrc:string
 // }
 
 // function InputNewPost() {
@@ -32,7 +32,7 @@
 //         return Math.floor(Math.random() * (max - min + 1) + min)
 //     }
     
-//     const collectionPost:any =collection(db, "post");
+//     const collectionPost :CollectionReference=collection(db, "post");
 //     const docRef = await addDoc(collectionPost,
 //     {
 //     caption:textState,

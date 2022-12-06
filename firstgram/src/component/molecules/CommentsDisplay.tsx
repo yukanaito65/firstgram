@@ -6,12 +6,21 @@ interface Props {
 
 function CommentsDisplay(props:Props) {
   return (
-    <div>
+    <div className='commentdisplay'>
     {props.displayComment.map((data:any,index:any)=>{
     return(
-    <div key={index} style={{display:"flex",fontSize:"16px",width:"100%",margin:"3px"}}>
-    <p style={{fontWeight:"500"}}>{data.userName}</p>
-    <p style={{marginLeft:"5px"}}>{data.commentText}</p>
+    <div 
+    className='commentdisplay__comset'
+    key={index} 
+    // style={{display:"flex",fontSize:"16px",width:"100%",margin:"3px"}}
+    >
+    <p 
+    className='commentdisplay__username'
+    // style={{fontWeight:"500"}}
+    >{data.userName}</p>
+    <p className='commentdisplay__com'
+    // style={{marginLeft:"5px"}}
+    >{data.commentText}</p>
     </div>
     )
     })}
