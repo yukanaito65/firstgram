@@ -4,9 +4,10 @@
     }
     &__btns {
         display: flex;
-        &--passChangeBtn {
-            margin-right: 20px;
-        }
+        margin: 5px 0;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
         &--btn {
             justify-self: center;
             border: none;

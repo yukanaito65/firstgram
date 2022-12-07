@@ -8,7 +8,7 @@
     padding: 5px 0;
     position: fixed;
     top: 100px;
-    right: 25%;
+    right: 30%;
     list-style: none;
     width: 20%;
     background-color: $color-base;
@@ -27,7 +27,7 @@
       width: 100%;
       background: none;
       border: none;
-      color: rgb(38, 38, 38);
+      color: $color-black;
       padding: 3px 15px;
       text-align: left;
       justify-content: space-between;

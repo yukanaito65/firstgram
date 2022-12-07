@@ -1,0 +1,12 @@
+.searchBtn {
+    background: none;
+    color: rgb(38, 38, 38);
+    margin: 2px 0 1px 3px;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    &:hover {
+        cursor: pointer;
+        opacity: 0.6;
+    }
+}
