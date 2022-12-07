@@ -80,6 +80,7 @@
   width: 14%;
   aspect-ratio: 1/1;
   border: solid 1px lightgray;
+  background-color: white;
 }
 .icon-image__img {
   width: 100%;
@@ -101,6 +102,7 @@
   width: 14%;
   aspect-ratio: 1/1;
   border: solid 1px lightgray;
+  background-color: white;
 }
 .icon-image__img {
   width: 100%;
@@ -341,6 +343,9 @@ input:placeholder-shown ~ .form__messageBox {
   text-align: center;
   width: 80px;
 }
+.followCount:hover {
+  opacity: 0.7;
+}
 .followCount__number {
   font-weight: bold;
 }
@@ -348,6 +353,9 @@ input:placeholder-shown ~ .form__messageBox {
 .followerCount {
   text-align: center;
   width: 80px;
+}
+.followerCount:hover {
+  opacity: 0.7;
 }
 .followerCount__number {
   font-weight: bold;
@@ -364,6 +372,9 @@ input:placeholder-shown ~ .form__messageBox {
 .profileFollowerCount {
   text-align: center;
   width: 80px;
+}
+.profileFollowerCount:hover {
+  opacity: 0.7;
 }
 .profileFollowerCount__number {
   font-weight: bold;
@@ -434,6 +445,9 @@ input:placeholder-shown ~ .form__messageBox {
   width: calc((100% - 6px) / 3);
   aspect-ratio: 1/1;
 }
+.threeRowsPostList__image:hover {
+  opacity: 0.7;
+}
 .threeRowsPostList__message {
   margin-top: 10%;
   text-align: center;
@@ -444,6 +458,10 @@ input:placeholder-shown ~ .form__messageBox {
   gap: 3%;
   align-items: center;
   margin-top: 3%;
+}
+.userData:hover {
+  cursor: pointer;
+  background-color: #f0f0f0;
 }
 .userData__userName {
   font-weight: bold;
@@ -763,9 +781,11 @@ input:placeholder-shown ~ .form__messageBox {
   margin-top: 10px;
   margin-bottom: 10px;
 }
-.profile__btn {
+.profile__btnWrapper {
   display: flex;
-  gap: 5%;
+}
+.profile__dmBtn {
+  height: 30px;
 }
 
 .registerContents {
@@ -818,11 +838,20 @@ input:placeholder-shown ~ .form__messageBox {
 .postlook__favo {
   margin: 10px 5px 0px 5px;
 }
+.postlook__favo:hover {
+  opacity: 0.5;
+}
 .postlook__com {
   margin: 10px 5px 0px 5px;
 }
+.postlook__com:hover {
+  opacity: 0.5;
+}
 .postlook__keep {
   margin: 5px 5px 0px auto;
+}
+.postlook__keep:hover {
+  opacity: 0.5;
 }
 .postlook__favolengthtime {
   display: flex;
@@ -907,11 +936,20 @@ input:placeholder-shown ~ .form__messageBox {
 .postdetails__favo {
   margin: 10px 5px 0px 5px;
 }
+.postdetails__favo:hover {
+  opacity: 0.5;
+}
 .postdetails__com {
   margin: 10px 5px 0px 5px;
 }
+.postdetails__com:hover {
+  opacity: 0.5;
+}
 .postdetails__keep {
   margin: 5px 5px 5px auto;
+}
+.postdetails__keep:hover {
+  opacity: 0.5;
 }
 .postdetails__postcommentset {
   display: flex;

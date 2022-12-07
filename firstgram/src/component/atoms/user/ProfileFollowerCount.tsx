@@ -6,7 +6,7 @@ interface Props {
   uid: string;
   userId: string;
 }
-//followerList,link,userId,uid
+
 function ProfileFollowerCount(props: Props) {
   // const [followerNum, setFollowerNum] = useState<any>(props.followerList.length);
 
@@ -27,9 +27,7 @@ function ProfileFollowerCount(props: Props) {
       }}
     >
       <p>
-      <span
-      // style={{fontWeight:"bold"}}
-      className="profileFollowerCount__number">
+      <span className="profileFollowerCount__number">
         {/* {props.followerList.length} */}
         {props.followerCount}
         </span><br/>

@@ -9,7 +9,6 @@ import {
 import React, { useEffect, useState } from "react";
 import { FaBookmark } from "react-icons/fa";
 import { auth, db } from "../../../firebase";
-import AddFollowButton from "./AddFollowButton";
 import AddKeepButton from "./AddKeepButton";
 
 //ログインユーザーのkeepPosts配列に今表示しているpostのpostIdが存在したら保存解除ボタン、存在しなかったら保存するボタン
@@ -17,7 +16,6 @@ import AddKeepButton from "./AddKeepButton";
 //今表示しているpostのpostId
 //propsでpostIdもらう
 function RemoveKeepButton(props: any) {
-
   const [loading, setLoading] = useState(true);
 
   //ログインユーザーの情報
@@ -98,14 +96,14 @@ function RemoveKeepButton(props: any) {
         <>
           {keepBtn === true ? (
             <button
-            onClick={() =>{
-               removeKeep()
-              //  window.location.reload()
+              onClick={() => {
+                removeKeep();
+                //  window.location.reload()
               }}
-              className="keep_btn"
-              >
-                <FaBookmark className="keep_btn_img" />
-              </button>
+              className="keepBtn"
+            >
+              <FaBookmark className="keepBtn__img" />
+            </button>
           ) : (
             <AddKeepButton postId={props.postId} />
           )}

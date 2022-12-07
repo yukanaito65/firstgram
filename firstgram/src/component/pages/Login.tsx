@@ -19,49 +19,31 @@ function Login() {
 
   return (
     <>
-    <Header show={false} />
+      <Header show={false} />
       {/* ログインしている場合、マイページにリダイレクトする設定 */}
       {user ? (
         <Navigate to={`/mypage`} />
       ) : (
         <>
-          <div className="login"
-          // style={{display:"flex", justifyContent: "space-around"}}
-          >
-
-            <div className="login__iphone"
-            // style={{ width: "35%", height: "auto" }}
-            >
+          <div className="login">
+            <div className="login__iphone">
               <img
                 src={`${process.env.PUBLIC_URL}/iphone.png`}
                 alt="iphone"
                 className="login__img"
-                // style={{ width: "100%", height: "100%" }}
               />
             </div>
-            <div
-            className="login__contents"
-              // style={{
-              //   backgroundColor: "#ffff",
-              //   outline: "solid #d3d3d3",
-              //   textAlign: "center",
-              //   width: "50%",
-              // }}
-            >
-              <h1 className="login__logo"
-                // style={{ width: "100px", height: "100px", margin: "10% auto" }}
-              >
+            <div className="login__contents">
+              <h1 className="login__logo">
                 <Logo />
               </h1>
               <LoginForm />
 
               <p>
-                アカウントをお持ちでないですか？<br />
+                アカウントをお持ちでないですか？
+                <br />
                 <Link to={`/register`}>
-                  <span className="login__link"
-                  // style={{ color: "#0d6efd" }}
-                  >
-                    登録する</span>
+                  <span className="login__link">登録する</span>
                 </Link>
               </p>
             </div>

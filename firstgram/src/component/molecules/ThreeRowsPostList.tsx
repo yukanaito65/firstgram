@@ -22,20 +22,16 @@ function ThreeRowsPostList(props: Props) {
         <div className="threeRowsPostList">
           {props.posts.map((post: Post) => {
             return (
-              // <div style={{width: "300px", height: "300px", objectFit: "cover"}}>
               <div className="threeRowsPostList__image">
-                {/* <div className="myPostList_image-height"> */}
                 <Link
                   to="/PostDetails"
                   state={{
-                    // userid: props.users.userId,
                     userid: post.userId,
                     postid: post.postId,
                   }}
                 >
                   <OneThirdPost imageUrl={post.imageUrl} />
                 </Link>
-                {/* </div> */}
               </div>
             );
           })}

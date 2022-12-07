@@ -7,6 +7,9 @@
     width: calc((100% - 3px * 2) / 3);
   aspect-ratio: 1/1;
   }
+  &__image:hover {
+    opacity: 0.7;
+  }
   &__message {
     margin-top: 10%;
     text-align: center;

@@ -8,14 +8,6 @@ function InputRegister(props: any) {
         name={props.name}
         placeholder={props.placeholder}
         className="inputRegister"
-        // style={{
-        //   width: "80%",
-        //   height: "35px",
-        //   backgroundColor: "#f7f7f7",
-        //   outline: "solid #d3d3d3",
-        //   border: "none",
-        //   marginLeft: "16px"
-        // }}
       />
     </div>
   );

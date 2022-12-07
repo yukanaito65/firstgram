@@ -1,4 +1,3 @@
-import { QuerySnapshot } from 'firebase/firestore'
 import React from 'react'
 import { Post } from '../../types/types'
 import FollowCount from '../atoms/user/FollowCount'
@@ -14,9 +13,7 @@ interface Props  {
 
 function MyPageInfo(props:Props) {
   return (
-    <div
-    // style={{display:"flex", width:"330px", justifyContent: "space-between"}}
-    className="info">
+    <div className="info">
       <PostCount posts={props.posts}/>
       <FollowerCount
       followerList={props.followerList}

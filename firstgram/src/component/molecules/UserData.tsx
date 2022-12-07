@@ -18,14 +18,11 @@ function UserData(props: Props) {
         state={{ userId: props.users.userId }}
       >
         <div id={props.users.userId}
-        // style={{display: "flex", gap:"3%", alignItems: "center", marginTop: "3%"}}
         className="userData"
         >
         <CommonIcon icon={props.users.icon} />
         <div>
-          <span
-          // style={{fontWeight: "bold"}}
-          className="userData__userName">
+          <span className="userData__userName">
           <UserName users={props.users} />
           </span>
           <Name users={props.users} />

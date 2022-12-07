@@ -7,16 +7,15 @@ import {
   getDocs,
   query,
   QueryDocumentSnapshot,
-  QuerySnapshot,
   where,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import Footer from "../organisms/Footer";
 import Header from "../organisms/Header";
 import { auth, db } from "../../firebase";
 import ThreeRowsPostList from "../molecules/ThreeRowsPostList";
 import { Post, User } from "../../types/types";
+import BackBtn from "../atoms/button/BackBtn";
 
 function KeepList() {
   //keepPostsの中に入っているpostIdを元にpostのimageUrl取得
@@ -89,29 +88,11 @@ function KeepList() {
       {!loading && (
         <>
           <Header show={true} />
-          <Link to={"/mypage"}>⬅︎</Link>
+          <BackBtn />
           <ThreeRowsPostList
             posts={keepPosts}
             message={<p>保存済みの投稿はありません</p>}
           />
-          {/* {keepPostIds.length > 0 ? (
-            <div>
-          {keepPosts.map((keepPost: any) => {
-            return (
-                <Link
-                  to={"/PostDetails"}
-                  state={{ userid: keepPost.userId, postid: keepPost.postId }}
-                >
-                  <MyPost imageUrl={keepPost.imageUrl} />
-                </Link>
-            );
-          })}
-          </div>
-          ) :(
-            <div>
-              <p>保存済みの投稿はありません</p>
-            </div>
-          )} */}
           <Footer />
         </>
       )}
