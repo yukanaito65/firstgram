@@ -9,7 +9,6 @@ import CommonIcon from "../atoms/icon/CommonIcon";
 import { GetAllUserData } from "../data/GetAllUserData";
 import SearchForm from "../molecules/SearchForm";
 
-
 // 流れ
 // まず前userのuserNameとnameとuserIdを取得し配列に入れる
 // その中からinputタグ内の文字を含むuserを配列に格納する
@@ -73,11 +72,9 @@ function SearchPage() {
       userName: string;
       icon: string;
     }[] = [];
-    for (const userId of searchResultList) {
-      console.log(1);
-      const resultUserDoc = doc(db, "user", userId);
-      console.log(resultUserDoc);
 
+    for (const userId of searchResultList) {
+      const resultUserDoc = doc(db, "user", userId);
       getDoc(resultUserDoc).then((resultUserData) => {
         const getData: any = resultUserData.data();
         if (getData) {
@@ -93,39 +90,39 @@ function SearchPage() {
     }
   };
 
-  console.log(dataArr);
-
   return (
     <>
       <Header show={true} />
-      <div className="margin"></div>
-      <form className="searchpage_form">
+      <div className="searchPage">
         <SearchForm
           inputValue={searchValue}
           propsOnChange={setSearchValue}
           onClickSearch={() => onClickSearch()}
         />
-      </form>
-      {dataArr.length > 0 ? (
-        dataArr.map((a) => {
-          return (
-            <>
-              <Link
-                to={a.userId === currentUserId ? "/mypage" : "/profile"}
-                state={{ userId: a.userId }}
-              >
-                <CommonIcon icon={a.icon} />
-                <p>{a.name}</p>
-                <p>{a.userName}</p>
-              </Link>
-            </>
-          );
-        })
-      ) : (
-        <div className="no_matchUser">
-          <p>該当するユーザーがいません</p>
+        <div className="searchPage__resultUserList">
+          {dataArr.length > 0 ? (
+            dataArr.map((a) => {
+              return (
+                <Link
+                  to={a.userId === currentUserId ? "/mypage" : "/profile"}
+                  state={{ userId: a.userId }}
+                  className="searchPage__resultUserList--resultUser"
+                >
+                  <CommonIcon icon={a.icon} />
+                  <div className="searchPage__resultUserList--resultUserDetail">
+                    <p>{a.name}</p>
+                    <p>{a.userName}</p>
+                  </div>
+                </Link>
+              );
+            })
+          ) : (
+            <div className="searchPage__noMatchUser">
+              <p>該当するユーザーがいません</p>
+            </div>
+          )}
         </div>
-      )}
+      </div>
       <Footer />
     </>
   );

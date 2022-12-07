@@ -62,6 +62,19 @@
   margin-right: 5px;
 }
 
+.searchBtn {
+  background: none;
+  color: rgb(38, 38, 38);
+  margin: 2px 0 1px 3px;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+}
+.searchBtn:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}
+
 .icon-image {
   border-radius: 50%;
   width: 14%;
@@ -428,7 +441,7 @@ input:placeholder-shown ~ .form__messageBox {
   padding: 5px 0;
   position: fixed;
   top: 100px;
-  right: 25%;
+  right: 30%;
   list-style: none;
   width: 20%;
   background-color: #f7f7f7;
@@ -500,6 +513,38 @@ input:placeholder-shown ~ .form__messageBox {
 .caption {
   font-size: 16px;
   margin: 5px;
+}
+
+.searchForm {
+  width: 65%;
+  margin: 10px auto;
+  position: fixed;
+  top: 30px;
+  z-index: 100;
+  max-width: 600px;
+  min-width: 350px;
+}
+.searchForm__input {
+  width: 90%;
+  line-height: 30px;
+  border: 2px solid #1b4b36;
+  border-radius: 5px;
+  padding: 2px 10px;
+}
+.searchForm__input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  cursor: pointer;
+  background-image: url(../../public/x_icon.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-right: 0px;
+  width: 15px;
+  height: 15px;
+}
+
+.searchFormWapper {
+  width: 100%;
+  padding: 30px 10px 15px 20px;
 }
 
 .userDataTable {
@@ -577,6 +622,7 @@ input:placeholder-shown ~ .form__messageBox {
   margin: 15px;
   display: flex;
   justify-content: space-between;
+  padding: 0;
 }
 .footer__ul--li {
   border-right: 2px solid rgb(38, 38, 38);
@@ -605,9 +651,10 @@ input:placeholder-shown ~ .form__messageBox {
 }
 .accountSetting__btns {
   display: flex;
-}
-.accountSetting__btns--passChangeBtn {
-  margin-right: 20px;
+  margin: 5px 0;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
 }
 .accountSetting__btns--btn {
   justify-self: center;
@@ -876,6 +923,29 @@ input:placeholder-shown ~ .form__messageBox {
   align-items: center;
 }
 
+.searchPage {
+  margin-top: 20px;
+}
+.searchPage__resultUserList {
+  margin-top: 45px;
+}
+.searchPage__resultUserList--resultUser {
+  display: flex;
+  gap: 20px;
+  padding: 15px;
+}
+.searchPage__resultUserList--resultUser:hover {
+  cursor: pointer;
+  background-color: #f0f0f0;
+}
+.searchPage__resultUserList--resultUserDetail {
+  margin: auto 0;
+}
+.searchPage__noMatchUser {
+  margin-top: 100px;
+  text-align: center;
+}
+
 *,
 *:before,
 *:after {
@@ -901,7 +971,7 @@ body {
   max-width: 600px;
   margin: 0 auto;
   overflow-x: hidden;
-  padding-top: 80px;
+  padding-top: 60px;
   padding-bottom: 120px;
   min-height: 100vh;
   position: relative;

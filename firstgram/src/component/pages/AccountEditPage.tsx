@@ -106,7 +106,7 @@ function AccountEditPage() {
             </tr>
           </table>
           <div className="confirm_btn">
-            <Btn onClick={ChangeConfirm} text="更新" />
+            <Btn onClick={ChangeConfirm} text="更新" className="changeUserBtn" />
           </div>
           <BackBtn />
         </div>
