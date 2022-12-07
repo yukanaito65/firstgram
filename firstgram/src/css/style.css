@@ -459,6 +459,10 @@ input:placeholder-shown ~ .form__messageBox {
   align-items: center;
   margin-top: 3%;
 }
+.userData:hover {
+  cursor: pointer;
+  background-color: #f0f0f0;
+}
 .userData__userName {
   font-weight: bold;
 }
