@@ -24,8 +24,11 @@
     margin-top: 10px;
     margin-bottom: 10px;
   }
-  &__btn {
+  &__btnWrapper {
     display: flex;
-    gap: 5%;
+    // gap: 5%;
+  }
+  &__dmBtn {
+    height: 30px;
   }
 }

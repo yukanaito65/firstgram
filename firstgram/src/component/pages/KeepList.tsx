@@ -17,6 +17,7 @@ import Header from "../organisms/Header";
 import { auth, db } from "../../firebase";
 import ThreeRowsPostList from "../molecules/ThreeRowsPostList";
 import { Post, User } from "../../types/types";
+import BackBtn from "../atoms/button/BackBtn";
 
 function KeepList() {
   //keepPostsの中に入っているpostIdを元にpostのimageUrl取得
@@ -89,7 +90,8 @@ function KeepList() {
       {!loading && (
         <>
           <Header show={true} />
-          <Link to={"/mypage"}>⬅︎</Link>
+          {/* <Link to={"/mypage"}>⬅︎</Link> */}
+          <BackBtn />
           <ThreeRowsPostList
             posts={keepPosts}
             message={<p>保存済みの投稿はありません</p>}

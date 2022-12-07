@@ -14,9 +14,9 @@ import FollowerCount from "../user/FollowerCount";
 import RemoveFollowButton from "./RemoveFollowButton";
 
 interface Props {
-  userId:string;
+  userId: string;
   followerCount: number;
-  setFollowerCount:React.Dispatch<React.SetStateAction<number>>;
+  setFollowerCount: React.Dispatch<React.SetStateAction<number>>;
 }
 //profileに配置するボタン
 //userIdを受け取る
@@ -66,8 +66,6 @@ function AddFollowButton(props: Props) {
       // setFollowUsers(followUserDataId);
       // setFollowerList(followUserDataId?.follower);
 
-
-
       // setProfileFollowerCount(profileFollowerCount);
 
       // console.log(props.userId);
@@ -89,7 +87,6 @@ function AddFollowButton(props: Props) {
   //redux
   // const dispatch = useDispatch();
 
-
   const addFollow = async () => {
     await updateDoc(userDocRefId, {
       follow: arrayUnion(props.userId),
@@ -105,7 +102,7 @@ function AddFollowButton(props: Props) {
     //空白だと押した時に白くなる＝set関数が動いている
     //followerCount入れるとなにもかわらない
     //入ってほしい値は新たに取得したデータ
-    props.setFollowerCount(props.followerCount+1);
+    props.setFollowerCount(props.followerCount + 1);
 
     //redux
     // dispatch(followerData(props.followerList));
@@ -116,11 +113,11 @@ function AddFollowButton(props: Props) {
     <>
       {!loading && (
         <>
-        {/* {users.follower} */}
+          {/* {users.follower} */}
 
           {followBtn === false ? (
             <>
-            {/* <span style={{position: "absolute", top:"20%", left: "75%" }}>
+              {/* <span style={{position: "absolute", top:"20%", left: "75%" }}>
             <FollowerCount
             followerList={followerList}
             link={"/follower"}
@@ -128,16 +125,18 @@ function AddFollowButton(props: Props) {
             uid={user.uid}
             />
             </span> */}
-            {/* {props.followerCount} */}
-            <button onClick={() => addFollow()}>フォローする</button>
-            {/* <p>{followerList.length}</p> */}
+              {/* {props.followerCount} */}
+              <button onClick={() => addFollow()} className="btn">
+                フォローする
+              </button>
+              {/* <p>{followerList.length}</p> */}
             </>
           ) : (
             <RemoveFollowButton
-            userId={props.userId}
-            followerCount={props.followerCount}
-            setFollowerCount={props.setFollowerCount}
-             />
+              userId={props.userId}
+              followerCount={props.followerCount}
+              setFollowerCount={props.setFollowerCount}
+            />
           )}
         </>
       )}

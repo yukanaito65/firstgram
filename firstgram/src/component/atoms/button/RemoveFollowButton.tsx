@@ -118,11 +118,8 @@ function RemoveFollowButton(props: Props) {
               />
               </span> */}
               {/* {props.followerCount} */}
-            <button onClick={() =>{
-               removeFollow()
-              //  window.location.reload()
-              }
-              }>フォロー中</button>
+            <button onClick={() =>removeFollow()}
+            className="btn">フォロー中</button>
               {/* <p>{followerList.length}</p> */}
               </>
           ) : (

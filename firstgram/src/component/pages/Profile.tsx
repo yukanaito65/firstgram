@@ -216,19 +216,22 @@ function Profile() {
             </div>
 
             <span
-            // style={{ fontWeight: "bold" }}
-            className="profile__name">
+              // style={{ fontWeight: "bold" }}
+              className="profile__name"
+            >
               <Name users={profileUsers} />
             </span>
             <div
-            // style={{ marginTop: "10px", marginBottom: "10px" }}
-            className="profile__profile">
+              // style={{ marginTop: "10px", marginBottom: "10px" }}
+              className="profile__profile"
+            >
               {profileUsers.profile}
             </div>
 
             <div
-            // style={{ display: "flex", gap: "5%" }}
-            className="profile__btn">
+              // style={{ display: "flex", gap: "5%" }}
+              className="profile__btnWrapper"
+            >
               {usersFollow.includes(userId) ? (
                 <>
                   <RemoveFollowButton
@@ -250,7 +253,7 @@ function Profile() {
               )}
 
               <Link to={`/dmPage`} state={{ userId: userId }}>
-                <button>DM</button>
+                <button className="btn profile__dmBtn">DM</button>
               </Link>
             </div>
 

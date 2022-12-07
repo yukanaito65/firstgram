@@ -102,9 +102,9 @@ function RemoveKeepButton(props: any) {
                removeKeep()
               //  window.location.reload()
               }}
-              className="keep_btn"
+              className="keepBtn"
               >
-                <FaBookmark className="keep_btn_img" />
+                <FaBookmark className="keepBtn__img" />
               </button>
           ) : (
             <AddKeepButton postId={props.postId} />
