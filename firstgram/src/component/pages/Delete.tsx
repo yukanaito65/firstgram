@@ -5,10 +5,12 @@ import Header from '../organisms/Header'
 
 function Delete() {
   return (
-    <div>
+    <div >
     <Header show={true} />
-       <p>削除しました</p> 
-       <Link to="/" ><button>Topページに戻る</button></Link>
+    <div style={{width:"100%"}}>
+       <p style={{margin:"50px",display:"block",textAlign:"center"}}>削除しました</p> 
+       <Link to="/" ><button className='btn' style={{margin:"0 auto"}}>Topページに戻る</button></Link>
+       </div>
        <Footer />
     </div>
   )

@@ -49,6 +49,7 @@ function App() {
             {/* <Route path={`/PostLook`} element={<PostLook />} /> */}
             <Route path={`/passwordChange`} element={<PsswordChange />} />
             <Route path={`/PostEditing`} element={<PostEditing />} />
+            <Route path={`/Delete`} element={<Delete />} />
 
             {/* <Route path={`/FavolitePostLook`} element={<FavolitePostLook />} /> */}
 

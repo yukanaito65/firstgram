@@ -308,7 +308,7 @@ function PostLook() {
                               <div className="postlook__btn"
                               // style={{ marginLeft: "auto", width: "30%" }}
                               >
-                                <button
+                                <button className="btn"
                                   onClick={async (e:React.MouseEvent) => {
                                     // 押された投稿のcommentにinputCommentを配列で追加
                                     updateDoc(
@@ -496,7 +496,7 @@ function PostLook() {
                               <div className="postlook__btn"
                               // style={{ marginLeft: "auto", width: "30%" }}
                               >
-                                <button
+                                <button className="btn"
                                   onClick={async (e: React.MouseEvent) => {
                                     // 押された投稿のcommentにinputCommentを配列で追加
                                     updateDoc(

@@ -3,7 +3,9 @@ import { IoAddCircle } from "react-icons/io5";
 
 function RegisterIcon() {
   return (
-    <div style={{  position: "relative",}}>
+    <div
+    //  style={{  position: "relative",}}
+     className="registerIcon">
       <div
         className="icon-image"
         // style={{
