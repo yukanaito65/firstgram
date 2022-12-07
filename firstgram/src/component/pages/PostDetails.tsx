@@ -28,7 +28,6 @@ import {
   AiOutlineMessage,
 } from "react-icons/ai";
 import PostIcon from "../atoms/icon/PostIcon";
-import Post from "../atoms/pictures/Img";
 import CommentsDisplay from "../molecules/CommentsDisplay";
 import KeepButton from "../atoms/button/KeepButton";
 import FavoLength from "../molecules/FavoLength";
@@ -224,7 +223,7 @@ function PostDetails() {
                 </div>
               {/* </div> */}
 
-              <p 
+              <p
               className="postdetais__username"
               // style={{ fontSize: "20px", marginLeft: "5px" }}
               >
@@ -283,7 +282,7 @@ function PostDetails() {
                     </nav>
                   </div>
 
-                  <div 
+                  <div
                   className="postdetails__closebtn"
                   // style={{ marginLeft: "auto" }}
                   >
@@ -298,7 +297,7 @@ function PostDetails() {
                 </>
               ) : (
                 <>
-                  <div 
+                  <div
                    className="postdetails__closebtn"
                   // style={{ marginLeft: "auto" }}
                   >
@@ -316,11 +315,11 @@ function PostDetails() {
 
             <Img imgUrl={imgUrl} />
 
-            <div 
+            <div
             className="postdetails__favocomkeep"
             // style={{ display: "flex" }}
             >
-              <div 
+              <div
               className="postdetails__favo"
               // style={{ margin: "10px 5px 0px 5px" }}
               >
@@ -335,7 +334,7 @@ function PostDetails() {
                 )}
               </div>
 
-              <div 
+              <div
               className="postdetails__com"
               // style={{ margin: "10px 5px 0px 5px" }}
               >
@@ -377,7 +376,7 @@ function PostDetails() {
                   }}
                 ></input>
               </div>
-              <div 
+              <div
               className="postdetails__postcommentbutton"
               // style={{ marginLeft: "auto", width: "30%" }}
               >
@@ -453,7 +452,7 @@ function PostDetails() {
               <div className="postdetails__com"
               // style={{ margin: "10px 5px 0px 5px" }}
               >
-               
+
                   <AiOutlineMessage
                     size={30}
                     color={"rgb(38, 38, 38)"}

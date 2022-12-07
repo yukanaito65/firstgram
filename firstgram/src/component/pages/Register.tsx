@@ -27,30 +27,15 @@ function Register() {
         <Navigate to={`/`} />
       ) : (
         <>
-          <div
-            // style={{
-            //   backgroundColor: "#ffff",
-            //   outline: "solid #d3d3d3",
-            //   textAlign: "center",
-            //   width: "70%",
-            //   margin: "0 auto"
-            // }}
-            className="registerContents"
-          >
-            <h1
-            // style={{ width: "100px", height: "100px", margin: "0 auto" }}
-            className="registerContents__logo"
-            >
+          <div className="registerContents">
+            <h1 className="registerContents__logo">
               <Logo />
             </h1>
             <RegisterForm />
             <p>
               アカウントをお持ちですか？
               <Link to={`/login`}>
-                <span
-                // style={{ color: "#0d6efd" }}
-                className="registerContents__loginLink"
-                >ログインする</span>
+                <span className="registerContents__loginLink">ログインする</span>
               </Link>
             </p>
           </div>

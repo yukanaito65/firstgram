@@ -8,7 +8,6 @@ import {
   where,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import Footer from "../organisms/Footer";
 import Header from "../organisms/Header";
 import UserList from "../organisms/UserList";
@@ -85,7 +84,6 @@ function MyFollow() {
       {!loading && (
         <>
         <Header show={true} />
-          {/* <Link to={"/mypage"}>⬅︎</Link> */}
           <BackBtn />
 
           <UserList

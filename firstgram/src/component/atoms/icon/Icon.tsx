@@ -11,7 +11,7 @@ import type { User } from "../../../types/types";
 
 function Icon() {
   //取得してきたデータを保持
-  const [users, setUsers] = useState< User | undefined>();
+  const [users, setUsers] = useState<User | undefined>();
 
   //ログイン状態を保持
   //Authenticationに登録されている情報を持つ
@@ -55,33 +55,18 @@ function Icon() {
   return (
     <>
       {!loading && (
-        <div
-          className="icon-image"
-          // style={{
-          //   borderRadius: "50%",
-          //   width: "120px",
-          //   height: "120px",
-          //   border: "solid 1px lightgray",
-          // }}
-        >
+        <div className="icon-image">
           {user && users?.icon !== "" ? (
             <img
+              className="icon-image__img"
               src={users?.icon}
               alt="icon"
-              className="icon-image__img"
-              // style={{ width: "100%", height: "100%", objectFit: "cover",borderRadius: "50%" }}
             />
           ) : (
             <img
-            className="noIconImage"
+              className="noIconImage"
               src={`${process.env.PUBLIC_URL}/noIcon.png`}
               alt="NoImage"
-              // style={{
-              //   width: "100%",
-              //   height: "100%",
-              //   backgroundColor: "#d3d3d3",
-              //   borderRadius: "50%",
-              // }}
             />
           )}
         </div>

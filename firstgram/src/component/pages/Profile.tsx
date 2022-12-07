@@ -8,7 +8,6 @@ import {
   getDocs,
   query,
   QueryDocumentSnapshot,
-  QuerySnapshot,
   where,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
@@ -16,7 +15,6 @@ import { Link, useLocation } from "react-router-dom";
 import AddFollowButton from "../atoms/button/AddFollowButton";
 // import FollowButton from "./component/atoms/button/FollowButton";
 import RemoveFollowButton from "../atoms/button/RemoveFollowButton";
-import FollowerCount from "../atoms/user/FollowerCount";
 import CommonIcon from "../atoms/icon/CommonIcon";
 import UserName from "../atoms/user/UserName";
 import { auth, db } from "../../firebase";
@@ -52,7 +50,7 @@ function Profile() {
   const [followList, setFollowList] = useState<any>({ follow: [] });
 
   //userのfollower配列
-  const [followerList, setFollowerList] = useState<any>({ follower: [] });
+  // const [followerList, setFollowerList] = useState<any>({ follower: [] });
 
   // const [followBtn,setFollowBtn] = useState<boolean>();
 
@@ -100,7 +98,7 @@ function Profile() {
       } else {
         // setPostList(profileUserDataId.post);
         setFollowList(profileUserDataId.follow);
-        setFollowerList(profileUserDataId.follower);
+        // setFollowerList(profileUserDataId.follower);
         // setFollowerNum(profileUserDataId.follower.length);
       }
 
@@ -152,56 +150,22 @@ function Profile() {
         <>
           <Header show={true} />
           <div>
-            <div
-              // style={{
-              //   textAlign: "center",
-              //   fontSize: "20px",
-              //   fontWeight: "bold",
-              // }}
-              className="profile__userName"
-            >
+            <div className="profile__userName">
               <UserName users={profileUsers} />
             </div>
 
-            <div
-              // style={{
-              //   display: "flex",
-              //   justifyContent: "space-between",
-              //   gap: "10%",
-              //   margin: "10px 20px",
-              //   alignItems: "center",
-              // }}
-              className="profile__info"
-            >
+            <div className="profile__info">
               <CommonIcon icon={profileUsers.icon} />
 
-              <div
-                // style={{
-                //   display: "flex",
-                //   width: "330px",
-                //   justifyContent: "space-between",
-                //   position: "relative",
-                // }}
-                className="profile__threeCount"
-              >
+              <div className="profile__threeCount">
                 <PostCount posts={posts} />
-                {/* <Link to={"/follower"} state={{ userId: userId, follower:followerList, uid: user.uid }}>
-            <div>{followerCount}follower</div>
-          </Link> */}
 
                 <ProfileFollowerCount
-                  //  followerList={followerList}
                   followerCount={followerCount}
                   link={"/follower"}
                   uid={user.uid}
                   userId={userId}
                 />
-                {/* <FollowerCount
-                followerList={followerList}
-                link={"/follower"}
-                uid={user.uid}
-                userId={userId}
-                /> */}
 
                 <FollowCount
                   followList={followList}
@@ -215,23 +179,14 @@ function Profile() {
               {/* <p>{followerNum.length}aaa</p> */}
             </div>
 
-            <span
-              // style={{ fontWeight: "bold" }}
-              className="profile__name"
-            >
+            <span className="profile__name">
               <Name users={profileUsers} />
             </span>
-            <div
-              // style={{ marginTop: "10px", marginBottom: "10px" }}
-              className="profile__profile"
-            >
+            <div className="profile__profile">
               {profileUsers.profile}
             </div>
 
-            <div
-              // style={{ display: "flex", gap: "5%" }}
-              className="profile__btnWrapper"
-            >
+            <div className="profile__btnWrapper">
               {usersFollow.includes(userId) ? (
                 <>
                   <RemoveFollowButton

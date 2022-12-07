@@ -10,10 +10,7 @@ function InputCPass(props: any) {
   };
 
   return (
-    <div
-    // style={{position: "relative"}}
-    className="form"
-    >
+    <div className="form">
       <span className="form__requiredIcon">＊</span>
       <input
         type={isRevealConfirmPassword ? "text" : "password"}
@@ -22,13 +19,6 @@ function InputCPass(props: any) {
         data-equal-to="email"
         pattern={props.passwordValue}
         className="form__input"
-        // style={{
-        //   width: "80%",
-        //   height: "35px",
-        //   backgroundColor: "#f7f7f7",
-        //   outline: "solid #d3d3d3",
-        //   border: "none"
-        // }}
         required
       />
       <span

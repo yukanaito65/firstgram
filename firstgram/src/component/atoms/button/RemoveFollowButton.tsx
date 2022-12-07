@@ -4,20 +4,18 @@ import {
   collection,
   CollectionReference,
   doc,
-  DocumentReference,
   getDoc,
   updateDoc,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { auth, db } from "../../../firebase";
 import { User } from "../../../types/types";
-import FollowerCount from "../user/FollowerCount";
 import AddFollowButton from "./AddFollowButton";
 
 interface Props {
-  userId:string;
+  userId: string;
   followerCount: number;
-  setFollowerCount:React.Dispatch<React.SetStateAction<number>>;
+  setFollowerCount: React.Dispatch<React.SetStateAction<number>>;
 }
 function RemoveFollowButton(props: Props) {
   const [loading, setLoading] = useState(true);
@@ -45,7 +43,10 @@ function RemoveFollowButton(props: Props) {
       setLoading(false);
 
       //ログインユーザーの情報取得して、usersに格納
-      const userCollectionRef = collection(db, "user") as CollectionReference<User>;
+      const userCollectionRef = collection(
+        db,
+        "user"
+      ) as CollectionReference<User>;
 
       const userDocRefId = doc(userCollectionRef, currentUser.uid);
       setUserDocRefId(userDocRefId);
@@ -59,14 +60,13 @@ function RemoveFollowButton(props: Props) {
       const followUserDocRefId = doc(userCollectionRef, props.userId);
       setFollowUserDocRefId(followUserDocRefId);
 
-      const followUserDocId = await getDoc(followUserDocRefId);
+      // const followUserDocId = await getDoc(followUserDocRefId);
 
-      const followUserDataId = followUserDocId.data();
+      // const followUserDataId = followUserDocId.data();
       // setFollowUsers(followUserDataId);
       // setFollowerList(followUserDataId?.follower);
 
       // setProfileFollowerCount(profileFollowerCount)
-
 
       // console.log(props.userId);
       // console.log(userDataId);
@@ -98,9 +98,7 @@ function RemoveFollowButton(props: Props) {
     setFollowBtn(false);
     // setFollowerNum(props.followerNum);
     // setProfileFollowerCount(profileFollowerCount);
-    props.setFollowerCount(props.followerCount-1);
-
-
+    props.setFollowerCount(props.followerCount - 1);
   };
 
   return (
@@ -109,7 +107,7 @@ function RemoveFollowButton(props: Props) {
         <>
           {followBtn === true ? (
             <>
-            {/* <span style={{position: "absolute", top: "20%", left: "75%" }}>
+              {/* <span style={{position: "absolute", top: "20%", left: "75%" }}>
             <FollowerCount
               followerList={followerList}
               link={"/follower"}
@@ -118,15 +116,16 @@ function RemoveFollowButton(props: Props) {
               />
               </span> */}
               {/* {props.followerCount} */}
-            <button onClick={() =>removeFollow()}
-            className="btn">フォロー中</button>
+              <button onClick={() => removeFollow()} className="btn">
+                フォロー中
+              </button>
               {/* <p>{followerList.length}</p> */}
-              </>
+            </>
           ) : (
             <AddFollowButton
-            userId={props.userId}
-            followerCount={props.followerCount}
-            setFollowerCount={props.setFollowerCount}
+              userId={props.userId}
+              followerCount={props.followerCount}
+              setFollowerCount={props.setFollowerCount}
             />
           )}
         </>

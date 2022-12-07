@@ -8,10 +8,8 @@ interface Props {
 function PostCount(props: Props) {
   return (
     <div
-    // style={{textAlign: "center", width: "80px"}}
     className="postCount">
     <span
-    // style={{fontWeight:"bold"}}
     className="postCount__number"
     >{props.posts.length}</span><br/>
     投稿

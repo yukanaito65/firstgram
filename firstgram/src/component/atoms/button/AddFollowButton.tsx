@@ -7,10 +7,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import { auth, db } from "../../../firebase";
-import { followerData } from "../../../redux/followerCountSlice";
-import FollowerCount from "../user/FollowerCount";
 import RemoveFollowButton from "./RemoveFollowButton";
 
 interface Props {
@@ -60,9 +57,9 @@ function AddFollowButton(props: Props) {
       const followUserDocRefId = doc(userCollectionRef, props.userId);
       setFollowUserDocRefId(followUserDocRefId);
 
-      const followUserDocId = await getDoc(followUserDocRefId);
+      // const followUserDocId = await getDoc(followUserDocRefId);
 
-      const followUserDataId = followUserDocId.data();
+      // const followUserDataId = followUserDocId.data();
       // setFollowUsers(followUserDataId);
       // setFollowerList(followUserDataId?.follower);
 
@@ -101,7 +98,6 @@ function AddFollowButton(props: Props) {
 
     //空白だと押した時に白くなる＝set関数が動いている
     //followerCount入れるとなにもかわらない
-    //入ってほしい値は新たに取得したデータ
     props.setFollowerCount(props.followerCount + 1);
 
     //redux
