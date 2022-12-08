@@ -104,7 +104,7 @@ function SearchPage() {
             dataArr.map((a) => {
               return (
                 <Link
-                  to={a.userId === currentUserId ? "/mypage" : "/profile"}
+                  to={a.userId === currentUserId ? "/mypage/" : "/profile"}
                   state={{ userId: a.userId }}
                   className="searchPage__resultUserList--resultUser"
                 >
