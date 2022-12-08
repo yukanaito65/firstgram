@@ -7,7 +7,6 @@ import {
   getDocs,
   query,
   QueryDocumentSnapshot,
-  QuerySnapshot,
   where,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
@@ -130,31 +129,10 @@ function MyPage() {
           ) : (
             <>
               <Header show={true} />
-              <div
-                // style={{
-                //   textAlign: "center",
-                //   fontSize: "20px",
-                //   fontWeight: "bold",
-                // }}
-                className="myPage__userName"
-              >
+              <div className="myPage__userName">
                 <UserName users={users} />
               </div>
-              {/* <div>{users.userName}</div> */}
-              {/* <Link to={`/dmPage`}>
-                  <button>DM</button>
-                </Link> */}
-
-              <div
-                // style={{
-                //   display: "flex",
-                //   justifyContent: "space-between",
-                //   gap: "10%",
-                //   margin: "10px 20px",
-                //   alignItems: "center",
-                // }}
-                className="myPage__info"
-              >
+              <div className="myPage__info">
                 <Icon />
                 <MyPageInfo
                   posts={posts}
@@ -186,25 +164,17 @@ function MyPage() {
                   <div>{followList.length}フォロー中</div>
                 </Link> */}
               {/* </div> */}
-              <span
-              // style={{ fontWeight: "bold" }}
-              className="myPage__name"
-              >
+              <span className="myPage__name">
                 <Name users={users} />
               </span>
-              <div
-              // style={{ marginTop: "10px", marginBottom: "10px" }}
-              className="myPage__profile"
-              >
-                {users.profile}
-              </div>
+              <div className="myPage__profile">{users.profile}</div>
               <ThreeRowsPostList
                 posts={posts}
                 // users={users}
                 message={
                   <>
                     <p>初めて投稿してみよう！</p>
-                    <Link to="/NewPost" className="myPage_messageLink">
+                    <Link to="/NewPost" className="myPage__messageLink">
                       新規投稿はこちら
                     </Link>
                   </>

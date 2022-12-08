@@ -16,7 +16,6 @@ import RemoveKeepButton from "./RemoveKeepButton";
 //今表示しているpostのpostId
 //propsでpostIdもらう
 function AddKeepButton(props: any) {
-
   const [loading, setLoading] = useState(true);
 
   //ログインユーザーの情報
@@ -75,7 +74,6 @@ function AddKeepButton(props: any) {
   //ログインユーザーのfollow配列に今表示しているユーザーのuserIdが存在したら、フォロー外すボタン、存在しなかったらフォローするボタン
   const [keepBtn, setKeepBtn] = useState<boolean>(false);
 
-
   //ログインユーザーのkeepPosts配列にprops.postIdを追加
   //postのkeeps配列にuser.uidを追加
   const addKeep = async () => {
@@ -96,12 +94,9 @@ function AddKeepButton(props: any) {
       {!loading && (
         <>
           {keepBtn === false ? (
-            <button
-            onClick={()=>addKeep()}
-            className="keepBtn"
-              >
-                <FaRegBookmark className="keepBtn__img" />
-              </button>
+            <button onClick={() => addKeep()} className="keepBtn">
+              <FaRegBookmark className="keepBtn__img" />
+            </button>
           ) : (
             <RemoveKeepButton postId={props.postId} />
           )}

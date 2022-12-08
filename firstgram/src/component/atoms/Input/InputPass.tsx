@@ -14,10 +14,7 @@ function InputPass(props: Props) {
   };
 
   return (
-    <div
-    // style={{ position: "relative" }}
-    className="form"
-    >
+    <div className="form">
       <input
         type={isRevealConfirmPassword ? "text" : "password"}
         name="password"
@@ -25,7 +22,6 @@ function InputPass(props: Props) {
         placeholder="パスワード"
         className="form__input"
         onChange={props.passChange}
-        // style={{width:"80%", height: "35px", backgroundColor: "#f7f7f7",outline: "solid #d3d3d3", border: "none"}}
         required
       />
       <span

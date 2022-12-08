@@ -22,11 +22,20 @@
     &__favo{
         margin: 10px 5px 0px 5px;
     }
+    &__favo:hover {
+        opacity: 0.5;
+    }
     &__com{
         margin: 10px 5px 0px 5px;
     }
+    &__com:hover {
+        opacity: 0.5;
+    }
     &__keep{
         margin: 5px 5px 0px auto;
+    }
+    &__keep:hover {
+        opacity: 0.5;
     }
     &__favolengthtime{
         display: flex;

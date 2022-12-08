@@ -1,5 +1,3 @@
-// import "../../../css/validation"
-
 import { useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
@@ -12,10 +10,7 @@ function InputRegisterPass(props: any) {
   };
 
   return (
-    <div className="input_fieldset"
-    style={{position: "relative"}}
-    // className="form"
-    >
+    <div className="form">
       <span className="form__requiredIcon">＊</span>
       <input
         type={isRevealConfirmPassword ? "text" : "password"}
@@ -25,13 +20,6 @@ function InputRegisterPass(props: any) {
         onChange={props.passChange}
         pattern="(?=.*?[a-z])(?=.*?\d)[a-z\d]{6,}"
         className="form__input"
-        // style={{
-        //   width: "80%",
-        //   height: "35px",
-        //   backgroundColor: "#f7f7f7",
-        //   outline: "solid #d3d3d3",
-        //   border: "none",
-        // }}
         required
       />
       <span

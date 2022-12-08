@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-
 function InputRequiredRegister(props: any) {
   return (
     <div>
@@ -11,13 +9,6 @@ function InputRequiredRegister(props: any) {
         pattern={props.pattern}
         data-equal-to={props.equal}
         className="form__input"
-        // style={{
-        //   width: "80%",
-        //   height: "35px",
-        //   backgroundColor: "#f7f7f7",
-        //   outline: "solid #d3d3d3",
-        //   border: "none",
-        // }}
         required
       />
       {/* <span className="input-error-message messageBox"> */}

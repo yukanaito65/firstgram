@@ -8,7 +8,7 @@ import {
   where,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Footer from "../organisms/Footer";
 import Header from "../organisms/Header";
 import UserList from "../organisms/UserList";
@@ -56,9 +56,6 @@ function Follower() {
       {!loading && (
         <>
           <Header show={true} />
-          {/* <Link to={"/profile"} state={{ userId: userId }}>
-            ⬅︎
-          </Link> */}
           <BackBtn />
           <UserList usersData={followerUsers} uid={uid} />
           <Footer />

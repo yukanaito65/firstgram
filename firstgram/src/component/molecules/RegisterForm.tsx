@@ -1,4 +1,3 @@
-import { spawn } from "child_process";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
@@ -11,11 +10,9 @@ import RegisterButton from "../atoms/button/RegisterButton";
 import RegisterIcon from "../atoms/icon/RegisterIcon";
 import InputCPass from "../atoms/Input/InputCPass";
 import InputEmail from "../atoms/Input/InputEmail";
-import InputPass from "../atoms/Input/InputPass";
 import InputRegister from "../atoms/Input/InputRegister";
 import InputRegisterPass from "../atoms/Input/InputRegisterPass";
 import InputRequiredRegister from "../atoms/Input/InputRequiredRegister";
-import InputUserRegister from "../atoms/Input/InputRequiredRegister";
 
 function RegisterForm() {
   //Authenticationに登録するemailとpassword
@@ -126,10 +123,8 @@ function RegisterForm() {
     <>
       {/* 登録ボタンを押した時にhandleSubmitを実行 */}
       <form onSubmit={handleSubmit}
-      // style={{ lineHeight: "5rem" }}
       className="form">
         <div
-        // style={{ width: "130px", height: "auto", margin: "0 auto" }}
         className="form__icon">
           {loading ? (
             <>
@@ -140,31 +135,16 @@ function RegisterForm() {
                 type="file"
                 accept=".png, .jpeg, .jpg"
                 onChange={InputImage}
-                // style={{ display: "none" }}
                 className="form__loading-input"
               />
             </>
           ) : (
             <>
               {isUploaded ? (
-                <div
-                  // style={{
-                  //   borderRadius: "50%",
-                  //   width: "120px",
-                  //   height: "120px",
-                  //   border: "solid 1px lightgray",
-                  // }}
-                  className="form__loaded-image"
-                >
+                <div className="form__loaded-image">
                   <img
                     alt="icon"
                     src={imgSrc}
-                    // style={{
-                    //   width: "100%",
-                    //   height: "100%",
-                    //   objectFit: "cover",
-                    //   borderRadius: "50%",
-                    // }}
                     className="form__loaded-image--img"
                   />
                 </div>
@@ -179,37 +159,19 @@ function RegisterForm() {
                     type="file"
                     accept=".png, .jpeg, .jpg"
                     onChange={InputImage}
-                    // style={{ display: "none" }}
                     className="form__loading-input"
                   />
                 </>
               )}
             </>
           )}
-          {/* </label> */}
         </div>
         <p className="form__requiredText">＊：必須項目</p>
-        {/* <div> */}
         <InputEmail
           emailChange={emailChange}
           valueEmail={registerEmail}
           requiredIcon={<span className="form__requiredIcon">＊</span>}
         />
-        {/* <input
-            type="email"
-            name="email"
-            value={registerEmail}
-            onChange={(e) => setRegisterEmail(e.target.value)}
-            placeholder="メールアドレス"
-            style={{
-              width: "80%",
-              height: "35px",
-              backgroundColor: "#f7f7f7",
-              outline: "solid #d3d3d3",
-              border: "none",
-            }}
-          /> */}
-        {/* </div> */}
 
         <InputRequiredRegister
           type={"text"}
@@ -218,98 +180,26 @@ function RegisterForm() {
           pattern={"^([a-zA-Z0-9]{4,})$"}
           message={"半角英数字4文字以上"}
         />
-        {/* <div>
-          <input
-            type="text"
-            name="userName"
-            placeholder="ユーザーネーム"
-            style={{
-              width: "80%",
-              height: "35px",
-              backgroundColor: "#f7f7f7",
-              outline: "solid #d3d3d3",
-              border: "none",
-            }}
-          />
-        </div> */}
 
         <InputRequiredRegister
           type={"text"}
           name={"name"}
           placeholder={"ネーム"}
         />
-        {/* <div>
-          <input
-            type="text"
-            name="name"
-            placeholder="ネーム"
-            style={{
-              width: "80%",
-              height: "35px",
-              backgroundColor: "#f7f7f7",
-              outline: "solid #d3d3d3",
-              border: "none",
-            }}
-          />
-        </div> */}
 
         <InputRegisterPass
           valuePassword={registerPassword}
           passChange={passChange}
         />
-        {/* <div>
-          <input
-            type="password"
-            name="password"
-            value={registerPassword}
-            onChange={(e) => setRegisterPassword(e.target.value)}
-            placeholder="パスワード"
-            style={{
-              width: "80%",
-              height: "35px",
-              backgroundColor: "#f7f7f7",
-              outline: "solid #d3d3d3",
-              border: "none",
-            }}
-          />
-        </div> */}
 
-        {/* <InputRequiredRegister type={"password"} name={"Cpassword"} placeholder={"確認用パスワード"} equal={"email"} /> */}
         <InputCPass passwordValue={registerPassword} />
-        {/* <div>
-          <input
-            type="password"
-            name="Cpassword"
-            placeholder="確認用パスワード"
-            style={{
-              width: "80%",
-              height: "35px",
-              backgroundColor: "#f7f7f7",
-              outline: "solid #d3d3d3",
-              border: "none",
-            }}
-          />
-        </div> */}
 
         <InputRegister
           type={"textarea"}
           name={"profile"}
           placeholder={"自己紹介"}
         />
-        {/* <div>
-          <input
-            type="textarea"
-            name="profile"
-            placeholder="自己紹介"
-            style={{
-              width: "80%",
-              height: "35px",
-              backgroundColor: "#f7f7f7",
-              outline: "solid #d3d3d3",
-              border: "none",
-            }}
-          />
-        </div> */}
+
         <RegisterButton />
       </form>
     </>
