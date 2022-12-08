@@ -208,7 +208,7 @@ function Profile() {
               )}
 
               <Link to={`/dmPage`} state={{ userId: userId }}>
-                <button className="btn profile__dmBtn">DM</button>
+                <button className="profile__dmBtn">メッセージを送信</button>
               </Link>
             </div>
 
