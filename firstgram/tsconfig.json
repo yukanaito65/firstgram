@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-, "setting.tsx"  ]
+, "setting.tsx", "sum.test.js"  ]
 }
