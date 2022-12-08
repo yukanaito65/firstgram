@@ -34,15 +34,15 @@ interface State {
     return (
       <div>
         {/* form入力をし、enterキーを押したときにonSubmitの中の関数が実行される */}
-        <form onSubmit={sendMessage} className="dmpage_form">
-          <div className="dmpage_form_wrapper">
+        <form onSubmit={sendMessage} className="sendDm">
+          <div className="sendDmWrapper">
             <input
-            className="dmpage_form_input"
+            className="sendDm__input"
               placeholder="メッセージを入力..."
               onChange={(e) => setMessage(e.target.value)}
               value={message}
             />
-            <button className="dmpage_form_btn">送信</button>
+            <button className="sendDm__btn">送信</button>
           </div>
         </form>
       </div>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../../firebase";
+import { MdAutorenew, MdOutlineChangeCircle } from "react-icons/md";
 
 function UpdateIcon(props: any) {
   //loadingしているかしてないか監視する
@@ -42,8 +43,8 @@ function UpdateIcon(props: any) {
             ) : (
               <>
                 {isUploaded ? (
-                  <div>
-                    <div className="setting_table_title">
+                  <div className="upDateIcon">
+                    <div>
                       <img
                         className="icon-image"
                         alt="ユーザーアイコン"
@@ -51,31 +52,39 @@ function UpdateIcon(props: any) {
 
                       />
                     </div>
-                    <div className="setting_table_content">
+                    <div className="upDateIcon__block">
+                      <label className="upDateIcon__label">
+                      <MdAutorenew size={30} color="white" />
                       <input
                         name="settingIcon"
                         type="file"
                         accept=".png, .jpeg, .jpg"
                         onChange={InputImage}
+                        className="upDateIcon__input"
                       />
+                      </label>
                     </div>
                   </div>
                 ) : (
                   <div>
-                    <div className="setting_table_title">
+                    <div>
                       <img
                         className="icon-image"
                         alt="ユーザーアイコン"
                         src={props.iconPropsValue}
                       />
                     </div>
-                    <div className="setting_table_content">
+                    <div className="upDateIcon__block">
+                      <label className="upDateIcon__label">
+                        <MdAutorenew size={30} color="white" />
                       <input
                         name="settingIcon"
                         type="file"
                         accept=".png, .jpeg, .jpg"
                         onChange={InputImage}
+                        className="upDateIcon__input"
                       />
+                      </label>
                     </div>
                   </div>
                 )}
