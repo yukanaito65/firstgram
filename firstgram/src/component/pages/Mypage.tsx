@@ -174,7 +174,7 @@ function MyPage() {
                 message={
                   <>
                     <p>初めて投稿してみよう！</p>
-                    <Link to="/NewPost" className="myPage_messageLink">
+                    <Link to="/NewPost" className="myPage__messageLink">
                       新規投稿はこちら
                     </Link>
                   </>
