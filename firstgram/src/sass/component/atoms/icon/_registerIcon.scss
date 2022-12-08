@@ -4,6 +4,9 @@
 
 .registerIcon {
   position: relative;
+  &:hover {
+    cursor: pointer;
+  }
 }
 .icon-image {
   border-radius: 50%;
