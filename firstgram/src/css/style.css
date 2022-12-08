@@ -141,6 +141,7 @@
   width: 100%;
   aspect-ratio: 1/1;
   border: solid 1px lightgray;
+  background-color: white;
 }
 .post-icon-image__img {
   border-radius: 50%;
