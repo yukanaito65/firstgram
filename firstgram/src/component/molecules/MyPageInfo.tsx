@@ -1,11 +1,11 @@
-import { QuerySnapshot } from 'firebase/firestore'
 import React from 'react'
+import { Post } from '../../types/types'
 import FollowCount from '../atoms/user/FollowCount'
 import FollowerCount from '../atoms/user/FollowerCount'
 import PostCount from '../atoms/user/PostCount'
 
-type Props = {
-  posts: QuerySnapshot[],
+interface Props  {
+  posts: Post[],
   followerList: string[],
   followList: string[],
   uid: string,
@@ -13,7 +13,7 @@ type Props = {
 
 function MyPageInfo(props:Props) {
   return (
-    <div style={{display:"flex", width:"330px", justifyContent: "space-between"}}>
+    <div className="info">
       <PostCount posts={props.posts}/>
       <FollowerCount
       followerList={props.followerList}

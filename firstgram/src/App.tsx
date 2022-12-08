@@ -10,7 +10,6 @@ import "./index.css"
 // import Follower from "./Follower";
 import PostDetails from "./component/pages/PostDetails";
 import PostLook from "./component/pages/PostLook";
-import DeleteCompPage from "./component/pages/DeleteCompPage";
 import PsswordChange from "./component/pages/PsswordChange";
 import PostEditing from "./component/pages/PostEditing";
 
@@ -24,6 +23,7 @@ import Follower from "./component/pages/Follower";
 import MyFollower from "./component/pages/MyFollower";
 import MyFollow from "./component/pages/MyFollow";
 import KeepList from "./component/pages/KeepList";
+import Delete from "./component/pages/Delete";
 
 
 
@@ -47,9 +47,9 @@ function App() {
             <Route path={`/PostDetails`} element={<PostDetails />} />
             {/* <Route path="/PostDetails" component={PostDetails} /> */}
             {/* <Route path={`/PostLook`} element={<PostLook />} /> */}
-            <Route path={`/deleteComp`} element={<DeleteCompPage />} />
             <Route path={`/passwordChange`} element={<PsswordChange />} />
             <Route path={`/PostEditing`} element={<PostEditing />} />
+            <Route path={`/Delete`} element={<Delete />} />
 
             {/* <Route path={`/FavolitePostLook`} element={<FavolitePostLook />} /> */}
 
@@ -57,6 +57,7 @@ function App() {
             <Route path={`/searchPage`} element={<SearchPage />} />
             <Route path={`/profile`} element={<Profile />} />
             <Route path={`/keep`} element={<KeepList />} />
+            {/* <Route path={`/InputNewPost`} element={<InputNewPost />} /> */}
           </Routes>
         </BrowserRouter>
       </div>

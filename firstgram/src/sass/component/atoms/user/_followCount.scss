@@ -1,0 +1,12 @@
+.followCount {
+  text-align: center;
+  width: 80px;
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  &__number {
+    font-weight: bold;
+  }
+}

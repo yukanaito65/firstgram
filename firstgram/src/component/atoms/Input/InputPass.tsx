@@ -1,22 +1,36 @@
-// import "../../../css/validation"
+import { useState } from "react";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
-function InputPass(props:any) {
+interface Props {
+  passChange: any;
+  valuePassword: string;
+}
+
+function InputPass(props: Props) {
+  const [isRevealConfirmPassword, setIsRevealConfirmPassword] = useState(false);
+
+  const toggleConfirmPassword = () => {
+    setIsRevealConfirmPassword((prevState) => !prevState);
+  };
 
   return (
-    <div className="input_fieldset">
+    <div className="form">
       <input
-        type="password"
+        type={isRevealConfirmPassword ? "text" : "password"}
         name="password"
         value={props.valuePassword}
-        placeholder={props.placeholder}
+        placeholder="パスワード"
+        className="form__input"
         onChange={props.passChange}
-        pattern="(?=.*?[a-z])(?=.*?\d)[a-z\d]{6,}"
-        style={{width:"80%", height: "35px", backgroundColor: "#f7f7f7",outline: "solid #d3d3d3", border: "none"}}
         required
       />
-      {/* <label className="label">パスワード(英半角子文字、半角数字を必ず含み、6文字以上)</label> */}
-      <span className="input-error-message messageBox">正しい形式で入力してください</span>
-      {/* <span className="input-ok-message messageBox">OK!</span> */}
+      <span
+        onClick={toggleConfirmPassword}
+        role="presentation"
+        className="form__isRevealPasswordIcon"
+      >
+        {isRevealConfirmPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
+      </span>
     </div>
   );
 }

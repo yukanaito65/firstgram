@@ -1,27 +1,38 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
+function InputCPass(props: any) {
 
-function InputCPass(props:any) {
+  const [isRevealConfirmPassword, setIsRevealConfirmPassword] = useState(false);
+
+  const toggleConfirmPassword = () => {
+    setIsRevealConfirmPassword((prevState) => !prevState);
+  };
 
   return (
-    <div>
-    <input
-    type="password"
-    name="Cpassword"
-    placeholder="確認用パスワード"
-    data-equal-to="email"
-    style={{
-      width: "80%",
-      height: "35px",
-      backgroundColor: "#f7f7f7",
-      outline: "solid #d3d3d3",
-      border: "none",
-    }}
-    required
-    />
-    <span className="input-error-message messageBox">正しい形式で入力してください</span>
+    <div className="form">
+      <span className="form__requiredIcon">＊</span>
+      <input
+        type={isRevealConfirmPassword ? "text" : "password"}
+        name="Cpassword"
+        placeholder="確認用パスワード"
+        data-equal-to="email"
+        pattern={props.passwordValue}
+        className="form__input"
+        required
+      />
+      <span
+        onClick={toggleConfirmPassword}
+        role="presentation"
+        className="form__isRevealPasswordIcon"
+      >
+        {isRevealConfirmPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
+      </span>
+      <span className="form__error-message form__messageBox">
+        パスワードが一致しません
+      </span>
     </div>
-  )
+  );
 }
 
 export default InputCPass;

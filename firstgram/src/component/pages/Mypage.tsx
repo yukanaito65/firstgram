@@ -6,21 +6,21 @@ import {
   getDoc,
   getDocs,
   query,
-  QuerySnapshot,
+  QueryDocumentSnapshot,
   where,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import Icon from "../atoms/icon/Icon";
 import UserName from "../atoms/user/UserName";
-import MyPostList from "../molecules/MyPostList";
 import { auth, db } from "../../firebase";
 import { User } from "../../types/types";
 import { Post } from "../../types/types";
-import Footer from "../molecules/Footer";
-import Header from "../molecules/Header";
+import Footer from "../organisms/Footer";
+import Header from "../organisms/Header";
 import MyPageInfo from "../molecules/MyPageInfo";
 import Name from "../atoms/user/Name";
+import ThreeRowsPostList from "../molecules/ThreeRowsPostList";
 
 function MyPage() {
   //ログインしているとログイン情報を持つ
@@ -31,7 +31,8 @@ function MyPage() {
 
   //取得してきたデータを保持
   const [users, setUsers] = useState<any>([]);
-  const [posts, setPosts] = useState<QuerySnapshot[]>([]);
+  // const [posts, setPosts] = useState<QuerySnapshot[]>([]);
+  const [posts, setPosts] = useState<Post[]>([]);
 
   //userのpost配列
   // const [postList, setPostList] = useState<any>({ post: [] });
@@ -68,7 +69,7 @@ function MyPage() {
         console.log(userDocId);
 
         // //取得したデータから必要なものを取り出す
-        const userDataId: any = userDocId.data();
+        const userDataId = userDocId.data();
         console.log(userDataId);
         setUsers(userDataId);
 
@@ -80,7 +81,7 @@ function MyPage() {
           setFollowerList(userDataId.follower);
           console.log(userDataId.name);
           console.log(userDataId.follow);
-          console.log(userDataId.post);
+          console.log(userDataId.posts);
         }
 
         //postコレクションへの参照を取得(userIdが一致しているドキュメントのみ)
@@ -92,12 +93,12 @@ function MyPage() {
         console.log(postCollectionRef); //Zcがひとつ
 
         // 上記を元にドキュメントのデータを取得(post)
-        const postDocId: any = await getDocs(postCollectionRef);
+        const postDocId = await getDocs(postCollectionRef);
         console.log(postDocId.docs); // 配列(3)[rl,rl,rl]
         console.log(postDocId); //ol
 
         //上記を元にデータの中身を取り出す。map()を使えるようにする。
-        const newPostDocIds = postDocId.docs as any[];
+        const newPostDocIds = postDocId.docs as QueryDocumentSnapshot<Post>[];
         const postDataArray = newPostDocIds.map((id) => id.data());
         console.log(postDataArray); //(3)[{},{},{}]
         setPosts(postDataArray);
@@ -113,10 +114,9 @@ function MyPage() {
   // };
 
   // console.log(users.name);  //ここに書くとレンダリングされた時に実行されてundefinedになる
-  console.log(posts); //postコレクションからuidと等しいドキュメントを取得したものが格納されている
+  // console.log(posts); //postコレクションからuidと等しいドキュメントを取得したものが格納されている
   // console.log(postList); //userコレクションからログインユーザーの情報を取得して、post配列の中身だけ格納している
-  console.log(followList);
-
+  // console.log(followList);
 
   return (
     <>
@@ -129,55 +129,56 @@ function MyPage() {
           ) : (
             <>
               <Header show={true} />
-              <div style={{textAlign: "center", fontSize: "20px", fontWeight: "bold"}}>
+              <div className="myPage__userName">
                 <UserName users={users} />
               </div>
-                {/* <div>{users.userName}</div> */}
-                {/* <Link to={`/dmPage`}>
-                  <button>DM</button>
-                </Link> */}
-
-              <div style={{display: "flex", justifyContent: "space-between", gap: "10%", margin: "10px 20px",  alignItems: "center"}}>
-              <Icon />
-              <MyPageInfo
-              posts={posts}
-              followerList={followerList}
-              followList={followList}
-              uid={user.uid}
-              />
+              <div className="myPage__info">
+                <Icon />
+                <MyPageInfo
+                  posts={posts}
+                  followerList={followerList}
+                  followList={followList}
+                  uid={user.uid}
+                />
               </div>
               {/* <div> */}
-                {/* <PostCount posts={posts} /> */}
-                {/* <div>{posts.length}投稿</div> */}
+              {/* <PostCount posts={posts} /> */}
+              {/* <div>{posts.length}投稿</div> */}
 
-                {/* <Link to={"/myFollower"}>
+              {/* <Link to={"/myFollower"}>
                   <div>{followerList.length}フォロワー</div>
                 </Link> */}
 
-                {/* <FollowerCount
+              {/* <FollowerCount
                   followerList={followerList}
                   link={"/myFollower"}
                   uid={user.uid}
                 /> */}
 
-                {/* <FollowCount
+              {/* <FollowCount
                   followList={followList}
                   link={"/myFollow"}
                   uid={user.uid}
                 /> */}
-                {/* <Link to={"/myFollow"}>
+              {/* <Link to={"/myFollow"}>
                   <div>{followList.length}フォロー中</div>
                 </Link> */}
               {/* </div> */}
-              <span style={{fontWeight: "bold"}}>
-                <Name users={users}/>
+              <span className="myPage__name">
+                <Name users={users} />
               </span>
-              <div>{users.profile}</div>
-              <MyPostList
-              posts={posts}
-              users={users}
-              message={<><p>初めて投稿してみよう！</p>
-              <Link to="/NewPost">新規投稿はこちら</Link></>}
+              <div className="myPage__profile">{users.profile}</div>
+              <ThreeRowsPostList
+                posts={posts}
+                // users={users}
+                message={
+                  <>
+                    <p>初めて投稿してみよう！</p>
+                    <Link to="/NewPost" className="myPage__messageLink">
+                      新規投稿はこちら
+                    </Link>
+                  </>
+                }
               />
               <Footer />
             </>

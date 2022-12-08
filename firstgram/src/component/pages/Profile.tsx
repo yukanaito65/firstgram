@@ -3,10 +3,11 @@ import {
   collection,
   CollectionReference,
   doc,
+  getCountFromServer,
   getDoc,
   getDocs,
   query,
-  QuerySnapshot,
+  QueryDocumentSnapshot,
   where,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
@@ -14,17 +15,17 @@ import { Link, useLocation } from "react-router-dom";
 import AddFollowButton from "../atoms/button/AddFollowButton";
 // import FollowButton from "./component/atoms/button/FollowButton";
 import RemoveFollowButton from "../atoms/button/RemoveFollowButton";
-import FollowerCount from "../atoms/user/FollowerCount";
 import CommonIcon from "../atoms/icon/CommonIcon";
 import UserName from "../atoms/user/UserName";
-import MyPostList from "../molecules/MyPostList";
 import { auth, db } from "../../firebase";
-import { Post } from "../../types/types";
+import { Post, User } from "../../types/types";
 import PostCount from "../atoms/user/PostCount";
 import FollowCount from "../atoms/user/FollowCount";
-import Header from "../molecules/Header";
-import Footer from "../molecules/Footer";
+import Header from "../organisms/Header";
+import Footer from "../organisms/Footer";
 import Name from "../atoms/user/Name";
+import ThreeRowsPostList from "../molecules/ThreeRowsPostList";
+import ProfileFollowerCount from "../atoms/user/ProfileFollowerCount";
 
 interface State {
   userId: string;
@@ -38,7 +39,7 @@ function Profile() {
 
   //userIdのユーザーの情報
   const [profileUsers, setProfileUsers] = useState<any>([]);
-  const [posts, setPosts] = useState<QuerySnapshot[]>([]);
+  const [posts, setPosts] = useState<Post[]>([]);
 
   const [loading, setLoading] = useState(true);
 
@@ -49,13 +50,15 @@ function Profile() {
   const [followList, setFollowList] = useState<any>({ follow: [] });
 
   //userのfollower配列
-  const [followerList, setFollowerList] = useState<any>({ follower: [] });
+  // const [followerList, setFollowerList] = useState<any>({ follower: [] });
 
   // const [followBtn,setFollowBtn] = useState<boolean>();
 
   // const [followerNum,setFollowerNum] = useState(0);
 
-  const [userCollectionRef,setUserCollectionRef] = useState<any>("");
+  // const [userCollectionRef, setUserCollectionRef] = useState<any>("");
+
+  const [followerCount, setFollowerCount] = useState<any>("");
 
   //各ページからデータ取得
   const location = useLocation();
@@ -67,8 +70,11 @@ function Profile() {
       setLoading(false);
       setUser(currentUser);
 
-      const userCollectionRef = collection(db, "user");
-      setUserCollectionRef(userCollectionRef);
+      const userCollectionRef = collection(
+        db,
+        "user"
+      ) as CollectionReference<User>;
+      // setUserCollectionRef(userCollectionRef);
 
       //ログインユーザーのfollow配列取得(フォローボタン用)
       const userDocRefId = doc(userCollectionRef, currentUser.uid);
@@ -92,9 +98,23 @@ function Profile() {
       } else {
         // setPostList(profileUserDataId.post);
         setFollowList(profileUserDataId.follow);
-        setFollowerList(profileUserDataId.follower);
+        // setFollowerList(profileUserDataId.follower);
         // setFollowerNum(profileUserDataId.follower.length);
       }
+
+      //follower数取得
+      //コレクションまるごと取得するから、共通点はそのユーザーをフォロしていること(フォローしている＝フォロワー)
+      const followerCollectionRef = query(
+        userCollectionRef,
+        where("follow", "array-contains", userId)
+      );
+
+      const profileUserFollowerCount = await getCountFromServer(
+        followerCollectionRef
+      );
+
+      setFollowerCount(profileUserFollowerCount.data().count);
+      // console.log(profileUserFollowerCount.data().count);
 
       //投稿一覧取得
       const postCollectionRef: any = query(
@@ -103,23 +123,22 @@ function Profile() {
       ) as CollectionReference<Post>;
 
       // 上記を元にドキュメントのデータを取得(post)
-      const postDocId: any = await getDocs(postCollectionRef);
+      const postDocId = await getDocs(postCollectionRef);
 
       //上記を元にデータの中身を取り出す。map()を使えるようにする。
-      const newPostDocIds = postDocId.docs as any[];
+      const newPostDocIds = postDocId.docs as QueryDocumentSnapshot<Post>[];
       const postDataArray = newPostDocIds.map((id) => id.data());
       setPosts(postDataArray);
     });
   }, []);
 
-
-  console.log(profileUsers); //[]
-  console.log(profileUsers.follow); //undefined
-  console.log(posts); //[]
-  console.log(followList); //follow[]
-  console.log(userId); //id出てる
-  console.log(profileUsers.userId); //undefined
-  console.log(usersFollow);
+  // console.log(profileUsers); //[]
+  // console.log(profileUsers.follow); //undefined
+  // console.log(posts); //[]
+  // console.log(followList); //follow[]
+  // console.log(userId); //id出てる
+  // console.log(profileUsers.userId); //undefined
+  // console.log(usersFollow);
 
   // const dispatch = useDispatch();
 
@@ -131,46 +150,22 @@ function Profile() {
         <>
           <Header show={true} />
           <div>
-            <div
-              style={{
-                textAlign: "center",
-                fontSize: "20px",
-                fontWeight: "bold",
-              }}
-            >
+            <div className="profile__userName">
               <UserName users={profileUsers} />
             </div>
 
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                gap: "10%",
-                margin: "10px 20px",
-                alignItems: "center",
-              }}
-            >
+            <div className="profile__info">
               <CommonIcon icon={profileUsers.icon} />
 
-              <div
-                style={{
-                  display: "flex",
-                  width: "330px",
-                  justifyContent: "space-between",
-                  position: "relative",
-                }}
-              >
+              <div className="profile__threeCount">
                 <PostCount posts={posts} />
-                {/* <Link to={"/follower"} state={{ userId: userId, follower:followerList, uid: user.uid }}>
-            <div>{followerNum}follower</div>
-          </Link> */}
-{/*
-                <FollowerCount
-           followerList={followerList}
-           link={"/follower"}
-           uid={user.uid}
-           userId={userId}
-           /> */}
+
+                <ProfileFollowerCount
+                  followerCount={followerCount}
+                  link={"/follower"}
+                  uid={user.uid}
+                  userId={userId}
+                />
 
                 <FollowCount
                   followList={followList}
@@ -184,33 +179,44 @@ function Profile() {
               {/* <p>{followerNum.length}aaa</p> */}
             </div>
 
-            <span style={{ fontWeight: "bold" }}>
+            <span className="profile__name">
               <Name users={profileUsers} />
             </span>
-            <div>{profileUsers.profile}</div>
-
-          <div style={{display: "flex", gap: "5%"}}>
-            {usersFollow.includes(userId) ? (
-              <>
-                <RemoveFollowButton
-                  userId={userId}
-                  // onClick={()=>setFollowerNum(followerNum)}
-                  // followerNum={followerNum}
-                />
-              </>
-            ) : (
-              <>
-                <AddFollowButton userId={userId} />
-              </>
-            )}
-
-            <Link to={`/dmPage`} state={{ userId: userId }}>
-              <button>DM</button>
-            </Link>
-
+            <div className="profile__profile">
+              {profileUsers.profile}
             </div>
 
-            <MyPostList posts={posts} users={profileUsers} message={<p>投稿がありません</p>} />
+            <div className="profile__btnWrapper">
+              {usersFollow.includes(userId) ? (
+                <>
+                  <RemoveFollowButton
+                    userId={userId}
+                    followerCount={followerCount}
+                    // onClick={()=>setFollowerNum(followerNum)}
+                    // followerNum={followerNum}
+                    setFollowerCount={setFollowerCount}
+                  />
+                </>
+              ) : (
+                <>
+                  <AddFollowButton
+                    userId={userId}
+                    followerCount={followerCount}
+                    setFollowerCount={setFollowerCount}
+                  />
+                </>
+              )}
+
+              <Link to={`/dmPage`} state={{ userId: userId }}>
+                <button className="profile__dmBtn">メッセージを送信</button>
+              </Link>
+            </div>
+
+            <ThreeRowsPostList
+              posts={posts}
+              // users={profileUsers}
+              message={<p>投稿がありません</p>}
+            />
           </div>
           <Footer />
         </>

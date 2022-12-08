@@ -1,13 +1,3 @@
-#プロジェクトについて
-
-snsの画像投稿アプリを作成(instagram参考)
-react,typescript,firebaseを使用
-
-＃環境構築の手順
-docker-compose run --rm react-app sh -c "npm install -g create-react-app && create-react-app react-sample -template redux-typescript”
-
-
-
 ## プロジェクトタイトル
 firstgram
 
@@ -37,7 +27,6 @@ snsの画像投稿アプリを作成(instagram参考)
 - 登録ユーザーの検索機能
 - 投稿の保存機能
 - プロフィール編集機能
-- アカウント削除機能
 
 ## ブランチ運用
 - main          : リリース用のソースコード
@@ -61,6 +50,20 @@ snsの画像投稿アプリを作成(instagram参考)
   |- sass
   |- types
 
+sns-app
+  |-- firstgram
+        |-- src
+        |-- Readme.md
+        |-- その他
+
+  ┣ ┠ ┝ ├
+┫ ┨ ┥ ┤ 
+│ ┃
+─ ━
+┌ ┏ ┓ ┐
+└ ┗ ┛ ┘
+
+- コンポーネントの切り分けはatomicデザインを意識して作成
 
 ## プロジェクトのスクリーンショット
 

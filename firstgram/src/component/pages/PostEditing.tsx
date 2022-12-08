@@ -2,50 +2,63 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import firebasePostDetails from "../utils/firebasePostDetails";
 import FirestoreUpdata from "../utils/FirestoreUpdata";
-import Footer from "../molecules/Footer";
-import Header from "../molecules/Header";
+import Footer from "../organisms/Footer";
+import Header from "../organisms/Header";
+import BackBtn from "../atoms/button/BackBtn";
+import Img from "../atoms/pictures/Img";
+
 
 interface State {
-    postid:string,
-    userid:string
+  postid: string;
+  userid: string;
 }
 
 function PostEditing() {
+  // postlookからデータを持ってくる
+  const location = useLocation();
+  const { postid, userid } = location.state as State;
 
-// postlookからデータを持ってくる
-const location = useLocation();
-const {postid,userid} = location.state as State
+  // 画像urlを格納
+  const [imgUrl, setimgUrl] = useState<string>("");
+  // textを格納
+  const [text, setText] = useState<string>("");
 
-// 画像urlを格納
-const [imgUrl, setimgUrl] = useState<any>("");
-// textを格納
-const [text, setText] = useState<any>("");
+  useEffect(() => {
+    firebasePostDetails(postid, userid).then((postData) => {
+      setimgUrl(postData.Imgurl);
+      setText(postData.Caption);
+    });
+  },[]);
 
-useEffect(()=>{
-firebasePostDetails(postid,userid).then((postData)=>{
-setimgUrl(postData.Imgurl)
-setText(postData.Caption)
-})
-}, [])
+  const Updata = (e: any) => {
+    console.log(text);
+    FirestoreUpdata(postid, text);
+  };
 
-const Updata = ((e:any)=>{
-console.log(text)
-FirestoreUpdata(postid,text)
-})
+  return (
+    <>
+      <div className="postediting">
+      <Header show={true} />
+      <Img imgUrl={imgUrl} />
+        <textarea className="postediting__textarea"
+          value={text}
+          onChange={(e) => {
+            setText(e.target.value);
+          }} />
 
-return (
-<>
-<Header show={true} />
-<div>
-<img src={imgUrl} />
-<input type="text" value={text} onChange={(e)=>{setText(e.target.value)}}></input>
-<Link to="/"><button onClick={Updata}>編集完了</button></Link>
-<Link to="/"><button>戻る</button></Link>
-</div>
-<Footer />
-</>
-);
+        <div className="postediting__btns">
+          <BackBtn />
+          <Link to="/">
+            <button onClick={Updata} 
+            className="postediting__btn btn">
+              編集完了
+            </button>
+          </Link>
+        </div>
+      <Footer />
+      </div>
+    </>
+  );
 }
-
 
 export default PostEditing;

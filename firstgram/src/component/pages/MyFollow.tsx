@@ -1,16 +1,19 @@
 import { onAuthStateChanged } from "firebase/auth";
 import {
   collection,
+  CollectionReference,
   getDocs,
   query,
+  QueryDocumentSnapshot,
   where,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import Footer from "../molecules/Footer";
-import Header from "../molecules/Header";
+import Footer from "../organisms/Footer";
+import Header from "../organisms/Header";
 import UserList from "../organisms/UserList";
 import { auth, db } from "../../firebase";
+import BackBtn from "../atoms/button/BackBtn";
+import { User } from "../../types/types";
 
 function MyFollow() {
   //ログインユーザーの情報
@@ -31,7 +34,7 @@ function MyFollow() {
   // const [followList, setFollowList] = useState<any>("");
 
   //フォローしているユーザーの情報[{1人目},{2人目}....]
-  const [followUsers, setFollowUsers] = useState<any[]>([]);
+  const [followUsers, setFollowUsers] = useState<User[]>([]);
 
   //followのuserId
   // const [followUserId, setFollowUserId] = useState("");
@@ -64,11 +67,11 @@ function MyFollow() {
       const followUserCollectionRef = query(
         collection(db, "user"),
         where("follower", "array-contains", currentUser.uid)
-      );
+      )as CollectionReference<User>;
 
       const followUserDocId = await getDocs(followUserCollectionRef);
 
-      const newFollowUserDocIds = followUserDocId.docs as any[];
+      const newFollowUserDocIds = followUserDocId.docs as QueryDocumentSnapshot<User>[] ;
 
       const followUserArray = newFollowUserDocIds.map((doc) => doc.data());
 
@@ -81,7 +84,7 @@ function MyFollow() {
       {!loading && (
         <>
         <Header show={true} />
-          <Link to={"/mypage"}>⬅︎</Link>
+          <BackBtn />
 
           <UserList
           usersData={followUsers}

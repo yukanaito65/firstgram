@@ -1,12 +1,7 @@
-import React from 'react'
-
+import React from "react";
 
 function LoginButton() {
-  return (
-    <button className="login-form__button">
-      ログイン
-    </button>
-  )
+  return <button className="btn">ログイン</button>;
 }
 
-export default LoginButton
+export default LoginButton;

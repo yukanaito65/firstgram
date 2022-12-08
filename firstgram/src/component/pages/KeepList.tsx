@@ -1,12 +1,21 @@
 import { onAuthStateChanged } from "firebase/auth";
-import { collection, doc, getDoc, getDocs, query, QuerySnapshot, where } from "firebase/firestore";
+import {
+  collection,
+  CollectionReference,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  QueryDocumentSnapshot,
+  where,
+} from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import MyPost from "../atoms/pictures/MyPost";
-import Footer from "../molecules/Footer";
-import Header from "../molecules/Header";
+import Footer from "../organisms/Footer";
+import Header from "../organisms/Header";
 import { auth, db } from "../../firebase";
-import MyPostList from "../molecules/MyPostList";
+import ThreeRowsPostList from "../molecules/ThreeRowsPostList";
+import { Post, User } from "../../types/types";
+import BackBtn from "../atoms/button/BackBtn";
 
 function KeepList() {
   //keepPostsの中に入っているpostIdを元にpostのimageUrl取得
@@ -21,9 +30,7 @@ function KeepList() {
   //ログインユーザーの情報の中からkeepPostsを格納
   const [keepPostIds, setKeepPostIds] = useState([]);
 
-  const [keepPosts, setKeepPosts] = useState<QuerySnapshot[]>([]);
-
-
+  const [keepPosts, setKeepPosts] = useState<Post[]>([]);
 
   useEffect(() => {
     onAuthStateChanged(auth, async (currentUser: any) => {
@@ -31,7 +38,7 @@ function KeepList() {
       setLoading(false);
 
       //ログインユーザーのkeepPosts配列をkeepListに格納
-      const userCollectionRef = collection(db, "user");
+      const userCollectionRef = collection(db, "user")as CollectionReference<User>;
 
       const userDocRefId = doc(userCollectionRef, currentUser.uid);
 
@@ -39,8 +46,6 @@ function KeepList() {
 
       const userKeepList = userDocId.get("keepPosts");
       setKeepPostIds(userKeepList);
-
-
 
       //この方法だと2回に１回ぐらいひとつしか表示されない
       // const keepArray: any = [];
@@ -58,8 +63,10 @@ function KeepList() {
       //   setKeepPosts(keepArray);
       // }); //map
 
-      const postCollectionRef = query(collection(db,"post"),
-      where("keeps", "array-contains", currentUser.uid));
+      const postCollectionRef = query(
+        collection(db, "post"),
+        where("keeps", "array-contains", currentUser.uid)
+      )as CollectionReference<Post>;
 
       console.log(postCollectionRef);
 
@@ -67,41 +74,25 @@ function KeepList() {
       console.log(keepPostDocId.docs);
       console.log(keepPostDocId);
 
-      const newKeepPostDocIds = keepPostDocId.docs as any[];
-      const keepPostArray = newKeepPostDocIds.map((doc)=>doc.data());
+      const newKeepPostDocIds = keepPostDocId.docs as QueryDocumentSnapshot<Post>[];
+      const keepPostArray = newKeepPostDocIds.map((doc) => doc.data());
       setKeepPosts(keepPostArray);
     }); //onAuth
   }, []);
-  console.log(keepPosts);//postの情報がオブジェクトになって配列に格納
+  console.log(keepPosts); //postの情報がオブジェクトになって配列に格納
   console.log(user.uid);
-  console.log(keepPostIds);//postIdだけ配列に格納
-
+  console.log(keepPostIds); //postIdだけ配列に格納
 
   return (
     <>
       {!loading && (
         <>
-        <Header show={true} />
-          <Link to={"/mypage"}>⬅︎</Link>
-
-          {keepPostIds.length > 0 ? (
-            <div>
-          {keepPosts.map((keepPost: any) => {
-            return (
-                <Link
-                  to={"/PostDetails"}
-                  state={{ userid: keepPost.userId, postid: keepPost.postId }}
-                >
-                  <MyPost imageUrl={keepPost.imageUrl} />
-                </Link>
-            );
-          })}
-          </div>
-          ) :(
-            <div>
-              <p>保存済みの投稿はありません</p>
-            </div>
-          )}
+          <Header show={true} />
+          <BackBtn />
+          <ThreeRowsPostList
+            posts={keepPosts}
+            message={<p>保存済みの投稿はありません</p>}
+          />
           <Footer />
         </>
       )}

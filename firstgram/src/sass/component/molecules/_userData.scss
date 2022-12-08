@@ -1,0 +1,14 @@
+.userData{
+  display: flex;
+  gap: 3%;
+  align-items: center;
+  margin-top: 3%;
+  &:hover {
+    cursor: pointer;
+    background-color: #f0f0f0;
+  }
+
+  &__userName {
+    font-weight: bold;
+  }
+}

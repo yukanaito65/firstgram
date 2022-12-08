@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function RegisterButton() {
-  return (
-    <button className='register-form_button'>
-      登録
-    </button>
-  )
+  return <button className="btn">登録</button>;
 }
 
-export default RegisterButton
+export default RegisterButton;

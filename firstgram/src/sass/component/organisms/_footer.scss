@@ -1,0 +1,39 @@
+@use "../../global/setting" as *;
+@use "../../global/mixin" as *;
+
+.footer {
+    width: 100%;
+    max-width: 600px;
+    min-width: 350px;
+    background-color: $color-base;
+    position: fixed;
+    bottom: 0;
+    &__ul {
+        width: 100%;
+        margin: 15px 0;
+        display: flex;
+        justify-content: space-between;
+        padding: 0;
+        &--li {
+            border-right: 2px solid $color-black;
+            margin: 0 auto;
+            padding: 0;
+            width: 100%;
+            &:last-child {
+                border: none;
+            }
+        }
+        &--liLink {
+            width: 100%;
+            display: block;
+            text-align: center;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+        &--liIcon {
+            margin: auto;
+            display: block;
+        }
+    }
+}
