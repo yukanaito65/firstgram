@@ -161,6 +161,9 @@
 .registerIcon {
   position: relative;
 }
+.registerIcon:hover {
+  cursor: pointer;
+}
 
 .icon-image {
   border-radius: 50%;
