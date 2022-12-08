@@ -1,41 +1,20 @@
 import React, { useState } from "react";
 import {
   getAuth,
-  deleteUser,
   EmailAuthProvider,
   reauthenticateWithCredential,
   updatePassword as firebaseUpdatePassword,
 } from "firebase/auth";
-import { useNavigate, Link } from "react-router-dom";
-import {
-  getDoc,
-  doc,
-  deleteDoc,
-  collection,
-  CollectionReference,
-  query,
-  where,
-  getDocs,
-  updateDoc,
-  arrayRemove,
-} from "firebase/firestore";
-import { db } from "../../firebase";
-import { useEffect } from "react";
-import { onAuthStateChanged } from "@firebase/auth";
-import type { User } from "../../types/types";
+import { Link } from "react-router-dom";
 import Header from "../organisms/Header";
 import Footer from "../organisms/Footer";
-import { IoIosArrowBack } from "react-icons/io";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import { async } from "@firebase/util";
 import { GetLoginUserData } from "../data/GetLoginUserData";
+import BackBtn from "../atoms/button/BackBtn";
 
 export function PsswordChange() {
   const auth = getAuth();
   const currentUser: any = auth.currentUser;
-  const currentUserId = currentUser?.uid;
-  console.log(currentUser);
-  const navigate = useNavigate();
 
   const [nowPassValue, setNowPassValue] = useState<any>("");
   const [newPassValue, setNewPassValue] = useState<any>("");
@@ -44,17 +23,12 @@ export function PsswordChange() {
   const [isRevealNewPassword, setIsRevealNewPassword] = useState(false);
   const [isRevealConfirmPassword, setIsRevealConfirmPassword] = useState(false);
 
+  const [errMessage, setErrMessage] = useState<string>("");
+
   const LoginUserData = GetLoginUserData();
   const authUserData = LoginUserData.authUserData;
   const firestoreUserData = LoginUserData.firestoreUserData;
   const loginUserEmail = firestoreUserData?.email;
-
-  // useEffect(() => {
-  //   setNowEmailValue(loginUserEmail);
-  // },[])
-  
-
-
 
   // パスワードの変更関数を定義(Authentication)
   const updatePassword = (
@@ -80,7 +54,7 @@ export function PsswordChange() {
             .then(() => resolve())
             .catch((error) => reject(error));
         })
-        .catch((error) => reject(error));
+        .catch((error) => reject(setErrMessage("現在のパスワードが違います")));
     });
   };
 
@@ -89,75 +63,6 @@ export function PsswordChange() {
     // パスワード変更
     updatePassword(nowPassValue, newPassValue);
   };
-
-  // 該当するPostデータの削除
-  const deletePostData = async () => {
-    // currentUserの投稿を取得
-    const q = query(
-      collection(db, "post"),
-      where("userId", "==", currentUserId)
-    );
-    const querySnapshot = await getDocs(q);
-    console.log(querySnapshot);
-    querySnapshot.forEach(async (docdata) => {
-      const data = (docdata.id, " => ", docdata.data());
-      const id = data.postId;
-      await deleteDoc(doc(db, "post", id));
-    });
-    // getDocs(q).then((querySnapshot:any) => {
-    //   for(const docdata of querySnapshot) {
-    //     const data = (docdata.id, " => ", docdata.data());
-    //     const id = data.postId;
-    //     deleteDoc(doc(db, "post", id));
-    //   }
-    // })
-  };
-
-  //   currentUserをフォローしているユーザーのfollow配列からcurrentUserのuserIdを消す
-  const followArrDelete = () => {
-    //コレクションへの参照を取得
-    const userCollectionRef = collection(db, "user");
-
-    // currentUserデータを取得
-    const currentUserData = doc(userCollectionRef, currentUserId);
-
-    // 上記を元にcurrentUserのドキュメントのデータを取得
-    getDoc(currentUserData).then((currentUserDocData) => {
-      // 取得したドキュメントデータからfollow配列を取得
-      const followerUserIdArr: string[] = currentUserDocData.get("follower");
-      console.log(followerUserIdArr);
-
-      for (const followerUserId of followerUserIdArr) {
-        const followerUserData = doc(db, "user", followerUserId);
-        updateDoc(followerUserData, {
-          follow: arrayRemove(currentUserId),
-        });
-      }
-    });
-  };
-
-  // currentUserがフォローしているユーザーのfollower配列からcurrentUserのuserIdを消す
-  const followerArrDelete = () => {
-    //コレクションへの参照を取得
-    const userCollectionRef = collection(db, "user");
-
-    // currentUserデータを取得
-    const currentUserData = doc(userCollectionRef, currentUserId);
-
-    // 上記を元にcurrentUserのドキュメントのデータを取得
-    getDoc(currentUserData).then((currentUserDocData) => {
-      // 取得したドキュメントデータからfollow配列を取得
-      const followUserIdArr: string[] = currentUserDocData.get("follow");
-
-      for (const followUserId of followUserIdArr) {
-        const followUserData = doc(db, "user", followUserId);
-        updateDoc(followUserData, {
-          follower: arrayRemove(currentUserId),
-        });
-      }
-    });
-  };
-
 
   // パスワードの表示/非表示
   const toggleNowPassword = () => {
@@ -171,118 +76,146 @@ export function PsswordChange() {
     setIsRevealConfirmPassword((prevState) => !prevState);
   };
 
-  // backボタン
-  const backBtn = () => {
-    navigate(-1);
-  };
-
   return (
     <>
-    {authUserData ? (
-    <div>
-      <Header show={true} />
-      <h1 className="margin-bottom_20">アカウント情報変更</h1>
-      <table className="setting_table">
-        <tr className="setting_table_tr">
-          <td className="setting_table_td setting_table_title">
-            <label htmlFor="settingEmail">現在のメールアドレス</label>
-          </td>
-          <td className="setting_table_td setting_table_content">
-            <p>{loginUserEmail}</p>
-          </td>
-        </tr>
+      {authUserData ? (
+        <div>
+          <Header show={true} />
+          <div className="accountEdit__top">
+            <BackBtn />
+            <h1>アカウント情報変更</h1>
+          </div>
+          <table className="passwordChangeTable">
+            <tr className="passwordChangeTable__tr">
+              <td className="passwordChangeTable__tr--tdTitle">
+                <label htmlFor="settingEmail">現在のメールアドレス</label>
+              </td>
+              <td className="passwordChangeTable__tr--Content">
+                <p>{loginUserEmail}</p>
+              </td>
+            </tr>
 
-        <tr className="setting_table_tr">
-          <td className="setting_table_td setting_table_title">
-            <label htmlFor="settingPassword">現在のパスワード</label>
-          </td>
-          <td className="setting_table_td setting_table_content">
-            <input
-              type={isRevealNowPassword ? "text" : "password"}
-              value={nowPassValue}
-              onChange={(e) => setNowPassValue(e.target.value)}
-              name="settingPassword"
-              id="settingPassword"
-            ></input>
-            <div
-              onClick={toggleNowPassword}
-              role="presentation"
-              className="isRevealPassword_icon"
-            >
-              {isRevealNowPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
-            </div>
-          </td>
-        </tr>
+            <tr className="passwordChangeTable__tr">
+              <td className="passwordChangeTable__tr--tdTitle">
+                <label htmlFor="settingPassword">現在のパスワード</label>
+              </td>
+              <td className="passwordChangeTable__tr--tdContent">
+                <div className="passwordChangeTable__tr--tdInput">
+                  <input
+                    type={isRevealNowPassword ? "text" : "password"}
+                    value={nowPassValue}
+                    onChange={(e) => setNowPassValue(e.target.value)}
+                    name="settingPassword"
+                    id="settingPassword"
+                  ></input>
+                  <div
+                    onClick={toggleNowPassword}
+                    role="presentation"
+                    className="isRevealPassword_icon"
+                  >
+                    {isRevealNowPassword ? (
+                      <AiFillEye className="passwordChangeTable__icon" />
+                    ) : (
+                      <AiFillEyeInvisible className="passwordChangeTable__icon" />
+                    )}
+                  </div>
+                </div>
+                <span>{errMessage}</span>
+              </td>
+            </tr>
 
-        <tr className="setting_table_tr">
-          <td className="setting_table_td setting_table_title">
-            <label htmlFor="settingPassword">新しいパスワード</label>
-          </td>
-          <td className="setting_table_td setting_table_content">
-            <input
-              type={isRevealNewPassword ? "text" : "password"}
-              value={newPassValue}
-              onChange={(e) => setNewPassValue(e.target.value)}
-              name="settingPassword"
-              id="settingPassword"
-            ></input>
-            <div
-              onClick={toggleNewPassword}
-              role="presentation"
-              className="isRevealPassword_icon"
-            >
-              {isRevealNewPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
-            </div>
-          </td>
-        </tr>
+            <tr className="passwordChangeTable__tr">
+              <td className="passwordChangeTable__tr--tdTitle">
+                <label htmlFor="settingPassword">新しいパスワード</label>
+              </td>
+              <td className="passwordChangeTable__tr--tdContent">
+                <div className="passwordChangeTable__tr--tdInput">
+                  <input
+                    type={isRevealNewPassword ? "text" : "password"}
+                    value={newPassValue}
+                    onChange={(e) => setNewPassValue(e.target.value)}
+                    name="settingPassword"
+                    id="settingPassword"
+                    placeholder="5文字以上"
+                  ></input>
+                  <div
+                    onClick={toggleNewPassword}
+                    role="presentation"
+                    className="isRevealPassword_icon"
+                  >
+                    {isRevealNewPassword ? (
+                      <AiFillEye className="passwordChangeTable__icon" />
+                    ) : (
+                      <AiFillEyeInvisible className="passwordChangeTable__icon" />
+                    )}
+                  </div>
 
-        <tr className="setting_table_tr">
-          <td className="setting_table_td setting_table_title">
-            <label htmlFor="settingCPassword">新しいパスワード（確認）</label>
-          </td>
-          <td className="setting_table_td setting_table_content">
-            <input
-              type={isRevealConfirmPassword ? "text" : "password"}
-              value={cNewPassValue}
-              onChange={(e) => setCNewPassValue(e.target.value)}
-              name="settingCPassword"
-              id="settingCPassword"
-              placeholder="再度パスワードを入力"
-            ></input>
-            <div
-              onClick={toggleConfirmPassword}
-              role="presentation"
-              className="isRevealPassword_icon"
-            >
-              {isRevealConfirmPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
-            </div>
+                  {0 < newPassValue.length && newPassValue.length < 6 && (
+                    <p>5文字以上を入力してください</p>
+                  )}
+                </div>
+              </td>
+            </tr>
 
-            {newPassValue.length > 0 && newPassValue !== cNewPassValue ? (
-              <p>新しいパスワードと新しいパワード(確認)が一致していません</p>
+            <tr className="passwordChangeTable__tr">
+              <td className="passwordChangeTable__tr--tdTitle">
+                <label htmlFor="settingCPassword">
+                  新しいパスワード（確認）
+                </label>
+              </td>
+              <td className="passwordChangeTable__tr--tdContent">
+                <div className="passwordChangeTable__tr--tdInput">
+                  <input
+                    type={isRevealConfirmPassword ? "text" : "password"}
+                    value={cNewPassValue}
+                    onChange={(e) => setCNewPassValue(e.target.value)}
+                    name="settingCPassword"
+                    id="settingCPassword"
+                    placeholder="再度パスワードを入力"
+                  ></input>
+                  <div
+                    onClick={toggleConfirmPassword}
+                    role="presentation"
+                    className="isRevealPassword_icon"
+                  >
+                    {isRevealConfirmPassword ? (
+                      <AiFillEye className="passwordChangeTable__icon" />
+                    ) : (
+                      <AiFillEyeInvisible className="passwordChangeTable__icon" />
+                    )}
+                  </div>
+
+                  {newPassValue.length > 0 &&
+                    newPassValue !== cNewPassValue && (
+                      <p>
+                        新しいパスワードと新しいパワード(確認)が一致していません
+                      </p>
+                    )}
+                </div>
+              </td>
+            </tr>
+          </table>
+
+          <div className="passwordChangeTable__confirmBtn">
+            {newPassValue.length > 4 && newPassValue === cNewPassValue ? (
+              <button onClick={dataUpdate} className="btn">
+                確定
+              </button>
             ) : (
-              <></>
+              <button className="passwordChangeTable__confirmBtn--noPushBtn">
+                確定
+              </button>
             )}
-          </td>
-        </tr>
-      </table>
+          </div>
 
-      <div className="confirm_btn">
-        <button onClick={dataUpdate}>確定</button>
-      </div>
-
-      <div className="back_btn">
-        <div onClick={backBtn}>
-          <IoIosArrowBack color="white" size={40} className="to_back" />
+          <Footer />
         </div>
-      </div>
-
-      <Footer />
-    </div>) : (
-      <div>
-        <p>ログインしてください</p>
-        <Link to={"/login"}>ログイン画面へ</Link>
-      </div>
-    )}
+      ) : (
+        <div>
+          <p>ログインしてください</p>
+          <Link to={"/login"}>ログイン画面へ</Link>
+        </div>
+      )}
     </>
   );
 }

@@ -20,6 +20,8 @@ import { IoIosArrowBack } from "react-icons/io";
 import Header from "../organisms/Header";
 import Footer from "../organisms/Footer";
 import { useLocation, Link } from "react-router-dom";
+import BackBtn from "../atoms/button/BackBtn";
+import PostIcon from "../atoms/icon/PostIcon";
 
 interface State {
   userId: string;
@@ -120,34 +122,27 @@ function DMPage() {
     });
   }, []);
 
-  // backボタン
-  const navigate = useNavigate();
-  const backBtn = () => {
-    navigate(-1);
-  };
-
   return (
     <>
       <Header show={true} />
-      <div className="dmpage_top">
-        <div onClick={backBtn}>
-          <IoIosArrowBack
-            color="rgb(38, 38, 38)"
-            size={35}
-            className="dmpage_back_btn"
-          />
+      <div className="dmPage">
+      <div className="dmPage__top">
+        <div className="dmPage__top--BackBtn">
+        <BackBtn />
         </div>
         <Link to="/profile" state={{userid:anotherUserId}}>
-          <div className="dm_another_info">
-            <img src={anotherIcon} width={50} alt={anotherName} />
-            <div className="dm_another_text">
-              <p className="dm_another_name">{anotherName}</p>
-              <p className="dm_another_userName">{anotherUserName}</p>
+          <div className="dmPage__top--anotherUser">
+            <div className="dmPage__top--anotherUser-icon">
+            <PostIcon icon={anotherIcon} />
+            </div>
+            <div className="dmPage__top--anotherUser-text">
+              <p className="dmPage__top--anotherUser-nameText">{anotherName}</p>
+              <p className="dmPage__top--anotherUser-userNameText">{anotherUserName}</p>
             </div>
           </div>
         </Link>
       </div>
-      <div className="margin"></div>
+      <div className="dmPage__messageWrapper">
       {MesseDisplay === undefined ? (
         <p>ローディング中...</p>
       ) : (
@@ -164,27 +159,27 @@ function DMPage() {
           return (
             <>
               {data.userId === currentUser ? (
-                <div className="dm_right" key={data.userId}>
-                  <p className="dm_message_right">{data.message}</p>
+                <div className="dmPage__rightMesse" key={data.userId}>
+                  <p className="dmPage__rightMesse--message">{data.message}</p>
                   {Min.toString().length === 1 ? (
-                    <p className="dm_date_right">
+                    <p className="dmPage__rightMesse--date">
                       {Year}.{Month}.{Day}&nbsp;{Hour}:0{Min}
                     </p>
                   ) : (
-                    <p className="dm_date_right">
+                    <p className="dmPage__rightMesse--date">
                       {Year}.{Month}.{Day}&nbsp;{Hour}:{Min}
                     </p>
                   )}
                 </div>
               ) : (
-                <div className="dm_left" key={data.userId}>
-                  <p className="dm_message_left">{data.message}</p>
+                <div className="dmPage__leftMesse" key={data.userId}>
+                  <p className="dmPage__leftMesse--message">{data.message}</p>
                   {Min.toString().length === 1 ? (
-                    <p className="dm_date_right">
+                    <p className="dmPage__leftMesse--date">
                       {Year}.{Month}.{Day}&nbsp;{Hour}:0{Min}
                     </p>
                   ) : (
-                    <p className="dm_date_right">
+                    <p className="dmPage__leftMesse--date">
                       {Year}.{Month}.{Day}&nbsp;{Hour}:{Min}
                     </p>
                   )}
@@ -194,9 +189,9 @@ function DMPage() {
           );
         })
       )}
-      <div className="dmpage_margin_20"></div>
+      </div>
       <SendDM />
-
+      </div>
       <Footer />
     </>
   );

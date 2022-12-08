@@ -357,6 +357,24 @@ input:placeholder-shown ~ .form__messageBox {
      object-fit: cover;
 }
 
+.upDateIcon__block {
+  width: 110%;
+}
+.upDateIcon__label {
+  background-color: #0d6efd;
+  padding: 3px;
+  cursor: pointer;
+  display: block;
+  width: 35px;
+  margin-left: auto;
+  border-radius: 50%;
+  height: 35px;
+  margin-top: -20px;
+}
+.upDateIcon__input {
+  display: none;
+}
+
 .followCount {
   text-align: center;
   width: 80px;
@@ -599,6 +617,38 @@ input:placeholder-shown ~ .form__messageBox {
   padding: 30px 10px 15px 20px;
 }
 
+.sendDm {
+  width: 65%;
+  margin: 8px auto;
+  background-color: #f7f7f7;
+  position: fixed;
+  bottom: 62px;
+}
+.sendDm__input {
+  width: 90%;
+  line-height: 30px;
+  border: 1px solid #818181;
+  border-radius: 5px;
+  padding: 2px 10px;
+}
+.sendDm__btn {
+  background: none;
+  color: #0d6efd;
+  margin: 2px 0 2px 5px;
+  font-size: 15px;
+  border: none;
+  font-weight: 600;
+}
+.sendDm__btn:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.sendDmWrapper {
+  width: 100%;
+  padding: 15px 10px 15px 20px;
+}
+
 .userDataTable {
   width: 100%;
   padding: 10px 0;
@@ -671,7 +721,7 @@ input:placeholder-shown ~ .form__messageBox {
 }
 .footer__ul {
   width: 100%;
-  margin: 15px;
+  margin: 15px 0;
   display: flex;
   justify-content: space-between;
   padding: 0;
@@ -1029,6 +1079,144 @@ input:placeholder-shown ~ .form__messageBox {
 .searchPage__noMatchUser {
   margin-top: 100px;
   text-align: center;
+}
+
+.accountEdit__top {
+  display: flex;
+  margin-bottom: 20px;
+}
+.accountEdit__icon {
+  width: 20%;
+  margin: 15px auto;
+}
+.accountEdit__userDateTable {
+  width: 100%;
+  padding: 10px 0;
+  border-collapse: collapse;
+}
+.accountEdit__userDateTable--tr {
+  border-bottom: 1px dashed rgb(38, 38, 38);
+  height: 5em;
+}
+.accountEdit__userDateTable--tdTitle {
+  width: 30%;
+  padding: 10px;
+}
+.accountEdit__userDateTable--tdContent {
+  padding: 10px;
+}
+.accountEdit__confirmBtn {
+  text-align: center;
+  margin: 10px;
+}
+.accountEdit__noUserData {
+  display: block;
+  text-align: center;
+  margin-top: 100px;
+}
+
+.passwordChangeTable {
+  width: 100%;
+  padding: 10px 0;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+.passwordChangeTable__tr {
+  border-bottom: 1px dashed rgb(38, 38, 38);
+  height: 5em;
+}
+.passwordChangeTable__tr--tdTitle {
+  width: 40%;
+  padding: 10px;
+}
+.passwordChangeTable__tr--tdContent {
+  padding: 10px;
+}
+.passwordChangeTable__tr--tdInput {
+  display: flex;
+}
+.passwordChangeTable__confirmBtn {
+  text-align: center;
+  margin: 10px;
+}
+.passwordChangeTable__confirmBtn--noPushBtn {
+  justify-self: center;
+  border: none;
+  background-color: #a0a0a0;
+  color: #fff;
+  padding: 5px 15px;
+  font-size: 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin: 5px;
+}
+.passwordChangeTable__icon {
+  margin: auto 0 auto 10px;
+}
+
+.dmPage__top {
+  display: flex;
+  position: fixed;
+  top: 51px;
+  background-color: #fff;
+  padding-top: 10px;
+  box-shadow: 0px 10px 10px -8px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  max-width: 600px;
+  min-width: 350px;
+}
+.dmPage__top--BackBtn {
+  margin: auto 2px;
+}
+.dmPage__top--anotherUser {
+  display: flex;
+  margin-bottom: 10px;
+}
+.dmPage__top--anotherUser-icon {
+  width: 10%;
+}
+.dmPage__top--anotherUser-text {
+  margin: auto 10px;
+}
+.dmPage__top--anotherUser-nameText {
+  font-size: 16px;
+  font-weight: 600;
+}
+.dmPage__top--anotherUser-userNameText {
+  font-size: 13px;
+}
+.dmPage__messageWrapper {
+  margin-top: 80px;
+}
+.dmPage__rightMesse {
+  width: 40%;
+  font-size: 13px;
+  margin: 10px 10px 10px auto;
+}
+.dmPage__rightMesse--message {
+  border-radius: 15px;
+  color: #000;
+  background-color: #FF8774;
+  padding: 15px;
+}
+.dmPage__rightMesse--date {
+  display: block;
+  text-align: right;
+  padding-right: 10px;
+}
+.dmPage__leftMesse {
+  width: 40%;
+  font-size: 13px;
+  margin: 10px auto 10px 10px;
+}
+.dmPage__leftMesse--message {
+  border-radius: 15px;
+  color: #000;
+  background-color: #e6e6e6;
+  padding: 15px;
+}
+.dmPage__leftMesse--date {
+  padding-left: 10px;
 }
 
 *,
