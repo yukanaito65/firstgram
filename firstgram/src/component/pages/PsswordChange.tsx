@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import Header from "../organisms/Header";
 import Footer from "../organisms/Footer";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import { GetLoginUserData } from "../data/GetLoginUserData";
+import { GetLoginUserData } from "../utils/GetLoginUserAllData";
 import BackBtn from "../atoms/button/BackBtn";
 
 export function PsswordChange() {
