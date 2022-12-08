@@ -10,7 +10,7 @@ interface Props {
 function SearchForm(props: Props) {
   return (
     <div>
-      <form className="searchForm">
+      <form className="searchForm" onSubmit={props.onClickSearch}>
         <div className="searchFormWapper">
           <input
             className="searchForm__input"

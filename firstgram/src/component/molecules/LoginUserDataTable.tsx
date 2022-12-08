@@ -1,5 +1,5 @@
 import Icon from "../atoms/icon/Icon";
-import { GetLoginUserData } from "../data/GetLoginUserData";
+import { GetLoginUserData } from "../utils/GetLoginUserAllData";
 
 function LoginUserDataTable() {
   const LoginUserData = GetLoginUserData();

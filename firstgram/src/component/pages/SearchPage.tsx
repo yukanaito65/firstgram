@@ -6,7 +6,7 @@ import Header from "../organisms/Header";
 import Footer from "../organisms/Footer";
 import { Link } from "react-router-dom";
 import CommonIcon from "../atoms/icon/CommonIcon";
-import { GetAllUserData } from "../data/GetAllUserData";
+import { GetAllUserData } from "../utils/GetAllUserData";
 import SearchForm from "../molecules/SearchForm";
 
 // 流れ
