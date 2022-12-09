@@ -40,6 +40,11 @@
   cursor: pointer;
   opacity: 0.7;
 }
+@media screen and (max-width: 767px) {
+  .btn {
+    font-size: 12px;
+  }
+}
 
 .navBtn {
   width: 100%;
@@ -621,6 +626,11 @@ input:placeholder-shown ~ .form__messageBox {
   width: 15px;
   height: 15px;
 }
+@media screen and (max-width: 767px) {
+  .searchForm__input {
+    width: 85%;
+  }
+}
 
 .searchFormWapper {
   width: 100%;
@@ -628,7 +638,7 @@ input:placeholder-shown ~ .form__messageBox {
 }
 
 .sendDm {
-  width: 65%;
+  width: 100%;
   margin: 8px auto;
   background-color: #f7f7f7;
   position: fixed;
@@ -640,6 +650,11 @@ input:placeholder-shown ~ .form__messageBox {
   border: 1px solid #818181;
   border-radius: 5px;
   padding: 2px 10px;
+}
+@media screen and (max-width: 767px) {
+  .sendDm__input {
+    width: 85%;
+  }
 }
 .sendDm__btn {
   background: none;
@@ -681,6 +696,11 @@ input:placeholder-shown ~ .form__messageBox {
   width: 70%;
   padding: 10px;
 }
+@media screen and (max-width: 767px) {
+  .userDataTable {
+    font-size: 1.2rem;
+  }
+}
 
 .header {
   width: 100%;
@@ -703,7 +723,7 @@ input:placeholder-shown ~ .form__messageBox {
   display: flex;
 }
 .header__btns--addPost {
-  width: 10%;
+  width: 100%;
   background: none;
   border: none;
 }
@@ -711,7 +731,7 @@ input:placeholder-shown ~ .form__messageBox {
   cursor: pointer;
 }
 .header__btns--nav {
-  width: 10%;
+  width: 100%;
   background: none;
   border: none;
 }
@@ -754,12 +774,18 @@ input:placeholder-shown ~ .form__messageBox {
   display: block;
   text-align: center;
 }
-.footer__ul--liLink:hover {
-  cursor: pointer;
+.footer__ul--liNoLink {
+  width: 100%;
+  display: block;
+  text-align: center;
+}
+.footer__ul--liNoLink:hover {
+  cursor: default;
 }
 .footer__ul--liIcon {
-  margin: auto;
+  width: 100%;
   display: block;
+  text-align: center;
 }
 
 .accountSetting__title {
@@ -1105,6 +1131,11 @@ input:placeholder-shown ~ .form__messageBox {
   width: 20%;
   margin: 15px auto;
 }
+@media screen and (max-width: 767px) {
+  .accountEdit__icon {
+    width: 32%;
+  }
+}
 .accountEdit__userDateTable {
   width: 100%;
   padding: 10px 0;
@@ -1266,6 +1297,11 @@ body {
   position: relative;
   box-sizing: border-box;
 }
+@media screen and (max-width: 767px) {
+  body {
+    font-size: 1.2rem;
+  }
+}
 
 img,
 video,
@@ -1292,9 +1328,19 @@ h1 {
   font-size: 20px;
   margin: 5px;
 }
+@media screen and (max-width: 767px) {
+  h1 {
+    font-size: 18px;
+  }
+}
 
 input, textarea {
   padding: 5px;
+}
+@media screen and (max-width: 767px) {
+  input, textarea {
+    font-size: 1.2rem;
+  }
 }
 
 li {
