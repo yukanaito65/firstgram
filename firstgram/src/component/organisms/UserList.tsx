@@ -4,6 +4,7 @@ import UserData from "../molecules/UserData";
 interface Props {
   usersData: User[];
   uid: string;
+  message:string;
 }
 
 function UserList(props: Props) {
@@ -21,8 +22,8 @@ function UserList(props: Props) {
           })}
         </div>
       ) : (
-        <div>
-          <p>フォローしている人がいません</p>
+        <div className="userList__message">
+          <p>{props.message}</p>
         </div>
       )}
     </>

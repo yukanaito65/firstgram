@@ -1,6 +1,7 @@
 @use "../../../global/mixin/mobile";
 
 .registerBtn {
+  font-weight: bold;
   @include mobile.mobile{
   width: 50%;
   }

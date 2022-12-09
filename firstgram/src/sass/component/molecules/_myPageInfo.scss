@@ -4,9 +4,4 @@
   display: flex;
   width: 330px;
   justify-content: space-between;
-
-  @include mobile.mobile {
-    width: 0;
-  }
-
 }

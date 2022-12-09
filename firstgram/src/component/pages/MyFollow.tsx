@@ -88,7 +88,8 @@ function MyFollow() {
 
           <UserList
           usersData={followUsers}
-          uid={user.uid} />
+          uid={user.uid}
+          message="フォローしている人がいません" />
           {/* {followUsers.length > 0 ? (
             <div>
               {followUsers.map((followUser) => {

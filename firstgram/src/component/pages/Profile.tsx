@@ -178,9 +178,9 @@ function Profile() {
               {/* <p>{followerNum.length}aaa</p> */}
             </div>
 
-            <span className="profile__name">
+            <div className="profile__name">
               <Name users={profileUsers} />
-            </span>
+            </div>
             <div className="profile__profile">
               {profileUsers.profile}
             </div>

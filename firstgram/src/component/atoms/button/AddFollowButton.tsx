@@ -122,7 +122,7 @@ function AddFollowButton(props: Props) {
             />
             </span> */}
               {/* {props.followerCount} */}
-              <button onClick={() => addFollow()} className="btn">
+              <button onClick={() => addFollow()} className="btn addFollowBtn">
                 フォローする
               </button>
               {/* <p>{followerList.length}</p> */}

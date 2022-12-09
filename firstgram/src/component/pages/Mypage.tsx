@@ -164,9 +164,9 @@ function MyPage() {
                   <div>{followList.length}フォロー中</div>
                 </Link> */}
               {/* </div> */}
-              <span className="myPage__name">
-                <Name users={users} />
-              </span>
+              <div className="myPage__name">
+                {users.name}
+              </div>
               <div className="myPage__profile">{users.profile}</div>
               <ThreeRowsPostList
                 posts={posts}
