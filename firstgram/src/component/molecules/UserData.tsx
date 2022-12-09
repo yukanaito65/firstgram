@@ -25,7 +25,9 @@ function UserData(props: Props) {
           <span className="userData__userName">
           <UserName users={props.users} />
           </span>
+          <span className="userData__name">
           <Name users={props.users} />
+          </span>
         </div>
         </div>
       </Link>

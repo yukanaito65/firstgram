@@ -1,4 +1,6 @@
 @use "../../global/setting" as *;
+@use "../../global/mixin/mobile";
+
 
 .myPage {
   &__userName {
@@ -12,13 +14,24 @@
     gap: 10%;
     margin: 10px 20px;
     align-items: center;
+
+    @include mobile.mobile {
+      gap: 0;
+    }
   }
   &__name {
     font-weight: bold;
+
+    @include mobile.mobile {
+      margin-left: 7%;
+    }
   }
   &__profile {
     margin-top: 10px;
     margin-bottom: 10px;
+    @include mobile.mobile {
+      margin-left: 7%;
+    }
   }
   &__messageLink {
     color: $color-btn;

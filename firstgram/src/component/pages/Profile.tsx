@@ -15,7 +15,6 @@ import { Link, useLocation } from "react-router-dom";
 import AddFollowButton from "../atoms/button/AddFollowButton";
 // import FollowButton from "./component/atoms/button/FollowButton";
 import RemoveFollowButton from "../atoms/button/RemoveFollowButton";
-import CommonIcon from "../atoms/icon/CommonIcon";
 import UserName from "../atoms/user/UserName";
 import { auth, db } from "../../firebase";
 import { Post, User } from "../../types/types";
@@ -26,6 +25,7 @@ import Footer from "../organisms/Footer";
 import Name from "../atoms/user/Name";
 import ThreeRowsPostList from "../molecules/ThreeRowsPostList";
 import ProfileFollowerCount from "../atoms/user/ProfileFollowerCount";
+import ProfileIcon from "../atoms/icon/ProfileIcon";
 
 interface State {
   userId: string;
@@ -155,8 +155,7 @@ function Profile() {
             </div>
 
             <div className="profile__info">
-              <CommonIcon icon={profileUsers.icon} />
-
+              <ProfileIcon icon={profileUsers.icon} />
               <div className="profile__threeCount">
                 <PostCount posts={posts} />
 

@@ -1,0 +1,10 @@
+@use "../../../global/mixin/mobile";
+
+.loginBtn {
+  font-weight: bold;
+  @include mobile.mobile {
+    width: 50%;
+    padding: 7px 15px;
+
+  }
+}

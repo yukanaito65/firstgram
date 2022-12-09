@@ -1,10 +1,8 @@
-@use "../../../global/setting" as *;
-.form {
-  &__input{
-    width: 80%;
-    height: 35px;
-    background-color: $color-base;
-    outline: solid #d3d3d3;
-    border: none;
-  }
-}
+// @use "../../../global/setting" as *;
+// @use "../../../global/mixin/form";
+
+// .EmailForm {
+//   &__input{
+//     @include form.form-input;
+//   }
+// }

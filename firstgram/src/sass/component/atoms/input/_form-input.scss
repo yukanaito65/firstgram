@@ -1,0 +1,5 @@
+@use "../../../global/mixin/form";
+
+.form-input{
+    @include form.form-input;
+}

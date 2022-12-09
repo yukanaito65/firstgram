@@ -4,12 +4,12 @@ interface Props {
   icon: string;
 }
 
-function CommonIcon(props: Props) {
+function ProfileIcon(props: Props) {
   return (
-    <div className="commonIcon-image">
+    <div className="profileIcon-image">
       {props.icon !== "" ? (
         <img
-          className="commonIcon-image__img"
+          className="profileIcon-image__img"
           src={props.icon}
           alt="icon"
         />
@@ -24,4 +24,4 @@ function CommonIcon(props: Props) {
   );
 }
 
-export default CommonIcon;
+export default ProfileIcon;
