@@ -1,6 +1,12 @@
+@use "../../../global/mixin/mobile";
+
 .followCount {
   text-align: center;
   width: 80px;
+
+  @include mobile.mobile {
+    font-size: 1.4rem;
+  }
 
   &:hover {
     opacity: 0.7;

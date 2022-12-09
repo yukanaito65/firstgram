@@ -1,0 +1,7 @@
+@use "../../../global/mixin/mobile";
+
+.registerBtn {
+  @include mobile.mobile{
+  width: 50%;
+  }
+}

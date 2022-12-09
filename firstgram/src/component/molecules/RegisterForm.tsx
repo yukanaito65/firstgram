@@ -123,9 +123,9 @@ function RegisterForm() {
     <>
       {/* 登録ボタンを押した時にhandleSubmitを実行 */}
       <form onSubmit={handleSubmit}
-      className="form">
+      className="registerForm">
         <div
-        className="form__icon">
+        className="registerForm__icon">
           {loading ? (
             <>
               <p>uploading</p>
@@ -135,17 +135,17 @@ function RegisterForm() {
                 type="file"
                 accept=".png, .jpeg, .jpg"
                 onChange={InputImage}
-                className="form__loading-input"
+                className="registerForm__loading-input"
               />
             </>
           ) : (
             <>
               {isUploaded ? (
-                <div className="form__loaded-image">
+                <div className="registerForm__loaded-image">
                   <img
                     alt="icon"
                     src={imgSrc}
-                    className="form__loaded-image--img"
+                    className="registerForm__loaded-image--img"
                   />
                 </div>
               ) : (
@@ -159,18 +159,18 @@ function RegisterForm() {
                     type="file"
                     accept=".png, .jpeg, .jpg"
                     onChange={InputImage}
-                    className="form__loading-input"
+                    className="registerForm__loading-input"
                   />
                 </>
               )}
             </>
           )}
         </div>
-        <p className="form__requiredText">＊：必須項目</p>
+        <p className="registerForm__requiredText">＊：必須項目</p>
         <InputEmail
           emailChange={emailChange}
           valueEmail={registerEmail}
-          requiredIcon={<span className="form__requiredIcon">＊</span>}
+          requiredIcon={<span className="registerForm__requiredIcon">＊</span>}
         />
 
         <InputRequiredRegister

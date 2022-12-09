@@ -2,9 +2,7 @@
 @use "../../../global/mixin/noIconImg";
 @use "../../../global/mixin/mobile";
 
-
-//myPage,profile
-.icon-image {
+.profileIcon-image {
   border-radius: 50%;
   width: 20%;
   aspect-ratio: 1/1;
@@ -19,6 +17,6 @@
     @include iconImg.icon-image__img;
   }
 }
-.noIconImage{
+.noIconImage {
   @include noIconImg.noIconImage;
 }

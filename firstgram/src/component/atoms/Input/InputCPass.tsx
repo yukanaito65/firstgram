@@ -10,25 +10,25 @@ function InputCPass(props: any) {
   };
 
   return (
-    <div className="form">
-      <span className="form__requiredIcon">＊</span>
+    <div className="CpassForm">
+      <span className="CpassForm__requiredIcon">＊</span>
       <input
         type={isRevealConfirmPassword ? "text" : "password"}
         name="Cpassword"
         placeholder="確認用パスワード"
         data-equal-to="email"
         pattern={props.passwordValue}
-        className="form__input"
+        className="CpassForm__input"
         required
       />
       <span
         onClick={toggleConfirmPassword}
         role="presentation"
-        className="form__isRevealPasswordIcon"
+        className="CpassForm__isRevealPasswordIcon"
       >
         {isRevealConfirmPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
       </span>
-      <span className="form__error-message form__messageBox">
+      <span className="CpassForm__error-message CpassForm__messageBox">
         パスワードが一致しません
       </span>
     </div>

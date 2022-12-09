@@ -10,7 +10,7 @@ function UserList(props: Props) {
   return (
     <>
       {props.usersData.length > 0 ? (
-        <div>
+        <div className = "userList">
           {props.usersData.map((followUser: User) => {
             return (
             <UserData
