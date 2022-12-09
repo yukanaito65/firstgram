@@ -27,13 +27,19 @@
             width: 100%;
             display: block;
             text-align: center;
+        }
+        &--liNoLink {
+            width: 100%;
+            display: block;
+            text-align: center;
             &:hover {
-                cursor: pointer;
+                cursor: default;
             }
         }
         &--liIcon {
-            margin: auto;
+            width: 100%;
             display: block;
+            text-align: center;
         }
     }
 }

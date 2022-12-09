@@ -1,3 +1,5 @@
+@use "../../global/mixin/mobile" as *;
+
 .searchForm {
     width: 65%;
     margin: 10px auto;
@@ -21,6 +23,9 @@
             padding-right: 0px;
             width: 15px;
             height: 15px;
+        }
+        @include mobile {
+            width: 85%;
         }
     }
 }
