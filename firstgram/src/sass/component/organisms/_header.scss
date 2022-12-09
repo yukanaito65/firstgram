@@ -19,7 +19,7 @@
     margin: auto 0 auto auto;
     display: flex;
     &--addPost {
-        width: 10%;
+        width: 100%;
         background: none;
         border: none;
         &:hover {
@@ -27,7 +27,7 @@
         }
     }
     &--nav {
-        width: 10%;
+        width: 100%;
         background: none;
         border: none;
         &:hover {
