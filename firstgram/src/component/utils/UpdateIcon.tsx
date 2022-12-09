@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../../firebase";
-import { MdAutorenew, MdOutlineChangeCircle } from "react-icons/md";
+import { MdAutorenew } from "react-icons/md";
 
 function UpdateIcon(props: any) {
   //loadingしているかしてないか監視する

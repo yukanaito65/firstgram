@@ -1,6 +1,10 @@
 @use "../../global/setting" as *;
 @use "../../global/mixin" as *;
 
+.loginUserIcon {
+    padding-left: 10px;
+}
+
 .userDataTable {
     width: 100%;
     padding: 10px 0;

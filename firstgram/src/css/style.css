@@ -513,8 +513,8 @@ input:placeholder-shown ~ .form__messageBox {
   position: fixed;
   top: 100px;
   right: 30%;
-  list-style: none;
   width: 20%;
+  list-style: none;
   background-color: #f7f7f7;
   box-shadow: 0 0px 10px 7px rgba(0, 0, 0, 0.1);
   font-size: 19px;
@@ -542,6 +542,13 @@ input:placeholder-shown ~ .form__messageBox {
 .nav__ul--liLogout:hover {
   cursor: pointer;
   opacity: 0.6;
+}
+@media screen and (max-width: 767px) {
+  .nav__ul {
+    top: 65px;
+    right: 8%;
+    width: 45%;
+  }
 }
 
 .newpostuploadauter__textarea {
@@ -650,6 +657,10 @@ input:placeholder-shown ~ .form__messageBox {
   padding: 15px 10px 15px 20px;
 }
 
+.loginUserIcon {
+  padding-left: 10px;
+}
+
 .userDataTable {
   width: 100%;
   padding: 10px 0;
@@ -751,6 +762,7 @@ input:placeholder-shown ~ .form__messageBox {
 
 .accountSetting__title {
   margin-bottom: 20px;
+  padding-left: 5px;
 }
 .accountSetting__btns {
   display: flex;

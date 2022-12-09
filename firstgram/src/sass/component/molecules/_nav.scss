@@ -1,5 +1,6 @@
 @use "../../global/setting" as *;
 @use "../../global/mixin" as *;
+@use "../../global/mixin/mobile";
 
 .nav {
   width: 65%;
@@ -9,8 +10,8 @@
     position: fixed;
     top: 100px;
     right: 30%;
-    list-style: none;
     width: 20%;
+    list-style: none;
     background-color: $color-base;
     box-shadow: 0 0px 10px 7px rgb(0 0 0 / 10%);
     font-size: 19px;
@@ -37,6 +38,11 @@
         cursor: pointer;
         opacity: 0.6;
       }
+    }
+    @include mobile {
+      top: 65px;
+      right: 8%;
+      width: 45%;
     }
   }
 }

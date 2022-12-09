@@ -6,7 +6,7 @@ import Header from "../organisms/Header";
 import Footer from "../organisms/Footer";
 import { Link } from "react-router-dom";
 import CommonIcon from "../atoms/icon/CommonIcon";
-import { GetAllUserData } from "../data/GetAllUserData";
+import { GetAllUserData } from "../utils/GetAllUserData";
 import SearchForm from "../molecules/SearchForm";
 
 // 流れ
@@ -104,7 +104,7 @@ function SearchPage() {
             dataArr.map((a) => {
               return (
                 <Link
-                  to={a.userId === currentUserId ? "/mypage" : "/profile"}
+                  to={a.userId === currentUserId ? "/mypage/" : "/profile"}
                   state={{ userId: a.userId }}
                   className="searchPage__resultUserList--resultUser"
                 >
