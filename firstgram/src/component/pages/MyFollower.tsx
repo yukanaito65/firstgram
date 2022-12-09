@@ -8,7 +8,7 @@ import {
   where,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import GetFollowerData from "../data/GetFollowerData";
+import GetFollowerData from "../utils/GetFollowerData";
 import Footer from "../organisms/Footer";
 import Header from "../organisms/Header";
 import UserList from "../organisms/UserList";
