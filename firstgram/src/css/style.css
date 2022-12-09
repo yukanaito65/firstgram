@@ -1231,6 +1231,12 @@ input:placeholder-shown ~ .form__messageBox {
 .dmPage__top--anotherUser-userNameText {
   font-size: 13px;
 }
+@media screen and (max-width: 767px) {
+  .dmPage__top {
+    position: fixed;
+    top: 41px;
+  }
+}
 .dmPage__messageWrapper {
   margin-top: 80px;
 }
