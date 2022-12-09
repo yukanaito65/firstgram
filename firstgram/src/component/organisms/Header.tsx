@@ -26,16 +26,16 @@ function Header({show}:{show:boolean}) {
           <div className="header__btns">
             <Link to="/newPost">
               <button className="header__btns--addPost">
-                <IoAddCircleOutline size={40} color={"white"} />
+                <IoAddCircleOutline size={35} color={"white"} />
               </button>
             </Link>
             {navDisplay ? (
               <button className="header__btns--nav" onClick={() => navActive()}>
-                <FiX size={40} color={"white"} />
+                <FiX size={35} color={"white"} className="iconTest" />
               </button>
             ) : (
               <button className="header__btns--nav" onClick={() => navActive()}>
-                <FiMenu size={40} color={"white"} />
+                <FiMenu size={35} color={"white"} />
               </button>
             )}
           </div>}

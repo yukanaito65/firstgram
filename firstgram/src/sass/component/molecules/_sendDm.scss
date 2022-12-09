@@ -1,7 +1,8 @@
 @use "../../global/setting" as *;
+@use "../../global/mixin/mobile" as *;
 
 .sendDm {
-    width: 65%;
+    width: 100%;
     margin: 8px auto;
     background-color: $color-base;
     position: fixed;
@@ -12,6 +13,9 @@
         border: 1px solid #818181;
         border-radius: 5px;
         padding: 2px 10px;
+        @include mobile {
+            width: 85%;
+        }
     }
     &__btn {
         background: none;

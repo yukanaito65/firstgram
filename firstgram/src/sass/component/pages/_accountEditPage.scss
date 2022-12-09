@@ -1,3 +1,5 @@
+@use "../../global/mixin" as *;
+
 .accountEdit {
     &__top {
         display: flex;
@@ -6,6 +8,9 @@
     &__icon {
         width: 20%;
         margin: 15px auto;
+        @include mobile {
+            width: 32%;
+        }
     }
     &__userDateTable {
         width: 100%;
