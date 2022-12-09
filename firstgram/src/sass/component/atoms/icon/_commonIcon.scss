@@ -1,12 +1,12 @@
 @use "../../../global/mixin/iconImg";
 @use "../../../global/mixin/noIconImg";
 
-.icon-image {
-   @include iconImg.icon-image;
-  // border-radius: 50%;
-  // width: 14%;
-  // aspect-ratio: 1/1;
-  // border: solid 1px lightgray;
+.commonIcon-image {
+  border-radius: 50%;
+  width: 15%;
+  aspect-ratio: 1/1;
+  border: solid 1px lightgray;
+  background-color: #ffff;
 
   &__img {
     @include iconImg.icon-image__img;

@@ -1,12 +1,13 @@
 @use "../../../global/mixin/iconImg";
 @use "../../../global/mixin/noIconImg";
 
+//myPage,profile
 .icon-image {
-  @include  iconImg.icon-image;
-  // border-radius: 50%;
-  // width: 14%;
-  // aspect-ratio: 1/1;
-  // border: solid 1px lightgray;
+  border-radius: 50%;
+  width: 20%;
+  aspect-ratio: 1/1;
+  border: solid 1px lightgray;
+  background-color: #ffff;
 
   &__img {
     @include iconImg.icon-image__img;

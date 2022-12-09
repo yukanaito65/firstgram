@@ -4,7 +4,7 @@ import { IoAddCircle } from "react-icons/io5";
 function RegisterIcon() {
   return (
     <div className="registerIcon">
-      <div className="icon-image">
+      <div className="registerIcon__icon-image">
         <img
           src={`${process.env.PUBLIC_URL}/noIcon.png`}
           alt="NoImage"
@@ -13,7 +13,7 @@ function RegisterIcon() {
       </div>
       <div>
         <IoAddCircle
-        className="addIcon"
+        className="registerIcon__addIcon"
         size={30} />
       </div>
     </div>

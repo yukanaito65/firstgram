@@ -6,10 +6,10 @@ interface Props {
 
 function CommonIcon(props: Props) {
   return (
-    <div className="icon-image">
+    <div className="commonIcon-image">
       {props.icon !== "" ? (
         <img
-          className="icon-image__img"
+          className="commonIcon-image__img"
           src={props.icon}
           alt="icon"
         />
