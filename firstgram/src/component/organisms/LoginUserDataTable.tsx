@@ -15,16 +15,16 @@ function LoginUserDtataTable() {
     <>
       {authUserData ? (
         <>
-          <div>
+          <div className="loginUserIcon">
             <Icon />
           </div>
 
           <table className="userDataTable">
             <tr className="userDataTable__tr">
-              <td className="setting_table_title setting_table_td">
+              <td className="userDataTable__tr--title">
                 ユーザーネーム
               </td>
-              <td className="setting_table_td">{userNameValue}</td>
+              <td className="userDataTable__tr--content">{userNameValue}</td>
             </tr>
 
             <tr className="userDataTable__tr">
@@ -33,7 +33,7 @@ function LoginUserDtataTable() {
             </tr>
 
             <tr className="userDataTable__tr">
-              <td className="userDataTable__tr--titlesetting_table_title setting_table_td">自己紹介</td>
+              <td className="userDataTable__tr--title">自己紹介</td>
               <td className="userDataTable__tr--content">{profileValue}</td>
             </tr>
 
