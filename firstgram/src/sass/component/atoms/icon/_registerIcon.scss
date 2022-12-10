@@ -1,25 +1,41 @@
-@use "../../../global/mixin/iconImg";
 @use "../../../global/mixin/noIconImg";
 @use "../../../global/setting" as *;
+@use "../../../global/mixin/mobile";
 
 .registerIcon {
   position: relative;
   &:hover {
     cursor: pointer;
   }
+
+  &__icon-image {
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    border: solid 1px lightgray;
+
+    @include mobile.mobile {
+      width: 100px;
+      height: 100px;
+    }
+  }
+
+  &__addIcon {
+    color: $color-btn;
+    position: absolute;
+    top: 75%;
+    left: 65%;
+    width: 30px;
+    height: 30px;
+
+    @include mobile.mobile {
+      left: 70%;
+      width: 25px;
+      height: 25px;
+    }
+  }
 }
-.icon-image {
-  border-radius: 50%;
-  width: 120px;
-  height: 120px;
-  border: solid 1px lightgray;
-}
+
 .noIconImage {
   @include noIconImg.noIconImage;
-}
-.addIcon {
-  color: $color-btn;
-  position: absolute;
-  top: 75%;
-  left: 65%;
 }

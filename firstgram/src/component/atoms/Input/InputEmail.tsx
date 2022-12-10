@@ -15,7 +15,7 @@ function InputEmail(props: Props) {
         value={props.valueEmail}
         placeholder="メールアドレス"
         onChange={props.emailChange}
-        className="form__input"
+        className="form-input"
         required
       />
     </div>

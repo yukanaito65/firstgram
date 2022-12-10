@@ -1,6 +1,6 @@
 @use "../../../global/setting" as *;
 
-.form {
+.registerPassForm {
   position: relative;
 
   &__requiredIcon {
@@ -8,13 +8,13 @@
     font-size: 10px;
     margin-right: 1%;
   }
-  &__input {
-    width: 80%;
-    height: 35px;
-    background-color: $color-base;
-    outline: solid #d3d3d3;
-    border: none;
-  }
+  // &__input {
+  //   width: 80%;
+  //   height: 35px;
+  //   background-color: $color-base;
+  //   outline: solid #d3d3d3;
+  //   border: none;
+  // }
   &__isRevealPasswordIcon {
     position: absolute;
     top: 10%;
