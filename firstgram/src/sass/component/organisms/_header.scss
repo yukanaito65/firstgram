@@ -1,3 +1,5 @@
+@use "../../global/mixin" as *;
+
 .header {
   width: 100%;
   max-width: 600px;
@@ -41,4 +43,11 @@
     width: 85%;
   display: flex;
   margin: 0 auto;
+}
+
+.iconTest {
+  @include mobile {
+    size: 30;
+    display: block;
+  }
 }
