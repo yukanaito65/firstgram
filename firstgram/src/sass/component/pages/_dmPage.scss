@@ -1,4 +1,5 @@
 @use "../../global/mixin/postIconImg";
+@use "../../global/mixin/mobile";
 
 .dmPage {
     &__top {
@@ -30,6 +31,10 @@
             &-userNameText {
                 font-size: 13px;
             }
+        }
+        @include mobile.mobile {
+            position: fixed;
+            top: 41px;
         }
     }
     &__messageWrapper {
