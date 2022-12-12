@@ -84,21 +84,19 @@ function PostDetails() {
   //   dispatch(fetchAsyncGet());
   // }, [dispatch]);
 
-
   useEffect(() => {
     //ログイン判定
     onAuthStateChanged(auth, async (user) => {
       setUser(user);
 
-      GetLoginUserData(user).then((loginUserData:any) => {
+      GetLoginUserData(user).then((loginUserData: any) => {
         setLoginUserName(loginUserData.userName);
         setLoginUserKeep(loginUserData.keepPosts);
       });
 
-// Redux使うときのやつ
-    // setLoginUserName(userData.userName)
-    // setLoginUserName(userData.keepPosts)
-
+      // Redux使うときのやつ
+      // setLoginUserName(userData.userName)
+      // setLoginUserName(userData.keepPosts)
 
       if (user?.uid === userid) {
         // useStateでログインしているユーザーの投稿かどうか判定するを保持
@@ -121,7 +119,7 @@ function PostDetails() {
   }, []);
 
   // お気に入りボタンがクリックされたら
-  const Favorite = async (e:any) => {
+  const Favorite = async (e: any) => {
     // 押された投稿のFavolitesにloginUserNameを配列で追加
     FavoriteUpdata(postid, loginUserName, arrayUnion);
     // firestoreからfavolitesを取得、保持
@@ -131,7 +129,7 @@ function PostDetails() {
   };
 
   // お気に入り取り消し機能
-  const NoFavorite = async (e:any) => {
+  const NoFavorite = async (e: any) => {
     // 押された投稿のFavolitesからloginUserNameを削除
     FavoriteUpdata(postid, loginUserName, arrayRemove);
     // firestoreからfavolitesを取得、保持
@@ -219,330 +217,358 @@ function PostDetails() {
 
   return (
     <>
-    <div className="postdetails">
-      <Header show={true} />
-      <div>
-        {loginUserPost ? (
-          <>
-            <div
-            className="postdetails__iconusername"
-              // style={{ display: "flex", alignItems: "center", width: "100%" }}
-            >
-              {/* <div className="postDetails_postIcon"> */}
+      <div className="postdetails">
+        <Header show={true} />
+        <div>
+          {loginUserPost ? (
+            <>
+              <div
+                className="postdetails__iconusername"
+                // style={{ display: "flex", alignItems: "center", width: "100%" }}
+              >
+                {/* <div className="postDetails_postIcon"> */}
                 <div className="postdetails__icon">
-                <Link
-                  to={userid === user.uid ? "/mypage" : "/profile"}
-                  state={{ userId: userid }}
-                >
-                  <PostIcon icon={icon} />
-                </Link>
+                  <Link
+                    to={userid === user.uid ? "/mypage" : "/profile"}
+                    state={{ userId: userid }}
+                  >
+                    <PostIcon icon={icon} />
+                  </Link>
                 </div>
-              {/* </div> */}
+                {/* </div> */}
 
-              <p
-              className="postdetais__username"
-              // style={{ fontSize: "20px", marginLeft: "5px" }}
-              >
-                {postUserName}
-              </p>
+                <p
+                  className="postdetais__username"
+                  // style={{ fontSize: "20px", marginLeft: "5px" }}
+                >
+                  {postUserName}
+                </p>
 
-              {select ? (
-                <>
-                  <div style={{ marginLeft: "auto" }}>
-                    <nav style={{ width: "100%", margin: "0 auto " }}>
-                      <ul
-                        style={{
-                          padding: "5px 0",
-                          position: "fixed",
-                          top: "100px",
-                          right: "25%",
-                          listStyle: "none",
-                          width: "20%",
-                          backgroundColor: " #f7f7f7",
-                          boxShadow: "0 0px 10px 7px rgb(0 0 0 / 10%)",
-                          fontSize: "19px",
-                          zIndex: " 800",
-                          marginLeft: "auto",
-                        }}
-                      >
-                        <li
+                {select ? (
+                  <>
+                    <div style={{ marginLeft: "auto" }}>
+                      <nav style={{ width: "100%", margin: "0 auto " }}>
+                        <ul
                           style={{
-                            width: "100%",
-                            borderBottom: "2px solid #e7e7e7",
                             padding: "5px 0",
+                            position: "fixed",
+                            top: "100px",
+                            right: "25%",
+                            listStyle: "none",
+                            width: "20%",
+                            backgroundColor: " #f7f7f7",
+                            boxShadow: "0 0px 10px 7px rgb(0 0 0 / 10%)",
+                            fontSize: "19px",
+                            zIndex: " 800",
+                            marginLeft: "auto",
                           }}
                         >
-                          <Link
-                            to="/PostEditing"
-                            state={{ postid: postid, userid: userid }}
+                          <li
+                            style={{
+                              width: "100%",
+                              borderBottom: "2px solid #e7e7e7",
+                              padding: "5px 0",
+                            }}
                           >
-                            <button className="navBtn">編集</button>
-                          </Link>
-                        </li>
-                        <li
-                          style={{
-                            width: "100%",
-                            padding: "5px 0",
-                          }}
-                        >
-                          <Link to="/Delete">
-                            <button
-                              onClick={ClickDelition}
-                              className="navBtn"
+                            <Link
+                              to="/PostEditing"
+                              state={{ postid: postid, userid: userid }}
                             >
-                              削除
-                            </button>
-                          </Link>
-                        </li>
-                      </ul>
-                    </nav>
-                  </div>
+                              <button className="navBtn">編集</button>
+                            </Link>
+                          </li>
+                          <li
+                            style={{
+                              width: "100%",
+                              padding: "5px 0",
+                            }}
+                          >
+                            <Link to="/Delete">
+                              <button
+                                onClick={ClickDelition}
+                                className="navBtn"
+                              >
+                                削除
+                              </button>
+                            </Link>
+                          </li>
+                        </ul>
+                      </nav>
+                    </div>
 
-                  <div
-                  className="postdetails__closebtn"
-                  // style={{ marginLeft: "auto" }}
-                  >
-                    <AiOutlineClose
-                    className="postdetails__closebtnicon"
-                      // style={{ display: "block" }}
-                      size={27}
-                      color={"rgb(38, 38, 38)"}
-                      onClick={Back}
-                    />
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div
-                   className="postdetails__closebtn"
-                  // style={{ marginLeft: "auto" }}
-                  >
-                    <AiOutlineEllipsis
-                    className="postdetails__closebtnicon"
-                      // style={{ display: "block" }}
-                      size={40}
-                      color={"rgb(38, 38, 38)"}
-                      onClick={Select}
-                    />
-                  </div>
-                </>
-              )}
-            </div>
-
-            <Img imgUrl={imgUrl} />
-
-            <div
-            className="postdetails__favocomkeep"
-            // style={{ display: "flex" }}
-            >
-              <div
-              className="postdetails__favo"
-              // style={{ margin: "10px 5px 0px 5px" }}
-              >
-                {favorites.includes(loginUserName) ? (
-                  <AiFillHeart size={30} color={"red"} onClick={NoFavorite} />
+                    <div
+                      className="postdetails__closebtn"
+                      // style={{ marginLeft: "auto" }}
+                    >
+                      <AiOutlineClose
+                        className="postdetails__closebtnicon"
+                        // style={{ display: "block" }}
+                        size={27}
+                        color={"rgb(38, 38, 38)"}
+                        onClick={Back}
+                      />
+                    </div>
+                  </>
                 ) : (
-                  <AiOutlineHeart
-                    size={30}
-                    color={"rgb(38, 38, 38)"}
-                    onClick={Favorite}
-                  />
+                  <>
+                    <div
+                      className="postdetails__closebtn"
+                      // style={{ marginLeft: "auto" }}
+                    >
+                      <AiOutlineEllipsis
+                        className="postdetails__closebtnicon"
+                        // style={{ display: "block" }}
+                        size={40}
+                        color={"rgb(38, 38, 38)"}
+                        onClick={Select}
+                      />
+                    </div>
+                  </>
                 )}
               </div>
 
+              <Img imgUrl={imgUrl} />
+
               <div
-              className="postdetails__com"
-              // style={{ margin: "10px 5px 0px 5px" }}
-              >
-                <AiOutlineMessage
-                  size={30}
-                  color={"rgb(38, 38, 38)"}
-                  onClick={CommentDisplay}
-                />
-              </div>
-
-              <div className="postdetails__keep"
-              // style={{ margin: "5px 5px 5px auto" }}
-              >
-                <KeepButton loginUserKeep={loginUserKeep} data={postid} />
-              </div>
-              </div>
-
-            <FavoLength favos={favorites} />
-            <Caption data={caption} />
-
-            <div className="postdetails__postcommentset"
-            // style={{ display: "flex", width: "100%" }}
-            >
-              <div className="postdetails__postcomment"
-                // style={{
-                //   display: "flex",
-                //   width: "70%",
-                //   height: "30px",
-                //   margin: "5px",
-                // }}
-              >
-                <input
-                className="postdetails__postcommentinput"
-                  // style={{ width: "100%" }}
-                  type="text"
-                  value={inputComment}
-                  onChange={(e) => {
-                    setInputComment(e.target.value);
-                  }}
-                ></input>
-              </div>
-              <div
-              className="postdetails__postcommentbutton"
-              // style={{ marginLeft: "auto", width: "30%" }}
-              >
-                <button className="btn"
-                onClick={AddComment}>投稿する</button>
-              </div>
-            </div>
-            {commentDisplay ? (
-              <>
-                <div className="postdetails__displaycomment"
+                className="postdetails__favocomkeep"
                 // style={{ display: "flex" }}
+              >
+                <div
+                  className="postdetails__favo"
+                  // style={{ margin: "10px 5px 0px 5px" }}
                 >
-                  <CommentsDisplay displayComment={displayComment} />
-                  <AiOutlineClose
-                  className="postdetails__commentclosebtn"
-                    // style={{
-                    //   display: "block",
-                    //   margin: "auto 0 0 auto",
-                    //   alignItems: "center",
-                    // }}
-                    size={15}
-                    color={"rgb(38, 38, 38)"}
-                    onClick={CommentBack}
-                  />
+                  {favorites.includes(loginUserName) ? (
+                    <AiFillHeart
+                      className="postdetails__favBtn"
+                      size={30}
+                      color={"red"}
+                      onClick={NoFavorite}
+                    />
+                  ) : (
+                    <AiOutlineHeart
+                      className="postdetails__favBtn"
+                      size={30}
+                      color={"rgb(38, 38, 38)"}
+                      onClick={Favorite}
+                    />
+                  )}
                 </div>
-              </>
-            ) : (
-              <></>
-            )}
-          </>
-        ) : (
-          <>
-            <div className="postdetails__iconusername"
-              // style={{ display: "flex", alignItems: "center", width: "100%" }}
-            >
-              {/* <div className="postDetails_postIcon"> */}
-              <div className="postdetails__icon">
-                <Link
-                  to={userid === user.uid ? "/mypage" : "/profile"}
-                  state={{ userId: userid }}
+
+                <div
+                  className="postdetails__com"
+                  // style={{ margin: "10px 5px 0px 5px" }}
                 >
-                  <PostIcon icon={icon} />
-                </Link>
-              </div>
-              <p className="postdetails__username"
-              // style={{ fontSize: "20px", marginLeft: "5px" }}
-              >
-                {postUserName}
-              </p>
-            </div>
-
-
-            <Img imgUrl={imgUrl} />
-
-
-            <div className="postdetails__favocomkeep"
-            // style={{ display: "flex" }}
-            >
-              <div className="postdetails__favo"
-              // style={{ margin: "10px 5px 0px 5px" }}
-              >
-                {favorites.includes(loginUserName) ? (
-                  <AiFillHeart size={30} color={"red"} onClick={NoFavorite} />
-                ) : (
-                  <AiOutlineHeart
-                    size={30}
-                    color={"rgb(38, 38, 38)"}
-                    onClick={Favorite}
-                  />
-                )}
-              </div>
-
-              <div className="postdetails__com"
-              // style={{ margin: "10px 5px 0px 5px" }}
-              >
-
                   <AiOutlineMessage
+                    className="postdetails__commentBtn"
                     size={30}
                     color={"rgb(38, 38, 38)"}
                     onClick={CommentDisplay}
                   />
-              </div>
+                </div>
 
-              <div className="postdetails__keep"
-              // style={{ margin: "5px 5px 5px auto" }}
-              >
-                <KeepButton loginUserKeep={loginUserKeep} data={postid} />
-              </div>
-            </div>
-
-            <FavoLength favos={favorites} />
-
-            <Caption data={caption} />
-
-            <div className="postdetails__postcommentset"
-            // style={{ display: "flex", width: "100%" }}
-            >
-              <div className="postdetails__postcomment"
-                // style={{
-                //   display: "flex",
-                //   width: "70%",
-                //   height: "30px",
-                //   margin: "5px",
-                // }}
-              >
-                <input className="postdetails__postcommentinput"
-                  // style={{ width: "100%" }}
-                  type="text"
-                  value={inputComment}
-                  onChange={(e) => {
-                    setInputComment(e.target.value);
-                  }}
-                ></input>
-              </div>
-
-              <div className="postdetails__postcommentbutton"
-              // style={{ marginLeft: "auto", width: "30%" }}
-              >
-                <button className="btn"
-                onClick={AddComment}>投稿する</button>
-              </div>
-            </div>
-
-            {commentDisplay ? (
-              <>
-                <div className="postdetails__displaycomment"
-                // style={{ display: "flex" }}
+                <div
+                  className="postdetails__keep"
+                  // style={{ margin: "5px 5px 5px auto" }}
                 >
-                  <CommentsDisplay displayComment={displayComment} />
-                  <AiOutlineClose
-                  className="postdetails__commentclosebtn"
-                    // style={{
-                    //   display: "block",
-                    //   margin: "auto 0 0 auto",
-                    //   alignItems: "center",
-                    // }}
-                    size={15}
+                  <KeepButton loginUserKeep={loginUserKeep} data={postid} />
+                </div>
+              </div>
+
+              <FavoLength favos={favorites} />
+              <Caption data={caption} />
+
+              <div
+                className="postdetails__postcommentset"
+                // style={{ display: "flex", width: "100%" }}
+              >
+                <div
+                  className="postdetails__postcomment"
+                  // style={{
+                  //   display: "flex",
+                  //   width: "70%",
+                  //   height: "30px",
+                  //   margin: "5px",
+                  // }}
+                >
+                  <input
+                    className="postdetails__postcommentinput"
+                    // style={{ width: "100%" }}
+                    type="text"
+                    value={inputComment}
+                    onChange={(e) => {
+                      setInputComment(e.target.value);
+                    }}
+                  ></input>
+                </div>
+                <div
+                  className="postdetails__postcommentbutton"
+                  // style={{ marginLeft: "auto", width: "30%" }}
+                >
+                  <button className="btn" onClick={AddComment}>
+                    投稿する
+                  </button>
+                </div>
+              </div>
+              {commentDisplay ? (
+                <>
+                  <div
+                    className="postdetails__displaycomment"
+                    // style={{ display: "flex" }}
+                  >
+                    <CommentsDisplay displayComment={displayComment} />
+                    <AiOutlineClose
+                      className="postdetails__commentclosebtn"
+                      // style={{
+                      //   display: "block",
+                      //   margin: "auto 0 0 auto",
+                      //   alignItems: "center",
+                      // }}
+                      size={15}
+                      color={"rgb(38, 38, 38)"}
+                      onClick={CommentBack}
+                    />
+                  </div>
+                </>
+              ) : (
+                <></>
+              )}
+            </>
+          ) : (
+            <>
+              <div
+                className="postdetails__iconusername"
+                // style={{ display: "flex", alignItems: "center", width: "100%" }}
+              >
+                {/* <div className="postDetails_postIcon"> */}
+                <div className="postdetails__icon">
+                  <Link
+                    to={userid === user.uid ? "/mypage" : "/profile"}
+                    state={{ userId: userid }}
+                  >
+                    <PostIcon icon={icon} />
+                  </Link>
+                </div>
+                <p
+                  className="postdetails__username"
+                  // style={{ fontSize: "20px", marginLeft: "5px" }}
+                >
+                  {postUserName}
+                </p>
+              </div>
+
+              <Img imgUrl={imgUrl} />
+
+              <div
+                className="postdetails__favocomkeep"
+                // style={{ display: "flex" }}
+              >
+                <div
+                  className="postdetails__favo"
+                  // style={{ margin: "10px 5px 0px 5px" }}
+                >
+                  {favorites.includes(loginUserName) ? (
+                    <AiFillHeart
+                      className="postdetails__favBtn"
+                      size={30}
+                      color={"red"}
+                      onClick={NoFavorite}
+                    />
+                  ) : (
+                    <AiOutlineHeart
+                      className="postdetails__favBtn"
+                      size={30}
+                      color={"rgb(38, 38, 38)"}
+                      onClick={Favorite}
+                    />
+                  )}
+                </div>
+
+                <div
+                  className="postdetails__com"
+                  // style={{ margin: "10px 5px 0px 5px" }}
+                >
+                  <AiOutlineMessage
+                    className="commentBtn"
+                    size={30}
                     color={"rgb(38, 38, 38)"}
-                    onClick={CommentBack}
+                    onClick={CommentDisplay}
                   />
                 </div>
-              </>
-            ) : (
-              <></>
-            )}
-          </>
-        )}
-      </div>
 
-      <Footer />
+                <div
+                  className="postdetails__keep"
+                  // style={{ margin: "5px 5px 5px auto" }}
+                >
+                  <KeepButton loginUserKeep={loginUserKeep} data={postid} />
+                </div>
+              </div>
+
+              <FavoLength favos={favorites} />
+
+              <Caption data={caption} />
+
+              <div
+                className="postdetails__postcommentset"
+                // style={{ display: "flex", width: "100%" }}
+              >
+                <div
+                  className="postdetails__postcomment"
+                  // style={{
+                  //   display: "flex",
+                  //   width: "70%",
+                  //   height: "30px",
+                  //   margin: "5px",
+                  // }}
+                >
+                  <input
+                    className="postdetails__postcommentinput"
+                    // style={{ width: "100%" }}
+                    type="text"
+                    value={inputComment}
+                    onChange={(e) => {
+                      setInputComment(e.target.value);
+                    }}
+                  ></input>
+                </div>
+
+                <div
+                  className="postdetails__postcommentbutton"
+                  // style={{ marginLeft: "auto", width: "30%" }}
+                >
+                  <button className="btn" onClick={AddComment}>
+                    投稿する
+                  </button>
+                </div>
+              </div>
+
+              {commentDisplay ? (
+                <>
+                  <div
+                    className="postdetails__displaycomment"
+                    // style={{ display: "flex" }}
+                  >
+                    <CommentsDisplay displayComment={displayComment} />
+                    <AiOutlineClose
+                      className="postdetails__commentclosebtn"
+                      // style={{
+                      //   display: "block",
+                      //   margin: "auto 0 0 auto",
+                      //   alignItems: "center",
+                      // }}
+                      size={15}
+                      color={"rgb(38, 38, 38)"}
+                      onClick={CommentBack}
+                    />
+                  </div>
+                </>
+              ) : (
+                <></>
+              )}
+            </>
+          )}
+        </div>
+
+        <Footer />
       </div>
     </>
   );

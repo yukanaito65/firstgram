@@ -52,7 +52,7 @@ function AccountEditPage() {
       name: nameValue,
       profile: profileValue,
     });
-    navigate("/mypage/");
+    navigate("/mypage");
   };
 
   return (

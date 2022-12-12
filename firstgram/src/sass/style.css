@@ -5,8 +5,8 @@
   border: none;
 }
 .keepBtn__img {
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
 }
 
 .keepBtn {
@@ -16,8 +16,8 @@
   border: none;
 }
 .keepBtn__img {
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
 }
 
 .backBtn__icon:hover {
@@ -97,14 +97,37 @@
   opacity: 0.7;
 }
 
-.icon-image {
+.loginBtn {
+  font-weight: bold;
+}
+@media screen and (max-width: 767px) {
+  .loginBtn {
+    width: 50%;
+    padding: 7px 15px;
+  }
+}
+
+.registerBtn {
+  font-weight: bold;
+}
+@media screen and (max-width: 767px) {
+  .registerBtn {
+    width: 50%;
+  }
+}
+
+.addFollowBtn {
+  font-weight: bold;
+}
+
+.commonIcon-image {
   border-radius: 50%;
-  width: 14%;
+  width: 15%;
   aspect-ratio: 1/1;
   border: solid 1px lightgray;
   background-color: white;
 }
-.icon-image__img {
+.commonIcon-image__img {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
@@ -121,10 +144,15 @@
 
 .icon-image {
   border-radius: 50%;
-  width: 14%;
+  width: 20%;
   aspect-ratio: 1/1;
   border: solid 1px lightgray;
   background-color: white;
+}
+@media screen and (max-width: 767px) {
+  .icon-image {
+    width: 27%;
+  }
 }
 .icon-image__img {
   width: 100%;
@@ -169,12 +197,32 @@
 .registerIcon:hover {
   cursor: pointer;
 }
-
-.icon-image {
+.registerIcon__icon-image {
   border-radius: 50%;
   width: 120px;
   height: 120px;
   border: solid 1px lightgray;
+}
+@media screen and (max-width: 767px) {
+  .registerIcon__icon-image {
+    width: 100px;
+    height: 100px;
+  }
+}
+.registerIcon__addIcon {
+  color: #0d6efd;
+  position: absolute;
+  top: 75%;
+  left: 65%;
+  width: 30px;
+  height: 30px;
+}
+@media screen and (max-width: 767px) {
+  .registerIcon__addIcon {
+    left: 70%;
+    width: 25px;
+    height: 25px;
+  }
 }
 
 .noIconImage {
@@ -184,19 +232,42 @@
   border-radius: 50%;
 }
 
-.addIcon {
-  color: #0d6efd;
-  position: absolute;
-  top: 75%;
-  left: 65%;
+.profileIcon-image {
+  border-radius: 50%;
+  width: 20%;
+  aspect-ratio: 1/1;
+  border: solid 1px lightgray;
+  background-color: white;
+}
+@media screen and (max-width: 767px) {
+  .profileIcon-image {
+    width: 27%;
+  }
+}
+.profileIcon-image__img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
 }
 
-.form__requiredIcon {
+.noIconImage {
+  width: 100%;
+  height: 100%;
+  background-color: #d3d3d3;
+  border-radius: 50%;
+}
+
+.CpassForm {
+  position: relative;
+}
+.CpassForm__requiredIcon {
   color: red;
   font-size: 10px;
   margin-right: 1%;
 }
-.form__input {
+.CpassForm__input {
   width: 80%;
   height: 35px;
   background-color: #f7f7f7;
@@ -204,54 +275,46 @@
   border: none;
   position: relative;
 }
-.form__isRevealPasswordIcon {
+@media screen and (max-width: 767px) {
+  .CpassForm__input {
+    height: 40px;
+    width: 85%;
+    outline: 1px solid #d3d3d3;
+  }
+}
+.CpassForm__isRevealPasswordIcon {
   position: absolute;
   top: 10%;
   left: 85%;
 }
-.form__error-message {
+.CpassForm__error-message {
   color: red;
   font-size: 13px;
 }
-input:invalid ~ .form__error-message {
+input:invalid ~ .CpassForm__error-message {
   display: block;
   height: 30px;
   text-align: left;
   margin-left: 40px;
   line-height: 1.5rem;
 }
-input:valid ~ .form__error-message {
+input:valid ~ .CpassForm__error-message {
   display: none;
 }
-input:-moz-placeholder-shown ~ .form__messageBox {
+input:-moz-placeholder-shown ~ .CpassForm__messageBox {
   display: none;
 }
-input:-ms-input-placeholder ~ .form__messageBox {
+input:-ms-input-placeholder ~ .CpassForm__messageBox {
   display: none;
 }
-input:placeholder-shown ~ .form__messageBox {
+input:placeholder-shown ~ .CpassForm__messageBox {
   display: none;
 }
 
-.form__input {
-  width: 80%;
-  height: 35px;
-  background-color: #f7f7f7;
-  outline: solid #d3d3d3;
-  border: none;
-}
-
-.form {
+.passForm {
   position: relative;
 }
-.form__input {
-  width: 80%;
-  height: 35px;
-  background-color: #f7f7f7;
-  outline: solid #d3d3d3;
-  border: none;
-}
-.form__isRevealPasswordIcon {
+.passForm__isRevealPasswordIcon {
   position: absolute;
   top: 10%;
   left: 85%;
@@ -265,85 +328,93 @@ input:placeholder-shown ~ .form__messageBox {
   border: none;
   margin-left: 16px;
 }
+@media screen and (max-width: 767px) {
+  .inputRegister {
+    width: 85%;
+    height: 40px;
+    outline: 1px solid #d3d3d3;
+  }
+}
 
-.form {
+.registerPassForm {
   position: relative;
 }
-.form__requiredIcon {
+.registerPassForm__requiredIcon {
   color: red;
   font-size: 10px;
   margin-right: 1%;
 }
-.form__input {
-  width: 80%;
-  height: 35px;
-  background-color: #f7f7f7;
-  outline: solid #d3d3d3;
-  border: none;
-}
-.form__isRevealPasswordIcon {
+.registerPassForm__isRevealPasswordIcon {
   position: absolute;
   top: 10%;
   left: 85%;
 }
-.form__error-message {
+.registerPassForm__error-message {
   color: red;
   font-size: 13px;
 }
-input:invalid ~ .form__error-message {
+input:invalid ~ .registerPassForm__error-message {
   display: block;
   height: 30px;
   text-align: left;
   margin-left: 40px;
   line-height: 1.5rem;
 }
-input:valid ~ .form__error-message {
+input:valid ~ .registerPassForm__error-message {
   display: none;
 }
-input:-moz-placeholder-shown ~ .form__messageBox {
+input:-moz-placeholder-shown ~ .registerPassForm__messageBox {
   display: none;
 }
-input:-ms-input-placeholder ~ .form__messageBox {
+input:-ms-input-placeholder ~ .registerPassForm__messageBox {
   display: none;
 }
-input:placeholder-shown ~ .form__messageBox {
+input:placeholder-shown ~ .registerPassForm__messageBox {
   display: none;
 }
 
-.form__requiredIcon {
+.requiredRegisterForm__requiredIcon {
   color: red;
   font-size: 10px;
   margin-right: 1%;
 }
-.form__input {
+.requiredRegisterForm__error-message {
+  color: red;
+  font-size: 13px;
+}
+input:invalid ~ .requiredRegisterForm__error-message {
+  display: block;
+  height: 30px;
+  text-align: left;
+  margin-left: 40px;
+  line-height: 1.5rem;
+}
+input:valid ~ .requiredRegisterForm__error-message {
+  display: none;
+}
+input:-moz-placeholder-shown ~ .requiredRegisterForm__messageBox {
+  display: none;
+}
+input:-ms-input-placeholder ~ .requiredRegisterForm__messageBox {
+  display: none;
+}
+input:placeholder-shown ~ .requiredRegisterForm__messageBox {
+  display: none;
+}
+
+.form-input {
   width: 80%;
   height: 35px;
   background-color: #f7f7f7;
   outline: solid #d3d3d3;
   border: none;
 }
-.form__error-message {
-  color: red;
-  font-size: 13px;
-}
-input:invalid ~ .form__error-message {
-  display: block;
-  height: 30px;
-  text-align: left;
-  margin-left: 40px;
-  line-height: 1.5rem;
-}
-input:valid ~ .form__error-message {
-  display: none;
-}
-input:-moz-placeholder-shown ~ .form__messageBox {
-  display: none;
-}
-input:-ms-input-placeholder ~ .form__messageBox {
-  display: none;
-}
-input:placeholder-shown ~ .form__messageBox {
-  display: none;
+@media screen and (max-width: 767px) {
+  .form-input {
+    height: 40px;
+    width: 85%;
+    outline: 1px solid #d3d3d3;
+  }
 }
 
 .postImage {
@@ -387,6 +458,11 @@ input:placeholder-shown ~ .form__messageBox {
   text-align: center;
   width: 80px;
 }
+@media screen and (max-width: 767px) {
+  .followCount {
+    font-size: 1.4rem;
+  }
+}
 .followCount:hover {
   opacity: 0.7;
 }
@@ -397,6 +473,11 @@ input:placeholder-shown ~ .form__messageBox {
 .followerCount {
   text-align: center;
   width: 80px;
+}
+@media screen and (max-width: 767px) {
+  .followerCount {
+    font-size: 1.4rem;
+  }
 }
 .followerCount:hover {
   opacity: 0.7;
@@ -409,6 +490,11 @@ input:placeholder-shown ~ .form__messageBox {
   text-align: center;
   width: 80px;
 }
+@media screen and (max-width: 767px) {
+  .postCount {
+    font-size: 1.4rem;
+  }
+}
 .postCount__number {
   font-weight: bold;
 }
@@ -416,6 +502,11 @@ input:placeholder-shown ~ .form__messageBox {
 .profileFollowerCount {
   text-align: center;
   width: 80px;
+}
+@media screen and (max-width: 767px) {
+  .profileFollowerCount {
+    font-size: 1.4rem;
+  }
 }
 .profileFollowerCount:hover {
   opacity: 0.7;
@@ -444,37 +535,53 @@ input:placeholder-shown ~ .form__messageBox {
   justify-content: space-between;
 }
 
-.form {
+.registerForm {
   line-height: 5rem;
+  margin-top: 7%;
 }
-.form__icon {
+@media screen and (max-width: 767px) {
+  .registerForm {
+    line-height: 6rem;
+  }
+}
+.registerForm__icon {
   width: 130px;
   height: auto;
   margin: 0 auto;
 }
-.form__loading-input {
+@media screen and (max-width: 767px) {
+  .registerForm__icon {
+    width: 100px;
+  }
+}
+.registerForm__loading-input {
   display: none;
 }
-.form__loaded-image {
+.registerForm__loaded-image {
   border-radius: 50%;
   width: 120px;
   height: 120px;
   border: solid 1px lightgray;
 }
-.form__loaded-image--img {
+.registerForm__loaded-image--img {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
   border-radius: 50%;
 }
-.form__requiredText {
+.registerForm__requiredText {
   color: red;
   font-size: 14px;
   margin-left: 50px;
   text-align: left;
 }
-.form__requiredIcon {
+@media screen and (max-width: 767px) {
+  .registerForm__requiredText {
+    margin-left: 30px;
+  }
+}
+.registerForm__requiredIcon {
   color: red;
   font-size: 10px;
   margin-right: 1%;
@@ -509,6 +616,9 @@ input:placeholder-shown ~ .form__messageBox {
 }
 .userData__userName {
   font-weight: bold;
+}
+.userData__name {
+  color: rgba(65, 65, 65, 0.6196078431);
 }
 
 .nav {
@@ -795,6 +905,16 @@ input:placeholder-shown ~ .form__messageBox {
   text-align: center;
 }
 
+@media screen and (max-width: 767px) {
+  .userList {
+    margin-left: 3%;
+  }
+}
+.userList__message {
+  text-align: center;
+  margin-top: 10%;
+}
+
 .accountSetting__title {
   margin-bottom: 20px;
   padding-left: 5px;
@@ -825,20 +945,31 @@ input:placeholder-shown ~ .form__messageBox {
 .login {
   display: flex;
   justify-content: space-around;
+  margin-top: 5%;
 }
 .login__iphone {
   width: 35%;
   height: auto;
+}
+@media screen and (max-width: 767px) {
+  .login__iphone {
+    display: none;
+  }
 }
 .login__img {
   width: 100%;
   height: 100%;
 }
 .login__contents {
-  background-color: #f7f7f7;
+  background-color: white;
   outline: solid #d3d3d3;
   text-align: center;
   width: 50%;
+}
+@media screen and (max-width: 767px) {
+  .login__contents {
+    width: 75%;
+  }
 }
 .login__logo {
   width: 100px;
@@ -864,9 +995,19 @@ input:placeholder-shown ~ .form__messageBox {
 .myPage__name {
   font-weight: bold;
 }
+@media screen and (max-width: 767px) {
+  .myPage__name {
+    margin-left: 3%;
+  }
+}
 .myPage__profile {
   margin-top: 10px;
   margin-bottom: 10px;
+}
+@media screen and (max-width: 767px) {
+  .myPage__profile {
+    margin-left: 3%;
+  }
 }
 .myPage__messageLink {
   color: #0d6efd;
@@ -883,6 +1024,9 @@ input:placeholder-shown ~ .form__messageBox {
   gap: 10%;
   margin: 10px 20px;
   align-items: center;
+}
+.profile__icon {
+  width: 20%;
 }
 .profile__threeCount {
   display: flex;
@@ -918,11 +1062,16 @@ input:placeholder-shown ~ .form__messageBox {
 }
 
 .registerContents {
-  background-color: #f7f7f7;
+  background-color: white;
   outline: solid #d3d3d3;
   text-align: center;
   width: 70%;
-  margin: 0 auto;
+  margin: 5% auto;
+}
+@media screen and (max-width: 767px) {
+  .registerContents {
+    width: 90%;
+  }
 }
 .registerContents__logo {
   width: 100px;
@@ -970,14 +1119,26 @@ input:placeholder-shown ~ .form__messageBox {
 .postlook__favo:hover {
   opacity: 0.5;
 }
+@media screen and (max-width: 767px) {
+  .postlook__favBtn {
+    width: 29px;
+    height: 29px;
+  }
+}
 .postlook__com {
   margin: 10px 5px 0px 5px;
 }
 .postlook__com:hover {
   opacity: 0.5;
 }
+@media screen and (max-width: 767px) {
+  .postlook__commentBtn {
+    width: 29px;
+    height: 29px;
+  }
+}
 .postlook__keep {
-  margin: 5px 5px 0px auto;
+  margin: 10px 5px 0px auto;
 }
 .postlook__keep:hover {
   opacity: 0.5;
@@ -1010,27 +1171,39 @@ input:placeholder-shown ~ .form__messageBox {
 
 .newpost__inputfileset {
   border: solid 1px #333;
-  height: 300px;
+  height: 473px;
+  width: 70%;
   text-align: center;
+  background-color: #f2f2f2;
+  margin: 0 auto;
+  border-radius: 10px;
+}
+.newpost__title {
+  padding: 2%;
+  border-bottom: 1px solid #333;
+  font-weight: bold;
+}
+.newpost__inputWrapper {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
+  margin-top: 40%;
+  align-items: center;
 }
 .newpost__inputfileicon {
-  width: 100%;
+  width: 50px;
+  height: 50px;
 }
-.newpost____input {
+.newpost__input {
   border-radius: 3px;
   padding: 3px;
   position: relative;
   background-color: #0d6efd;
-  margin: 0 auto;
-  align-items: center;
   width: 200px;
+  margin-top: 3%;
 }
 .newpost__inputletter {
   color: #fff;
+  font-weight: bold;
 }
 .newpost__file {
   height: 100%;
@@ -1039,6 +1212,9 @@ input:placeholder-shown ~ .form__messageBox {
   position: absolute;
   top: 0;
   width: 100%;
+}
+.newpost__file:hover {
+  cursor: pointer;
 }
 
 .postdetails__iconusername {
@@ -1068,11 +1244,23 @@ input:placeholder-shown ~ .form__messageBox {
 .postdetails__favo:hover {
   opacity: 0.5;
 }
+@media screen and (max-width: 767px) {
+  .postdetails__favBtn {
+    width: 29px;
+    height: 29px;
+  }
+}
 .postdetails__com {
   margin: 10px 5px 0px 5px;
 }
 .postdetails__com:hover {
   opacity: 0.5;
+}
+@media screen and (max-width: 767px) {
+  .postdetails__commentBtn {
+    width: 29px;
+    height: 29px;
+  }
 }
 .postdetails__keep {
   margin: 5px 5px 5px auto;
