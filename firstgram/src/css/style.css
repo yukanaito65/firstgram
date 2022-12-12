@@ -5,8 +5,8 @@
   border: none;
 }
 .keepBtn__img {
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
 }
 
 .keepBtn {
@@ -16,8 +16,8 @@
   border: none;
 }
 .keepBtn__img {
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
 }
 
 .backBtn__icon:hover {
@@ -1130,14 +1130,26 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
 .postlook__favo:hover {
   opacity: 0.5;
 }
+@media screen and (max-width: 767px) {
+  .postlook__favBtn {
+    width: 29px;
+    height: 29px;
+  }
+}
 .postlook__com {
   margin: 10px 5px 0px 5px;
 }
 .postlook__com:hover {
   opacity: 0.5;
 }
+@media screen and (max-width: 767px) {
+  .postlook__commentBtn {
+    width: 29px;
+    height: 29px;
+  }
+}
 .postlook__keep {
-  margin: 5px 5px 0px auto;
+  margin: 10px 5px 0px auto;
 }
 .postlook__keep:hover {
   opacity: 0.5;
@@ -1245,11 +1257,23 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
 .postdetails__favo:hover {
   opacity: 0.5;
 }
+@media screen and (max-width: 767px) {
+  .postdetails__favBtn {
+    width: 29px;
+    height: 29px;
+  }
+}
 .postdetails__com {
   margin: 10px 5px 0px 5px;
 }
 .postdetails__com:hover {
   opacity: 0.5;
+}
+@media screen and (max-width: 767px) {
+  .postdetails__commentBtn {
+    width: 29px;
+    height: 29px;
+  }
 }
 .postdetails__keep {
   margin: 5px 5px 5px auto;

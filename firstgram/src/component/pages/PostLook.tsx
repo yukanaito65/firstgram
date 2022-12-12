@@ -221,6 +221,7 @@ function PostLook() {
                         >
                           {data.favorites.includes(loginUserName) ? (
                             <AiFillHeart
+                            className="postlook__favBtn"
                               size={30}
                               color={"red"}
                               onClick={(e:React.MouseEvent) => {
@@ -235,6 +236,7 @@ function PostLook() {
                             />
                           ) : (
                             <AiOutlineHeart
+                            className="postlook__favBtn"
                               size={30}
                               color={"black"}
                               onClick={(e:React.MouseEvent) => {
@@ -255,6 +257,7 @@ function PostLook() {
                         // style={{ margin: "10px 5px 0px 5px" }}
                         >
                           <AiOutlineMessage
+                          className="postlook__commentBtn"
                             size={30}
                             color={"black"}
                             onClick={CommentDisplay}
@@ -407,13 +410,15 @@ function PostLook() {
 
                       {/* いいねコメント保存 */}
                       <div className="postlook__favocomkeep"
-                      style={{ display: "flex", marginBottom: "0" }}>
+                      // style={{ display: "flex", marginBottom: "0" }}
+                      >
                         {/* いいねボタン */}
                         <div className="postlook__favo"
                         // style={{ margin: "10px 5px 0px 5px" }}
                         >
                           {data.favorites.includes(loginUserName) ? (
                             <AiFillHeart
+                            className="postlook__favBtn"
                               size={30}
                               color={"red"}
                               onClick={(e: React.MouseEvent) => {
@@ -428,6 +433,7 @@ function PostLook() {
                             />
                           ) : (
                             <AiOutlineHeart
+                            className="postlook__favBtn"
                               size={30}
                               color={"black"}
                               onClick={(e: React.MouseEvent) => {
@@ -448,6 +454,7 @@ function PostLook() {
                         // style={{ margin: "10px 5px 0px 5px" }}
                         >
                           <AiOutlineMessage
+                          className="postlook__commentBtn"
                             size={30}
                             color={"black"}
                             onClick={CommentDisplay}

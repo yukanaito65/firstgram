@@ -53,7 +53,7 @@ function Footer() {
           </li>
         )}
 
-        {currentPath === "/mypage/" ? (
+        {currentPath === "/mypage" ? (
           <li className="footer__ul--li">
             <div className="footer__ul--liNoLink">
               <MdAccountCircle
@@ -65,7 +65,7 @@ function Footer() {
           </li>
         ) : (
           <li className="footer__ul--li">
-            <Link to="/mypage/" className="footer__ul--liLink">
+            <Link to="/mypage" className="footer__ul--liLink">
               <MdAccountCircle
                 size={30}
                 color={"rgb(38, 38, 38)"}
