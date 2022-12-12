@@ -24,6 +24,9 @@ import MyFollower from "./component/pages/MyFollower";
 import MyFollow from "./component/pages/MyFollow";
 import KeepList from "./component/pages/KeepList";
 import Delete from "./component/pages/Delete";
+import PostComplet from "./component/pages/PostComplet";
+
+
 
 
 
@@ -50,13 +53,14 @@ function App() {
             <Route path={`/passwordChange`} element={<PsswordChange />} />
             <Route path={`/PostEditing`} element={<PostEditing />} />
             <Route path={`/Delete`} element={<Delete />} />
-
+            <Route path={`/postComplet`} element={<PostComplet />} />
             {/* <Route path={`/FavolitePostLook`} element={<FavolitePostLook />} /> */}
 
             <Route path={`/dmPage`} element={<DMPage />} />
             <Route path={`/searchPage`} element={<SearchPage />} />
             <Route path={`/profile`} element={<Profile />} />
             <Route path={`/keep`} element={<KeepList />} />
+          
             {/* <Route path={`/InputNewPost`} element={<InputNewPost />} /> */}
           </Routes>
         </BrowserRouter>
