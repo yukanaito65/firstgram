@@ -107,7 +107,7 @@ function PostDetails() {
       } else {
         setLoginUserPost(false);
       }
- 
+
 
     // 画面遷移したら、firestoreから画像、caption,falolites,commmentを取得、保持
     firebasePostDetails(postid, userid).then((postData) => {
@@ -173,7 +173,7 @@ function PostDetails() {
           }),
         }
       );
-     
+
       await firebasePostDetails(postid, userid).then((postData) => {
       setDisplayComment(postData.Comments);
     });
@@ -277,6 +277,7 @@ function PostDetails() {
                   <div className="postdetalis__select"
                   // style={{ marginLeft: "auto" }}
                   >
+
                     <nav className="postdetalis__nav"
                     // style={{ width: "100%", margin: "0 auto " }}
                     >
@@ -315,18 +316,19 @@ function PostDetails() {
                           //   padding: "5px 0",
                           // }}
                         >
-                          <Link to="/Delete">
-                            <button
-                              onClick={ClickDelition}
-                              className="navBtn"
-                            >
-                              削除
-                            </button>
-                          </Link>
-                        </li>
-                      </ul>
-                    </nav>
-                  </div>
+                            <Link to="/Delete">
+                              <button
+                                onClick={ClickDelition}
+                                className="navBtn"
+                              >
+                                削除
+                              </button>
+                            </Link>
+                          </li>
+                        </ul>
+                      </nav>
+                    </div>
+
 
                   <div
                   className="postdetails__closebtn"
@@ -392,8 +394,8 @@ function PostDetails() {
                   color={"rgb(38, 38, 38)"}
                   onClick={CommentDisplay}
                 /> */}
-                
-                <FavoLength favos={favorites} 
+
+                <FavoLength favos={favorites}
                />
               </div>
 
@@ -445,12 +447,12 @@ function PostDetails() {
     <div className='commentdisplay'>
     {displayComment.map((data:any,index:any)=>{
     return(
-    <div 
+    <div
     className='commentdisplay__comset'
-    key={index} 
+    key={index}
     // style={{display:"flex",fontSize:"16px",width:"100%",margin:"3px"}}
     >
-    <p 
+    <p
     className='commentdisplay__username'
     // style={{fontWeight:"500"}}
     >{data.userName}</p>
@@ -586,12 +588,12 @@ function PostDetails() {
     <div className='commentdisplay'>
     {displayComment.map((data:any,index:any)=>{
     return(
-    <div 
+    <div
     className='commentdisplay__comset'
-    key={index} 
+    key={index}
     // style={{display:"flex",fontSize:"16px",width:"100%",margin:"3px"}}
     >
-    <p 
+    <p
     className='commentdisplay__username'
     // style={{fontWeight:"500"}}
     >{data.userName}</p>
