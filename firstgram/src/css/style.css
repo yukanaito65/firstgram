@@ -1266,6 +1266,7 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
 }
 .postdetails__com {
   margin: 10px 5px 0px 5px;
+  margin-top: 12px;
 }
 .postdetails__com:hover {
   opacity: 0.5;
@@ -1505,6 +1506,14 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
 }
 .dmPage__leftMesse--date {
   padding-left: 10px;
+}
+
+.lead_article {
+  margin-top: 60px;
+}
+
+.lead_center {
+  text-align: center;
 }
 
 *,

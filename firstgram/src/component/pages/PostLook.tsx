@@ -163,11 +163,17 @@ function PostLook() {
         {postData.length === 0 ? (
           <>
 
-            <div style={{ marginTop: "60px" }}>
-              <div style={{ width: "100%" }}>
-                <p style={{ textAlign: "center" }}>投稿がありません</p>
-              </div>
-              <div style={{ textAlign: "center" }}>
+            <div className="lead_article"
+            // style={{ marginTop: "60px" }}
+            >
+              {/* <div style={{ width: "100%" }}> */}
+                <p className="lead_center"
+                // style={{ textAlign: "center" }}
+                >投稿がありません</p>
+              {/* </div> */}
+              <div className="lead_center"
+              // style={{ textAlign: "center" }}
+              >
                 {/* style={{margin:"0 auto",}} */}
                 <Link to="/SearchPage">
                   <button className="btn">検索してみよう！</button>

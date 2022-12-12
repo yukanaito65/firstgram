@@ -26,7 +26,6 @@ export function GetAllUserData(propsSetFnc: any) {
                 const data = docdata.data();
                 allUserDataArr.push(data);
               });
-              console.log("ログイン状態です")
               propsSetFnc(allUserDataArr);
             });
           }
@@ -37,5 +36,4 @@ export function GetAllUserData(propsSetFnc: any) {
     };
   }, []);
 
-  console.log(allUserDataArr)
 }

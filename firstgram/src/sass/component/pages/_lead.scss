@@ -1,0 +1,10 @@
+@use "../../../sass/global/mixin/lead";
+
+.lead_article{
+    @include lead.article;
+}
+
+
+.lead_center{
+    @include lead.center;
+}
