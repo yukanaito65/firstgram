@@ -107,10 +107,17 @@
   }
 }
 
+.registerBtn {
+  font-weight: bold;
+}
 @media screen and (max-width: 767px) {
   .registerBtn {
     width: 50%;
   }
+}
+
+.addFollowBtn {
+  font-weight: bold;
 }
 
 .commonIcon-image {
@@ -272,6 +279,7 @@
   .CpassForm__input {
     height: 40px;
     width: 85%;
+    outline: 1px solid #d3d3d3;
   }
 }
 .CpassForm__isRevealPasswordIcon {
@@ -324,6 +332,7 @@ input:placeholder-shown ~ .CpassForm__messageBox {
   .inputRegister {
     width: 85%;
     height: 40px;
+    outline: 1px solid #d3d3d3;
   }
 }
 
@@ -404,6 +413,7 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
   .form-input {
     height: 40px;
     width: 85%;
+    outline: 1px solid #d3d3d3;
   }
 }
 
@@ -524,14 +534,10 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
   width: 330px;
   justify-content: space-between;
 }
-@media screen and (max-width: 767px) {
-  .info {
-    width: 0;
-  }
-}
 
 .registerForm {
   line-height: 5rem;
+  margin-top: 7%;
 }
 @media screen and (max-width: 767px) {
   .registerForm {
@@ -904,6 +910,10 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
     margin-left: 3%;
   }
 }
+.userList__message {
+  text-align: center;
+  margin-top: 10%;
+}
 
 .accountSetting__title {
   margin-bottom: 20px;
@@ -935,6 +945,7 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
 .login {
   display: flex;
   justify-content: space-around;
+  margin-top: 5%;
 }
 .login__iphone {
   width: 35%;
@@ -981,17 +992,12 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
   margin: 10px 20px;
   align-items: center;
 }
-@media screen and (max-width: 767px) {
-  .myPage__info {
-    gap: 0;
-  }
-}
 .myPage__name {
   font-weight: bold;
 }
 @media screen and (max-width: 767px) {
   .myPage__name {
-    margin-left: 7%;
+    margin-left: 3%;
   }
 }
 .myPage__profile {
@@ -1000,7 +1006,7 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
 }
 @media screen and (max-width: 767px) {
   .myPage__profile {
-    margin-left: 7%;
+    margin-left: 3%;
   }
 }
 .myPage__messageLink {
@@ -1060,7 +1066,7 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
   outline: solid #d3d3d3;
   text-align: center;
   width: 70%;
-  margin: 0 auto;
+  margin: 5% auto;
 }
 @media screen and (max-width: 767px) {
   .registerContents {
@@ -1153,27 +1159,39 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
 
 .newpost__inputfileset {
   border: solid 1px #333;
-  height: 300px;
+  height: 473px;
+  width: 70%;
   text-align: center;
+  background-color: #f2f2f2;
+  margin: 0 auto;
+  border-radius: 10px;
+}
+.newpost__title {
+  padding: 2%;
+  border-bottom: 1px solid #333;
+  font-weight: bold;
+}
+.newpost__inputWrapper {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
+  margin-top: 40%;
+  align-items: center;
 }
 .newpost__inputfileicon {
-  width: 100%;
+  width: 50px;
+  height: 50px;
 }
-.newpost____input {
+.newpost__input {
   border-radius: 3px;
   padding: 3px;
   position: relative;
   background-color: #0d6efd;
-  margin: 0 auto;
-  align-items: center;
   width: 200px;
+  margin-top: 3%;
 }
 .newpost__inputletter {
   color: #fff;
+  font-weight: bold;
 }
 .newpost__file {
   height: 100%;
@@ -1182,6 +1200,9 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
   position: absolute;
   top: 0;
   width: 100%;
+}
+.newpost__file:hover {
+  cursor: pointer;
 }
 
 .postdetails__iconusername {
