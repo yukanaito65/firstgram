@@ -26,9 +26,15 @@ const NewPost = (props: any) => {
 
   // 画像の更新
   const InputImage = (e: any) => {
+
+    const getRandomArbitrary =(min:number, max:number)=> {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min + 1) + min)
+  }
     // パスと名前で参照を作成
     const file = e.target.files[0];
-    const storageRef = ref(storage, "image/" + file.name);
+    const storageRef = ref(storage, "image/" +getRandomArbitrary(1,1000)+ file.name );
     // 画像のアップロード
     const uploadImage = uploadBytesResumable(storageRef, file);
     uploadImage.on(
