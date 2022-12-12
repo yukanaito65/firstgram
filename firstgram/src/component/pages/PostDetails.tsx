@@ -271,28 +271,30 @@ function PostDetails() {
                 {select ? (
                   <>
                     <div style={{ marginLeft: "auto" }}>
-                      <nav style={{ width: "100%", margin: "0 auto " }}>
+                      <nav
+                      // style={{ width: "100%", margin: "0 auto " }}
+                      >
                         <ul
-                          style={{
-                            padding: "5px 0",
-                            position: "fixed",
-                            top: "100px",
-                            right: "25%",
-                            listStyle: "none",
-                            width: "20%",
-                            backgroundColor: " #f7f7f7",
-                            boxShadow: "0 0px 10px 7px rgb(0 0 0 / 10%)",
-                            fontSize: "19px",
-                            zIndex: " 800",
-                            marginLeft: "auto",
-                          }}
+                          // style={{
+                          //   padding: "5px 0",
+                          //   position: "fixed",
+                          //   top: "100px",
+                          //   right: "25%",
+                          //   listStyle: "none",
+                          //   width: "20%",
+                          //   backgroundColor: " #f7f7f7",
+                          //   boxShadow: "0 0px 10px 7px rgb(0 0 0 / 10%)",
+                          //   fontSize: "19px",
+                          //   zIndex: " 800",
+                          //   marginLeft: "auto",
+                          // }}
                         >
                           <li
-                            style={{
-                              width: "100%",
-                              borderBottom: "2px solid #e7e7e7",
-                              padding: "5px 0",
-                            }}
+                            // style={{
+                            //   width: "100%",
+                            //   borderBottom: "2px solid #e7e7e7",
+                            //   padding: "5px 0",
+                            // }}
                           >
                             <Link
                               to="/PostEditing"
@@ -302,10 +304,10 @@ function PostDetails() {
                             </Link>
                           </li>
                           <li
-                            style={{
-                              width: "100%",
-                              padding: "5px 0",
-                            }}
+                            // style={{
+                            //   width: "100%",
+                            //   padding: "5px 0",
+                            // }}
                           >
                             <Link to="/Delete">
                               <button
