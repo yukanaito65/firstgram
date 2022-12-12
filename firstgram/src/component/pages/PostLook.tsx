@@ -192,7 +192,13 @@ function PostLook() {
                         <p className="postlook__username"
                         // style={{ fontSize: "20px", marginLeft: "5px" }}
                         >
-                          {data.userName}
+                          <Link
+                          to={data.userId === userId ? "/mypage" : "/profile"}
+                          state={{ userId: data.userId }}
+                        >
+                            {data.userName}
+                        </Link>
+                        
                         </p>
                       </div>
 
@@ -381,7 +387,12 @@ function PostLook() {
                         <p className="postlook__username"
                         // style={{ fontSize: "20px", marginLeft: "5px" }}
                         >
-                          {data.userName}
+                            <Link
+                          to={data.userId === userId ? "/mypage" : "/profile"}
+                          state={{ userId: data.userId }}
+                        >
+                            {data.userName}
+                        </Link>
                         </p>
                       </div>
 
