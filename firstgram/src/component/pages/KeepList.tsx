@@ -68,20 +68,17 @@ function KeepList() {
         where("keeps", "array-contains", currentUser.uid)
       )as CollectionReference<Post>;
 
-      console.log(postCollectionRef);
+      
 
       const keepPostDocId = await getDocs(postCollectionRef);
-      console.log(keepPostDocId.docs);
-      console.log(keepPostDocId);
+    
 
       const newKeepPostDocIds = keepPostDocId.docs as QueryDocumentSnapshot<Post>[];
       const keepPostArray = newKeepPostDocIds.map((doc) => doc.data());
       setKeepPosts(keepPostArray);
     }); //onAuth
   }, []);
-  console.log(keepPosts); //postの情報がオブジェクトになって配列に格納
-  console.log(user.uid);
-  console.log(keepPostIds); //postIdだけ配列に格納
+
 
   return (
     <>

@@ -44,7 +44,7 @@ function RegisterForm() {
         setLoading(true);
       },
       (err) => {
-        console.log(err);
+  <></>
       },
       //upload完了したらloadedになる(loadingがfalse,loadedがtrue)
       () => {
@@ -73,12 +73,12 @@ function RegisterForm() {
 
       //FireStoreへのデータ新規追加
       const { userName, name, Cpassword, profile } = e.target.elements;
-      console.log(userName.value);
+   
 
       //ログイン判定
       onAuthStateChanged(auth, async (user) => {
         if (!user) {
-          console.log("ログアウト状態です");
+          <></>
         } else {
           //ログイン済みユーザーのドキュメントへの参照を取得
           const docRef = doc(db, "user", user.uid);

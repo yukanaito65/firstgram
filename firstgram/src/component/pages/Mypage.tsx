@@ -49,7 +49,7 @@ function MyPage() {
   useEffect(() => {
     onAuthStateChanged(auth, async (currentUser: any) => {
       if (!currentUser) {
-        console.log("ログアウト状態です");
+<></>
       } else {
         setUser(currentUser);
         //ログイン判定が終わったタイミングでloadingはfalseに変わる
@@ -66,22 +66,19 @@ function MyPage() {
 
         // //上記を元にドキュメントのデータを取得
         const userDocId = await getDoc(userDocRefId);
-        console.log(userDocId);
+     
 
         // //取得したデータから必要なものを取り出す
         const userDataId = userDocId.data();
-        console.log(userDataId);
         setUsers(userDataId);
 
         if (!userDataId) {
-          console.log("データがありません");
+          <></>   
         } else {
           // setPostList(userDataId.post);
           setFollowList(userDataId.follow);
           setFollowerList(userDataId.follower);
-          console.log(userDataId.name);
-          console.log(userDataId.follow);
-          console.log(userDataId.posts);
+
         }
 
         //postコレクションへの参照を取得(userIdが一致しているドキュメントのみ)
@@ -90,19 +87,19 @@ function MyPage() {
           where("userId", "==", currentUser.uid)
         ) as CollectionReference<Post>;
 
-        console.log(postCollectionRef); //Zcがひとつ
+        //Zcがひとつ
 
         // 上記を元にドキュメントのデータを取得(post)
         const postDocId = await getDocs(postCollectionRef);
-        console.log(postDocId.docs); // 配列(3)[rl,rl,rl]
-        console.log(postDocId); //ol
+      // 配列(3)[rl,rl,rl]
+      //ol
 
         //上記を元にデータの中身を取り出す。map()を使えるようにする。
         const newPostDocIds = postDocId.docs as QueryDocumentSnapshot<Post>[];
         const postDataArray = newPostDocIds.map((id) => id.data());
-        console.log(postDataArray); //(3)[{},{},{}]
+      //(3)[{},{},{}]
         setPosts(postDataArray);
-        console.log(posts); //[]
+      //[]
       }
     });
   }, []);
@@ -113,10 +110,10 @@ function MyPage() {
   //   navigate("/searchPage");
   // };
 
-  // console.log(users.name);  //ここに書くとレンダリングされた時に実行されてundefinedになる
-  // console.log(posts); //postコレクションからuidと等しいドキュメントを取得したものが格納されている
-  // console.log(postList); //userコレクションからログインユーザーの情報を取得して、post配列の中身だけ格納している
-  // console.log(followList);
+ //ここに書くとレンダリングされた時に実行されてundefinedになる
+//postコレクションからuidと等しいドキュメントを取得したものが格納されている
+//userコレクションからログインユーザーの情報を取得して、post配列の中身だけ格納している
+
 
   return (
     <>
