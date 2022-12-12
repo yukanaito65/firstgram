@@ -1247,6 +1247,7 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
 }
 .postdetails__com {
   margin: 10px 5px 0px 5px;
+  margin-top: 12px;
 }
 .postdetails__com:hover {
   opacity: 0.5;
