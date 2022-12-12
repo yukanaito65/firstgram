@@ -45,12 +45,11 @@ function DMPage() {
     //ログイン判定
     onAuthStateChanged(auth, async (user) => {
       if (!user) {
-        console.log("ログアウト状態です");
+        <></>
       } else {
         // ログインユーザーのid取得
         const currentUserId = user.uid;
         setCurrentUser(currentUserId);
-        console.log(`ログインユーザーID : ${currentUserId}`);
 
         // メッセージの箱を用意
         const MesseList: {
@@ -92,10 +91,9 @@ function DMPage() {
             message: data.message,
             timestamp: data.timestamp,
           });
-          console.log(MesseList);
         });
         setMesseDisplay(MesseList);
-        console.log(MesseList);
+    
 
         // 会話相手の情報取得(ユーザーデータ表示のため)
         const userDocRefId = doc(db, "user", userId);
@@ -106,18 +104,18 @@ function DMPage() {
         // //取得したデータから必要なものを取り出す
         const userDataId: any = userDocId.data();
         if (!userDataId) {
-          console.log("データがありません");
+<></>
         } else {
           setAnotherIcon(userDataId.icon);
           setAnotherName(userDataId.name);
           setAnotherUserName(userDataId.userName);
           setAnotherUserId(userDataId.userId);
         }
-        console.log(MesseList);
+       
         MesseList.sort((a: any, b: any) => {
           return a.timestamp.toDate() < b.timestamp.toDate() ? -1 : 1;
         });
-        console.log(MesseList);
+     
       }
     });
   }, []);

@@ -74,7 +74,7 @@ function PostLook() {
       });
 
       if (!user) {
-        console.log("ログアウト状態です");
+      <></>
       } else {
         // ログインしているユーザーのデータ取得
         // GetLoginUserName(user).then((loginUserData:any)=>{
@@ -110,12 +110,10 @@ function PostLook() {
 
         // ログインしているユーザーのpost情報を配列に格納
         const myPostId = userDatas?.posts;
-        console.log(userDatas?.posts);
         for (let postid of myPostId) {
           const information = doc(db, "post", postid);
           const DataDoc = await getDoc(information);
           const Datas = DataDoc.data();
-          // console.log(postDatas)
           postDataArray.push(Datas);
         }
 
@@ -141,7 +139,6 @@ function PostLook() {
         // });
         // setRamData(randomArray);
 
-        // console.log(postData)
       }
     });
   }, [favbtn]);

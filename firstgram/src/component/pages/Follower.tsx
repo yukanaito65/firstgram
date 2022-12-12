@@ -49,7 +49,7 @@ function Follower() {
     });
   }, []);
 
-  console.log(followerUsers);
+
 
   return (
     <>

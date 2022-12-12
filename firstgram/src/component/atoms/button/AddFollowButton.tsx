@@ -92,7 +92,7 @@ function AddFollowButton(props: Props) {
     await updateDoc(followUserDocRefId, {
       follower: arrayUnion(user.uid),
     });
-    console.log("add");
+    // console.log("add");
     setFollowBtn(true);
     // setProfileFollowerCount(profileFollowerCount);
 

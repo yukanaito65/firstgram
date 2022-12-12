@@ -17,9 +17,9 @@ function NewPostUploadAuter(props:State) {
 // firestoreに追加
 const OnFirebase = async(e:any) => {
     // if(textState === ""){
-    // console.log("テキストの入力がありません")
+//   ("テキストの入力がありません")
     // }else if(imgSrc === ""){
-    // console.log("画像の入力がありません")
+// ("画像の入力がありません")
     // }else {
     
     // const getRandomArbitrary =(min:number, max:number)=> {
@@ -49,9 +49,9 @@ const OnFirebase = async(e:any) => {
     // usersのログインしているuserのidを取得
     onAuthStateChanged(auth, async (user) => {
         if (!user) {
-        console.log("ログアウト状態です");
+        <></>
         } else {
-        console.log("ログイン状態です");
+    
         //ログイン済みユーザーのドキュメントへの参照を取得
         const docusesinformation = doc(db, "user", user.uid);
 // 上記を元にドキュメントのデータを取得

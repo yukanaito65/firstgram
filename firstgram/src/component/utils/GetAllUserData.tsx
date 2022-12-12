@@ -16,7 +16,7 @@ export function GetAllUserData(propsSetFnc: any) {
     //ログイン判定
       onAuthStateChanged(auth, (user) => {
         if (!user) {
-          console.log("ログアウト状態です");
+        <></>
         } else {
           if (!ignore) {
             const userQuery = query(collection(db, "user"));
@@ -25,7 +25,6 @@ export function GetAllUserData(propsSetFnc: any) {
               data.forEach((docdata) => {
                 const data = docdata.data();
                 allUserDataArr.push(data);
-                console.log(allUserDataArr);
               });
               console.log("ログイン状態です")
               propsSetFnc(allUserDataArr);

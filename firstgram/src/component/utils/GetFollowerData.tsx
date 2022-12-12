@@ -38,11 +38,8 @@ function GetFollowerData() {
       const followerUserArray = newFollowerUserDocIds.map((doc) => doc.data());
       setFollowerUsers(followerUserArray);
 
-      console.log(followerUserArray);
     }); //onAuth
   }, []); //useEffect
-
-  console.log(followerUsers);
 
 
   return (

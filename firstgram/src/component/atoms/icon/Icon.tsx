@@ -24,7 +24,6 @@ function Icon() {
     //ログイン判定
     onAuthStateChanged(auth, async (user) => {
       if (!user) {
-        console.log("ログアウト状態です");
       } else {
         //ログイン情報をuserに代入
         setUser(user);

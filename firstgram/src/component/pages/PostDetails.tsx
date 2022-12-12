@@ -119,7 +119,7 @@ function PostDetails() {
       setPostUserName(postData.PostUserName);
       setIcon(postData.Icon);
     });
-    console.log(displayComment)
+   
 
   });
   }, [favbtn]);
@@ -193,7 +193,6 @@ function PostDetails() {
     const postUserPost = postUserData?.posts;
     const index = postUserPost.indexOf(postid);
     postUserPost.splice(index, 1);
-    // console.log(postUserPost)
     await updateDoc(postUserDocRef, {
       posts: postUserPost,
     });
@@ -209,13 +208,11 @@ function PostDetails() {
       const users = (doc.id, " => ", doc.data());
       DeleteKeepPostsUsers.push(users);
     });
-    console.log(DeleteKeepPostsUsers);
     DeleteKeepPostsUsers.forEach(async (userData) => {
       const keepUserId = userData?.userId;
       const UserKeepPosts = userData?.keepPosts;
       const index = UserKeepPosts.indexOf(postid);
       UserKeepPosts.splice(index, 1);
-      console.log(UserKeepPosts);
       await updateDoc(doc(collection(db, "user"), keepUserId), {
         keepPosts: UserKeepPosts,
       });
