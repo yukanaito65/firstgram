@@ -68,18 +68,12 @@ function RemoveFollowButton(props: Props) {
 
       // setProfileFollowerCount(profileFollowerCount)
 
-      // console.log(props.userId);
-      // console.log(userDataId);
-      // console.log(userDataId.follow); //undefined
-      // console.log(followUserDataId);
+
     }); //onAuth
   }, []);
 
   //useEffectの中のコードよりも先に外のコードが処理される→初期表示の時にundefinedになってしまう
-  // console.log(props.userId);
-  // console.log(users);
-  // console.log(users.follow); //undefined
-  // console.log(followUsers);
+
 
   //ログインユーザーのfollow配列に今表示しているユーザーのuserIdが存在したら、フォロー外すボタン、存在しなかったらフォローするボタン
   const [followBtn, setFollowBtn] = useState<boolean>(true);
@@ -93,7 +87,7 @@ function RemoveFollowButton(props: Props) {
     await updateDoc(followUserDocRefId, {
       follower: arrayRemove(user.uid),
     });
-    console.log("remove");
+
     //削除したらtrueにする
     setFollowBtn(false);
     // setFollowerNum(props.followerNum);

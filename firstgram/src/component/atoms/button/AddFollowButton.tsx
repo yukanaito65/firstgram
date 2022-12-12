@@ -65,18 +65,12 @@ function AddFollowButton(props: Props) {
 
       // setProfileFollowerCount(profileFollowerCount);
 
-      // console.log(props.userId);
-      // console.log(userDataId);
-      // console.log(userDataId.follow); //undefined
-      // console.log(followUserDataId);
+
     }); //onAuth
   }, []);
 
   //useEffectの中のコードよりも先に外のコードが処理される→初期表示の時にundefinedになってしまう
-  // console.log(props.userId);
-  // console.log(users);
-  // console.log(users.follow);
-  // console.log(followUsers);
+
 
   //ログインユーザーのfollow配列に今表示しているユーザーのuserIdが存在したら、フォロー外すボタン、存在しなかったらフォローするボタン
   const [followBtn, setFollowBtn] = useState<boolean>(false);
@@ -92,7 +86,7 @@ function AddFollowButton(props: Props) {
     await updateDoc(followUserDocRefId, {
       follower: arrayUnion(user.uid),
     });
-    // console.log("add");
+   
     setFollowBtn(true);
     // setProfileFollowerCount(profileFollowerCount);
 
@@ -103,7 +97,7 @@ function AddFollowButton(props: Props) {
     //redux
     // dispatch(followerData(props.followerList));
   };
-  // console.log(users.follower);
+
 
   return (
     <>

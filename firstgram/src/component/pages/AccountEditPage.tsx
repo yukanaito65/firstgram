@@ -18,7 +18,6 @@ function AccountEditPage() {
   } = GetLoginUserData();
   const authUserData = LoginUserData.authUserData;
   const firestoreUserData = LoginUserData.firestoreUserData;
-  console.log(authUserData.uid);
 
   const userName = firestoreUserData?.userName;
   const name = firestoreUserData?.name;
