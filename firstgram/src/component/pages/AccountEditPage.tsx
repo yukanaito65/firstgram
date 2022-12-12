@@ -105,8 +105,6 @@ function AccountEditPage() {
                   value={profileValue}
                   onChange={(e) => setProfileValue(e.target.value)}
                   name="settingProfile"
-                  cols={40}
-                  rows={3}
                 />
               </td>
             </tr>

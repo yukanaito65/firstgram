@@ -23,6 +23,12 @@
         }
         &--tdContent {
             padding: 15px 5px;
+            width: 70%;
+        }
+        &--tdContentTextarea {
+            @include mobile {
+                height: 100px;
+            }
         }
     }
     &__confirmBtn {

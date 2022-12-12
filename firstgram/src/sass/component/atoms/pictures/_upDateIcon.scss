@@ -4,6 +4,12 @@
 .upDateIcon {
     &__img {
         margin: 0 auto;
+        position: relative;
+        cursor: pointer;
+        &--imgBlock {
+            margin: 0 auto;
+            cursor: pointer;
+        }
     }
     &__label {
         background-color: #0d6efd;
@@ -11,15 +17,11 @@
         cursor: pointer;
         display: block;
         width: 32px;
-        // margin-left: auto;
         border-radius: 50%;
         height: 32px;
-        margin-top: -20px;
-        @include mobile {
-            width: 31px;
-            height: 31px;
-            // margin: -20px auto 0 51%;
-        }
+        position: absolute;
+        top: 81%;
+        left: 60%;
     }
     &__input {
         display: none;
