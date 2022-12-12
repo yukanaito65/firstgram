@@ -63,7 +63,6 @@ function Profile() {
   //各ページからデータ取得
   const location = useLocation();
   const { userId } = location.state as State;
-  console.log(userId);
 
   useEffect(() => {
     onAuthStateChanged(auth, async (currentUser: any) => {
@@ -91,10 +90,10 @@ function Profile() {
 
       const profileUserDataId = profileUserDocId.data();
       setProfileUsers(profileUserDataId);
-      console.log(profileUserDataId);
+
 
       if (!profileUserDataId) {
-        console.log("データがありません");
+      <></>
       } else {
         // setPostList(profileUserDataId.post);
         setFollowList(profileUserDataId.follow);
@@ -114,7 +113,6 @@ function Profile() {
       );
 
       setFollowerCount(profileUserFollowerCount.data().count);
-      // console.log(profileUserFollowerCount.data().count);
 
       //投稿一覧取得
       const postCollectionRef: any = query(
@@ -132,13 +130,7 @@ function Profile() {
     });
   }, []);
 
-  // console.log(profileUsers); //[]
-  // console.log(profileUsers.follow); //undefined
-  // console.log(posts); //[]
-  // console.log(followList); //follow[]
-  // console.log(userId); //id出てる
-  // console.log(profileUsers.userId); //undefined
-  // console.log(usersFollow);
+
 
   // const dispatch = useDispatch();
 

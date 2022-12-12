@@ -23,7 +23,7 @@ function UpdateIcon(props: any) {
         setloading(true);
       },
       (err) => {
-        console.log(err);
+        <></>
       },
       //upload完了したらloadedになる(loadingがfalse,loadedがtrue)
       () => {

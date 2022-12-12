@@ -53,11 +53,11 @@ function MyFollow() {
 
       // //上記を元にデータ取得
       // const userDocId = await getDoc(userDocRefId);
-      // console.log(userDocId);
+   
 
       // //データの中からfollow配列取得
       // const followUserList = userDocId.get("follow");
-      // console.log(followUserList); //配列で2つ取得できてる
+      //配列で2つ取得できてる
       // setFollowList(followUserList);
 
       // const userDataId = userDocId.data();
