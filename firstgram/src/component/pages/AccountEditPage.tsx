@@ -117,7 +117,7 @@ function AccountEditPage() {
           </div>
         </div>
       ) : (
-        <p className="text-align_center">データが表示されません</p>
+        <p className="accountEdit__noUserData">データが表示されません</p>
       )}
       <Footer />
     </div>

@@ -53,7 +53,7 @@ function Follow() {
         <>
           <Header show={true} />
           <BackBtn />
-          <UserList usersData={followUsers} uid={uid} />
+          <UserList usersData={followUsers} uid={uid} message="フォローしている人がいません" />
           <Footer />
         </>
       )}

@@ -1,10 +1,20 @@
-.form {
+@use "../../global/mixin/mobile";
+
+.registerForm {
   line-height: 5rem;
+  margin-top: 7%;
+  @include mobile.mobile {
+    line-height: 6rem;
+  }
 
   &__icon {
     width: 130px;
     height: auto;
     margin: 0 auto;
+
+    @include mobile.mobile {
+      width: 100px;
+    }
   }
   &__loading-input {
     display: none;
@@ -23,9 +33,12 @@
   }
   &__requiredText {
     color: red;
-  font-size: 14px;
-  margin-left: 50px;
-  text-align: left;
+    font-size: 14px;
+    margin-left: 50px;
+    text-align: left;
+    @include mobile.mobile {
+      margin-left: 30px;
+    }
   }
   &__requiredIcon {
     color: red;

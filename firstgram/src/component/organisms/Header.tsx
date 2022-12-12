@@ -26,7 +26,7 @@ function Header({show}:{show:boolean}) {
           <div className="header__btns">
             <Link to="/newPost">
               <button className="header__btns--addPost">
-                <IoAddCircleOutline size={35} color={"white"} />
+                <IoAddCircleOutline size={35} color={"white"} className="iconTest" />
               </button>
             </Link>
             {navDisplay ? (
@@ -35,7 +35,7 @@ function Header({show}:{show:boolean}) {
               </button>
             ) : (
               <button className="header__btns--nav" onClick={() => navActive()}>
-                <FiMenu size={35} color={"white"} />
+                <FiMenu size={35} color={"white"} className="iconTest" />
               </button>
             )}
           </div>}

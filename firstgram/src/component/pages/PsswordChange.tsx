@@ -90,7 +90,7 @@ export function PsswordChange() {
               <td className="passwordChangeTable__tr--tdTitle">
                 <label htmlFor="settingEmail">現在のメールアドレス</label>
               </td>
-              <td className="passwordChangeTable__tr--Content">
+              <td className="passwordChangeTable__tr--tdContent">
                 <p>{loginUserEmail}</p>
               </td>
             </tr>
@@ -160,7 +160,7 @@ export function PsswordChange() {
             <tr className="passwordChangeTable__tr">
               <td className="passwordChangeTable__tr--tdTitle">
                 <label htmlFor="settingCPassword">
-                  新しいパスワード（確認）
+                  新しいパスワード(確認)
                 </label>
               </td>
               <td className="passwordChangeTable__tr--tdContent">

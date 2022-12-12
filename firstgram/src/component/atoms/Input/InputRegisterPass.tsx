@@ -10,8 +10,8 @@ function InputRegisterPass(props: any) {
   };
 
   return (
-    <div className="form">
-      <span className="form__requiredIcon">＊</span>
+    <div className="registerPassForm">
+      <span className="registerPassForm__requiredIcon">＊</span>
       <input
         type={isRevealConfirmPassword ? "text" : "password"}
         name="password"
@@ -19,18 +19,18 @@ function InputRegisterPass(props: any) {
         placeholder="パスワード(半角英小文字、数字を含む6文字以上)"
         onChange={props.passChange}
         pattern="(?=.*?[a-z])(?=.*?\d)[a-z\d]{6,}"
-        className="form__input"
+        className="form-input"
         required
       />
       <span
         onClick={toggleConfirmPassword}
         role="presentation"
-        className="form__isRevealPasswordIcon"
+        className="registerPassForm__isRevealPasswordIcon"
       >
         {isRevealConfirmPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
       </span>
 
-      <span className="form__error-message form__messageBox">
+      <span className="registerPassForm__error-message registerPassForm__messageBox">
         正しい形式で入力してください<br />
         (半角英小文字、数字を含む6文字以上)
       </span>

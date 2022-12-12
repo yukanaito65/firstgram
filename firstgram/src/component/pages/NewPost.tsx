@@ -71,7 +71,7 @@ const NewPost = (props: any) => {
             {isUploaded ? (
               <>
                 <NewPostUploadAuter imgSrc={imgSrc} />
-                {/* <textarea value={textState} placeholder="コメントを入力してください" onChange={InputText} 
+                {/* <textarea value={textState} placeholder="コメントを入力してください" onChange={InputText}
             style={{width:"100%",height:"100px"}} />
             <Link to="/" ><button onClick={OnFirebase}>投稿</button></Link> */}
                 {/* <Link to="InputNewPost" state={{ imgSrc:imgSrc }}>次へ</Link> */}
@@ -98,10 +98,32 @@ const NewPost = (props: any) => {
                   //   /* border: none; */
                   //   borderRadius: "10px",
                   // }}
-                >
-                  <p style={{display: "block"}}>新規投稿作成</p>
 
-                  <div style={{alignItems: "center", display: "block"}}>
+                >
+                  <div
+                  className="newpost__title"
+                    // style={{
+                    //   padding: "2%",
+                    //   borderBottom: "1px solid #333",
+                    //   fontWeight: "bold"
+                    // }}
+                  >
+                    新規投稿を作成
+                  </div>
+
+                  <div
+                  className="newpost__inputWrapper"
+                  // style={{
+                  //   // alignItems: "center",
+                  //   //  display: "block",
+                  //   display: "flex",
+                  //   // justifyContent: "center",
+                  //   flexDirection: "column",
+                  //   marginTop: "40%",
+                  //   alignItems:"center"
+                  //   }}
+                  >
+                    <div>
                     <MdOutlineAddPhotoAlternate
                       className="newpost__inputfileicon"
                       size={40}
@@ -111,24 +133,27 @@ const NewPost = (props: any) => {
                       //   // margin:"0 auto"
                       // }}
                     />
+                    </div>
 
                     <div
                       className="newpost__input"
-                      // style={{
-                      //   // border: "1px solid",
-                      //   borderRadius: "3px",
-                      //   // display: "inline-block",
-                      //   padding: "3px",
-                      //   position: "relative",
-                      //   backgroundColor: "#0d6efd",
-                      //   margin: "0 auto",
-                      //   alignItems: "center",
-                      //   width: "200px",
-                      // }}
+
+                      style={{
+                        // border: "1px solid",
+                        // borderRadius: "3px",
+                        // display: "inline-block",
+                        // padding: "3px",
+                        // position: "relative",
+                        // backgroundColor: "#0d6efd",
+                        // margin: "0 auto",
+                        // alignItems: "center",
+                        // width: "200px",
+                      }}
+
                     >
                       <p
                         className="newpost__inputletter"
-                        style={{ color: "#fff" }}
+                        // style={{ color: "#fff" }}
                       >
                         コンピューターから選択
                       </p>

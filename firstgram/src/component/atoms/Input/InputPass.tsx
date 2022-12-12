@@ -14,20 +14,20 @@ function InputPass(props: Props) {
   };
 
   return (
-    <div className="form">
+    <div className="passForm">
       <input
         type={isRevealConfirmPassword ? "text" : "password"}
         name="password"
         value={props.valuePassword}
         placeholder="パスワード"
-        className="form__input"
+        className="form-input"
         onChange={props.passChange}
         required
       />
       <span
         onClick={toggleConfirmPassword}
         role="presentation"
-        className="form__isRevealPasswordIcon"
+        className="passForm__isRevealPasswordIcon"
       >
         {isRevealConfirmPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
       </span>

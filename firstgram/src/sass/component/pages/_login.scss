@@ -1,24 +1,33 @@
 @use "../../global/setting" as *;
+@use "../../global/mixin/mobile";
 
 .login {
   display: flex;
   justify-content: space-around;
+  margin-top: 5%;
 
   &__iphone {
     // width: 60%;
     width: 35%;
     // height: 60%;
     height: auto;
+
+    @include mobile.mobile {
+      display: none;
+    }
   }
   &__img {
     width: 100%;
     height: 100%;
   }
   &__contents {
-    background-color: $color-base;
+    background-color: #ffff;
     outline: solid #d3d3d3;
     text-align: center;
     width: 50%;
+    @include mobile.mobile {
+      width: 75%;
+    }
   }
   &__logo {
     width: 100px;

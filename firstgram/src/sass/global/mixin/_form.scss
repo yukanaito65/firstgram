@@ -1,17 +1,16 @@
-@use "../../../global/setting" as *;
-@use "../../../global/mixin/mobile";
+@use "./mobile";
+@use "../setting" as *;
 
-.inputRegister {
+@mixin form-input {
   width: 80%;
   height: 35px;
   background-color: $color-base;
   outline: solid #d3d3d3;
   border: none;
-  margin-left: 16px;
 
   @include mobile.mobile{
-    width: 85%;
     height: 40px;
+    width: 85%;
     outline: 1px solid #d3d3d3;
   }
 }
