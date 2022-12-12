@@ -9,6 +9,7 @@
         align-items: center;
         justify-content: center;
         gap: 20px;
+        font-weight: bold;
         &--btn {
             justify-self: center;
             border: none;
@@ -20,8 +21,8 @@
             font-size: 14px;
             margin: 5px;
                 &:hover{
-                cursor: pointer;
-                opacity: 0.7;
+                    cursor: pointer;
+                    opacity: 0.7;
                 }
         }
     }

@@ -16,9 +16,10 @@ import SearchForm from "../molecules/SearchForm";
 // 上記の配列をforEachで回しデータを取得し、それらを新たな配列に格納する
 // 上記の配列を使ってmapで回して表示する
 
-const auth = getAuth();
-const currentUserId = auth.currentUser?.uid;
 function SearchPage() {
+  const auth = getAuth();
+  const currentUserId = auth.currentUser?.uid;
+
   // inputタグ内の状態管理
   const [searchValue, setSearchValue] = useState<string>("");
 
@@ -51,7 +52,7 @@ function SearchPage() {
 
   // 「検索」クリック時にinputタグ内の文字と一致するユーザーのuserIdを配列に格納
   // 格納されたuserIdの任意の情報を取得
-  const onClickSearch = (e:React.FormEvent<HTMLFormElement>) => {
+  const onClickSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // 検索に引っかかったuserのuserIdを格納
     const searchResultList: string[] = [];
@@ -102,19 +103,27 @@ function SearchPage() {
         />
         <div className="searchPage__resultUserList">
           {dataArr.length > 0 ? (
-            dataArr.map((a) => {
+            dataArr.map((userData) => {
               return (
-                <Link
-                  to={a.userId === currentUserId ? "/mypage" : "/profile"}
-                  state={{ userId: a.userId }}
-                  className="searchPage__resultUserList--resultUser"
-                >
-                  <CommonIcon icon={a.icon} />
-                  <div className="searchPage__resultUserList--resultUserDetail">
-                    <p>{a.userName}</p>
-                    <p>{a.name}</p>
-                  </div>
-                </Link>
+                <>
+                  {console.log(userData.userId)}
+                  {console.log(currentUserId)}
+                  <Link
+                    to={
+                      userData.userId === currentUserId ? "/mypage" : "/profile"
+                    }
+                    state={{ userId: userData.userId }}
+                    className="searchPage__resultUserList--resultUser"
+                  >
+                    <CommonIcon icon={userData.icon} />
+                    <div className="searchPage__resultUserList--resultUserDetail">
+                      <p>{userData.userName}</p>
+                      <p className="searchPage__resultUserList--resultUserName">
+                        {userData.name}
+                      </p>
+                    </div>
+                  </Link>
+                </>
               );
             })
           ) : (

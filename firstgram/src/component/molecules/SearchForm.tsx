@@ -5,6 +5,7 @@ interface Props {
   inputValue: string,
   propsOnChange: any,
   onClickSearch: (event: React.FormEvent<HTMLFormElement>) => void,
+
 }
 
 function SearchForm(props: Props) {
@@ -19,7 +20,7 @@ function SearchForm(props: Props) {
             onChange={(e) => props.propsOnChange(e.target.value)}
             placeholder="検索ワードを入力"
           />
-          <button type="button" className="searchBtn">検索</button>
+          <Btn onClick={props.onClickSearch} text="検索" className="searchBtn" />
         </div>
       </form>
     </div>

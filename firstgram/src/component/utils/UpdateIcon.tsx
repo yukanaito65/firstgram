@@ -38,58 +38,84 @@ function UpdateIcon(props: any) {
   };
   return (
     <>
-       {loading ? (
-              <p>アップロード中</p>
-            ) : (
-              <>
-                {isUploaded ? (
-                  <div className="upDateIcon">
-                    <div className="icon-image upDateIcon__img">
-                      <img
-                        className="icon-image__img"
-                        alt="ユーザーアイコン"
-                        src={props.iconPropsValue}
+      {loading ? (
+        <p>アップロード中</p>
+      ) : (
+        <>
+          {isUploaded ? (
+            <>
+              {/* <label className="upDateIcon__label">
+                <div className="icon-image upDateIcon__img">
+                  <img
+                    className="icon-image__img upDateIcon__img--parent"
+                    alt="ユーザーアイコン"
+                    src={props.iconPropsValue}
+                  />
+                  <MdAutorenew size={25} color="white" />
+                </div>
+              </label>
+              <input
+                name="settingIcon"
+                type="file"
+                accept=".png, .jpeg, .jpg"
+                onChange={InputImage}
+                className="upDateIcon__input"
+              /> */}
+              <div className="upDateIcon__img">
+                <label htmlFor="iconChange">
+                  <div className="icon-image upDateIcon__img--imgBlock">
+                    <img
+                      className="icon-image__img"
+                      alt="ユーザーアイコン"
+                      src={props.iconPropsValue}
+                    />
+                  </div>
+                  <div className="upDateIcon__label">
+                    <MdAutorenew size={25} color="white" />
+                  </div>
+                </label>
+              </div>
 
-                      />
-                      <label className="upDateIcon__label">
-                      <MdAutorenew size={25} color="white" />
-                      <input
-                        name="settingIcon"
-                        type="file"
-                        accept=".png, .jpeg, .jpg"
-                        onChange={InputImage}
-                        className="upDateIcon__input"
-                      />
-                      </label>
-                    </div>
+              <input
+                name="settingIcon"
+                type="file"
+                accept=".png, .jpeg, .jpg"
+                onChange={InputImage}
+                className="upDateIcon__input"
+                id="iconChange"
+              />
+            </>
+          ) : (
+            <>
+              <div className="upDateIcon__img">
+                <label htmlFor="iconChange">
+                  <div className="icon-image upDateIcon__img--imgBlock">
+                    <img
+                      className="icon-image__img"
+                      alt="ユーザーアイコン"
+                      src={props.iconPropsValue}
+                    />
                   </div>
-                ) : (
-                  <div>
-                    <div className="icon-image upDateIcon__img">
-                      <img
-                        className="icon-image__img"
-                        alt="ユーザーアイコン"
-                        src={props.iconPropsValue}
-                      />
-                    </div>
-                    <div className="upDateIcon__block">
-                      <label className="upDateIcon__label">
-                        <MdAutorenew size={25} color="white" />
-                      <input
-                        name="settingIcon"
-                        type="file"
-                        accept=".png, .jpeg, .jpg"
-                        onChange={InputImage}
-                        className="upDateIcon__input"
-                      />
-                      </label>
-                    </div>
+                  <div className="upDateIcon__label">
+                    <MdAutorenew size={25} color="white" />
                   </div>
-                )}
-              </>
-            )}
+                </label>
+              </div>
+
+              <input
+                name="settingIcon"
+                type="file"
+                accept=".png, .jpeg, .jpg"
+                onChange={InputImage}
+                className="upDateIcon__input"
+                id="iconChange"
+              />
+            </>
+          )}
+        </>
+      )}
     </>
-  )
+  );
 }
 
-export default UpdateIcon
+export default UpdateIcon;

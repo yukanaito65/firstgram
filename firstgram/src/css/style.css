@@ -42,7 +42,7 @@
 }
 @media screen and (max-width: 767px) {
   .btn {
-    font-size: 12px;
+    font-size: 16px;
   }
 }
 
@@ -438,6 +438,12 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
 
 .upDateIcon__img {
   margin: 0 auto;
+  position: relative;
+  cursor: pointer;
+}
+.upDateIcon__img--imgBlock {
+  margin: 0 auto;
+  cursor: pointer;
 }
 .upDateIcon__label {
   background-color: #0d6efd;
@@ -447,13 +453,9 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
   width: 32px;
   border-radius: 50%;
   height: 32px;
-  margin-top: -20px;
-}
-@media screen and (max-width: 767px) {
-  .upDateIcon__label {
-    width: 31px;
-    height: 31px;
-  }
+  position: absolute;
+  top: 81%;
+  left: 60%;
 }
 .upDateIcon__input {
   display: none;
@@ -720,10 +722,15 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
   width: 100%;
   margin: 10px auto;
   position: fixed;
-  top: 30px;
+  top: 50px;
   z-index: 100;
   max-width: 600px;
   min-width: 350px;
+}
+@media screen and (max-width: 767px) {
+  .searchForm {
+    top: 25px;
+  }
 }
 .searchForm__input {
   width: 90%;
@@ -744,7 +751,7 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
 }
 @media screen and (max-width: 767px) {
   .searchForm__input {
-    width: 85%;
+    width: 80%;
   }
 }
 
@@ -771,7 +778,7 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
 }
 @media screen and (max-width: 767px) {
   .sendDm__input {
-    width: 85%;
+    width: 80%;
   }
 }
 .sendDm__btn {
@@ -807,16 +814,16 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
   height: 5em;
 }
 .userDataTable__tr--title {
-  width: 30%;
+  width: 35%;
   padding: 10px;
 }
 .userDataTable__tr--content {
-  width: 70%;
+  width: 65%;
   padding: 10px;
 }
 @media screen and (max-width: 767px) {
   .userDataTable {
-    font-size: 1.2rem;
+    font-size: 16px;
   }
 }
 
@@ -833,7 +840,7 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
   box-sizing: border-box;
 }
 .header__logo {
-  width: 10%;
+  width: 12%;
   margin: auto 0;
 }
 .header__btns {
@@ -933,6 +940,7 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
   align-items: center;
   justify-content: center;
   gap: 20px;
+  font-weight: bold;
 }
 .accountSetting__btns--btn {
   justify-self: center;
@@ -1332,6 +1340,12 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
 }
 .accountEdit__userDateTable--tdContent {
   padding: 15px 5px;
+  width: 70%;
+}
+@media screen and (max-width: 767px) {
+  .accountEdit__userDateTable--tdContentTextarea {
+    height: 100px;
+  }
 }
 .accountEdit__confirmBtn {
   text-align: center;
@@ -1385,7 +1399,7 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
 .dmPage__top {
   display: flex;
   position: fixed;
-  top: 47px;
+  top: 61px;
   background-color: #fff;
   padding-top: 20px;
   box-shadow: 0px 10px 10px -8px rgba(0, 0, 0, 0.5);
@@ -1478,7 +1492,7 @@ body {
   max-width: 600px;
   margin: 0 auto;
   overflow-x: hidden;
-  padding-top: 60px;
+  padding-top: 77px;
   padding-bottom: 120px;
   min-height: 100vh;
   position: relative;
@@ -1487,6 +1501,7 @@ body {
 @media screen and (max-width: 767px) {
   body {
     font-size: 16px;
+    padding-top: 55px;
   }
 }
 
