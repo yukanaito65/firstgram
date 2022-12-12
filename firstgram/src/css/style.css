@@ -1234,6 +1234,7 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
   display: flex;
   align-items: center;
   width: 100%;
+  padding-left: 10px;
 }
 .postdetails__icon {
   width: 10%;
@@ -1276,7 +1277,7 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
   }
 }
 .postdetails__keep {
-  margin: 5px 5px 5px auto;
+  margin: 11px 5px 5px auto;
 }
 .postdetails__keep:hover {
   opacity: 0.5;
