@@ -1,3 +1,5 @@
+@use "../../../global/mixin/mobile";
+
 .keepBtn {
   background-color: transparent;
   color: black;
@@ -5,7 +7,12 @@
   border: none;
 
   &__img {
-    width: 30px;
-  height: 30px;
+    width: 25px;
+    height: 25px;
+
+    // @include mobile.mobile {
+    //   width: 25px;
+    //   height: 25px;
+    // }
   }
 }

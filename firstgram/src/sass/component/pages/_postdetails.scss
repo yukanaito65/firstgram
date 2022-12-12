@@ -1,4 +1,5 @@
 @use "../../global/mixin/postIconImg";
+@use "../../global/mixin/mobile";
 
 .postdetails{
     &__iconusername{
@@ -29,12 +30,24 @@
     &__favo:hover {
         opacity: 0.5;
     }
+    &__favBtn {
+        @include mobile.mobile{
+            width: 29px;
+            height: 29px;
+            }
+    }
     &__com{
         margin: 10px 5px 0px 5px;
         margin-top:12px;
     }
     &__com:hover {
         opacity: 0.5;
+    }
+    &__commentBtn {
+        @include mobile.mobile{
+            width: 29px;
+            height: 29px;
+            }
     }
     &__keep{
         margin: 5px 5px 5px auto;

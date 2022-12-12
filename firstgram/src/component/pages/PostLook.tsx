@@ -165,6 +165,7 @@ function PostLook() {
       <div className="postlook">
         {postData.length === 0 ? (
           <>
+
             <div style={{ marginTop: "60px" }}>
               <div style={{ width: "100%" }}>
                 <p style={{ textAlign: "center" }}>投稿がありません</p>
@@ -175,7 +176,7 @@ function PostLook() {
                   <button className="btn">検索してみよう！</button>
                 </Link>
               </div>
-            </div>
+</div>
           </>
         ) : (
           <>
@@ -227,9 +228,9 @@ function PostLook() {
                       </Link>
 
                       {/* いいねコメント保存 */}
-                      <div
-                        className="postlook__favocomkeep"
-                        style={{ display: "flex", marginBottom: "0" }}
+
+                      <div className="postlook__favocomkeep"
+                      // style={{ display: "flex", marginBottom: "0" }}
                       >
                         {/* いいねボタン */}
                         <div
@@ -238,6 +239,7 @@ function PostLook() {
                         >
                           {data.favorites.includes(loginUserName) ? (
                             <AiFillHeart
+                            className="postlook__favBtn"
                               size={30}
                               color={"red"}
                               onClick={(e: React.MouseEvent) => {
@@ -252,6 +254,7 @@ function PostLook() {
                             />
                           ) : (
                             <AiOutlineHeart
+                            className="postlook__favBtn"
                               size={30}
                               color={"black"}
                               onClick={(e: React.MouseEvent) => {
@@ -273,6 +276,7 @@ function PostLook() {
                           // style={{ margin: "10px 5px 0px 5px" }}
                         >
                           <AiOutlineMessage
+                          className="postlook__commentBtn"
                             size={30}
                             color={"black"}
                             onClick={CommentDisplay}
