@@ -5,9 +5,9 @@
     &__top {
         display: flex;
         position: fixed;
-        top: 51px;
+        top: 47px;
         background-color: #fff;
-        padding-top: 10px;
+        padding-top: 20px;
         box-shadow: 0px 10px 10px -8px rgba(0, 0, 0, 0.5);
         width: 100%;
         max-width: 600px;
@@ -34,7 +34,7 @@
         }
         @include mobile.mobile {
             position: fixed;
-            top: 41px;
+            top: 28px;
         }
     }
     &__messageWrapper {

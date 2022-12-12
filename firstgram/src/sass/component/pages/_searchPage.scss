@@ -1,7 +1,7 @@
 .searchPage {
     margin-top: 20px;
     &__resultUserList {
-        margin-top: 45px;
+        margin-top: 55px;
         &--resultUser {
             display: flex;
             gap: 20px;
@@ -13,6 +13,9 @@
         }
         &--resultUserDetail {
             margin: auto 0;
+        }
+        &--resultUserName {
+            color: #4141419e;
         }
     }
     &__noMatchUser {

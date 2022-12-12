@@ -4,7 +4,7 @@ import Btn from "../atoms/button/Btn";
 interface Props {
   inputValue: string,
   propsOnChange: any,
-  onClickSearch: () => void,
+  onClickSearch: (event: React.FormEvent<HTMLFormElement>) => void,
 }
 
 function SearchForm(props: Props) {
@@ -19,7 +19,7 @@ function SearchForm(props: Props) {
             onChange={(e) => props.propsOnChange(e.target.value)}
             placeholder="検索ワードを入力"
           />
-          <Btn onClick={props.onClickSearch} text={"検索"} className="searchBtn" />
+          <button type="button" className="searchBtn">検索</button>
         </div>
       </form>
     </div>
