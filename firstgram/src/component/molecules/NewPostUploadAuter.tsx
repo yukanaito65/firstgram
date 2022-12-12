@@ -22,11 +22,11 @@ const OnFirebase = async(e:any) => {
     // console.log("画像の入力がありません")
     // }else {
     
-    const getRandomArbitrary =(min:number, max:number)=> {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min + 1) + min)
-    }
+    // const getRandomArbitrary =(min:number, max:number)=> {
+    //     min = Math.ceil(min);
+    //     max = Math.floor(max);
+    //     return Math.floor(Math.random() * (max - min + 1) + min)
+    // }
     
     const collectionPost:any =collection(db, "post");
     const docRef = await addDoc(collectionPost,
@@ -37,7 +37,7 @@ const OnFirebase = async(e:any) => {
     keeps: [],
     imageUrl:props.imgSrc,
     postDate: serverTimestamp(),
-    number:getRandomArbitrary(1,5)
+    // number:getRandomArbitrary(1,5)
     });
     
     // ドキュメント更新(ID取得の為)
@@ -97,7 +97,7 @@ const InputText = (e:any)=>{
     // style={{display:"flex",width:"100%",justifyContent: "space-between"}}
     >
     <BackBtn />
-    <Link to="/" >
+    <Link to="/postComplet" >
     <button onClick={OnFirebase}  className="newpostuploadauter__postbtn btn"
     // style={{textAlign:"right"}}
     >投稿</button></Link>
