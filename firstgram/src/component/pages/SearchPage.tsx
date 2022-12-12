@@ -51,7 +51,8 @@ function SearchPage() {
 
   // 「検索」クリック時にinputタグ内の文字と一致するユーザーのuserIdを配列に格納
   // 格納されたuserIdの任意の情報を取得
-  const onClickSearch = () => {
+  const onClickSearch = (e:React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     // 検索に引っかかったuserのuserIdを格納
     const searchResultList: string[] = [];
     dataList.forEach((user) => {
@@ -97,7 +98,7 @@ function SearchPage() {
         <SearchForm
           inputValue={searchValue}
           propsOnChange={setSearchValue}
-          onClickSearch={() => onClickSearch()}
+          onClickSearch={(e) => onClickSearch(e)}
         />
         <div className="searchPage__resultUserList">
           {dataArr.length > 0 ? (
@@ -110,8 +111,8 @@ function SearchPage() {
                 >
                   <CommonIcon icon={a.icon} />
                   <div className="searchPage__resultUserList--resultUserDetail">
-                    <p>{a.name}</p>
                     <p>{a.userName}</p>
+                    <p>{a.name}</p>
                   </div>
                 </Link>
               );

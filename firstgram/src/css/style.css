@@ -436,19 +436,24 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
      object-fit: cover;
 }
 
-.upDateIcon__block {
-  width: 110%;
+.upDateIcon__img {
+  margin: 0 auto;
 }
 .upDateIcon__label {
   background-color: #0d6efd;
   padding: 3px;
   cursor: pointer;
   display: block;
-  width: 35px;
-  margin-left: auto;
+  width: 32px;
   border-radius: 50%;
-  height: 35px;
+  height: 32px;
   margin-top: -20px;
+}
+@media screen and (max-width: 767px) {
+  .upDateIcon__label {
+    width: 31px;
+    height: 31px;
+  }
 }
 .upDateIcon__input {
   display: none;
@@ -708,10 +713,11 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
 .caption {
   font-size: 16px;
   margin: 5px;
+  padding-left: 10px;
 }
 
 .searchForm {
-  width: 65%;
+  width: 100%;
   margin: 10px auto;
   position: fixed;
   top: 30px;
@@ -749,10 +755,12 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
 
 .sendDm {
   width: 100%;
+  max-width: 600px;
+  min-width: 350px;
   margin: 8px auto;
   background-color: #f7f7f7;
   position: fixed;
-  bottom: 62px;
+  bottom: 30px;
 }
 .sendDm__input {
   width: 90%;
@@ -781,7 +789,7 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
 
 .sendDmWrapper {
   width: 100%;
-  padding: 15px 10px 15px 20px;
+  padding: 15px 10px 30px 20px;
 }
 
 .loginUserIcon {
@@ -1101,6 +1109,7 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
   align-items: center;
   width: 100%;
   margin-top: 30px;
+  padding-left: 10px;
 }
 .postlook__postIcon {
   width: 10%;
@@ -1112,6 +1121,8 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
 .postlook__favocomkeep {
   display: flex;
   margin-bottom: 0;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 .postlook__favo {
   margin: 10px 5px 0px 5px;
@@ -1145,6 +1156,8 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
 }
 .postlook__favolengthtime {
   display: flex;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 .postlook__comdisplay {
   display: flex;
@@ -1298,7 +1311,7 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
   margin-top: 20px;
 }
 .searchPage__resultUserList {
-  margin-top: 45px;
+  margin-top: 55px;
 }
 .searchPage__resultUserList--resultUser {
   display: flex;
@@ -1312,6 +1325,9 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
 .searchPage__resultUserList--resultUserDetail {
   margin: auto 0;
 }
+.searchPage__resultUserList--resultUserName {
+  color: rgba(65, 65, 65, 0.6196078431);
+}
 .searchPage__noMatchUser {
   margin-top: 100px;
   text-align: center;
@@ -1322,13 +1338,8 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
   margin-bottom: 20px;
 }
 .accountEdit__icon {
-  width: 20%;
+  width: 100%;
   margin: 15px auto;
-}
-@media screen and (max-width: 767px) {
-  .accountEdit__icon {
-    width: 32%;
-  }
 }
 .accountEdit__userDateTable {
   width: 100%;
@@ -1368,10 +1379,10 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
 }
 .passwordChangeTable__tr--tdTitle {
   width: 40%;
-  padding: 10px;
+  padding: 10px 5px 10px 10px;
 }
 .passwordChangeTable__tr--tdContent {
-  padding: 10px;
+  padding: 5px 10px;
 }
 .passwordChangeTable__tr--tdInput {
   display: flex;
@@ -1398,9 +1409,9 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
 .dmPage__top {
   display: flex;
   position: fixed;
-  top: 51px;
+  top: 47px;
   background-color: #fff;
-  padding-top: 10px;
+  padding-top: 20px;
   box-shadow: 0px 10px 10px -8px rgba(0, 0, 0, 0.5);
   width: 100%;
   max-width: 600px;
@@ -1429,7 +1440,7 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
 @media screen and (max-width: 767px) {
   .dmPage__top {
     position: fixed;
-    top: 41px;
+    top: 28px;
   }
 }
 .dmPage__messageWrapper {
@@ -1499,7 +1510,7 @@ body {
 }
 @media screen and (max-width: 767px) {
   body {
-    font-size: 1.3rem;
+    font-size: 16px;
   }
 }
 
@@ -1539,7 +1550,7 @@ input, textarea {
 }
 @media screen and (max-width: 767px) {
   input, textarea {
-    font-size: 1.3rem;
+    font-size: 16px;
   }
 }
 

@@ -7,6 +7,7 @@
         align-items: center;
         width: 100%;
         margin-top:30px;
+        padding-left: 10px;
     }
     &__postIcon{
         // width: 10%;
@@ -19,6 +20,8 @@
     &__favocomkeep{
         display: flex;
         margin-bottom: 0;
+        padding-left: 5px;
+        padding-right: 5px;
     }
     &__favo{
         margin: 10px 5px 0px 5px;
@@ -52,6 +55,8 @@
     }
     &__favolengthtime{
         display: flex;
+        padding-left: 5px;
+        padding-right: 5px;
     }
     &__comdisplay{
         display: flex;

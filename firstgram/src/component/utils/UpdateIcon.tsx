@@ -37,24 +37,22 @@ function UpdateIcon(props: any) {
     );
   };
   return (
-    <div>
+    <>
        {loading ? (
               <p>アップロード中</p>
             ) : (
               <>
                 {isUploaded ? (
                   <div className="upDateIcon">
-                    <div>
+                    <div className="icon-image upDateIcon__img">
                       <img
-                        className="icon-image"
+                        className="icon-image__img"
                         alt="ユーザーアイコン"
                         src={props.iconPropsValue}
 
                       />
-                    </div>
-                    <div className="upDateIcon__block">
                       <label className="upDateIcon__label">
-                      <MdAutorenew size={30} color="white" />
+                      <MdAutorenew size={25} color="white" />
                       <input
                         name="settingIcon"
                         type="file"
@@ -67,16 +65,16 @@ function UpdateIcon(props: any) {
                   </div>
                 ) : (
                   <div>
-                    <div>
+                    <div className="icon-image upDateIcon__img">
                       <img
-                        className="icon-image"
+                        className="icon-image__img"
                         alt="ユーザーアイコン"
                         src={props.iconPropsValue}
                       />
                     </div>
                     <div className="upDateIcon__block">
                       <label className="upDateIcon__label">
-                        <MdAutorenew size={30} color="white" />
+                        <MdAutorenew size={25} color="white" />
                       <input
                         name="settingIcon"
                         type="file"
@@ -90,7 +88,7 @@ function UpdateIcon(props: any) {
                 )}
               </>
             )}
-    </div>
+    </>
   )
 }
 

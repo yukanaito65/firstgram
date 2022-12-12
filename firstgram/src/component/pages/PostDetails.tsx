@@ -77,6 +77,7 @@ function PostDetails() {
   const location = useLocation();
   const { postid, userid } = location.state as State;
 
+  const [favbtn, setFavbtn] = useState(1);
   // Redux使うときのやつ
   // const dispatch = useDispatch();
   // const userData = useSelector(selectUsers)
@@ -104,19 +105,20 @@ function PostDetails() {
       } else {
         setLoginUserPost(false);
       }
-    });
 
-    // 画面遷移したら、firestoreから画像、caption,falolites,commmentを取得、保持
-    firebasePostDetails(postid, userid).then((postData) => {
-      setImgUrl(postData.Imgurl);
-      setCaption(postData.Caption);
-      setFavorites(postData.Favorites);
-      setDisplayComment(postData.Comments);
-      // setTime(postData.Time)
-      setPostUserName(postData.PostUserName);
-      setIcon(postData.Icon);
+      // 画面遷移したら、firestoreから画像、caption,falolites,commmentを取得、保持
+      firebasePostDetails(postid, userid).then((postData) => {
+        setImgUrl(postData.Imgurl);
+        setCaption(postData.Caption);
+        setFavorites(postData.Favorites);
+        setDisplayComment(postData.Comments);
+        // setTime(postData.Time)
+        setPostUserName(postData.PostUserName);
+        setIcon(postData.Icon);
+      });
+      console.log(displayComment);
     });
-  }, []);
+  }, [favbtn]);
 
   // お気に入りボタンがクリックされたら
   const Favorite = async (e: any) => {
@@ -126,6 +128,7 @@ function PostDetails() {
     await firebasePostDetails(postid, userid).then((postData) => {
       setFavorites(postData.Favorites);
     });
+    setFavbtn(favbtn + 1);
   };
 
   // お気に入り取り消し機能
@@ -141,18 +144,34 @@ function PostDetails() {
   // コメント送信ボタンがクリックされたら
   const AddComment = async (e: any) => {
     // 押された投稿のcommentにinputCommentを配列で追加
-    const postDataDocRefId = doc(collection(db, "post"), postid);
-    updateDoc(postDataDocRefId, {
+    // const postDataDocRefId = doc(collection(db, "post"), postid);
+    // updateDoc(postDataDocRefId, {
+    //   comments: arrayUnion({
+    //     userName: loginUserName,
+    //     commentText: inputComment,
+    //   }),
+    // });
+    // // firestoreからcommentを取得、保持
+    // await firebasePostDetails(postid, userid).then((postData) => {
+    //   setDisplayComment(postData.Comments);
+    // });
+    // setInputComment("");
+
+    setFavbtn(favbtn + 1);
+
+    // 押された投稿のcommentにinputCommentを配列で追加
+    updateDoc(doc(collection(db, "post"), postid), {
       comments: arrayUnion({
         userName: loginUserName,
         commentText: inputComment,
       }),
     });
-    // firestoreからcommentを取得、保持
+
     await firebasePostDetails(postid, userid).then((postData) => {
       setDisplayComment(postData.Comments);
     });
     setInputComment("");
+    //   }}
   };
 
   const ClickDelition = async (e: any) => {
@@ -207,13 +226,13 @@ function PostDetails() {
     setSelect(false);
   };
 
-  const CommentDisplay = (e: any) => {
-    setCommentDisplay(true);
-  };
+  // const CommentDisplay = (e: any) => {
+  //   setCommentDisplay(true);
+  // };
 
-  const CommentBack = (e: any) => {
-    setCommentDisplay(false);
-  };
+  // const CommentBack = (e: any) => {
+  //   setCommentDisplay(false);
+  // };
 
   return (
     <>
@@ -241,7 +260,12 @@ function PostDetails() {
                   className="postdetais__username"
                   // style={{ fontSize: "20px", marginLeft: "5px" }}
                 >
-                  {postUserName}
+                  <Link
+                    to={userid === user.uid ? "/mypage" : "/profile"}
+                    state={{ userId: userid }}
+                  >
+                    {postUserName}
+                  </Link>
                 </p>
 
                 {select ? (
@@ -358,12 +382,11 @@ function PostDetails() {
                   className="postdetails__com"
                   // style={{ margin: "10px 5px 0px 5px" }}
                 >
-                  <AiOutlineMessage
-                    className="postdetails__commentBtn"
-                    size={30}
-                    color={"rgb(38, 38, 38)"}
-                    onClick={CommentDisplay}
-                  />
+                  {/* <AiOutlineMessage
+                  size={30}
+                  color={"rgb(38, 38, 38)"}
+                  onClick={CommentDisplay}
+                /> */}
                 </div>
 
                 <div
@@ -409,29 +432,53 @@ function PostDetails() {
                   </button>
                 </div>
               </div>
-              {commentDisplay ? (
-                <>
-                  <div
-                    className="postdetails__displaycomment"
-                    // style={{ display: "flex" }}
-                  >
-                    <CommentsDisplay displayComment={displayComment} />
-                    <AiOutlineClose
-                      className="postdetails__commentclosebtn"
-                      // style={{
-                      //   display: "block",
-                      //   margin: "auto 0 0 auto",
-                      //   alignItems: "center",
-                      // }}
-                      size={15}
-                      color={"rgb(38, 38, 38)"}
-                      onClick={CommentBack}
-                    />
-                  </div>
-                </>
-              ) : (
-                <></>
-              )}
+              {/* {commentDisplay ? ( */}
+              {/* <> */}
+              <div
+                className="postdetails__displaycomment"
+                // style={{ display: "flex" }}
+              >
+                {/* <CommentsDisplay displayComment={displayComment} /> */}
+                <div className="commentdisplay">
+                  {displayComment.map((data: any, index: any) => {
+                    return (
+                      <div
+                        className="commentdisplay__comset"
+                        key={index}
+                        // style={{display:"flex",fontSize:"16px",width:"100%",margin:"3px"}}
+                      >
+                        <p
+                          className="commentdisplay__username"
+                          // style={{fontWeight:"500"}}
+                        >
+                          {data.userName}
+                        </p>
+                        <p
+                          className="commentdisplay__com"
+                          // style={{marginLeft:"5px"}}
+                        >
+                          {data.commentText}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+                {/* <AiOutlineClose
+                  className="postdetails__commentclosebtn"
+                    // style={{
+                    //   display: "block",
+                    //   margin: "auto 0 0 auto",
+                    //   alignItems: "center",
+                    // }}
+                    size={15}
+                    color={"rgb(38, 38, 38)"}
+                    onClick={CommentBack}
+                  /> */}
+              </div>
+              {/* </>
+            ) : (
+              <></>
+            )} */}
             </>
           ) : (
             <>
@@ -452,7 +499,12 @@ function PostDetails() {
                   className="postdetails__username"
                   // style={{ fontSize: "20px", marginLeft: "5px" }}
                 >
-                  {postUserName}
+                  <Link
+                    to={userid === user.uid ? "/mypage" : "/profile"}
+                    state={{ userId: userid }}
+                  >
+                    {postUserName}
+                  </Link>
                 </p>
               </div>
 
@@ -487,12 +539,11 @@ function PostDetails() {
                   className="postdetails__com"
                   // style={{ margin: "10px 5px 0px 5px" }}
                 >
-                  <AiOutlineMessage
-                    className="commentBtn"
+                  {/* <AiOutlineMessage
                     size={30}
                     color={"rgb(38, 38, 38)"}
                     onClick={CommentDisplay}
-                  />
+                  /> */}
                 </div>
 
                 <div
@@ -541,29 +592,53 @@ function PostDetails() {
                 </div>
               </div>
 
-              {commentDisplay ? (
-                <>
-                  <div
-                    className="postdetails__displaycomment"
-                    // style={{ display: "flex" }}
-                  >
-                    <CommentsDisplay displayComment={displayComment} />
-                    <AiOutlineClose
-                      className="postdetails__commentclosebtn"
-                      // style={{
-                      //   display: "block",
-                      //   margin: "auto 0 0 auto",
-                      //   alignItems: "center",
-                      // }}
-                      size={15}
-                      color={"rgb(38, 38, 38)"}
-                      onClick={CommentBack}
-                    />
-                  </div>
-                </>
-              ) : (
-                <></>
-              )}
+              {/* {commentDisplay ? (
+              <> */}
+              <div
+                className="postdetails__displaycomment"
+                // style={{ display: "flex" }}
+              >
+                {/* <CommentsDisplay displayComment={displayComment} /> */}
+                <div className="commentdisplay">
+                  {displayComment.map((data: any, index: any) => {
+                    return (
+                      <div
+                        className="commentdisplay__comset"
+                        key={index}
+                        // style={{display:"flex",fontSize:"16px",width:"100%",margin:"3px"}}
+                      >
+                        <p
+                          className="commentdisplay__username"
+                          // style={{fontWeight:"500"}}
+                        >
+                          {data.userName}
+                        </p>
+                        <p
+                          className="commentdisplay__com"
+                          // style={{marginLeft:"5px"}}
+                        >
+                          {data.commentText}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+                {/* <AiOutlineClose
+                  className="postdetails__commentclosebtn"
+                    // style={{
+                    //   display: "block",
+                    //   margin: "auto 0 0 auto",
+                    //   alignItems: "center",
+                    // }}
+                    size={15}
+                    color={"rgb(38, 38, 38)"}
+                    onClick={CommentBack}
+                  /> */}
+              </div>
+              {/* </>
+            ) : (
+              <></>
+            )} */}
             </>
           )}
         </div>
