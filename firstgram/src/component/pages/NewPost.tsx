@@ -26,9 +26,15 @@ const NewPost = (props: any) => {
 
   // 画像の更新
   const InputImage = (e: any) => {
+
+    const getRandomArbitrary =(min:number, max:number)=> {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min + 1) + min)
+  }
     // パスと名前で参照を作成
     const file = e.target.files[0];
-    const storageRef = ref(storage, "image/" + file.name);
+    const storageRef = ref(storage, "image/" +getRandomArbitrary(1,1000)+ file.name );
     // 画像のアップロード
     const uploadImage = uploadBytesResumable(storageRef, file);
     uploadImage.on(
@@ -76,22 +82,23 @@ const NewPost = (props: any) => {
                 <BackBtn />
                 <div
                   className="newpost__inputfileset"
-                  style={{
-                    //     border:"solid 1px #333 ",height:"300px", textAlign:"center",
-                    // display: "flex",justifyContent: "center",alignItems: "center",flexDirection: "column"
-                    // height: "473px",
-                    // textAlign: "center",
-                    // display: "flex",
-                    // justifyContent: "center",
-                    // // alignItems: "center",
-                    // flexDirection: "column",
-                    // backgroundColor: "#f2f2f2",
-                    // /* margin-top: 30px; */
-                    // width: "70%",
-                    // margin: " 0 auto",
-                    // /* border: none; */
-                    // borderRadius: "10px",
-                  }}
+                  // style={{
+                  //   //     border:"solid 1px #333 ",height:"300px", textAlign:"center",
+                  //   // display: "flex",justifyContent: "center",alignItems: "center",flexDirection: "column"
+                  //   height: "473px",
+                  //   textAlign: "center",
+                  //   display: "flex",
+                  //   justifyContent: "center",
+                  //   // alignItems: "center",
+                  //   flexDirection: "column",
+                  //   backgroundColor: "#f2f2f2",
+                  //   /* margin-top: 30px; */
+                  //   width: "70%",
+                  //   margin: " 0 auto",
+                  //   /* border: none; */
+                  //   borderRadius: "10px",
+                  // }}
+
                 >
                   <div
                   className="newpost__title"
@@ -130,6 +137,7 @@ const NewPost = (props: any) => {
 
                     <div
                       className="newpost__input"
+
                       style={{
                         // border: "1px solid",
                         // borderRadius: "3px",
@@ -141,6 +149,7 @@ const NewPost = (props: any) => {
                         // alignItems: "center",
                         // width: "200px",
                       }}
+
                     >
                       <p
                         className="newpost__inputletter"

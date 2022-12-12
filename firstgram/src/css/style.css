@@ -713,6 +713,7 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
 .caption {
   font-size: 16px;
   margin: 5px;
+  padding-left: 10px;
 }
 
 .searchForm {
@@ -1108,6 +1109,7 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
   align-items: center;
   width: 100%;
   margin-top: 30px;
+  padding-left: 10px;
 }
 .postlook__postIcon {
   width: 10%;
@@ -1119,6 +1121,8 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
 .postlook__favocomkeep {
   display: flex;
   margin-bottom: 0;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 .postlook__favo {
   margin: 10px 5px 0px 5px;
@@ -1140,6 +1144,8 @@ input:placeholder-shown ~ .requiredRegisterForm__messageBox {
 }
 .postlook__favolengthtime {
   display: flex;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 .postlook__comdisplay {
   display: flex;
