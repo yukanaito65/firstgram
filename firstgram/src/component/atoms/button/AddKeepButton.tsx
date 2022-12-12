@@ -58,18 +58,11 @@ function AddKeepButton(props: any) {
       const keepPostDataId = keepPostDocId.data();
       setKeepPosts(keepPostDataId);
 
-      console.log(props.postId);
-      console.log(userDataId);
-      // console.log(userDataId.follow); //undefined
-      console.log(keepPostDataId);
+
     }); //onAuth
   }, []);
 
   //useEffectの中のコードよりも先に外のコードが処理される→初期表示の時にundefinedになってしまう
-  console.log(props.postId);
-  console.log(users);
-  console.log(users.keepPosts); //undefined
-  console.log(keepPosts);
 
   //ログインユーザーのfollow配列に今表示しているユーザーのuserIdが存在したら、フォロー外すボタン、存在しなかったらフォローするボタン
   const [keepBtn, setKeepBtn] = useState<boolean>(false);
@@ -83,7 +76,6 @@ function AddKeepButton(props: any) {
     await updateDoc(keepPostDocRefId, {
       keeps: arrayUnion(user.uid),
     });
-    console.log("add");
     //削除したらtrueにする
     setKeepBtn(true);
     // setFollowerNum(props.followerNum);

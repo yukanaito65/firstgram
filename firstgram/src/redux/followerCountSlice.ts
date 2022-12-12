@@ -32,7 +32,7 @@ interface State {
 
 //     const profileUserDataId = profileUserDocId.data();
 //     // setProfileUsers(profileUserDataId);
-//     // console.log(profileUserDataId);
+
 //     return profileUserDataId;
 
 // })

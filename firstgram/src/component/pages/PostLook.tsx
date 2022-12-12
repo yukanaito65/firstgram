@@ -34,7 +34,7 @@ import PostIcon from "../atoms/icon/PostIcon";
 
 import Img from "../atoms/pictures/Img";
 import { Post } from "../../types/types";
-
+import ThreeRowsPostList from "../molecules/ThreeRowsPostList";
 
 function PostLook() {
   // followuserのpostidからとってきたpostData
@@ -74,7 +74,7 @@ function PostLook() {
       });
 
       if (!user) {
-        console.log("ログアウト状態です");
+      <></>
       } else {
         // ログインしているユーザーのデータ取得
         // GetLoginUserName(user).then((loginUserData:any)=>{
@@ -110,12 +110,10 @@ function PostLook() {
 
         // ログインしているユーザーのpost情報を配列に格納
         const myPostId = userDatas?.posts;
-        console.log(userDatas?.posts);
         for (let postid of myPostId) {
           const information = doc(db, "post", postid);
           const DataDoc = await getDoc(information);
           const Datas = DataDoc.data();
-          // console.log(postDatas)
           postDataArray.push(Datas);
         }
 
@@ -123,25 +121,24 @@ function PostLook() {
         setPostData(postDataArray);
 
         // ランダムの数値のpostを取得
-        const getRandomArbitrary = (min: number, max: number) => {
-          min = Math.ceil(min);
-          max = Math.floor(max);
-          return Math.floor(Math.random() * (max - min + 1) + min);
-        };
+        // const getRandomArbitrary = (min: number, max: number) => {
+        //   min = Math.ceil(min);
+        //   max = Math.floor(max);
+        //   return Math.floor(Math.random() * (max - min + 1) + min);
+        // };
 
-        const randomArray: any[] = [];
-        const q = query(
-          collection(db, "post"),
-          where("number", "==", getRandomArbitrary(1, 5))
-        );
-        const querySnapshot = await getDocs(q);
-        querySnapshot.forEach((doc) => {
-          const followUserPost = (doc.id, " => ", doc.data());
-          randomArray.push(followUserPost);
-        });
-        setRamData(randomArray);
+        // const randomArray: any[] = [];
+        // const q = query(
+        //   collection(db, "post"),
+        //   where("number", "==", getRandomArbitrary(1, 5))
+        // );
+        // const querySnapshot = await getDocs(q);
+        // querySnapshot.forEach((doc) => {
+        //   const followUserPost = (doc.id, " => ", doc.data());
+        //   randomArray.push(followUserPost);
+        // });
+        // setRamData(randomArray);
 
-        // console.log(postData)
       }
     });
   }, [favbtn]);
@@ -163,198 +160,26 @@ function PostLook() {
     <>
       <Header show={true} />
       <div className="postlook">
-        {followUser.length === 0 ? (
+        {postData.length === 0 ? (
           <>
-            <div>
-              {ramData.map((data: Post, index:string) => {
-                const favos = [...data.favorites];
-                const com = [...data.comments];
-                return (
-                  <>
-                    <div key={index}>
-                      <div className="postlook__iconusername"
-                        // style={{
-                        //   display: "flex",
-                        //   alignItems: "center",
-                        //   width: "100%",
-                        //   marginTop:"30px"
-                        // }}
-                      >
-                         <div className="postlook__postIcon">
-                        <Link
-                          to={data.userId === userId ? "/mypage" : "/profile"}
-                          state={{ userId: data.userId }}
-                        >
-                      {/* <div className="postDetails_postIcon"> */}
-                          <PostIcon icon={data.icon} />
-                        </Link>
-                        </div>
-                        <p className="postlook__username"
-                        // style={{ fontSize: "20px", marginLeft: "5px" }}
-                        >
-                          <Link
-                          to={data.userId === userId ? "/mypage" : "/profile"}
-                          state={{ userId: data.userId }}
-                        >
-                            {data.userName}
-                        </Link>
-                        
-                        </p>
-                      </div>
 
-
-                      {/* 画像 */}
-                      <Link
-                        to="/PostDetails"
-                        state={{ postid: data.postId, userid: data.userId }}
-                      >
-                        <Img imgUrl={data.imageUrl} />
-                      </Link>
-
-                      {/* いいねコメント保存 */}
-                      <div className="postlook__favocomkeep"
-                      // style={{ display: "flex", marginBottom: "0" }}
-                      >
-                        {/* いいねボタン */}
-                        <div className="postlook__favo"
-                        // style={{ margin: "10px 5px 0px 5px" }}
-                        >
-                          {data.favorites.includes(loginUserName) ? (
-                            <AiFillHeart
-                              size={30}
-                              color={"red"}
-                              onClick={(e:React.MouseEvent) => {
-                                updateDoc(
-                                  doc(collection(db, "post"), data.postId),
-                                  {
-                                    favorites: arrayRemove(loginUserName),
-                                  }
-                                );
-                                setFavbtn(favbtn + 1);
-                              }}
-                            />
-                          ) : (
-                            <AiOutlineHeart
-                              size={30}
-                              color={"black"}
-                              onClick={(e:React.MouseEvent) => {
-                                updateDoc(
-                                  doc(collection(db, "post"), data.postId),
-                                  {
-                                    favorites: arrayUnion(loginUserName),
-                                  }
-                                );
-                                setFavbtn(favbtn + 1);
-                              }}
-                            />
-                          )}
-                        </div>
-
-                        {/* コメントボタン */}
-                        <div className="postlook__com"
-                        // style={{ margin: "10px 5px 0px 5px" }}
-                        >
-                          <AiOutlineMessage
-                            size={30}
-                            color={"black"}
-                            onClick={CommentDisplay}
-                          />
-                        </div>
-
-                        {/* 保存ボタン */}
-                        <div className="postlook__keep"
-                        // style={{ margin: "5px 5px 0px auto" }}
-                        >
-                          <KeepButton
-                            loginUserKeep={loginUserKeep}
-                            data={data.postId}
-                          />
-                        </div>
-                      </div>
-
-                      {/* いいね数、投稿時間 */}
-                      <div className="postlook__favolengthtime"
-                      // style={{ display: "flex" }}
-                      >
-                        <FavoLength favos={favos} />
-                        <Time data={data.postDate} />
-                      </div>
-
-                      {/* キャプション */}
-                      <Caption data={data.caption} />
-
-                      <div>
-                        {commentDisplay ? (
-                          <>
-                            {/* コメント表示 */}
-                            <CommentsDisplay displayComment={com} />
-
-                            <div className="postlook__comdisplay"
-                            // style={{ display: "flex", width: "100%" }}
-                            >
-                              {/* コメント投稿セット */}
-                              <div className="cominput"
-                                // style={{
-                                //   display: "flex",
-                                //   width: "70%",
-                                //   height: "30px",
-                                //   margin: "5px",
-                                // }}
-                              >
-                                <input className="postlook__input"
-                                  type="text"
-                                  value={inputComment}
-                                  onChange={(e) => {
-                                    setInputComment(e.target.value);
-                                  }}
-                                  // style={{ width: "100%" }}
-                                />
-                              </div>
-
-                              <div className="postlook__btn"
-                              // style={{ marginLeft: "auto", width: "30%" }}
-                              >
-                                <button className="btn"
-                                  onClick={async (e:React.MouseEvent) => {
-                                    // 押された投稿のcommentにinputCommentを配列で追加
-                                    updateDoc(
-                                      doc(collection(db, "post"), data.postId),
-                                      {
-                                        comments: arrayUnion({
-                                          userName: loginUserName,
-                                          commentText: inputComment,
-                                        }),
-                                      }
-                                    );
-                                    setFavbtn(favbtn + 1);
-                                    setInputComment("");
-                                  }}
-                                >
-                                  投稿する
-                                </button>
-                              </div>
-                              <AiOutlineClose
-                              className="postlook__closebtn"
-                                // style={{
-                                //   display: "block",
-                                //   margin: "15px 0 0 auto",
-                                //   alignItems: "center",
-                                // }}
-                                size={15}
-                                color={"rgb(38, 38, 38)"}
-                                onClick={CommentBack}
-                              />
-                            </div>
-                          </>
-                        ) : (
-                          <></>
-                        )}
-                      </div>
-                    </div>
-                  </>
-                );
-              })}
-            </div>
+            <div className="lead_article"
+            // style={{ marginTop: "60px" }}
+            >
+              {/* <div style={{ width: "100%" }}> */}
+                <p className="lead_center"
+                // style={{ textAlign: "center" }}
+                >投稿がありません</p>
+              {/* </div> */}
+              <div className="lead_center"
+              // style={{ textAlign: "center" }}
+              >
+                {/* style={{margin:"0 auto",}} */}
+                <Link to="/SearchPage">
+                  <button className="btn">検索してみよう！</button>
+                </Link>
+              </div>
+</div>
           </>
         ) : (
           <>
@@ -365,8 +190,8 @@ function PostLook() {
                 return (
                   <>
                     <div key={index}>
-
-                      <div className="postlook__iconusername"
+                      <div
+                        className="postlook__iconusername"
                         // style={{
                         //   display: "flex",
                         //   alignItems: "center",
@@ -384,15 +209,16 @@ function PostLook() {
                           </Link>
                         </div>
 
-                        <p className="postlook__username"
-                        // style={{ fontSize: "20px", marginLeft: "5px" }}
+                        <p
+                          className="postlook__username"
+                          // style={{ fontSize: "20px", marginLeft: "5px" }}
                         >
-                            <Link
-                          to={data.userId === userId ? "/mypage" : "/profile"}
-                          state={{ userId: data.userId }}
-                        >
+                          <Link
+                            to={data.userId === userId ? "/mypage" : "/profile"}
+                            state={{ userId: data.userId }}
+                          >
                             {data.userName}
-                        </Link>
+                          </Link>
                         </p>
                       </div>
 
@@ -402,18 +228,21 @@ function PostLook() {
                         state={{ postid: data.postId, userid: data.userId }}
                       >
                         <Img imgUrl={data.imageUrl} />
-
                       </Link>
 
                       {/* いいねコメント保存 */}
+
                       <div className="postlook__favocomkeep"
-                      style={{ display: "flex", marginBottom: "0" }}>
+                      // style={{ display: "flex", marginBottom: "0" }}
+                      >
                         {/* いいねボタン */}
-                        <div className="postlook__favo"
-                        // style={{ margin: "10px 5px 0px 5px" }}
+                        <div
+                          className="postlook__favo"
+                          // style={{ margin: "10px 5px 0px 5px" }}
                         >
                           {data.favorites.includes(loginUserName) ? (
                             <AiFillHeart
+                            className="postlook__favBtn"
                               size={30}
                               color={"red"}
                               onClick={(e: React.MouseEvent) => {
@@ -428,6 +257,7 @@ function PostLook() {
                             />
                           ) : (
                             <AiOutlineHeart
+                            className="postlook__favBtn"
                               size={30}
                               color={"black"}
                               onClick={(e: React.MouseEvent) => {
@@ -444,10 +274,12 @@ function PostLook() {
                         </div>
 
                         {/* コメントボタン */}
-                        <div className="postlook__com"
-                        // style={{ margin: "10px 5px 0px 5px" }}
+                        <div
+                          className="postlook__com"
+                          // style={{ margin: "10px 5px 0px 5px" }}
                         >
                           <AiOutlineMessage
+                          className="postlook__commentBtn"
                             size={30}
                             color={"black"}
                             onClick={CommentDisplay}
@@ -455,8 +287,9 @@ function PostLook() {
                         </div>
 
                         {/* 保存ボタン */}
-                        <div className="postlook__keep"
-                        // style={{ margin: "5px 5px 0px auto" }}
+                        <div
+                          className="postlook__keep"
+                          // style={{ margin: "5px 5px 0px auto" }}
                         >
                           <KeepButton
                             loginUserKeep={loginUserKeep}
@@ -466,8 +299,9 @@ function PostLook() {
                       </div>
 
                       {/* いいね数、投稿時間 */}
-                      <div className="postlook__favolengthtime"
-                      // style={{ display: "flex" }}
+                      <div
+                        className="postlook__favolengthtime"
+                        // style={{ display: "flex" }}
                       >
                         <FavoLength favos={favos} />
                         <Time data={data.postDate} />
@@ -482,11 +316,13 @@ function PostLook() {
                             {/* コメント表示 */}
                             <CommentsDisplay displayComment={com} />
 
-                            <div className="postlook__comdisplay"
-                            // style={{ display: "flex", width: "100%" }}
+                            <div
+                              className="postlook__comdisplay"
+                              // style={{ display: "flex", width: "100%" }}
                             >
                               {/* コメント投稿セット */}
-                              <div className="postlook__cominput"
+                              <div
+                                className="postlook__cominput"
                                 // style={{
                                 //   display: "flex",
                                 //   width: "70%",
@@ -494,7 +330,8 @@ function PostLook() {
                                 //   margin: "5px",
                                 // }}
                               >
-                                <input className="postlook__input"
+                                <input
+                                  className="postlook__input"
                                   type="text"
                                   value={inputComment}
                                   onChange={(e) => {
@@ -504,10 +341,12 @@ function PostLook() {
                                 />
                               </div>
 
-                              <div className="postlook__btn"
-                              // style={{ marginLeft: "auto", width: "30%" }}
+                              <div
+                                className="postlook__btn"
+                                // style={{ marginLeft: "auto", width: "30%" }}
                               >
-                                <button className="btn"
+                                <button
+                                  className="btn"
                                   onClick={async (e: React.MouseEvent) => {
                                     // 押された投稿のcommentにinputCommentを配列で追加
                                     updateDoc(
@@ -527,7 +366,7 @@ function PostLook() {
                                 </button>
                               </div>
                               <AiOutlineClose
-                              className="postlook__closebtn"
+                                className="postlook__closebtn"
                                 // style={{
                                 //   display: "block",
                                 //   margin: "15px 0 0 auto",

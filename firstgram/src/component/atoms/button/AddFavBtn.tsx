@@ -12,7 +12,6 @@ interface State {
 const AddFavBtn = (props:State) => {
     // const postData2=[...props.postData]
     // for(let i = 0; i<postData2.length; i++){
-    //     console.log(props.postId)
     //     if(postData2[i].postId === props.postId){
     //         postData2[i].favorites.push()
     //     }

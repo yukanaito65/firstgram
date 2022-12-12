@@ -31,7 +31,6 @@ function PostEditing() {
   },[]);
 
   const Updata = (e: any) => {
-    console.log(text);
     FirestoreUpdata(postid, text);
   };
 

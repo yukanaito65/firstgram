@@ -56,11 +56,10 @@ function MyFollower() {
 
       // //上記を元にデータ取得
       // const userDocId = await getDoc(userDocRefId);
-      // console.log(userDocId); //il
+
 
       // //データの中からfollow配列取得
       // const followerUserList = userDocId.get("follower");
-      // console.log(followerUserList);
       // setFollowerList(followerUserList);
 
       //複数のユーザーの情報を取得する＝共通していることは、ログインユーザーのことをフォローしていること
@@ -76,18 +75,15 @@ function MyFollower() {
 
       const followerUserArray = newFollowerUserDocIds.map((doc) => doc.data());
       setFollowerUsers(followerUserArray);
-      console.log(followerUserArray);
 
       // setMyFollowerData(GetFollowerData());
     }); //onAuth
   }, []); //useEffect
 
-  // console.log(followerUsers);
-  // console.log(followerList);
 
-  console.log(GetFollowerData());
-  // console.log(myDataList);
-  // console.log(myFollowerData);
+
+
+
 
   return (
     <>

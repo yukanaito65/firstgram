@@ -24,7 +24,7 @@ export function GetLoginUserData() {
     //ログイン判定
     onAuthStateChanged(auth, (currentUser) => {
       if (!currentUser) {
-        console.log("ログアウト状態です");
+      <></>
       } else {
         //ログイン情報をuserに代入
         setAuthUserData(currentUser);
@@ -43,7 +43,7 @@ export function GetLoginUserData() {
            // //取得したデータから必要なものを取り出す
         const userDataId: User | undefined = userDocId.data();
         setFirestoreUserData(userDataId);
-        console.log(userDataId);
+    
         })
       }
     });
