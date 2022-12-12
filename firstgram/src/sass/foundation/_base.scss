@@ -33,7 +33,7 @@ body {
   position: relative;
   box-sizing: border-box;
   @include mobile {
-    font-size: 1.3rem;
+    font-size: 16px;
   }
 }
 
@@ -68,7 +68,7 @@ h1 {
 input, textarea {
   padding: 5px;
   @include mobile {
-    font-size: 1.3rem;
+    font-size: 16px;
   }
 }
 

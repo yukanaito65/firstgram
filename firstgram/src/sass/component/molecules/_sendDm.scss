@@ -3,10 +3,12 @@
 
 .sendDm {
     width: 100%;
+    max-width: 600px;
+    min-width: 350px;
     margin: 8px auto;
     background-color: $color-base;
     position: fixed;
-    bottom: 62px;
+    bottom: 30px;
     &__input {
         width: 90%;
         line-height: 30px;
@@ -33,5 +35,5 @@
 
 .sendDmWrapper {
     width: 100%;
-    padding: 15px 10px 15px 20px;
+    padding: 15px 10px 30px 20px;
 }

@@ -6,11 +6,8 @@
         margin-bottom: 20px;
     }
     &__icon {
-        width: 20%;
+        width: 100%;
         margin: 15px auto;
-        @include mobile {
-            width: 32%;
-        }
     }
     &__userDateTable {
         width: 100%;
