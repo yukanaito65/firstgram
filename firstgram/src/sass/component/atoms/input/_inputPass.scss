@@ -1,0 +1,20 @@
+@use "../../../global/setting" as *;
+@use "../../../global/mixin/form";
+
+.passForm {
+  position: relative;
+
+  // &__input {
+  //   // width: 80%;
+  //   // height: 35px;
+  //   // background-color: $color-base;
+  //   // outline: solid #d3d3d3;
+  //   // border: none;
+  //   @include form.form-input
+  // }
+  &__isRevealPasswordIcon {
+    position: absolute;
+    top: 10%;
+    left: 85%;
+  }
+}

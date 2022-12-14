@@ -1,0 +1,16 @@
+@use "./mobile";
+@use "../setting" as *;
+
+@mixin form-input {
+  width: 80%;
+  height: 35px;
+  background-color: $color-base;
+  outline: solid #d3d3d3;
+  border: none;
+
+  @include mobile.mobile{
+    height: 40px;
+    width: 85%;
+    outline: 1px solid #d3d3d3;
+  }
+}

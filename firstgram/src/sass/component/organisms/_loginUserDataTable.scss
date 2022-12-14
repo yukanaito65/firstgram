@@ -1,0 +1,28 @@
+@use "../../global/setting" as *;
+@use "../../global/mixin" as *;
+
+.loginUserIcon {
+    padding-left: 10px;
+}
+
+.userDataTable {
+    width: 100%;
+    padding: 10px 0;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    &__tr {
+        border-bottom: 1px dashed $color-black;
+        height: 5em;
+        &--title {
+            width: 35%;
+            padding: 10px;
+        }
+        &--content {
+            width: 65%;
+            padding: 10px;
+        }
+    }
+    @include mobile {
+        font-size: 16px;
+    }
+}

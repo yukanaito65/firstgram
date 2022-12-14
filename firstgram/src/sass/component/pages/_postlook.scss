@@ -1,0 +1,83 @@
+@use "../../global/mixin/postIconImg";
+@use "../../global/mixin/mobile";
+
+.postlook{
+    &__iconusername{
+        display: flex;
+        align-items: center;
+        width: 100%;
+        margin-top:30px;
+        padding-left: 10px;
+    }
+    &__postIcon{
+        // width: 10%;
+        @include postIconImg.postDetails_postIcon;
+    }
+    &__username{
+        font-size: 20px;
+        margin-left: 5px;
+    }
+    &__favocomkeep{
+        display: flex;
+        margin-bottom: 0;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    &__favo{
+        margin: 10px 5px 0px 5px;
+    }
+    &__favo:hover {
+        opacity: 0.5;
+    }
+    &__favBtn {
+        @include mobile.mobile{
+        width: 29px;
+        height: 29px;
+        }
+    }
+    &__com{
+        margin: 10px 5px 0px 5px;
+    }
+    &__com:hover {
+        opacity: 0.5;
+    }
+    &__commentBtn {
+        @include mobile.mobile{
+            width: 29px;
+            height: 29px;
+        }
+    }
+    &__keep{
+        margin: 10px 5px 0px auto;
+    }
+    &__keep:hover {
+        opacity: 0.5;
+    }
+    &__favolengthtime{
+        display: flex;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    &__comdisplay{
+        display: flex;
+        width: 100%;
+    }
+    &__cominput{
+        display: flex;
+        width: 70%;
+        height: 30px;
+        margin: 5px;
+    }
+    &__input{
+        width: 100%;
+    }
+    &__btn{
+        margin-left: auto;
+        width: 30%;
+    }
+    &__closebtn{
+        display: block;
+        margin: 15px 0 0 auto;
+        align-items: center;
+    }
+}

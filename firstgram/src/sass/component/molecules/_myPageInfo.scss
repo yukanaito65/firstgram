@@ -1,0 +1,7 @@
+@use "../../global/mixin/mobile";
+
+.info{
+  display: flex;
+  width: 330px;
+  justify-content: space-between;
+}

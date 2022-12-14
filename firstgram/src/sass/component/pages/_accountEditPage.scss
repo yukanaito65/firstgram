@@ -1,0 +1,43 @@
+@use "../../global/mixin" as *;
+
+.accountEdit {
+    &__top {
+        display: flex;
+        margin-bottom: 20px;
+    }
+    &__icon {
+        width: 100%;
+        margin: 15px auto;
+    }
+    &__userDateTable {
+        width: 100%;
+        padding: 10px 0;
+        border-collapse: collapse;
+        &--tr {
+            border-bottom: 1px dashed rgb(38, 38, 38);
+            height: 5em;
+        }
+        &--tdTitle {
+            width: 30%;
+            padding: 10px;
+        }
+        &--tdContent {
+            padding: 15px 5px;
+            width: 70%;
+        }
+        &--tdContentTextarea {
+            @include mobile {
+                height: 100px;
+            }
+        }
+    }
+    &__confirmBtn {
+        text-align: center;
+        margin: 10px;
+    }
+    &__noUserData {
+        display: block;
+        text-align: center;
+        margin-top: 100px;
+    }
+}

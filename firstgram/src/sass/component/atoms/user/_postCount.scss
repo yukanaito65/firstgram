@@ -1,0 +1,14 @@
+@use "../../../global/mixin/mobile";
+
+.postCount {
+  text-align: center;
+  width: 80px;
+
+  @include mobile.mobile {
+    font-size: 1.4rem;
+  }
+
+  &__number {
+    font-weight: bold;
+  }
+}

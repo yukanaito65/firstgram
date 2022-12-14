@@ -1,0 +1,15 @@
+.postediting{
+    &__textarea{
+    height: 300px;
+     width: 100%;
+     margin-top:5px;
+    }
+    &__btns{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+    }
+    &__btn{
+        text-align: right;
+    }
+}

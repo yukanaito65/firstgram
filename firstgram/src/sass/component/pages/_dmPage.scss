@@ -1,0 +1,73 @@
+@use "../../global/mixin/postIconImg";
+@use "../../global/mixin/mobile";
+
+.dmPage {
+    &__top {
+        display: flex;
+        position: fixed;
+        top: 61px;
+        background-color: #fff;
+        padding-top: 20px;
+        box-shadow: 0px 10px 10px -8px rgba(0, 0, 0, 0.5);
+        width: 100%;
+        max-width: 600px;
+        min-width: 350px;
+        &--BackBtn {
+            margin: auto 2px;
+        }
+        &--anotherUser {
+            display: flex;
+            margin-bottom: 10px;
+            &-icon {
+                @include postIconImg.postDetails_postIcon;
+            }
+            &-text {
+                margin: auto 10px;
+            }
+            &-nameText {
+                font-size: 16px;
+                font-weight: 600;
+            }
+            &-userNameText {
+                font-size: 13px;
+            }
+        }
+        @include mobile.mobile {
+            position: fixed;
+            top: 28px;
+        }
+    }
+    &__messageWrapper {
+        margin-top: 80px;
+    }
+    &__rightMesse {
+        width: 40%;
+        font-size: 13px;
+        margin: 10px 10px 10px auto;
+        &--message {
+            border-radius: 15px;
+            color: #000;
+            background-color: #FF8774;
+            padding: 15px;
+        }
+        &--date {
+            display: block;
+            text-align: right;
+            padding-right: 10px;
+        }
+    }
+    &__leftMesse {
+        width: 40%;
+        font-size: 13px;
+        margin: 10px auto 10px 10px;
+        &--message {
+            border-radius: 15px;
+            color: #000;
+            background-color: #e6e6e6;
+            padding: 15px;
+        }
+        &--date {
+            padding-left: 10px;
+        }
+    }
+}

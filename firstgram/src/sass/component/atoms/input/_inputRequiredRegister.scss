@@ -1,0 +1,33 @@
+@use "../../../global/setting" as *;
+
+.requiredRegisterForm {
+  &__requiredIcon {
+    color: red;
+    font-size: 10px;
+    margin-right: 1%;
+  }
+  // &__input {
+  //   width: 80%;
+  //   height: 35px;
+  //   background-color: $color-base;
+  //   outline: solid #d3d3d3;
+  //   border: none;
+  // }
+  &__error-message {
+    color: red;
+    font-size: 13px;
+  }
+input:invalid ~ &__error-message {
+  display: block;
+  height: 30px;
+  text-align: left;
+  margin-left: 40px;
+  line-height: 1.5rem;
+}
+input:valid ~ &__error-message {
+  display: none;
+}
+input:placeholder-shown ~ &__messageBox {
+  display: none;
+}
+}

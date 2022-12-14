@@ -1,0 +1,23 @@
+@use "../../global/setting" as *;
+@use "../../global/mixin/mobile";
+
+.registerContents {
+  background-color: #ffff;
+  outline: solid #d3d3d3;
+  text-align: center;
+  width: 70%;
+  margin: 5% auto;
+
+  @include mobile.mobile {
+    width: 90%;
+  }
+
+  &__logo {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+  }
+  &__loginLink {
+    color: $color-btn;
+  }
+}

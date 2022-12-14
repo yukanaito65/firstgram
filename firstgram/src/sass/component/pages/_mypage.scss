@@ -1,0 +1,39 @@
+@use "../../global/setting" as *;
+@use "../../global/mixin/mobile";
+
+
+.myPage {
+  &__userName {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  &__info {
+    display: flex;
+    justify-content: space-around;
+    gap: 10%;
+    margin: 10px 20px;
+    align-items: center;
+
+    // @include mobile.mobile {
+    //   gap: 0;
+    // }
+  }
+  &__name {
+    font-weight: bold;
+
+    @include mobile.mobile {
+      margin-left: 3%;
+    }
+  }
+  &__profile {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    @include mobile.mobile {
+      margin-left: 3%;
+    }
+  }
+  &__messageLink {
+    color: $color-btn;
+  }
+}

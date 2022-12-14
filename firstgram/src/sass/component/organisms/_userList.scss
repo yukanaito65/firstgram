@@ -1,0 +1,12 @@
+@use "../../global/mixin/mobile";
+
+.userList {
+  @include mobile.mobile {
+    margin-left: 3%;
+  }
+
+  &__message{
+   text-align: center;
+   margin-top: 10%;
+  }
+}

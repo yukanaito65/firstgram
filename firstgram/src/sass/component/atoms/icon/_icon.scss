@@ -1,0 +1,24 @@
+@use "../../../global/mixin/iconImg";
+@use "../../../global/mixin/noIconImg";
+@use "../../../global/mixin/mobile";
+
+
+//myPage,profile
+.icon-image {
+  border-radius: 50%;
+  width: 20%;
+  aspect-ratio: 1/1;
+  border: solid 1px lightgray;
+  background-color: #ffff;
+
+  @include mobile.mobile {
+    width: 27%;
+  }
+
+  &__img {
+    @include iconImg.icon-image__img;
+  }
+}
+.noIconImage{
+  @include noIconImg.noIconImage;
+}
