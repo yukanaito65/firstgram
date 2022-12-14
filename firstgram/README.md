@@ -1,16 +1,13 @@
 ## プロジェクトタイトル
 firstgram
 
-## ロゴ
-
 ## プロジェクトの概要
 snsの画像投稿アプリを作成(instagram参考)
 
 ## 使用言語
 - React
-- 状態管理(Redux,Reduxtoolkit)
 - TypeScript
-- scss(FLOOCSS)
+- Sass(BEM)
 - Firebase(Firestore Database,Storage,Authentication)
 - Docker
 
@@ -27,6 +24,7 @@ snsの画像投稿アプリを作成(instagram参考)
 - 登録ユーザーの検索機能
 - 投稿の保存機能
 - プロフィール編集機能
+- ヘッダー/フッター
 
 ## ブランチ運用
 - main          : リリース用のソースコード
@@ -35,7 +33,7 @@ snsの画像投稿アプリを作成(instagram参考)
 
 ## ディレクトリ構造
 <pre>
-.
+firstgram
 ├── Dockerfile
 ├── README.md
 ├── docker-compose.yaml
@@ -87,5 +85,5 @@ snsの画像投稿アプリを作成(instagram参考)
 - コンポーネントの切り分けはatomicデザインを意識して作成
 
 ## プロジェクトのスクリーンショット
-<img src="./public/login-p.jpg" width="300px">
+<img width="1080" alt="スクリーンショット 2022-12-14 17 43 45" src="https://user-images.githubusercontent.com/110379033/207548223-1482d0da-bfdd-4a30-8f9e-7e7929070abc.png">
 
