@@ -31,6 +31,7 @@ snsの画像投稿アプリを作成(instagram参考)
 - develop       : 開発中のソースコード
 - feather/機能名 : 各機能のソースコード
 
+
 ## ディレクトリ構造
 <pre>
 firstgram
@@ -86,4 +87,8 @@ firstgram
 
 ## プロジェクトのスクリーンショット
 <img width="1080" alt="スクリーンショット 2022-12-14 17 43 45" src="https://user-images.githubusercontent.com/110379033/207548223-1482d0da-bfdd-4a30-8f9e-7e7929070abc.png">
+<img width="1080" alt="スクリーンショット 2022-12-14 17 45 52" src="https://user-images.githubusercontent.com/110379033/207548678-899cf744-5d0f-4f99-a755-bc077946b5af.png">
+<img width="1080" alt="スクリーンショット 2022-12-14 17 47 29" src="https://user-images.githubusercontent.com/110379033/207549019-4a5e1014-4a44-40e0-888d-e9e6baf35116.png">
+<img width="1080" alt="スクリーンショット 2022-12-14 17 48 01" src="https://user-images.githubusercontent.com/110379033/207549138-9998c053-66ab-4f07-b497-33a534abd316.png">
+<img width="1080" alt="スクリーンショット 2022-12-14 17 48 28" src="https://user-images.githubusercontent.com/110379033/207549221-ffbe3ea9-7f5f-4878-9dcc-086592b7c450.png">
 
